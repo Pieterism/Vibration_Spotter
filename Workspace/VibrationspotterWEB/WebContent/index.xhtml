@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"> 
+<h:head>
+<title>Welcome Page!</title>
+</h:head>
+<h:body>
+	<div class="titel" align="left">
+         <h1><b>Welcome to the vibration spotter</b><img src="logo.png" width="50" height="50"/> </h1>
+     </div>
+     <hr />
+     <div class="paragraph" style="margin-left: 20px">
+		<h2 >formulier invullen </h2>
+			<h:form>
+				<h:panelGrid columns ="2">
+					<h:outputLabel value="gebruikersnaam: "/>
+					<h:inputText value =" "/>
+					
+					<h:outputLabel value="paswoord: "/>
+					<h:inputSecret value =" "/>
+					
+					<h:outputLabel value="titel: "/>
+					<h:inputText value =" "/>
+					
+					<h:outputLabel value="locatie: "/>
+					<h:inputText value =" "/>
+				</h:panelGrid>
+				<h3><i>Resulaten:</i></h3>
+				<h:panelGrid columns ="2">
+			  		<h:outputLabel value="x: "/>
+			   		<h:inputText value =" "/>
+			   		
+			   		<h:outputLabel value="y: "/>
+			   		<h:inputText value =" "/>
+			   		
+			   		<h:outputLabel value="z: "/>
+			   		<h:inputText value =" "/>
+			   	<br/>
+			   </h:panelGrid>
+				<h:commandButton value = "project aanmaken">
+					
+				</h:commandButton>
+			</h:form>
+	</div>
+</h:body>
+</html>
