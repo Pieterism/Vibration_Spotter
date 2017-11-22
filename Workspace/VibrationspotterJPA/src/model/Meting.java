@@ -45,11 +45,13 @@ public class Meting implements Serializable {
 	public Meting() {
 		locatie = null;
 		paswoord = null;
+		titel=null;
 	}
 
-	public Meting(String locatie, String paswoord) {
+	public Meting(String locatie, String paswoord,String titel) {
 		this.locatie = locatie;
 		this.paswoord = paswoord;
+		this.titel=titel;
 	}
 
 
