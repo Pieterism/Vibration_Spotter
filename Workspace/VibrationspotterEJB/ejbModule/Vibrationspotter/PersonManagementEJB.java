@@ -26,10 +26,10 @@ public class PersonManagementEJB implements PersonManagementEJBLocal {
 	}
 
 	@Override
-	public void addPersoon(String gebruikersnaam) {
+	public void addPersoon(String gebruikersnaam, String password) {
 		Query q = em.createQuery("INSERT INTO Persoon (p.voornaam,p.achternaam) VALUES (: voornaam,: achternaam)" );
 		q.setParameter(1, gebruikersnaam);
-		q.setParameter(2, gebruikersnaam);
+		q.setParameter(2, password);	//password zit momenteel in achternaam
 		
 	}
 }
