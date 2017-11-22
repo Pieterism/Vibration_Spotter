@@ -1,20 +1,30 @@
 package project;
 
-import javax.faces.bean.RequestScoped;
 import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.ejb.EJB;
 
+import Vibrationspotter.MetingManagementEJBLocal;
+import Vibrationspotter.PersonManagementEJBLocal;
 
-//http://localhost:8080/testWEB/
+import model.Meting;
+import model.Persoon;
+
+
+//http://localhost:8080/VibrationspotterWeb/
 @Named
 @ViewScoped
 public class MetingController {
 
   private String output="alle velden invullen";
+  
   @EJB
-  private MetingManagementEJB mmejb;
+  private MetingManagementEJBLocal mmejb;
+  
+  @EJB
+  private PersonManagementEJBLocal pmejb;
+  
   
   private Meting m=new Meting();
   private Persoon p=new Persoon();
