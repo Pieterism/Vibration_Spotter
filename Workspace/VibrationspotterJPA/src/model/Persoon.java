@@ -17,9 +17,13 @@ public class Persoon implements Serializable {
 	@Id
 	private int idPersoon;
 
-	private String achternaam; //comment
+	private String achternaam; 
 
 	private String voornaam;
+	
+	private String password;
+	
+	private String gebruikersnaam;
 
 	//bi-directional many-to-one association to Meting
 	@OneToMany(mappedBy="persoon")
