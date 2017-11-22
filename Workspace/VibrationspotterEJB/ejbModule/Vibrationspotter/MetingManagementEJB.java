@@ -31,9 +31,8 @@ public class MetingManagementEJB implements MetingManagementEJBLocal{
 	}
 
 	@Override
-	public void addMeting(String gebruikersnaam, String titel, String Locatie, int x, int y, int z) {
-		// TODO Auto-generated method stub
-		
+	public void addMeting(Meting meting) {
+		em.persist(meting);
 	}
 
 }
