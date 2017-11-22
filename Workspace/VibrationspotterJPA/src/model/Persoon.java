@@ -17,7 +17,7 @@ public class Persoon implements Serializable {
 	@Id
 	private int idPersoon;
 
-	private String achternaam;
+	private String achternaam; //comment
 
 	private String voornaam;
 
