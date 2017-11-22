@@ -16,19 +16,19 @@
 			<h:form>
 				<h:panelGrid columns ="2">
 					<h:outputLabel value="gebruikersnaam: "/>
-					<h:inputText required ="true" value ="#{MetingController.p.gebruikersnaam}" requiredMessage="Username is required"/>
+					<h:inputText required ="true" value ="#{MetingController.persoon.gebruikersnaam}" requiredMessage="Username is required"/>
 					
 					<h:outputLabel value="paswoord: "/>
-					<h:inputSecret required ="true" value ="#{MetingController.p.password}" requiredMessage="password is required"/>
+					<h:inputSecret required ="true" value ="#{MetingController.persoon.password}" requiredMessage="password is required"/>
 					
 					<h:outputLabel value="titel: "/>
-					<h:inputText required ="true" value ="#{MetingController.m.titel}"/>
+					<h:inputText required ="true" value ="#{MetingController.meting.titel}"/>
 					
 					<h:outputLabel value="locatie: "/>
-					<h:inputText required ="true" value ="#{MetingController.m.locatie}"/>
+					<h:inputText required ="true" value ="#{MetingController.meting.locatie}"/>
 					
 					<h:outputLabel value="Resultaat: "/>
-					<h:inputText required ="true" value ="#{MetingController.m.resulaat}"/>
+					<h:inputText required ="true" value ="#{MetingController.meting.resulaat}"/>
 
 			   </h:panelGrid>
 				<h:commandButton value = "project aanmaken" action="#{MetingController.submit}">
