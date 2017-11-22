@@ -14,7 +14,7 @@ import javax.persistence.SecondaryTable;
 import javax.persistence.Table;
 import javax.persistence.PrimaryKeyJoinColumn;
 
-@Entity
+@Entity //comment
 @Table(name="Persoon")
 @NamedQuery(name="Persoon.findAll", query="SELECT p FROM Persoon p")
 //@SecondaryTable(name = "Person_Group", pkJoinColumns=@PrimaryKeyJoinColumn(name="login", referencedColumnName="login"))
