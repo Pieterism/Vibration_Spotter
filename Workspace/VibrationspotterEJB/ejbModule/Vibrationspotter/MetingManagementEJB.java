@@ -20,11 +20,13 @@ public class MetingManagementEJB implements MetingManagementEJBLocal{
 	@Resource
 	private SessionContext ctx;
 	
+	public MetingManagementEJB(){};
+	
 	@Override
 	public Meting findMeting(String titelMeting) {
 		Query q = em.createQuery("SELECT id FROM Meting m WHERE m.titel = :titel");
 		q.setParameter(1, titelMeting);
-	
+		
 		return em.find(Meting.class, titelMeting);
 	}
 
