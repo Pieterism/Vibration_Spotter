@@ -8,5 +8,5 @@ import model.Meting;
 public interface MetingManagementEJBLocal {
 	public Meting findMeting(String titelMeting);
 	
-	public void addMeting(String gebruikersnaam, String titel, String Locatie, int x, int y, int z);
+	void addMeting(Meting meting);
 }
