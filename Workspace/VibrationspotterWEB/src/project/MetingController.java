@@ -31,7 +31,7 @@ public class MetingController {
 
   public String submit() {
 	//output = m.getPersoon()+", uw project met titel "+m.getTitel()+" werd met succes aangemaakt!";
-	 System.out.println(meting.getTitel());
+	System.out.println(meting.getTitel());
 	metingejb.addMeting(meting);
 	persoonejb.addPersoon(persoon);
 	
