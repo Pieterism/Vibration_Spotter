@@ -2,6 +2,7 @@ package Vibrationspotter;
 
 import javax.annotation.Resource;
 import javax.ejb.SessionContext;
+import javax.ejb.Stateless;
 import javax.persistence.Query;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -9,6 +10,7 @@ import javax.persistence.PersistenceContext;
 import model.Meting;
 import model.Persoon;
 
+@Stateless
 public class PersonManagementEJB implements PersonManagementEJBLocal {
 	
 	@PersistenceContext(unitName="vibrationspotter")
@@ -26,10 +28,8 @@ public class PersonManagementEJB implements PersonManagementEJBLocal {
 	}
 
 	@Override
-	public void addPersoon(String gebruikersnaam, String password) {
-		Query q = em.createQuery("INSERT INTO Persoon (p.voornaam,p.achternaam) VALUES (: voornaam,: achternaam)" );
-		q.setParameter(1, gebruikersnaam);
-		q.setParameter(2, password);	//password zit momenteel in achternaam
+	public void addPersoon(Persoon persoon) {
+		em.persist(persoon);
 		
 	}
 }

@@ -33,7 +33,9 @@ public class Persoon implements Serializable{
 	private String paswoord;
 
 	
-	
+	public Persoon(){
+		
+	}
 	
 	public Persoon(String gebruikersnaam, String paswoord) {
 		this.gebruikersnaam = gebruikersnaam;
