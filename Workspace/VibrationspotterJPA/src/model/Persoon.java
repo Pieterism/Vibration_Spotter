@@ -14,7 +14,7 @@ import javax.persistence.SecondaryTable;
 import javax.persistence.Table;
 import javax.persistence.PrimaryKeyJoinColumn;
 
-@Entity //comment
+@Entity 
 @Table(name="Persoon")
 @NamedQuery(name="Persoon.findAll", query="SELECT p FROM Persoon p")
 //@SecondaryTable(name = "Person_Group", pkJoinColumns=@PrimaryKeyJoinColumn(name="login", referencedColumnName="login"))
@@ -74,79 +74,3 @@ public class Persoon implements Serializable{
 	
 }
 	
-
-	
-	//@ManyToMany
-//	@OneToOne(cascade=CascadeType.ALL)
-//	@JoinTable(
-//			name="Person_Group",
-//			joinColumns={@JoinColumn(name="login", referencedColumnName="login")},
-//			inverseJoinColumns={@JoinColumn(name="idGroup", referencedColumnName="idGroup")})
-
-
-	/*public Person(Person person)
-	{
-		this.name = person.name;
-		this.login = person.login;
-		this.hPassword = person.hPassword;
-		this.address = person.address;
-	}
-	
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public Person(String name) {
-		super();
-		this.name = name;
-	}
-	
-	public Person(){
-		super();
-	}
-	
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getLogin() {
-		return login;
-	}
-
-	public void setLogin(String login) {
-		this.login = login;
-	}
-
-	public String gethPassword() {
-		return hPassword;
-	}
-
-	public void sethPassword(String hPassword) {
-		this.hPassword = hPassword;
-	}
-
-	public String getAddress() {
-		return address;
-	}
-
-	public void setAddress(String address) {
-		this.address = address;
-	}
-
-	public String getGroup() {
-		return group;
-	}
-
-	public void setGroup(String group) {
-		this.group = group;
-	}
-
-}*/
