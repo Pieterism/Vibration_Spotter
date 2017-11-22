@@ -1,68 +1,92 @@
 package model;
 
 import java.io.Serializable;
-
-import javax.persistence.Column;
-import javax.persistence.Embeddable;
-import javax.persistence.EmbeddedId;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 
-
+/**
+ * The persistent class for the meting database table.
+ * 
+ */
 @Entity
-@Table(name="Meting")
-//@NamedQuery(name="Meting.findAll", query="SELECT m FROM Meting m")
+@NamedQuery(name="Meting.findAll", query="SELECT m FROM Meting m")
 public class Meting implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="idMeting", nullable=false)
-	private int idMeting;
-	
-	@Column(name="locatie", nullable=false)
+
+	@EmbeddedId
+	private MetingPK id;
+
 	private String locatie;
-	
-	@Column(name="paswoord", nullable=false)
-	private String paswoord;
-	
+
+	private String resultaat;
+
+	private String tijdstip;
+
+	private String titel;
+
+	private String type;
+
+	//bi-directional many-to-one association to Persoon
+	@ManyToOne
+	private Persoon persoon;
+
 	public Meting() {
-		locatie = null;
-		paswoord = null;
 	}
 
-	public Meting(String locatie, String paswoord) {
-		this.locatie = locatie;
-		this.paswoord = paswoord;
+	public MetingPK getId() {
+		return this.id;
 	}
 
-
-	public int getId() {
-		return idMeting;
+	public void setId(MetingPK id) {
+		this.id = id;
 	}
-
 
 	public String getLocatie() {
-		return locatie;
+		return this.locatie;
 	}
 
 	public void setLocatie(String locatie) {
 		this.locatie = locatie;
 	}
 
-	public String getPaswoord() {
-		return paswoord;
+	public String getResultaat() {
+		return this.resultaat;
 	}
 
-	public void setPaswoord(String paswoord) {
-		this.paswoord = paswoord;
+	public void setResultaat(String resultaat) {
+		this.resultaat = resultaat;
 	}
 
-	
+	public String getTijdstip() {
+		return this.tijdstip;
+	}
+
+	public void setTijdstip(String tijdstip) {
+		this.tijdstip = tijdstip;
+	}
+
+	public String getTitel() {
+		return this.titel;
+	}
+
+	public void setTitel(String titel) {
+		this.titel = titel;
+	}
+
+	public String getType() {
+		return this.type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	public Persoon getPersoon() {
+		return this.persoon;
+	}
+
+	public void setPersoon(Persoon persoon) {
+		this.persoon = persoon;
+	}
 
 }
