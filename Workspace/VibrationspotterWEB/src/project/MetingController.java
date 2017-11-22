@@ -30,7 +30,7 @@ public class MetingController {
   private Persoon p=new Persoon();
 
   public String submit() {
-		output = m.getPersoon()+", uw project met titel "+m.getTitel()+" werd met succes aangemaakt!";
+	output = m.getPersoon()+", uw project met titel "+m.getTitel()+" werd met succes aangemaakt!";
 	//EJB aanroepen
     setM(null);
     return "index.xhtml";
