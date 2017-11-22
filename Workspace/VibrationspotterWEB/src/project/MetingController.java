@@ -20,18 +20,20 @@ public class MetingController {
   private String output="alle velden invullen";
   
   @EJB
-  private MetingManagementEJBLocal mmejb;
+  private MetingManagementEJBLocal metingejb;
   
   @EJB
-  private PersonManagementEJBLocal pmejb;
+  private PersonManagementEJBLocal persoonejb;
   
   
-  private Meting m=new Meting();
-  private Persoon p=new Persoon();
+  private Meting meting=new Meting();
+  private Persoon persoon=new Persoon();
 
   public String submit() {
-	output = m.getPersoon()+", uw project met titel "+m.getTitel()+" werd met succes aangemaakt!";
-	//EJB aanroepen
+	//output = m.getPersoon()+", uw project met titel "+m.getTitel()+" werd met succes aangemaakt!";
+	 System.out.println(meting.getTitel());
+	metingejb.addMeting(meting);
+	
     setM(null);
     return "index.xhtml";
   }
@@ -46,11 +48,12 @@ public class MetingController {
   }
 
 public Meting getM() {
-	return m;
+	return meting;
 }
 
 public void setM(Meting m) {
-	this.m = m;
+	this.meting = meting;
 }
+
 
 }
