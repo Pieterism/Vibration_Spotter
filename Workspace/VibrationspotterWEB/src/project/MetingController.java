@@ -33,6 +33,7 @@ public class MetingController {
 	//output = m.getPersoon()+", uw project met titel "+m.getTitel()+" werd met succes aangemaakt!";
 	 System.out.println(meting.getTitel());
 	metingejb.addMeting(meting);
+	persoonejb.addPersoon(persoon);
 	
     setM(null);
     return "index.xhtml";
