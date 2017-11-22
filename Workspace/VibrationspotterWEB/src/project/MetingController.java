@@ -53,7 +53,7 @@ public Meting getM() {
 }
 
 public void setM(Meting m) {
-	this.meting = meting;
+	meting = m;
 }
 
 

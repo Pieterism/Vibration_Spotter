@@ -26,10 +26,8 @@ public class PersonManagementEJB implements PersonManagementEJBLocal {
 	}
 
 	@Override
-	public void addPersoon(String gebruikersnaam) {
-		Query q = em.createQuery("INSERT INTO Persoon (p.voornaam,p.achternaam) VALUES (: voornaam,: achternaam)" );
-		q.setParameter(1, gebruikersnaam);
-		q.setParameter(2, gebruikersnaam);
+	public void addPersoon(Persoon persoon) {
+		em.persist(persoon);
 		
 	}
 }
