@@ -31,6 +31,17 @@ public class Meting implements Serializable {
 	@Column(name="paswoord", nullable=false)
 	private String paswoord;
 	
+	@Column(name="titel", nullable=false)
+	private String titel;
+	
+	public String getTitel() {
+		return titel;
+	}
+
+	public void setTitel(String titel) {
+		this.titel = titel;
+	}
+
 	public Meting() {
 		locatie = null;
 		paswoord = null;
