@@ -12,7 +12,7 @@ import model.Meting;
 import model.Persoon;
 
 
-//http://localhost:8080/VibrationspotterWeb/
+//http://localhost:8080/VibrationspotterWEB/
 @Named
 @ViewScoped
 public class MetingController {

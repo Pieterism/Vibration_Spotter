@@ -3,12 +3,13 @@ package Vibrationspotter;
 import javax.annotation.Resource;
 import javax.ejb.EJB;
 import javax.ejb.SessionContext;
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import model.Meting;
-
+@Stateless
 public class MetingManagementEJB implements MetingManagementEJBLocal{
 	
 	@PersistenceContext(unitName="vibrationspotter")
