@@ -16,7 +16,7 @@
 			<h:form>
 				<h:panelGrid columns ="2">
 					<h:outputLabel value="gebruikersnaam: "/>
-					<h:inputText required ="true" value ="#{MetingController.m.user}" requiredMessage="Username is required"/>
+					<h:inputText required ="true" value ="#{MetingController.p.voornaam}" requiredMessage="Username is required"/>
 					
 					<h:outputLabel value="paswoord: "/>
 					<h:inputSecret required ="true" value ="#{MetingController.m.pass}" requiredMessage="password is required"/>
@@ -25,19 +25,11 @@
 					<h:inputText required ="true" value ="#{MetingController.m.titel}"/>
 					
 					<h:outputLabel value="locatie: "/>
-					<h:inputText required ="true" value ="#{MetingController.m.location}"/>
-				</h:panelGrid>
-				<h3><i>Resultaten:</i></h3>
-				<h:panelGrid columns ="2">
-			  		<h:outputLabel value="x: "/>
-			   		<h:inputText required ="true" value ="#{MetingController.m.x}"/>
-			   		
-			   		<h:outputLabel value="y: "/>
-			   		<h:inputText required ="true" value ="#{MetingController.m.y}"/>
-			   		
-			   		<h:outputLabel value="z: "/>
-			   		<h:inputText required ="true" value ="#{MetingController.m.z}"/>
-			   	<br/>
+					<h:inputText required ="true" value ="#{MetingController.m.locatie}"/>
+					
+					<h:outputLabel value="Resultaat: "/>
+					<h:inputText required ="true" value ="#{MetingController.m.resulaat}"/>
+
 			   </h:panelGrid>
 				<h:commandButton value = "project aanmaken" action="#{MetingController.submit}">
 				</h:commandButton> 
