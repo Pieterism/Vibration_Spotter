@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"> 
+<h:head>
+<title>Welcome Page!</title>
+</h:head>
+<h:body>
+	<div class="titel" align="left">
+         <h1><b>Welcome to the vibration spotter</b><img src="logo.png" width="50" height="50"/> </h1>
+     </div>
+     <hr />
+     <div class="paragraph" style="margin-left: 20px">
+		<h2 >formulier <small>(alle velden invullen!)</small> </h2>
+			<h:form>
+				<h:panelGrid columns ="2">
+					<h:outputLabel value="gebruikersnaam: "/>
+					<h:inputText required ="true" value ="#{MetingController.m.user}" requiredMessage="Username is required"/>
+					
+					<h:outputLabel value="paswoord: "/>
+					<h:inputSecret required ="true" value ="#{MetingController.m.pass}" requiredMessage="password is required"/>
+					
+					<h:outputLabel value="titel: "/>
+					<h:inputText required ="true" value ="#{MetingController.m.titel}"/>
+					
+					<h:outputLabel value="locatie: "/>
+					<h:inputText required ="true" value ="#{MetingController.m.location}"/>
+				</h:panelGrid>
+				<h3><i>Resultaten:</i></h3>
+				<h:panelGrid columns ="2">
+			  		<h:outputLabel value="x: "/>
+			   		<h:inputText required ="true" value ="#{MetingController.m.x}"/>
+			   		
+			   		<h:outputLabel value="y: "/>
+			   		<h:inputText required ="true" value ="#{MetingController.m.y}"/>
+			   		
+			   		<h:outputLabel value="z: "/>
+			   		<h:inputText required ="true" value ="#{MetingController.m.z}"/>
+			   	<br/>
+			   </h:panelGrid>
+				<h:commandButton value = "project aanmaken" action="#{MetingController.submit}">
+				</h:commandButton> 
+				<br/>
+				<br/>
+			</h:form>
+			 <h:outputText value="#{MetingController.output}"/>
+	</div>
+</h:body>
+</html>
