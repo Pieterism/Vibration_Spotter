@@ -12,7 +12,7 @@ import model.Meting;
 @Stateless
 public class MetingManagementEJB implements MetingManagementEJBLocal{
 	
-	@PersistenceContext(unitName="vibrationspotter")
+	@PersistenceContext(unitName="demodb")
 	private EntityManager em;
 
 	@EJB
