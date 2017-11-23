@@ -35,7 +35,7 @@ public class MetingController {
 	metingejb.addMeting(meting);
 	persoonejb.addPersoon(persoon);
 	
-    setM(null);
+    setMeting(null);
     return "index.xhtml";
   }
 
@@ -48,12 +48,20 @@ public class MetingController {
     this.output = output;
   }
 
-public Meting getM() {
+public Meting getMeting() {
 	return meting;
 }
 
-public void setM(Meting m) {
+public void setMeting(Meting meting) {
 	this.meting = meting;
+}
+
+public Persoon getPersoon() {
+	return persoon;
+}
+
+public void setPersoon(Persoon persoon) {
+	this.persoon = persoon;
 }
 
 
