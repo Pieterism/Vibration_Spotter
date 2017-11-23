@@ -1,7 +1,10 @@
 package Vibrationspotter;
 
+import javax.ejb.Local;
+
 import model.Persoon;
 
+@Local
 public interface PersonManagementEJBLocal {
 		public Persoon findPersoon(String gebruikersnaam);
 		
