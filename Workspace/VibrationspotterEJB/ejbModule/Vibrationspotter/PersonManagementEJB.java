@@ -13,7 +13,7 @@ import model.Persoon;
 @Stateless
 public class PersonManagementEJB implements PersonManagementEJBLocal {
 	
-	@PersistenceContext(unitName="vibrationspotter")
+	@PersistenceContext(unitName="demodb")
 	private EntityManager em;
 	
 	@Resource
