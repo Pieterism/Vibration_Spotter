@@ -28,30 +28,23 @@ public class Meting implements Serializable {
 	@Column(name="locatie", nullable=false)
 	private String locatie;
 	
-	@Column(name="paswoord", nullable=false)
-	private String paswoord;
-	
 	@Column(name="titel", nullable=false)
 	private String titel;
 	
-	public String getTitel() {
-		return titel;
-	}
-
-	public void setTitel(String titel) {
-		this.titel = titel;
-	}
+	@Column(name="resultaat", nullable=false)
+	private String resultaat;
+	
 
 	public Meting() {
 		locatie = null;
-		paswoord = null;
 		titel=null;
+		resultaat=null;
 	}
 
-	public Meting(String locatie, String paswoord,String titel) {
+	public Meting(String locatie,String titel,String resultaat) {
 		this.locatie = locatie;
-		this.paswoord = paswoord;
 		this.titel=titel;
+		this.resultaat = resultaat;
 	}
 
 
@@ -68,12 +61,20 @@ public class Meting implements Serializable {
 		this.locatie = locatie;
 	}
 
-	public String getPaswoord() {
-		return paswoord;
+	public String getTitel() {
+		return titel;
 	}
 
-	public void setPaswoord(String paswoord) {
-		this.paswoord = paswoord;
+	public void setTitel(String titel) {
+		this.titel = titel;
+	}
+
+	public String getResultaat() {
+		return resultaat;
+	}
+
+	public void setResultaat(String resultaat) {
+		this.resultaat = resultaat;
 	}
 
 	
