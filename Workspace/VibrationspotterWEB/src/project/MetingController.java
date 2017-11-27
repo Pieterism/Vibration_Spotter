@@ -1,8 +1,10 @@
 package project;
 
-import javax.faces.bean.ViewScoped;
-import javax.inject.Inject;
+import javax.faces.view.ViewScoped;
 import javax.inject.Named;
+
+import java.io.Serializable;
+
 import javax.ejb.EJB;
 
 import Vibrationspotter.MetingManagementEJBLocal;
@@ -15,9 +17,11 @@ import model.Persoon;
 //http://localhost:8080/VibrationspotterWEB/
 @Named
 @ViewScoped
-public class MetingController {
+public class MetingController implements Serializable {
 
-  private String output="alle velden invullen";
+	private static final long serialVersionUID = 1L;
+
+private String output="alle velden invullen";
   
   @EJB
   private MetingManagementEJBLocal metingejb;
@@ -31,7 +35,7 @@ public class MetingController {
 
   public String submit() {
 	//output = m.getPersoon()+", uw project met titel "+m.getTitel()+" werd met succes aangemaakt!";
-	System.out.println(meting.getTitel());
+	System.out.println("test");
 	metingejb.addMeting(meting);
 	persoonejb.addPersoon(persoon);
 	
