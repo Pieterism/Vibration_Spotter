@@ -6,9 +6,9 @@ import model.Persoon;
 
 @Local
 public interface PersonManagementEJBLocal {
-		public Persoon findPersoon(String gebruikersnaam);
-		
-		public void addPersoon(Persoon persoon);
-	}
+	public Persoon findPersoon(String gebruikersnaam);
+
+	public void addPersoon(Persoon persoon);
+}
 
 

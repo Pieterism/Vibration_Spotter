@@ -12,13 +12,12 @@ import model.Persoon;
 
 @Stateless
 public class PersonManagementEJB implements PersonManagementEJBLocal {
-	
+
 	@PersistenceContext(unitName="demodb")
 	private EntityManager em;
-	
+
 	@Resource
 	private SessionContext ctx;
-	
 
 	@Override
 	public Persoon findPersoon(String gebruikersnaam) {
@@ -30,6 +29,6 @@ public class PersonManagementEJB implements PersonManagementEJBLocal {
 	@Override
 	public void addPersoon(Persoon persoon) {
 		em.persist(persoon);
-		
+
 	}
 }

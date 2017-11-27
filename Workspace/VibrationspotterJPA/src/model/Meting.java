@@ -19,21 +19,21 @@ import javax.persistence.Table;
 //@NamedQuery(name="Meting.findAll", query="SELECT m FROM Meting m")
 public class Meting implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="idMeting", nullable=false)
 	private int idMeting;
-	
+
 	@Column(name="locatie", nullable=false)
 	private String locatie;
-	
+
 	@Column(name="titel", nullable=false)
 	private String titel;
-	
+
 	@Column(name="resultaat", nullable=false)
 	private String resultaat;
-	
+
 
 	public Meting() {
 		locatie = null;
@@ -76,7 +76,4 @@ public class Meting implements Serializable {
 	public void setResultaat(String resultaat) {
 		this.resultaat = resultaat;
 	}
-
-	
-
 }

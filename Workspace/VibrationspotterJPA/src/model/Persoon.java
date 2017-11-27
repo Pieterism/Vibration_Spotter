@@ -20,29 +20,29 @@ import javax.persistence.PrimaryKeyJoinColumn;
 //@SecondaryTable(name = "Person_Group", pkJoinColumns=@PrimaryKeyJoinColumn(name="login", referencedColumnName="login"))
 public class Persoon implements Serializable{
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="id", nullable=false, length=16)
 	private int id;
-	
+
 	@Column(name="gebruikersnaam", nullable=false)
 	private String gebruikersnaam;
-	
+
 	@Column(name="paswoord", nullable=false)
 	private String paswoord;
 
-	
+
 	public Persoon(){
-		
+
 	}
-	
+
 	public Persoon(String gebruikersnaam, String paswoord) {
 		this.gebruikersnaam = gebruikersnaam;
 		this.paswoord = paswoord;
 	}
-	
-	
+
+
 
 	public int getId() {
 		return id;
@@ -62,15 +62,6 @@ public class Persoon implements Serializable{
 
 	public void setPaswoord(String paswoord) {
 		this.paswoord = paswoord;
-	}
-
-	
-	
-	
-	
-
-	
-	
-	
+	}	
 }
-	
+
