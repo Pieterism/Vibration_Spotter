@@ -19,9 +19,10 @@ import model.Persoon;
 @ViewScoped
 public class MetingController implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+private static final long serialVersionUID = 1L;
 
 private String output="alle velden invullen";
+
   
   @EJB
   private MetingManagementEJBLocal metingejb;
@@ -34,11 +35,11 @@ private String output="alle velden invullen";
   private Persoon persoon=new Persoon();
 
   public String submit() {
+	setOutput(persoon.getGebruikersnaam()+", uw project met titel "+meting.getTitel()+" werd met succes aangemaakt!");
+	System.out.println(persoon.getGebruikersnaam()+", uw project met titel "+meting.getTitel()+" werd met succes aangemaakt!");
 	metingejb.addMeting(meting);
 	persoonejb.addPersoon(persoon);
-	output = persoon.getGebruikersnaam()+", uw project met titel "+meting.getTitel()+" werd met succes aangemaakt!";
-    setMeting(null);
-    return "index.xhtml";
+	return "/index.xhtml?faces-redirect=true";
   }
 
 
