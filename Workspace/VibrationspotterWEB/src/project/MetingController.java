@@ -34,11 +34,9 @@ private String output="alle velden invullen";
   private Persoon persoon=new Persoon();
 
   public String submit() {
-	//output = m.getPersoon()+", uw project met titel "+m.getTitel()+" werd met succes aangemaakt!";
-	System.out.println("test");
 	metingejb.addMeting(meting);
 	persoonejb.addPersoon(persoon);
-	
+	output = persoon.getGebruikersnaam()+", uw project met titel "+meting.getTitel()+" werd met succes aangemaakt!";
     setMeting(null);
     return "index.xhtml";
   }
