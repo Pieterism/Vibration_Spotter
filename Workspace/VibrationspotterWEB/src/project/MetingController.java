@@ -21,39 +21,39 @@ public class MetingController implements Serializable {
 
 private static final long serialVersionUID = 1L;
 
-  @EJB
-  private MetingManagementEJBLocal metingejb;
+ @EJB
+ private MetingManagementEJBLocal metingejb;
   
-  @EJB
-  private PersonManagementEJBLocal persoonejb;
+ @EJB
+ private PersonManagementEJBLocal persoonejb;
   
   
-  private Meting meting=new Meting();
-  private Persoon persoon=new Persoon();
+ private Meting meting=new Meting();
+ private Persoon persoon=new Persoon();
   
 
-  public String submit() {
+ public String submit() {
 	metingejb.addMeting(meting);
 	persoonejb.addPersoon(persoon);
 	return "succes.xhtml";
-  }
+ }
 
 
 public Meting getMeting() {
 	return meting;
-}
+  }
 
 public void setMeting(Meting meting) {
 	this.meting = meting;
-}
+  }
 
 public Persoon getPersoon() {
 	return persoon;
-}
+  }
 
 public void setPersoon(Persoon persoon) {
 	this.persoon = persoon;
-}
+  }
 
 
 }
