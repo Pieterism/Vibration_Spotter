@@ -1,4 +1,10 @@
 /* Add a black background color to the top navigation */
+
+.header{
+	 background-color: #f1f1f1;
+  padding: 30px;
+  text-align: center;
+}
 .topnav {
     background-color: #333;
     overflow: hidden;
