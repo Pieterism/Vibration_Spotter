@@ -16,6 +16,7 @@ import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity 
@@ -49,10 +50,13 @@ public class Project implements Serializable {
 	@Column(name="resultaat")
 	private int resultaat;
 	
+	@OneToMany(mappedBy = "project")
+	private List<Meting> metingen;
+	
 	@ManyToOne
 	@JoinColumn(name = "idLeerkracht")
 	private Leerkracht LeerkrachtProject;
-/*
+
 	@ManyToMany(cascade = { 
         CascadeType.PERSIST, 		//nog aanpassen
         CascadeType.MERGE
@@ -62,7 +66,7 @@ public class Project implements Serializable {
 	      joinColumns=@JoinColumn(name="Project_idProject", referencedColumnName="idProject"),
 	      inverseJoinColumns=@JoinColumn(name="Spotter_idSpotter", referencedColumnName="idSpotter"))
 	  private List<Spotter> spotters; 
-*/
+
 }
 
 

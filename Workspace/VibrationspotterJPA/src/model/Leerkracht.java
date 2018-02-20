@@ -1,6 +1,7 @@
 package model;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity 
@@ -34,6 +36,9 @@ public class Leerkracht implements Serializable  {
 	
 	@Column(name="schooladres", nullable=false)
 	private String schooladres;
+	
+/*	@OneToMany(mappedBy = "LeerkrachtProject")
+	private List<Project> projecten;*/
 
 	public Leerkracht() {
 	}

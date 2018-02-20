@@ -16,17 +16,27 @@ import javax.persistence.Table;
 
 public class Student {
 
-/*	@Id
+	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="idStudent", nullable=false)
 	private int idStudent;	
 	
 	@ManyToOne
-	@JoinColumn(name = "idLeerkracht")
+	@JoinColumn(name = "idLeerkracht",nullable=false)
 	private Leerkracht leerkracht;
 	
 	@ManyToOne
-	@JoinColumn(name = "studentPaswoord")		//AANPASSEN
+	@JoinColumn(name = "studentPaswoord",nullable=false)		//AANPASSEN
 	private int paswoord;
-	*/
+
+	public int getIdStudent() {
+		return idStudent;
+	}
+
+	public void setIdStudent(int idStudent) {
+		this.idStudent = idStudent;
+	}
+	
+	
+	
 }

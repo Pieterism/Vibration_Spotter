@@ -1,6 +1,7 @@
 package model;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
@@ -12,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 
@@ -41,10 +43,15 @@ public class Meting implements Serializable {
 	
 	@Column(name="resultaat", nullable=false)//NOG VERWIJDEREN
 	private String resultaat;
+	
+	@OneToMany(mappedBy = "meting")
+	private List<Foto> fotos;
 
 	@ManyToOne
 	@JoinColumn(name = "idProject")
 	private Project project;
+	
+	
 
 	public Meting() {
 		locatie = null;
