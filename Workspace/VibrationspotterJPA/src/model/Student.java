@@ -10,9 +10,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
-/*@Entity 
+@Entity 
 @Table(name="Student")
-@NamedQuery(name="Student.findAll", query="SELECT p FROM Student p")*/
+@NamedQuery(name="Student.findAll", query="SELECT p FROM Student p")
 
 public class Student {
 
@@ -25,9 +25,9 @@ public class Student {
 	@JoinColumn(name = "idLeerkracht",nullable=false)
 	private Leerkracht leerkracht;
 	
-	@ManyToOne
+	/*@ManyToOne
 	@JoinColumn(name = "studentPaswoord",nullable=false)		//AANPASSEN
-	private int paswoord;
+	private String paswoord;*/
 
 	public int getIdStudent() {
 		return idStudent;

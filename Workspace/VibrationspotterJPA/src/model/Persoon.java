@@ -23,11 +23,20 @@ public class Persoon implements Serializable{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="id", nullable=false, length=16)
-	private int id;
-
-	@Column(name="gebruikersnaam", nullable=false)
+	@Column(name="idPersoon", nullable=false, length=16)
+	private int idPersoon;
+	
+	@Column(name="gebruikersnaam", nullable=false) //Nog aanpassen
 	private String gebruikersnaam;
+	
+	@Column(name="voornaam", nullable=false)
+	private String voornaam;
+	
+	@Column(name="achternaam", nullable=false)
+	private String achternaam;
+	
+	@Column(name="admin", nullable=false)
+	private boolean admin;
 
 	@Column(name="paswoord", nullable=false)
 	private String paswoord;
@@ -36,13 +45,43 @@ public class Persoon implements Serializable{
 	public Persoon(){
 	}
 
-	public Persoon(String gebruikersnaam, String paswoord) {
-		this.gebruikersnaam = gebruikersnaam;
+	//AANPASSEN CONSTRUCTOR
+
+	public int getIdPersoon() {
+		return idPersoon;
+	}
+
+
+	public String getPaswoord() {
+		return paswoord;
+	}
+
+	public void setPaswoord(String paswoord) {
 		this.paswoord = paswoord;
 	}
 
-	public int getId() {
-		return id;
+	public String getVoornaam() {
+		return voornaam;
+	}
+
+	public void setVoornaam(String voornaam) {
+		this.voornaam = voornaam;
+	}
+
+	public String getAchternaam() {
+		return achternaam;
+	}
+
+	public void setAchternaam(String achternaam) {
+		this.achternaam = achternaam;
+	}
+
+	public boolean isAdmin() {
+		return admin;
+	}
+
+	public void setAdmin(boolean admin) {
+		this.admin = admin;
 	}
 
 	public String getGebruikersnaam() {
@@ -51,14 +90,10 @@ public class Persoon implements Serializable{
 
 	public void setGebruikersnaam(String gebruikersnaam) {
 		this.gebruikersnaam = gebruikersnaam;
-	}
-
-	public String getPaswoord() {
-		return paswoord;
-	}
-
-	public void setPaswoord(String paswoord) {
-		this.paswoord = paswoord;
 	}	
+	
+	
+	
+	
 }
 
