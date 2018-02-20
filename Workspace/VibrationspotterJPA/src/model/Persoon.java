@@ -51,7 +51,6 @@ public class Persoon implements Serializable{
 		return idPersoon;
 	}
 
-
 	public String getPaswoord() {
 		return paswoord;
 	}

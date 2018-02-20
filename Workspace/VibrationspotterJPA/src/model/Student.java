@@ -26,7 +26,7 @@ public class Student {
 	private Leerkracht leerkracht;
 	
 	/*@ManyToOne
-	@JoinColumn(name = "studentPaswoord",nullable=false)		//AANPASSEN
+	@JoinColumn(name = "studentPaswoord",nullable=false)		//AANPASSEN!
 	private String paswoord;*/
 
 	public int getIdStudent() {
@@ -36,6 +36,7 @@ public class Student {
 	public void setIdStudent(int idStudent) {
 		this.idStudent = idStudent;
 	}
+	
 	
 	
 	
