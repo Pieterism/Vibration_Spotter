@@ -1,6 +1,6 @@
 
 package model;
-
+//PERSOON NOG AANPASSEN
 
 import java.io.Serializable;
 
@@ -34,15 +34,12 @@ public class Persoon implements Serializable{
 
 
 	public Persoon(){
-
 	}
 
 	public Persoon(String gebruikersnaam, String paswoord) {
 		this.gebruikersnaam = gebruikersnaam;
 		this.paswoord = paswoord;
 	}
-
-
 
 	public int getId() {
 		return id;
