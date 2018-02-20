@@ -37,8 +37,8 @@ public class Leerkracht implements Serializable  {
 	@Column(name="schooladres", nullable=false)
 	private String schooladres;
 	
-/*	@OneToMany(mappedBy = "LeerkrachtProject")
-	private List<Project> projecten;*/
+	@OneToMany(mappedBy = "LeerkrachtProject") 
+	private List<Project> projecten;
 
 	public Leerkracht() {
 	}
