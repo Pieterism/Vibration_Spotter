@@ -10,13 +10,13 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
-@Entity 
+/*@Entity 
 @Table(name="Student")
-@NamedQuery(name="Student.findAll", query="SELECT p FROM Student p")
+@NamedQuery(name="Student.findAll", query="SELECT p FROM Student p")*/
 
 public class Student {
 
-	@Id
+/*	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="idStudent", nullable=false)
 	private int idStudent;	
@@ -28,5 +28,5 @@ public class Student {
 	@ManyToOne
 	@JoinColumn(name = "studentPaswoord")		//AANPASSEN
 	private int paswoord;
-	
+	*/
 }
