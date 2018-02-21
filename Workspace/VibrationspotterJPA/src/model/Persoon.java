@@ -3,6 +3,7 @@ package model;
 //PERSOON NOG AANPASSEN
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.SecondaryTable;
 import javax.persistence.Table;
 import javax.persistence.PrimaryKeyJoinColumn;
@@ -41,6 +43,14 @@ public class Persoon implements Serializable{
 	@Column(name="paswoord", nullable=false)
 	private String paswoord;
 
+	@OneToMany(mappedBy="persoon")
+	private List<Leerkracht> leerkrachten;
+	
+	@OneToMany(mappedBy="persoon")
+	private List<Student> studenten;
+	
+	@OneToMany(mappedBy="persoon")
+	private List<Spotter> personen;
 
 	public Persoon(){
 	}

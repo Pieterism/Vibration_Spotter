@@ -8,8 +8,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
@@ -37,8 +39,11 @@ public class Spotter implements Serializable {
 	@Column(length=100000)	//nog aanpassen
 	private byte[] foto;
 	
-	
 	@ManyToMany(mappedBy="spotters")
 	private List<Project> projects;
+	
+	@ManyToOne
+	@JoinColumn(name = "idPersoon")
+	private  Persoon persoon;
 	
 }

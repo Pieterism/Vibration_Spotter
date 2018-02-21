@@ -30,6 +30,9 @@ public class Student {
 	@JoinColumn(name = "studentPaswoord",nullable=false)		
 	private Leerkracht paswoord;
 	
+	@ManyToOne
+	@JoinColumn(name = "idPersoon")
+	private  Persoon persoon;
 	
 	public int getIdStudent() {
 		return idStudent;

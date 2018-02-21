@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -42,6 +44,10 @@ public class Leerkracht implements Serializable  {
 	
 	@OneToMany(mappedBy = "leerkracht")
 	private List<Student> studentPaswoorden;
+	
+	@ManyToOne
+	@JoinColumn(name = "idPersoon")
+	private  Persoon persoon;
 
 	public Leerkracht() {
 	}
