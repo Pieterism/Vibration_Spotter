@@ -2,6 +2,7 @@ package model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -25,9 +26,10 @@ public class Student {
 	@JoinColumn(name = "idLeerkracht",nullable=false)
 	private Leerkracht leerkracht;
 	
-	/*@ManyToOne
-	@JoinColumn(name = "studentPaswoord",nullable=false)		//AANPASSEN!
-	private String paswoord;*/
+	@ManyToOne
+	@JoinColumn(name = "studentPaswoord",nullable=false)		
+	private Leerkracht paswoord;
+	
 
 	public int getIdStudent() {
 		return idStudent;

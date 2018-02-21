@@ -37,8 +37,8 @@ public class Spotter implements Serializable {
 	@Column(length=100000)	//nog aanpassen
 	private byte[] foto;
 	
-	/*
+	
 	@ManyToMany(mappedBy="spotters")
 	private List<Project> projects;
-	*/
+	
 }

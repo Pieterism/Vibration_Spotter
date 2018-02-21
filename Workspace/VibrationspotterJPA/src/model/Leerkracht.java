@@ -39,17 +39,25 @@ public class Leerkracht implements Serializable  {
 	
 	@OneToMany(mappedBy = "LeerkrachtProject") 
 	private List<Project> projecten;
+	
+	@OneToMany(mappedBy = "leerkracht")
+	private List<Student> studentPaswoorden;
 
 	public Leerkracht() {
 	}
 	
-	public Leerkracht(int idLeerkracht, String email, String studentPaswoord, String schooladres) {
+
+	public Leerkracht(int idLeerkracht, String email, String studentPaswoord, String schooladres,
+			List<Project> projecten) {
 		super();
 		this.idLeerkracht = idLeerkracht;
 		this.email = email;
 		this.studentPaswoord = studentPaswoord;
 		this.schooladres = schooladres;
+		this.projecten = projecten;
 	}
+
+
 
 	public int getIdLeerkracht() {
 		return idLeerkracht;
@@ -63,13 +71,6 @@ public class Leerkracht implements Serializable  {
 		this.email = email;
 	}
 
-	public String getStudentPaswoord() {
-		return studentPaswoord;
-	}
-
-	public void setStudentPaswoord(String studentPaswoord) {
-		this.studentPaswoord = studentPaswoord;
-	}
 
 	public String getSchooladres() {
 		return schooladres;
@@ -78,6 +79,17 @@ public class Leerkracht implements Serializable  {
 	public void setSchooladres(String schooladres) {
 		this.schooladres = schooladres;
 	}
+
+
+	public String getStudentPaswoord() {
+		return studentPaswoord;
+	}
+
+
+	public void setStudentPaswoord(String studentPaswoord) {
+		this.studentPaswoord = studentPaswoord;
+	}
+
 	
 	
 	

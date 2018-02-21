@@ -32,8 +32,12 @@ public class Configuratie implements Serializable {
 	public Configuratie(int idConfiguratie){
 		this.idConfiguratie=idConfiguratie;
 	}
+
+	public int getIdConfiguratie() {
+		return idConfiguratie;
+	}	
 	
 }
 
 
-//NOG AANPASSEN
+//NOG AANPASSEN MET TAAL,...
