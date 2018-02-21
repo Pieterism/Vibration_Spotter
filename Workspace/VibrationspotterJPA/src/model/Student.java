@@ -30,7 +30,7 @@ public class Student {
 	@JoinColumn(name = "studentPaswoord",nullable=false)		
 	private Leerkracht paswoord;
 	
-
+	
 	public int getIdStudent() {
 		return idStudent;
 	}
