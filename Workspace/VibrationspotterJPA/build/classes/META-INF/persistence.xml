@@ -11,6 +11,8 @@
 		<jta-data-source>jdbc/vibrationspotter</jta-data-source>
 		<class>model.Meting</class>
 		<class>model.Persoon</class>
+		<class>model.Foto</class>
+		<class>model.Project</class>
 		
 		<properties>
 			<!--  tables will be created only if they do not exist. Use for production 
