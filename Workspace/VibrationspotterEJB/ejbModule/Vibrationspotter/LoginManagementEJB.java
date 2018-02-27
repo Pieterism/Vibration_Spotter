@@ -10,7 +10,7 @@ import javax.persistence.Query;
 import model.Foto;
 
 @Stateless
-public class LoginEJB implements LoginManagementEJBLocal {
+public class LoginManagementEJB implements LoginManagementEJBLocal {
 	
 		@PersistenceContext(unitName="demodb")		
 		private EntityManager em;

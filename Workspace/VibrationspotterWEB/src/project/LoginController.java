@@ -9,6 +9,7 @@ import java.io.Serializable;
 
 import javax.ejb.EJB;
 
+import Vibrationspotter.LoginManagementEJBLocal;
 import Vibrationspotter.MetingManagementEJBLocal;
 import Vibrationspotter.PersonManagementEJBLocal;
 
@@ -34,7 +35,7 @@ private LoginManagementEJBLocal loginEJB;
 	 //System.out.println(user);
 	 //System.out.println(pwd);
 	 boolean valid;
-	 valid=LoginEJB.controleerpaswoord(user,pwd);
+	 valid=loginEJB.controleerpaswoord(user,pwd);
 	 if(valid){
 		 return "index";
 	 }
@@ -43,7 +44,7 @@ private LoginManagementEJBLocal loginEJB;
 		 return "login";
 		 
 	 }
-	return "login";
+
  }
  
  
