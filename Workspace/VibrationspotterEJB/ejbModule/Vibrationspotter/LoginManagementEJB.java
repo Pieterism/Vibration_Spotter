@@ -22,7 +22,8 @@ public class LoginManagementEJB implements LoginManagementEJBLocal {
 
 		@Override
 		public boolean controleerpaswoord (String user, String pwd) {
-			Query q = em.createQuery("SELECT p FROM Leerkracht p WHERE p.email = : email AND p.studentPaswoord = : studentPaswoord" );
+			System.out.println(pwd);
+			Query q = em.createQuery("SELECT p FROM Leerkracht p WHERE p.email = :email AND p.studentPaswoord = :studentPaswoord" );
 		//	q.setParameter(1, idFoto);
 		//	q.setParameter(2, studentPaswoord)
 			List<Leerkracht> leerkracht = q.getResultList();
@@ -30,9 +31,7 @@ public class LoginManagementEJB implements LoginManagementEJBLocal {
 				if(leerkracht.get(0).getStudentPaswoord()==pwd){
 					return true;
 				};
-				
-				
-				
+
 			}
 			return false ;
 		}
