@@ -1,6 +1,6 @@
 package Vibrationspotter;
 
-public interface LoginEJBLocal {
+public interface LoginManagementEJBLocal {
 
 	boolean controleerpaswoord(String user, String pwd);
 
