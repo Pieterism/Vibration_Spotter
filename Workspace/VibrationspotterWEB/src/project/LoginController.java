@@ -32,6 +32,8 @@ private static final long serialVersionUID = 1L;
  public String submit() {
 	 System.out.println(user);
 	 System.out.println(pwd);
+	 boolean valid;
+	 valid=LoginEJB(user,pwd);
 	 FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_INFO,"wachtwoord en gebruikersnaam komen niet overeen!","Please enter correct username and Password"));
 	return "login";
  }
