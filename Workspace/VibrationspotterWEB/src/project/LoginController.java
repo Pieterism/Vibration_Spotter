@@ -21,7 +21,8 @@ public class LoginController implements Serializable {
 
 private static final long serialVersionUID = 1L;
 
-
+@EJB
+private LoginManagementEJBLocal loginEJB;
   
   
  private String pwd;
@@ -30,8 +31,8 @@ private static final long serialVersionUID = 1L;
  
  
  public String submit() {
-	 System.out.println(user);
-	 System.out.println(pwd);
+	 //System.out.println(user);
+	 //System.out.println(pwd);
 	 boolean valid;
 	 valid=LoginEJB.controleerpaswoord(user,pwd);
 	 if(valid){
