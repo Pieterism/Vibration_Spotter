@@ -14,91 +14,26 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-@Entity 
-@Table(name="Leerkracht")
-@NamedQuery(name="Leerkracht.findAll", query="SELECT p FROM Leerkracht p")
+@Entity
+@Table(name = "leerkracht")
+@NamedQuery(name = "leerkracht.findAll", query = "SELECT p FROM leerkracht p")
 
-public class Leerkracht implements Serializable  {
+public class Leerkracht implements Serializable {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="idLeerkracht", nullable=false,unique=true)
+	@Column(name = "idLeerkracht", nullable = false, unique = true)
 	private int idLeerkracht;
-	
-	@Column(name="email", nullable=false,unique=true)
-	private String email;
-	
-	@Column(name="studentPaswoord", nullable=false)
-	private String studentPaswoord;
-	
-	@Column(name="schooladres", nullable=false)
+
+	@Column(name = "schoolnaam", nullable = false)
+	private String schoolnaam;
+
+	@Column(name = "schooladres", nullable = false)
 	private String schooladres;
-	
-	@OneToMany(mappedBy = "LeerkrachtProject") 
-	private List<Project> projecten;
-	
-	@OneToMany(mappedBy = "leerkracht")
-	private List<Student> studentPaswoorden;
-	
-	@ManyToOne
-	@JoinColumn(name = "idPersoon")
-	private  Persoon persoon;
-
-	public Leerkracht() {
-	}
-	
-
-	public Leerkracht(int idLeerkracht, String email, String studentPaswoord, String schooladres,
-			List<Project> projecten) {
-		super();
-		this.idLeerkracht = idLeerkracht;
-		this.email = email;
-		this.studentPaswoord = studentPaswoord;
-		this.schooladres = schooladres;
-		this.projecten = projecten;
-	}
-
-
-
-	public int getIdLeerkracht() {
-		return idLeerkracht;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-
-	public String getSchooladres() {
-		return schooladres;
-	}
-
-	public void setSchooladres(String schooladres) {
-		this.schooladres = schooladres;
-	}
-
-
-	public String getStudentPaswoord() {
-		return studentPaswoord;
-	}
-
-
-	public void setStudentPaswoord(String studentPaswoord) {
-		this.studentPaswoord = studentPaswoord;
-	}
-
-	
-	
-	
-	
 
 }

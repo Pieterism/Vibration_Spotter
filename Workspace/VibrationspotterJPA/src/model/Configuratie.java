@@ -10,9 +10,9 @@ import javax.persistence.Id;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
-@Entity 
-@Table(name="Configuratie")
-@NamedQuery(name="Configuratie.findAll", query="SELECT p FROM Configuratie p")
+@Entity
+@Table(name = "configuratie")
+@NamedQuery(name = "configuratie.findAll", query = "SELECT p FROM configuratie p")
 
 public class Configuratie implements Serializable {
 
@@ -20,24 +20,25 @@ public class Configuratie implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="idConfiguratie", nullable=false)
+	@Column(name = "idConfiguratie", nullable = false)
 	private int idConfiguratie;
 
-	public Configuratie() {	
-	}
-	
-	public Configuratie(int idConfiguratie){
-		this.idConfiguratie=idConfiguratie;
-	}
+	@Column(name = "taal")
+	private String taal;
 
 	public int getIdConfiguratie() {
 		return idConfiguratie;
-	}	
-	
+	}
+
+	public String getTaal() {
+		return taal;
+	}
+
+	public void setTaal(String taal) {
+		this.taal = taal;
+	}
+
 }
-
-
-//NOG AANPASSEN MET TAAL,...

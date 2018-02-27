@@ -13,41 +13,29 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
-@Entity 
-@Table(name="Foto")
-@NamedQuery(name="Foto.findAll", query="SELECT p FROM Foto p")
+@Entity
+@Table(name = "foto")
+@NamedQuery(name = "foto.findAll", query = "SELECT p FROM foto p")
 
-public class Foto implements Serializable{
+public class Foto implements Serializable {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="idFoto", nullable=false)
+	@Column(name = "idFoto", nullable = false)
 	private int idFoto;
-	
+
 	@Lob
-	@Column(length=100000)	//nog aanpassen
+	@Column(name = "foto")
 	private byte[] foto;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "idMeting")
 	private Meting meting;
-
-	public Foto(){
-		idFoto = 0;
-		foto = null;	
-		meting = null;
-	}
-	
-	public Foto(int idFoto, byte[] foto, Meting meting) {
-		this.idFoto = idFoto;
-		this.foto = foto;
-		this.meting = meting;
-	}
 
 	public int getIdFoto() {
 		return idFoto;
@@ -72,12 +60,5 @@ public class Foto implements Serializable{
 	public void setMeting(Meting meting) {
 		this.meting = meting;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
+
 }

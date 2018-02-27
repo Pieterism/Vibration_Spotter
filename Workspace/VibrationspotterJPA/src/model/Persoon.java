@@ -1,72 +1,45 @@
-
 package model;
-//PERSOON NOG AANPASSEN
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
-import javax.persistence.SecondaryTable;
-import javax.persistence.Table;
-import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.*;
 
-@Entity 
-@Table(name="Persoon")
-@NamedQuery(name="Persoon.findAll", query="SELECT p FROM Persoon p")
-//@SecondaryTable(name = "Person_Group", pkJoinColumns=@PrimaryKeyJoinColumn(name="login", referencedColumnName="login"))
-public class Persoon implements Serializable{
+@Entity
+@Table(name = "Persoon")
+@NamedQuery(name = "Persoon.findAll", query = "SELECT p FROM Persoon p")
+@Inheritance(strategy = InheritanceType.JOINED)
+public class Persoon implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="idPersoon", nullable=false, length=16)
+	@Column(name = "idPersoon", nullable = false, length = 16)
 	private int idPersoon;
-	
-	@Column(name="gebruikersnaam", nullable=false) //Nog aanpassen
-	private String gebruikersnaam;
-	
-	@Column(name="voornaam", nullable=false)
+
+	@Column(name = "voornaam", nullable = false)
 	private String voornaam;
-	
-	@Column(name="achternaam", nullable=false)
+
+	@Column(name = "achternaam", nullable = false)
 	private String achternaam;
-	
-	@Column(name="admin", nullable=false)
+
+	@Column(name = "admin", nullable = false)
 	private boolean admin;
 
-	@Column(name="paswoord", nullable=false)
+	@Column(name = "paswoord", nullable = false)
 	private String paswoord;
 
-	@OneToMany(mappedBy="persoon")
-	private List<Leerkracht> leerkrachten;
-	
-	@OneToMany(mappedBy="persoon")
-	private List<Student> studenten;
-	
-	@OneToMany(mappedBy="persoon")
-	private List<Spotter> personen;
-
-	public Persoon(){
-	}
-
-	//AANPASSEN CONSTRUCTOR
+	@ManyToMany
+	@JoinTable(name = "Persoon_has_Project", joinColumns = @JoinColumn(name = "Persoon", referencedColumnName = "idPersoon"), inverseJoinColumns = @JoinColumn(name = "Project", referencedColumnName = "IdProject"))
+	private List<Project> projects = new ArrayList<>();
 
 	public int getIdPersoon() {
 		return idPersoon;
 	}
 
-	public String getPaswoord() {
-		return paswoord;
-	}
-
-	public void setPaswoord(String paswoord) {
-		this.paswoord = paswoord;
+	public void setIdPersoon(int idPersoon) {
+		this.idPersoon = idPersoon;
 	}
 
 	public String getVoornaam() {
@@ -93,16 +66,28 @@ public class Persoon implements Serializable{
 		this.admin = admin;
 	}
 
-	public String getGebruikersnaam() {
-		return gebruikersnaam;
+	public String getPaswoord() {
+		return paswoord;
 	}
 
-	public void setGebruikersnaam(String gebruikersnaam) {
-		this.gebruikersnaam = gebruikersnaam;
-	}	
-	
-	
-	
-	
-}
+	public void setPaswoord(String paswoord) {
+		this.paswoord = paswoord;
+	}
 
+	public List<Project> getProjects() {
+		return projects;
+	}
+
+	public void setProjects(List<Project> projects) {
+		this.projects = projects;
+	}
+
+	public void addProject(Project p) {
+		projects.add(p);
+	}
+
+	public void removeProject(Project p) {
+		projects.remove(p);
+	}
+
+}

@@ -57,15 +57,8 @@ public class Project implements Serializable {
 	@JoinColumn(name = "idLeerkracht")
 	private Leerkracht LeerkrachtProject;
 
-	@ManyToMany(cascade = { 
-        CascadeType.PERSIST, 		//nog aanpassen
-        CascadeType.MERGE
-    })
-	@JoinTable(
-	      name="Project_has_Spotter",
-	      joinColumns=@JoinColumn(name="Project_idProject", referencedColumnName="idProject"),
-	      inverseJoinColumns=@JoinColumn(name="Spotter_idSpotter", referencedColumnName="idSpotter"))
-	  private List<Spotter> spotters; 
+	@ManyToMany (mappedBy = "persoon")
+	  private List<Persoon> deelnemers = new ArrayList<>(); 
 
 }
 
