@@ -25,15 +25,14 @@ public class LoginManagementEJB implements LoginManagementEJBLocal {
 			Query q = em.createQuery("SELECT p FROM Leerkracht p WHERE p.email = :email AND p.studentPaswoord = :studentPaswoord" );
 		//	q.setParameter(1, idFoto);
 		//	q.setParameter(2, studentPaswoord)
-			List<Leerkracht> leerkracht = q.getResultList();
-			if(leerkracht.size() == 1){
-				if(leerkracht.get(0).getStudentPaswoord()==pwd){
-					return true;
-				};
+				List<Leerkracht> leerkracht = q.getResultList();
+				if(leerkracht.size() == 1){
+					if(leerkracht.get(0).getStudentPaswoord()==pwd){
+						return true;
+					}
+		
+				}
 				
-				
-				
-			}
 			return false ;
 		}
 }
