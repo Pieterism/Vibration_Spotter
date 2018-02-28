@@ -12,8 +12,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "configuratie")
-@NamedQuery(name = "configuratie.findAll", query = "SELECT p FROM configuratie p")
-
+@NamedQuery(name = "configuratie.findAll", query = "SELECT p FROM Configuratie p")
 public class Configuratie implements Serializable {
 
 	/**
@@ -28,6 +27,16 @@ public class Configuratie implements Serializable {
 
 	@Column(name = "taal")
 	private String taal;
+
+	public Configuratie() {
+		super();
+	}
+
+	public Configuratie(int idConfiguratie, String taal) {
+		super();
+		this.idConfiguratie = idConfiguratie;
+		this.taal = taal;
+	}
 
 	public int getIdConfiguratie() {
 		return idConfiguratie;

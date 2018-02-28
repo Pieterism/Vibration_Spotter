@@ -15,8 +15,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "foto")
-@NamedQuery(name = "foto.findAll", query = "SELECT p FROM foto p")
-
+@NamedQuery(name = "foto.findAll", query = "SELECT p FROM Foto p")
 public class Foto implements Serializable {
 
 	/**
@@ -36,6 +35,17 @@ public class Foto implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "idMeting")
 	private Meting meting;
+
+	public Foto() {
+		super();
+	}
+
+	public Foto(int idFoto, byte[] foto, Meting meting) {
+		super();
+		this.idFoto = idFoto;
+		this.foto = foto;
+		this.meting = meting;
+	}
 
 	public int getIdFoto() {
 		return idFoto;

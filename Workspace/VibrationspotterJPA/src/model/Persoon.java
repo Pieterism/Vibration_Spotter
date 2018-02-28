@@ -3,6 +3,7 @@ package model;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.*;
 
@@ -24,15 +25,33 @@ public class Persoon implements Serializable {
 	@Column(name = "achternaam", nullable = false)
 	private String achternaam;
 
-	@Column(name = "admin", nullable = false)
-	private boolean admin;
-
 	@Column(name = "paswoord", nullable = false)
 	private String paswoord;
 
-	@ManyToMany
-	@JoinTable(name = "Persoon_has_Project", joinColumns = @JoinColumn(name = "Persoon", referencedColumnName = "idPersoon"), inverseJoinColumns = @JoinColumn(name = "Project", referencedColumnName = "IdProject"))
-	private List<Project> projects = new ArrayList<>();
+	@Column(name = "emailadres", nullable = false)
+	private String emailadres;
+
+	@Column(name = "admin", nullable = false)
+	private boolean admin;
+
+	@ManyToMany(targetEntity = Project.class)
+	private Set projects;
+
+	public Persoon() {
+		super();
+	}
+
+	public Persoon(int idPersoon, String voornaam, String achternaam, String paswoord, String emailadres, boolean admin,
+			Set projects) {
+		super();
+		this.idPersoon = idPersoon;
+		this.voornaam = voornaam;
+		this.achternaam = achternaam;
+		this.paswoord = paswoord;
+		this.emailadres = emailadres;
+		this.admin = admin;
+		this.projects = projects;
+	}
 
 	public int getIdPersoon() {
 		return idPersoon;
@@ -58,14 +77,6 @@ public class Persoon implements Serializable {
 		this.achternaam = achternaam;
 	}
 
-	public boolean isAdmin() {
-		return admin;
-	}
-
-	public void setAdmin(boolean admin) {
-		this.admin = admin;
-	}
-
 	public String getPaswoord() {
 		return paswoord;
 	}
@@ -74,20 +85,30 @@ public class Persoon implements Serializable {
 		this.paswoord = paswoord;
 	}
 
-	public List<Project> getProjects() {
+	public String getEmailadres() {
+		return emailadres;
+	}
+
+	public void setEmailadres(String emailadres) {
+		this.emailadres = emailadres;
+	}
+
+	public boolean isAdmin() {
+		return admin;
+	}
+
+	public void setAdmin(boolean admin) {
+		this.admin = admin;
+	}
+
+	public Set getProjects() {
 		return projects;
 	}
 
-	public void setProjects(List<Project> projects) {
+	public void setProjects(Set projects) {
 		this.projects = projects;
 	}
 
-	public void addProject(Project p) {
-		projects.add(p);
-	}
-
-	public void removeProject(Project p) {
-		projects.remove(p);
-	}
+	// nog methodes nodig om met projecten om te gaan
 
 }

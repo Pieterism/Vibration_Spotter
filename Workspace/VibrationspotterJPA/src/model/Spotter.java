@@ -13,37 +13,38 @@ import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
-@Entity 
-@Table(name="Spotter")
-@NamedQuery(name="Spotter.findAll", query="SELECT p FROM Spotter p")
-
-public class Spotter implements Serializable {
+@Entity
+@Table(name = "Spotter")
+@NamedQuery(name = "Spotter.findAll", query = "SELECT p FROM Spotter p")
+@PrimaryKeyJoinColumn(referencedColumnName = "idPersoon")
+public class Spotter extends Persoon {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="idSpotter", nullable=false)
-	private int idSpotter;
-	
-	
-	@Column(name="emailadres", nullable=false,unique=true)
-	private int emailadres;
-	
-	@Lob
-	@Column(length=100000)	//nog aanpassen
-	private byte[] foto;
-	
-	@ManyToMany(mappedBy="spotters")
-	private List<Project> projects;
-	
-	@ManyToOne
-	@JoinColumn(name = "idPersoon")
-	private  Persoon persoon;
-	
+
+	@Column(name = "gebruikersnaam", nullable = false, unique = true)
+	private int gebruikersnaam;
+
+	public Spotter() {
+		super();
+	}
+
+	public Spotter(int gebruikersnaam) {
+		super();
+		this.gebruikersnaam = gebruikersnaam;
+	}
+
+	public int getGebruikersnaam() {
+		return gebruikersnaam;
+	}
+
+	public void setGebruikersnaam(int gebruikersnaam) {
+		this.gebruikersnaam = gebruikersnaam;
+	}
+
 }

@@ -3,6 +3,7 @@ package model;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -19,49 +20,135 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-@Entity 
-@Table(name="Project")
-@NamedQuery(name="Project.findAll", query="SELECT p FROM Project p")
+@Entity
+@Table(name = "Project")
+@NamedQuery(name = "Project.findAll", query = "SELECT p FROM Project p")
 public class Project implements Serializable {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="idProject", nullable=false)
+	@Column(name = "idProject", nullable = false)
 	private int idProject;
-	
-	@Column(name="titel", nullable=false)
+
+	@Column(name = "titel", nullable = false)
 	private String titel;
 
-	@Column(name="latitude", nullable=false)		//float heeft scale en precission
-	private float latitude;
-	
-	@Column(name="longtitude", nullable=false)		//float heeft scale en precission
-	private float longtitude;
-	
-	@Lob
-	@Column(name="beschrijving", length=512)	//length nog aanpassen
-	private String beschrijving;
-	
-	@Column(name="resultaat")
-	private int resultaat;
-	
-	@OneToMany(mappedBy = "project")
-	private List<Meting> metingen;
-	
-	@ManyToOne
-	@JoinColumn(name = "idLeerkracht")
-	private Leerkracht LeerkrachtProject;
+	@Column(name = "type", nullable = false)
+	private int type; // aan elk type meting een int toekennen en adhv deze int
+						// bepalen welk type het is.
 
-	@ManyToMany (mappedBy = "persoon")
-	  private List<Persoon> deelnemers = new ArrayList<>(); 
+	@Column(name = "latitude", nullable = false)
+	private float latitude;
+
+	@Column(name = "longtitude", nullable = false)
+	private float longtitude;
+
+	@Column(name = "goedgekeurd", nullable = false)
+	private boolean goedgekeurd;
+
+	@Column(name = "QR", nullable = false)
+	private String QR;
+
+	@Lob
+	@Column(name = "beschrijving", length = 512)
+	private String beschrijving;
+
+	@ManyToMany(targetEntity = Persoon.class)
+	private Set personen;
+
+	public Project() {
+		super();
+	}
+
+	public Project(int idProject, String titel, int type, float latitude, float longtitude, boolean goedgekeurd,
+			String qR, String beschrijving, Set personen) {
+		super();
+		this.idProject = idProject;
+		this.titel = titel;
+		this.type = type;
+		this.latitude = latitude;
+		this.longtitude = longtitude;
+		this.goedgekeurd = goedgekeurd;
+		QR = qR;
+		this.beschrijving = beschrijving;
+		this.personen = personen;
+	}
+
+	public int getIdProject() {
+		return idProject;
+	}
+
+	public void setIdProject(int idProject) {
+		this.idProject = idProject;
+	}
+
+	public String getTitel() {
+		return titel;
+	}
+
+	public void setTitel(String titel) {
+		this.titel = titel;
+	}
+
+	public int getType() {
+		return type;
+	}
+
+	public void setType(int type) {
+		this.type = type;
+	}
+
+	public float getLatitude() {
+		return latitude;
+	}
+
+	public void setLatitude(float latitude) {
+		this.latitude = latitude;
+	}
+
+	public float getLongtitude() {
+		return longtitude;
+	}
+
+	public void setLongtitude(float longtitude) {
+		this.longtitude = longtitude;
+	}
+
+	public boolean isGoedgekeurd() {
+		return goedgekeurd;
+	}
+
+	public void setGoedgekeurd(boolean goedgekeurd) {
+		this.goedgekeurd = goedgekeurd;
+	}
+
+	public String getQR() {
+		return QR;
+	}
+
+	public void setQR(String qR) {
+		QR = qR;
+	}
+
+	public String getBeschrijving() {
+		return beschrijving;
+	}
+
+	public void setBeschrijving(String beschrijving) {
+		this.beschrijving = beschrijving;
+	}
+
+	public Set getPersonen() {
+		return personen;
+	}
+
+	public void setPersonen(Set personen) {
+		this.personen = personen;
+	}
 
 }
-
-
-
-//Getters, Setters, constructors
