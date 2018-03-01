@@ -28,7 +28,7 @@ public class PersonManagementEJB implements PersonManagementEJBLocal {
 	@Override
 	public Persoon findPersoon(String voornaam, String achternaam) {
 		Query q = em.createQuery("SELECT p FROM Persoon  WHERE p.voornaam = : voornaam "
-				+ "AND p.achternaam =: achternaam");
+				+ "AND p.achternaam =: achternaam");//NOG AANPASSEN
 		q.setParameter(1,voornaam);
 		q.setParameter(2,achternaam);
 		return null;
