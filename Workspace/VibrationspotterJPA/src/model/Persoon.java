@@ -11,6 +11,12 @@ import javax.persistence.*;
 @Table(name = "Persoon")
 @NamedQuery(name = "Persoon.findAll", query = "SELECT p FROM Persoon p")
 @Inheritance(strategy = InheritanceType.JOINED)
+@DiscriminatorColumn(
+		discriminatorType = DiscriminatorType.INTEGER,
+		name = "idPersoon",
+		columnDefinition = "TINYINT(1)")
+
+
 public class Persoon implements Serializable {
 	private static final long serialVersionUID = 1L;
 

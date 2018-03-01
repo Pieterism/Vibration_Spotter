@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -20,6 +21,7 @@ import javax.persistence.Table;
 @Table(name = "Spotter")
 @NamedQuery(name = "Spotter.findAll", query = "SELECT p FROM Spotter p")
 @PrimaryKeyJoinColumn(referencedColumnName = "idPersoon")
+@DiscriminatorValue("2")
 public class Spotter extends Persoon {
 
 	/**
