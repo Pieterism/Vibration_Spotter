@@ -4,11 +4,14 @@ import javax.annotation.Resource;
 import javax.ejb.EJB;
 import javax.ejb.SessionContext;
 import javax.ejb.Stateless;
+import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import java.util.List;
 
 import model.Meting;
+@Named
 @Stateless
 public class MetingManagementEJB implements MetingManagementEJBLocal{
 
@@ -34,6 +37,14 @@ public class MetingManagementEJB implements MetingManagementEJBLocal{
 	@Override
 	public void addMeting(Meting meting) {
 		em.persist(meting);
+	}
+	
+	
+	public List<Meting> findMetingenByIdProject(int idProject){
+		Query q = em.createQuery("SELECT m FROM Meting m WHERE m.idProject.idProject= :fname");
+		q.setParameter("fname", idProject);
+		List<Meting> metingen = q.getResultList();
+		return metingen;
 	}
 
 }
