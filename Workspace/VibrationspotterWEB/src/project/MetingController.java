@@ -12,6 +12,10 @@ import Vibrationspotter.PersonManagementEJBLocal;
 
 import model.Meting;
 import model.Persoon;
+import model.Project;
+
+import java.util.List;
+import java.util.ArrayList;
 
 
 //http://localhost:8080/VibrationspotterWEB/
@@ -30,6 +34,9 @@ private static final long serialVersionUID = 1L;
   
  private Meting meting=new Meting();
  private Persoon persoon=new Persoon();
+ 
+ private Project project=new Project();
+ private List<Meting> metingen = new ArrayList<Meting>();
   
 
  public String submit() {
@@ -37,6 +44,11 @@ private static final long serialVersionUID = 1L;
 	persoonejb.addPersoon(persoon);
 	return "succes.xhtml";
  }
+ 
+ 
+ public void findMetingenByIdProject(){
+		metingen=metingejb.findMetingenByIdProject(project.getIdProject());
+	}
 
 
 public Meting getMeting() {
@@ -54,6 +66,25 @@ public Persoon getPersoon() {
 public void setPersoon(Persoon persoon) {
 	this.persoon = persoon;
   }
+
+public Project getProject() {
+	return project;
+}
+
+
+public void setProject(Project project) {
+	this.project = project;
+}
+
+
+public List<Meting> getMetingen() {
+	return metingen;
+}
+
+
+public void setMetingen(List<Meting> metingen) {
+	this.metingen = metingen;
+}
 
 
 }
