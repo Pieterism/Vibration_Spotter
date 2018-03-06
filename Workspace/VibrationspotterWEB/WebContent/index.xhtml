@@ -21,18 +21,18 @@
      <div class="paragraph" style="margin-left: 20px">
 		<h2 >formulier</h2>
 			<h:form>
-				<h:panelGrid columns ="2">
+				<h:panelGrid columns ="2" cellpadding = "10">
 					<h:outputLabel value="titel: "/>
 					<h:inputText required ="true" value ="#{projectController.project.titel}"/>
 					
-					<h:outputLabel value="beschrijving "/>
+					<h:outputLabel value="beschrijving: "/>
 					<h:inputText required ="true" value ="#{projectController.project.beschrijving}"/>
 					
 					 <h:outputLabel value="type: "/>
-					<h:selectOneListbox value = "#{projectController.project.type}"> 
+					<h:selectOneMenu value = "#{projectController.project.type}"> 
    							<f:selectItem itemValue = "brug" itemLabel = "brug" /> 
    							<f:selectItem itemValue = "kraan" itemLabel = "kraan" /> 
-					</h:selectOneListbox>   
+					</h:selectOneMenu>   
 					
 			   </h:panelGrid>
 				<h:commandButton value = "project aanmaken" action="#{projectController.submit}">
