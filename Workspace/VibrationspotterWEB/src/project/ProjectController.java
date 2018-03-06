@@ -27,9 +27,10 @@ projectejb.addProject(project);
 return "index.xhtml";
 }
 
-public void wissen(){
+public String wissen(){
 	System.out.println("wissen");
 	projectejb.RemoveProject(project);
+	return "projecten.xhtml";
 }
 
 public Project getProject() {
