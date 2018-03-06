@@ -9,6 +9,7 @@
   <title>
     <ui:insert name="title">Projecten</ui:insert>
   </title>
+  	<link rel = "stylesheet" href ="stijl.css"></link>
   	<link rel = "stylesheet" href ="stijlmetingen.css"></link>
 </h:head>
      
@@ -17,6 +18,12 @@
 <div class="header">
        <h1><b>Projecten</b> </h1>
 </div>
+     <div class="topnav">
+		<a href="index.xhtml">Home</a>
+		<a class="active" href="projecten.xhtml">Projecten</a>
+		<a href="#contact">Contact</a>
+ 		<a href="#about">About</a>
+	</div>
 
     <h:dataTable id="projectlist" value="#{projectManagementEJB.findAllProjecten()}" var="pro" border="5" cellpadding ="5" styleClass="tabel" headerClass="htabel">
 
@@ -33,6 +40,13 @@
           <h:outputText value="titel"/>
         </f:facet>
          <h:outputText value="#{pro.titel}"/>
+      </h:column>
+      
+       <h:column>
+        <f:facet name="header">
+          <h:outputText value="type"/>
+        </f:facet>
+         <h:outputText value="#{pro.type}"/>
       </h:column>
       
       <h:column>
