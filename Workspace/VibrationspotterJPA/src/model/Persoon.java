@@ -39,6 +39,9 @@ public class Persoon implements Serializable {
 
 	@Column(name = "admin", nullable = false)
 	private boolean admin;
+	
+	@Column(name = "salt", nullable = false)
+	private String salt;
 
 	@ManyToMany(targetEntity = Project.class)
 	private Set projects;
@@ -105,6 +108,14 @@ public class Persoon implements Serializable {
 
 	public void setAdmin(boolean admin) {
 		this.admin = admin;
+	}
+	
+	public String getSalt() {
+		return salt;
+	}
+
+	public void setSalt(String salt) {
+		this.salt = salt;
 	}
 
 	public Set getProjects() {
