@@ -1,8 +1,10 @@
 package model;
 
 import java.io.Serializable;
+import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.Set;
 
 import javax.persistence.*;
@@ -11,11 +13,7 @@ import javax.persistence.*;
 @Table(name = "Persoon")
 @NamedQuery(name = "Persoon.findAll", query = "SELECT p FROM Persoon p")
 @Inheritance(strategy = InheritanceType.JOINED)
-@DiscriminatorColumn(
-		discriminatorType = DiscriminatorType.INTEGER,
-		name = "idPersoon",
-		columnDefinition = "TINYINT(1)")
-
+@DiscriminatorColumn(discriminatorType = DiscriminatorType.INTEGER, name = "idPersoon", columnDefinition = "TINYINT(1)")
 
 public class Persoon implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -39,7 +37,7 @@ public class Persoon implements Serializable {
 
 	@Column(name = "admin", nullable = false)
 	private boolean admin;
-	
+
 	@Column(name = "salt", nullable = false)
 	private String salt;
 
@@ -60,6 +58,7 @@ public class Persoon implements Serializable {
 		this.emailadres = emailadres;
 		this.admin = admin;
 		this.projects = projects;
+		setSalt();
 	}
 
 	public int getIdPersoon() {
@@ -109,13 +108,16 @@ public class Persoon implements Serializable {
 	public void setAdmin(boolean admin) {
 		this.admin = admin;
 	}
-	
+
 	public String getSalt() {
 		return salt;
 	}
 
-	public void setSalt(String salt) {
-		this.salt = salt;
+	public void setSalt() {
+		Random r = new SecureRandom();
+		byte[] s = new byte[20];
+		r.nextBytes(s);
+		this.salt = s.toString();
 	}
 
 	public Set getProjects() {
