@@ -32,7 +32,7 @@ public class ProjectManagementEJB implements ProjectManagementEJBLocal{
 
 	@Override
 	public void addProject(Project project) {
-		// TODO Auto-generated method stub
+		em.persist(project);
 		
 	}
 	
