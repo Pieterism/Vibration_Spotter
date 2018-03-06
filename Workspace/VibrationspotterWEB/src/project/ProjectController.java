@@ -21,8 +21,9 @@ private ProjectManagementEJBLocal projectejb;
 
 private Project project=new Project();
 
-public void submit() {
+public String submit() {
 projectejb.addProject(project);
+return "index.xhtml";
 }
 
 public Project getProject() {
