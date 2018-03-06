@@ -78,6 +78,19 @@ public class Project implements Serializable {
 		this.beschrijving = beschrijving;
 		this.personen = personen;
 	}
+	
+	public Project(int idProject, String titel, int type, String beschrijving) {
+		super();
+		this.idProject = idProject;
+		this.titel = titel;
+		this.type = type;
+		this.latitude = 0;
+		this.longtitude = 0;
+		this.goedgekeurd = true;
+		QR = "0";
+		this.beschrijving = beschrijving;
+		personen = null;
+	}
 
 	public int getIdProject() {
 		return idProject;
