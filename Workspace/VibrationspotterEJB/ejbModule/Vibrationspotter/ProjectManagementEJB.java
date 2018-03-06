@@ -48,13 +48,14 @@ public class ProjectManagementEJB implements ProjectManagementEJBLocal{
 		return projecten;
 		  }
 	  
-	  public List<Project> findProjectById(int idProject) {
+	  /*public List<Project> findProjectById(int idProject) {
 		  Query q = em.createQuery("SELECT p FROM Project p WHERE p.idProject = :idProject");
 		  q.setParameter("idProject", idProject);
 		  List<Project> projecten = q.getResultList();
 		return projecten;
 		  }
-
+*/
+	  
 /*	  public List<Project> findAllUserProjecten() {
 		  Query q = em.createQuery("SELECT p FROM Project p WHERE ORDER BY p.idProject ASC");
 		  List<Project> projecten = q.getResultList();
