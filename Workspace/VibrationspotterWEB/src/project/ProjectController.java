@@ -21,10 +21,18 @@ private ProjectManagementEJBLocal projectejb;
 
 private Project project=new Project();
 
-
-
 public void submit() {
 projectejb.addProject(project);
 }
+
+public Project getProject() {
+	return project;
+}
+
+public void setProject(Project project) {
+	this.project = project;
+}
+
+
 
 }
