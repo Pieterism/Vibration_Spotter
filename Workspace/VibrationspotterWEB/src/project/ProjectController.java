@@ -22,8 +22,14 @@ private ProjectManagementEJBLocal projectejb;
 private Project project=new Project();
 
 public String submit() {
+System.out.println("aanmaken");
 projectejb.addProject(project);
 return "index.xhtml";
+}
+
+public void wissen(){
+	System.out.println("wissen");
+	projectejb.RemoveProject(project);
 }
 
 public Project getProject() {
