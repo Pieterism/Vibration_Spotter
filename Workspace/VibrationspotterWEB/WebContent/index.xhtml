@@ -22,14 +22,14 @@
 		<h2 >formulier</h2>
 			<h:form>
 				<h:panelGrid columns ="2">
-					<h:outputLabel value="gebruikersnaam: "/>
-					<h:inputText required ="true" value ="#{metingController.persoon.voornaam}" requiredMessage="Username is required"/>
-					
-					<h:outputLabel value="paswoord: "/>
-					<h:inputSecret required ="true" value ="#{metingController.persoon.paswoord}" requiredMessage="password is required"/>
-					
 					<h:outputLabel value="titel: "/>
 					<h:inputText required ="true" value ="#{metingController.meting.titel}"/>
+					
+				    <h:outputLabel value="type: "/>
+					<h:inputText required ="true" value ="#{metingController.meting.type}"/>
+					
+					<h:outputLabel value="beschrijving "/>
+					<h:inputText required ="true" value ="#{metingController.meting.beschrijving}"/>
 					
 			   </h:panelGrid>
 				<h:commandButton value = "project aanmaken" action="#{metingController.submit}">
