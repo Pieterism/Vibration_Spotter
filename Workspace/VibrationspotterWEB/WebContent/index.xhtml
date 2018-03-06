@@ -20,13 +20,13 @@
 	</div>
      <div class="paragraph" style="margin-left: 20px">
 		<h2 >formulier</h2>
-			<h:form>
+			<h:form >
 				<h:panelGrid columns ="2" cellpadding = "10">
 					<h:outputLabel value="titel: "/>
-					<h:inputText required ="true" value ="#{projectController.project.titel}"/>
+					<h:inputText required ="true" value ="#{projectController.project.titel}" requiredMessage="titel is niet ingevuld"/>
 					
 					<h:outputLabel value="beschrijving: "/>
-					<h:inputText required ="true" value ="#{projectController.project.beschrijving}"/>
+					<h:inputText required ="true" value ="#{projectController.project.beschrijving}" requiredMessage="beschrijving is niet ingevuld"/>
 					
 					 <h:outputLabel value="type: "/>
 					<h:selectOneMenu value = "#{projectController.project.type}"> 

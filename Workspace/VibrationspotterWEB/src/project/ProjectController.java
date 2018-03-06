@@ -24,9 +24,11 @@ private ProjectManagementEJBLocal projectejb;
 private Project project=new Project();
 
 public String submit() {
-System.out.println("aanmaken");
+
 projectejb.addProject(project);
-FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_INFO,"UW project is aangemaakt","Please enter correct username and Password"));
+FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_INFO,"Uw project is aangemaakt","Uw project is aangemaakt"));
+
+
 return "index.xhtml";
 }
 
