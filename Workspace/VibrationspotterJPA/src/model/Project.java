@@ -39,7 +39,7 @@ public class Project implements Serializable {
 	private String titel;
 
 	@Column(name = "type", nullable = false)
-	private int type; // aan elk type meting een int toekennen en adhv deze int
+	private String type; // aan elk type meting een int toekennen en adhv deze int
 						// bepalen welk type het is.
 
 	@Column(name = "latitude", nullable = false)
@@ -70,7 +70,7 @@ public class Project implements Serializable {
 
 	}
 
-	public Project(int idProject, String titel, int type, float latitude, float longtitude, boolean goedgekeurd,
+	public Project(int idProject, String titel, String type, float latitude, float longtitude, boolean goedgekeurd,
 			String qR, String beschrijving, Set personen) {
 		super();
 		this.idProject = idProject;
@@ -101,11 +101,11 @@ public class Project implements Serializable {
 		this.titel = titel;
 	}
 
-	public int getType() {
+	public String getType() {
 		return type;
 	}
 
-	public void setType(int type) {
+	public void setType(String type) {
 		this.type = type;
 	}
 
