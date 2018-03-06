@@ -25,11 +25,14 @@
 					<h:outputLabel value="titel: "/>
 					<h:inputText required ="true" value ="#{projectController.project.titel}"/>
 					
-				    <h:outputLabel value="type: "/>
-					<h:inputText required ="true" value ="#{projectController.project.type}"/>
-					
 					<h:outputLabel value="beschrijving "/>
 					<h:inputText required ="true" value ="#{projectController.project.beschrijving}"/>
+					
+					 <h:outputLabel value="type: "/>
+					<h:selectOneListbox value = "#{projectController.project.type}"> 
+   							<f:selectItem itemValue = "brug" itemLabel = "brug" /> 
+   							<f:selectItem itemValue = "kraan" itemLabel = "kraan" /> 
+					</h:selectOneListbox>   
 					
 			   </h:panelGrid>
 				<h:commandButton value = "project aanmaken" action="#{projectController.submit}">
