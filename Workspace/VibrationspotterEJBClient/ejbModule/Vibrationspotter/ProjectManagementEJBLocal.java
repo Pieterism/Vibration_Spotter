@@ -11,5 +11,7 @@ public interface ProjectManagementEJBLocal {
 	
 	public List<Project> findAllProjecten();
 
+	void RemoveProject(Project project);
+
 
 }
