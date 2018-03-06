@@ -62,7 +62,12 @@ public class Project implements Serializable {
 	private Set personen;
 
 	public Project() {
-		super();
+		//super();
+		this.latitude = 0;
+		this.longtitude = 0;
+		this.goedgekeurd = true;
+		QR = "0";
+
 	}
 
 	public Project(int idProject, String titel, int type, float latitude, float longtitude, boolean goedgekeurd,
