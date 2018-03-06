@@ -33,6 +33,9 @@ public class Meting implements Serializable {
 
 	@Column(name = "tijdstip", nullable = false)
 	private String tijdstip;
+	
+	@Column(name = "foto", nullable = false)
+	private String foto;
 
 	@Lob
 	@Column(name = "resultaten", nullable = false) // NOG VERWIJDEREN
@@ -107,5 +110,14 @@ public class Meting implements Serializable {
 	public void setIdProject(Project idProject) {
 		this.idProject = idProject;
 	}
+
+	public String getFoto() {
+		return foto;
+	}
+
+	public void setFoto(String foto) {
+		this.foto = foto;
+	}
+	
 
 }
