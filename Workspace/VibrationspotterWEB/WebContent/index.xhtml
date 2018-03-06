@@ -23,13 +23,13 @@
 			<h:form>
 				<h:panelGrid columns ="2">
 					<h:outputLabel value="titel: "/>
-					<h:inputText required ="true" value ="#{metingController.meting.titel}"/>
+					<h:inputText required ="true" value ="#{projectController.project.titel}"/>
 					
 				    <h:outputLabel value="type: "/>
-					<h:inputText required ="true" value ="#{metingController.meting.type}"/>
+					<h:inputText required ="true" value ="#{projectController.project.type}"/>
 					
 					<h:outputLabel value="beschrijving "/>
-					<h:inputText required ="true" value ="#{metingController.meting.beschrijving}"/>
+					<h:inputText required ="true" value ="#{projectController.project.beschrijving}"/>
 					
 			   </h:panelGrid>
 				<h:commandButton value = "project aanmaken" action="#{projectController.submit}">
