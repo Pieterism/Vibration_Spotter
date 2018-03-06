@@ -1,7 +1,7 @@
 /* Add a black background color to the top navigation */
 
 .header{
-	 background-color: #f1f1f1;
+  background-color: #f1f1f1;
   padding: 30px;
   text-align: center;
 }
@@ -34,4 +34,21 @@
 
 .fail{
 color: red;
+}
+
+
+.paragraph{
+	background-color: #f1f1f1;
+	margin-top: 20px;
+	border-style: solid;
+	width: 20%;
+	height: 400px;
+	padding: 25px;
+	
+}
+
+.knop{
+	background-color: white;
+	
+	
 }
