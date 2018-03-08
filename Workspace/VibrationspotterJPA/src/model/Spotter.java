@@ -1,6 +1,7 @@
 package model;
 
 import java.io.Serializable;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -32,11 +33,11 @@ public class Spotter extends Persoon {
 	@Column(name = "gebruikersnaam", nullable = false, unique = true)
 	private int gebruikersnaam;
 
-	public Spotter() {
+	public Spotter() throws NoSuchAlgorithmException {
 		super();
 	}
 
-	public Spotter(int gebruikersnaam) {
+	public Spotter(int gebruikersnaam) throws NoSuchAlgorithmException {
 		super();
 		this.gebruikersnaam = gebruikersnaam;
 	}

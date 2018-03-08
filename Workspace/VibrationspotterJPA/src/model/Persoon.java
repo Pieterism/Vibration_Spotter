@@ -1,11 +1,10 @@
 package model;
 
 import java.io.Serializable;
+import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
 import java.util.Set;
+import Bcrypt.BCrypt;
 
 import javax.persistence.*;
 
@@ -48,17 +47,16 @@ public class Persoon implements Serializable {
 		super();
 	}
 
-	public Persoon(int idPersoon, String voornaam, String achternaam, String paswoord, String emailadres, boolean admin,
-			Set projects) {
+	public Persoon(int idPersoon, String voornaam, String achternaam, String paswoord, String emailadres,
+			boolean admin) {
 		super();
+		this.salt = BCrypt.gensalt();
 		this.idPersoon = idPersoon;
 		this.voornaam = voornaam;
 		this.achternaam = achternaam;
-		this.paswoord = paswoord;
 		this.emailadres = emailadres;
+		this.paswoord = hashPasswd(paswoord,salt);
 		this.admin = admin;
-		this.projects = projects;
-		setSalt();
 	}
 
 	public int getIdPersoon() {
@@ -90,7 +88,7 @@ public class Persoon implements Serializable {
 	}
 
 	public void setPaswoord(String paswoord) {
-		this.paswoord = paswoord;
+
 	}
 
 	public String getEmailadres() {
@@ -113,11 +111,8 @@ public class Persoon implements Serializable {
 		return salt;
 	}
 
-	public void setSalt() {
-		Random r = new SecureRandom();
-		byte[] s = new byte[20];
-		r.nextBytes(s);
-		this.salt = s.toString();
+	public void setSalt(String s) {
+		salt = s;
 	}
 
 	public Set getProjects() {
@@ -128,6 +123,8 @@ public class Persoon implements Serializable {
 		this.projects = projects;
 	}
 
-	// nog methodes nodig om met projecten om te gaan
+	public String hashPasswd(String passwd,String salt){
+		return BCrypt.hashpw(passwd, salt);
+	}
 
 }

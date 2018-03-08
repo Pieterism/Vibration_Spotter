@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/VibrationspotterEJB/VibrationspotterEJB.iml" filepath="$PROJECT_DIR$/VibrationspotterEJB/VibrationspotterEJB.iml" />
+      <module fileurl="file://$PROJECT_DIR$/VibrationspotterEJBClient/VibrationspotterEJBClient.iml" filepath="$PROJECT_DIR$/VibrationspotterEJBClient/VibrationspotterEJBClient.iml" />
+      <module fileurl="file://$PROJECT_DIR$/VibrationspotterJPA/VibrationspotterJPA.iml" filepath="$PROJECT_DIR$/VibrationspotterJPA/VibrationspotterJPA.iml" />
+      <module fileurl="file://$PROJECT_DIR$/VibrationspotterWEB/VibrationspotterWEB.iml" filepath="$PROJECT_DIR$/VibrationspotterWEB/VibrationspotterWEB.iml" />
+    </modules>
+  </component>
+</project>
