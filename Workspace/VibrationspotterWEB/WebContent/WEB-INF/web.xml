@@ -20,4 +20,32 @@
     <url-pattern>*.xhtml</url-pattern>
 </servlet-mapping>
 
+
+ <security-constraint>
+             <display-name>SecurityConstraint</display-name>
+            <web-resource-collection>
+                 <web-resource-name>index</web-resource-name>
+                 <url-pattern>/*</url-pattern>
+         </web-resource-collection>
+            <auth-constraint>
+                  <role-name>admin</role-name>
+            </auth-constraint>
+            <user-data-constraint>
+                <transport-guarantee>NONE</transport-guarantee>
+            </user-data-constraint>
+ </security-constraint>
+       
+       
+      <login-config>
+            <auth-method>FORM</auth-method>
+         <form-login-config>
+                 <form-login-page>/login.xhtml</form-login-page>
+                 <form-error-page>/loginerror.xhtml</form-error-page>
+          </form-login-config>
+     </login-config>
+     <security-role>
+        <role-name>admin</role-name>
+    </security-role>
+
+
 </web-app>
