@@ -24,8 +24,8 @@ private static final long serialVersionUID = 1L;
 
 @EJB
 private LoginManagementEJBLocal loginEJB;
-  
-  
+ 
+ 
  private String pwd;
  private String user;
  private String msg;
