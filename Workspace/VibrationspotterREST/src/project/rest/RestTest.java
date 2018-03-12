@@ -14,9 +14,9 @@ public class RestTest {
 	}
 	
 	@GET
-	public Boolean getTest(){
+	public String getTest(){
 		System.out.println("Joepie");
-		return true;
+		return "GELUKT!";
 	}
 
 }
