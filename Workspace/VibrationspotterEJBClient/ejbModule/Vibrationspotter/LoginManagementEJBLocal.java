@@ -1,7 +1,11 @@
 package Vibrationspotter;
 
+import model.Persoon;
+
 public interface LoginManagementEJBLocal {
 
-	boolean controleerpaswoord(String user, String pwd);
+	boolean controleerpaswoord(String user, String pwd, Persoon p);
+
+	
 	
 }

@@ -2,6 +2,7 @@ package Vibrationspotter;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.List;
 
 import javax.annotation.Resource;
 import javax.ejb.SessionContext;
@@ -13,7 +14,10 @@ import com.sun.corba.se.pept.transport.Connection;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import model.Meting;
 import model.Persoon;
+import model.Project;
+
 
 @Stateless
 public class PersonManagementEJB implements PersonManagementEJBLocal {
@@ -45,16 +49,18 @@ public class PersonManagementEJB implements PersonManagementEJBLocal {
 
 	@Override
 	public void addPersoon(Persoon p) {
-		Query q = em.createQuery(
-				"INSERT INTO Persoon(voornaam, achternaam, paswoord, emailadres, admin,salt) VALUES(?,?,?,?,?,?)");
-		q.setParameter(1, p.getVoornaam());
-		q.setParameter(2, p.getAchternaam());
-		q.setParameter(3, p.getPaswoord());
-		q.setParameter(4, p.getEmailadres());
-		q.setParameter(5, p.isAdmin());
-		q.setParameter(6, p.getSalt());
-		q.executeUpdate();
-
+		em.persist(p);
+		
+	}
+	public Persoon findPersoonByEmail(String e){
+			Query q = em.createQuery("SELECT p FROM Persoon p WHERE p.email= :email");
+			q.setParameter("email", e);
+			List<Persoon> personen = q.getResultList();
+			Persoon p=personen.get(0);
+			return p;
+		}
+	
+		
 	}
 
 }

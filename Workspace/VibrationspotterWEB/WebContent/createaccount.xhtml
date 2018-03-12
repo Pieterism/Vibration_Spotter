@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html">
+<h:head>
+	<title>login</title>
+	<link rel = "stylesheet" href ="stijllogin.css"></link>
+</h:head>
+<h:body>
+<div class="header">
+       <h1><b>account aanmaken</b><img src="logo.png" width="50" height="50"/> </h1>
+</div>
+	<h:form>
+        <div class="paragraph" style="text-align: center">
+		<h:panelGrid columns ="2" cellpadding = "10" cellspacing = "1" styleClass="panel" >
+			<h:outputText value="voornaam:" />
+			<h:inputText  value="#{userController.persoon.voornaam}"></h:inputText>
+			<h:outputText value="achternaam:" />
+			<h:inputText  value="#{userController.persoon.achternaam}"></h:inputText>
+			<h:outputText value="emailadres:" />
+			<h:inputText value="#{userController.persoon.emailadres}"></h:inputText>
+			<h:outputText value="paswoord:" />
+			<h:inputSecret value="#{userController.persoon.paswoord}"></h:inputSecret>
+		 </h:panelGrid>
+		<br></br>
+		<h:commandButton value = "account aanamaken" action="#{userController.submit}"></h:commandButton>
+		<br></br><br></br>
+		<h:messages  layout="table" styleClass="fail" />
+		</div>
+	</h:form>
+	
+</h:body>
+</html>

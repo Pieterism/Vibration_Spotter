@@ -32,9 +32,9 @@ FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.
 return "index.xhtml";
 }
 
-public String wissen(){
-	System.out.println("wissen");
-	projectejb.RemoveProject(project);
+public String wissen(Project pro){
+	System.out.println(pro.getIdProject());
+	projectejb.wissenProject(pro.getIdProject());
 	return "projecten.xhtml";
 }
 

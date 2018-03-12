@@ -12,6 +12,7 @@ import javax.ejb.EJB;
 import Vibrationspotter.LoginManagementEJBLocal;
 import Vibrationspotter.MetingManagementEJBLocal;
 import Vibrationspotter.PersonManagementEJBLocal;
+import model.Persoon;
 
 
 
@@ -24,7 +25,8 @@ private static final long serialVersionUID = 1L;
 
 @EJB
 private LoginManagementEJBLocal loginEJB;
- 
+@EJB
+private PersonManagementEJBLocal persoonejb;
  
  private String pwd;
  private String user;
@@ -35,7 +37,9 @@ private LoginManagementEJBLocal loginEJB;
 	 //System.out.println(user);
 	 //System.out.println(pwd);
 	 boolean valid;
-	 valid=loginEJB.controleerpaswoord(user,pwd);
+	 Persoon p;
+	 p=persoonejb.findPersoonByEmail(user);
+	 valid=loginEJB.controleerpaswoord(user,pwd,p);
 	 if(valid){
 		 return "index";
 	 }

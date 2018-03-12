@@ -24,7 +24,7 @@
 		<a href="#contact">Contact</a>
  		<a href="about.xhtml">About</a>
 	</div>
-
+<h:form>
     <h:dataTable id="projectlist" value="#{projectManagementEJB.findAllProjecten()}" var="pro" border="5" cellpadding ="5" styleClass="tabel" headerClass="htabel">
 
        <h:column>
@@ -67,12 +67,9 @@
         <f:facet name="header">
           <h:outputText value="wissen"/>
         </f:facet>
-         <h:commandButton value = "project wissen" action="#{projectController.wissen}"></h:commandButton>
+         <h:commandButton value = "project wissen" action="#{projectController.wissen(pro)}"></h:commandButton>
       </h:column>
-
-
-
-
     </h:dataTable>
+    </h:form>
 </h:body>
 </html>

@@ -44,19 +44,21 @@ public class Persoon implements Serializable {
 	private Set projects;
 
 	public Persoon() {
-		super();
+		paswoord = "amdin";
+		salt=BCrypt.gensalt();
 	}
 
-	public Persoon(int idPersoon, String voornaam, String achternaam, String paswoord, String emailadres,
-			boolean admin) {
+	public Persoon(int idPersoon, String voornaam, String achternaam, String paswoord, String emailadres,boolean admin,String salt,Set projects) {
 		super();
 		this.salt = BCrypt.gensalt();
 		this.idPersoon = idPersoon;
 		this.voornaam = voornaam;
 		this.achternaam = achternaam;
 		this.emailadres = emailadres;
+		System.out.println(paswoord);
 		this.paswoord = hashPasswd(paswoord,salt);
 		this.admin = admin;
+		this.projects=projects;
 	}
 
 	public int getIdPersoon() {
@@ -88,6 +90,7 @@ public class Persoon implements Serializable {
 	}
 
 	public void setPaswoord(String paswoord) {
+		this.paswoord=hashPasswd(paswoord,salt);
 
 	}
 
@@ -126,5 +129,6 @@ public class Persoon implements Serializable {
 	public String hashPasswd(String passwd,String salt){
 		return BCrypt.hashpw(passwd, salt);
 	}
+	
 
 }
