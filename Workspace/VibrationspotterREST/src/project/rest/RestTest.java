@@ -8,9 +8,9 @@ import javax.ws.rs.Path;
 public class RestTest {
 	
 	@POST
-	public Boolean postTest(){
+	public String postTest(){
 		System.out.println("Test gelukt");
-		return true;
+		return "GELUKT!";
 	}
 	
 	@GET
