@@ -39,6 +39,7 @@ color: red;
 
 .paragraph{
 	background-color: #f1f1f1;
+	margin-left: 20px;
 	margin-top: 20px;
 	border-style: solid;
 	width: 20%;
@@ -49,6 +50,14 @@ color: red;
 
 .knop{
 	background-color: white;
-	
+		
+}
+
+#tologin{
+	margin-left: 50%;
+	margin-top: 10px;
+	text-align: center;
 	
 }
+
+
