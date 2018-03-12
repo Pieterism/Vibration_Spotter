@@ -28,7 +28,7 @@ public class LoginManagementEJB implements LoginManagementEJBLocal {
 		private BCrypt bcrypt;
 
 		
-		public boolean controleerpaswoord (String user, String pwd,Persoon p) {
+		public boolean controleerpaswoord (String user, String pwd) {
 			Query q = em.createQuery("SELECT p FROM Persoon p WHERE p.emailadres = :emailadres" );
 			q.setParameter("emailadres", user);
 				List<Persoon> personen = q.getResultList();

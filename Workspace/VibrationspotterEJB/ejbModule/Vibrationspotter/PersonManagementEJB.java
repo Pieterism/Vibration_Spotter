@@ -56,6 +56,9 @@ public class PersonManagementEJB implements PersonManagementEJBLocal {
 			Query q = em.createQuery("SELECT p FROM Persoon p WHERE p.emailadres = :emailadres");
 			q.setParameter("emailadres", email);
 			List<Persoon> personen = q.getResultList();
+			if(personen.size()!=1){
+				return null;
+			}
 			Persoon p=personen.get(0);
 			return p;
 		}

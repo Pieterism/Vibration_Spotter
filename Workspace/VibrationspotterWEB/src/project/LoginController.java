@@ -37,9 +37,8 @@ private PersonManagementEJBLocal persoonejb;
 	 //System.out.println(user);
 	 //System.out.println(pwd);
 	 boolean valid;
-	 Persoon p;
-	 p=persoonejb.findPersoonByEmail(user);
-	 valid=loginEJB.controleerpaswoord(user,pwd,p);
+	
+	 valid=loginEJB.controleerpaswoord(user,pwd);
 	 if(valid){
 		 return "index";
 	 }

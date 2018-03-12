@@ -4,7 +4,7 @@ import model.Persoon;
 
 public interface LoginManagementEJBLocal {
 
-	boolean controleerpaswoord(String user, String pwd, Persoon p);
+	boolean controleerpaswoord(String user, String pwd);
 
 	
 	
