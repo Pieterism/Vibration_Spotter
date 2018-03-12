@@ -37,7 +37,7 @@ private LoginManagementEJBLocal loginEJB;
 	 boolean valid;
 	 valid=loginEJB.controleerpaswoord(user,pwd);
 	 if(valid){
-		 return "index";
+		 return "Home/index";
 	 }
 	 else{
 		 FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_INFO,"wachtwoord en gebruikersnaam komen niet overeen!","Please enter correct username and Password"));
@@ -45,6 +45,10 @@ private LoginManagementEJBLocal loginEJB;
 		 
 	 }
 
+ }
+ 
+ public String activateIndex(){
+	 return "index/index.faces?faces-redirect=true";
  }
  
  

@@ -34,8 +34,8 @@ public class Persoon implements Serializable {
 	@Column(name = "emailadres", nullable = false)
 	private String emailadres;
 
-	@Column(name = "admin", nullable = false)
-	private boolean admin;
+	@Column(name = "rol", nullable = false)
+	private String rol;
 
 	@Column(name = "salt", nullable = false)
 	private String salt;
@@ -48,7 +48,7 @@ public class Persoon implements Serializable {
 	}
 
 	public Persoon(int idPersoon, String voornaam, String achternaam, String paswoord, String emailadres,
-			boolean admin) {
+			String rol) {
 		super();
 		this.salt = BCrypt.gensalt();
 		this.idPersoon = idPersoon;
@@ -56,7 +56,7 @@ public class Persoon implements Serializable {
 		this.achternaam = achternaam;
 		this.emailadres = emailadres;
 		this.paswoord = hashPasswd(paswoord,salt);
-		this.admin = admin;
+		this.rol = rol;
 	}
 
 	public int getIdPersoon() {
@@ -99,12 +99,12 @@ public class Persoon implements Serializable {
 		this.emailadres = emailadres;
 	}
 
-	public boolean isAdmin() {
-		return admin;
+	public String isAdmin() {
+		return rol;
 	}
 
-	public void setAdmin(boolean admin) {
-		this.admin = admin;
+	public void setAdmin(String rol) {
+		this.rol = rol;
 	}
 
 	public String getSalt() {
