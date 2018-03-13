@@ -22,13 +22,22 @@
     <url-pattern>*.xhtml</url-pattern>
 </servlet-mapping>
 
+  <filter>
+    <filter-name>AuthenticationFilter</filter-name>
+    <filter-class>com.journaldev.servlet.filters.AuthenticationFilter</filter-class>
+  </filter>
+  
+    <filter-mapping>
+    <filter-name>AuthenticationFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
 
 
  <security-constraint>
              <display-name>SecurityConstraint</display-name>
             <web-resource-collection>
                  <web-resource-name>login via index</web-resource-name>
-                 <url-pattern>/Home/*</url-pattern>
+                 <url-pattern>/Home/about.xhtml/*</url-pattern>
          </web-resource-collection>
             <auth-constraint>
                   <role-name>admin</role-name>

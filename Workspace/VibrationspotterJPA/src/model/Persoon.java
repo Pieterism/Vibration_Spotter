@@ -34,8 +34,8 @@ public class Persoon implements Serializable {
 	@Column(name = "emailadres", nullable = false)
 	private String emailadres;
 
-	@Column(name = "rol", nullable = false)
-	private String rol;
+	@Column(name = "admin", nullable = false)
+	private String admin;
 
 	@Column(name = "salt", nullable = false)
 	private String salt;
@@ -56,7 +56,7 @@ public class Persoon implements Serializable {
 		this.achternaam = achternaam;
 		this.emailadres = emailadres;
 		this.paswoord = hashPasswd(paswoord,salt);
-		this.rol = rol;
+		this.admin = rol;
 	}
 
 	public int getIdPersoon() {
@@ -100,11 +100,11 @@ public class Persoon implements Serializable {
 	}
 
 	public String isAdmin() {
-		return rol;
+		return admin;
 	}
 
 	public void setAdmin(String rol) {
-		this.rol = rol;
+		this.admin = rol;
 	}
 
 	public String getSalt() {
