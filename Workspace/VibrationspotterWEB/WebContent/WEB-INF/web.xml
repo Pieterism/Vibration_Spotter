@@ -20,4 +20,28 @@
     <url-pattern>*.xhtml</url-pattern>
 </servlet-mapping>
 
+ <login-config>
+    <auth-method>FORM</auth-method>
+    <realm-name>vibrationspotter-realm</realm-name>
+    <form-login-config>
+      <form-login-page>/login.xhtml</form-login-page>
+      <form-error-page>/loginError.xhtml</form-error-page>
+    </form-login-config>
+  </login-config>
+  
+   <security-role>
+    <role-name>admin</role-name>
+ </security-role>
+ 
+  <security-constraint>
+    <web-resource-collection>
+        <web-resource-name>Secure Home Pages</web-resource-name>
+        <description/>
+        <url-pattern>/Home/about.xhtml/*</url-pattern>
+    </web-resource-collection>
+    <auth-constraint>
+        <role-name>admin</role-name>
+    </auth-constraint>
+</security-constraint>
+
 </web-app>

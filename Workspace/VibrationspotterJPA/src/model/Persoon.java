@@ -10,6 +10,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "Persoon")
+@SecondaryTable(name = "PersoonGroep", pkJoinColumns=@PrimaryKeyJoinColumn(name="idPersoon", referencedColumnName="idPersoon"))
 @NamedQuery(name = "Persoon.findAll", query = "SELECT p FROM Persoon p")
 @Inheritance(strategy = InheritanceType.JOINED)
 @DiscriminatorColumn(discriminatorType = DiscriminatorType.INTEGER, name = "idPersoon", columnDefinition = "TINYINT(1)")
@@ -42,6 +43,9 @@ public class Persoon implements Serializable {
 
 	@ManyToMany(targetEntity = Project.class)
 	private Set projects;
+	
+	@Column(table="PersoonGroep", name="idGroep")
+	private String groep;
 
 	public Persoon() {
 		paswoord = "amdin";
