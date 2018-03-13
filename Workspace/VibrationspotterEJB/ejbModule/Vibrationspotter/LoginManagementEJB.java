@@ -28,10 +28,12 @@ public class LoginManagementEJB implements LoginManagementEJBLocal {
 		private BCrypt bcrypt;
 
 		
-		public boolean controleerpaswoord (String user, String pwd) {
+		public boolean controleerpaswoord (String emailadres, String pwd) {
 			Query q = em.createQuery("SELECT p FROM Persoon p WHERE p.emailadres = :emailadres" );
-			q.setParameter("emailadres", user);
+			q.setParameter("emailadres", emailadres);
 				List<Persoon> personen = q.getResultList();
+				System.out.println(personen.get(0).getPaswoord());
+				/*
 				if(personen.size() == 1){
 					if(pwd.equals(bcrypt.checkpw(pwd,personen.get(0).getPaswoord()))){
 						return true;		
@@ -41,6 +43,7 @@ public class LoginManagementEJB implements LoginManagementEJBLocal {
 						return false;
 					}
 					}
+					*/
 				
 
 				
