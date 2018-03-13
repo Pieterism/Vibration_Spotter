@@ -11,6 +11,8 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import java.util.List;
 
+import model.Leerkracht;
+import model.Persoon;
 import model.Meting;
 import model.Project;
 @Named
@@ -39,6 +41,21 @@ public class ProjectManagementEJB implements ProjectManagementEJBLocal{
 	@Override
 	public void RemoveProject(Project project) {
 		em.remove(project);
+		
+	}
+	
+	public void wissenProject(int idProject){
+		/*
+		Query q = em.createQuery("SELECT p FROM Project p WHERE p.idProject = :idProject" );
+		q.setParameter("idProject", idProject);
+		List<Project> projecten = q.getResultList();
+		System.out.println(projecten.get(0).getIdProject());
+		*/
+		
+        Project pro = em.find(Project.class, idProject);
+		em.remove(pro);
+		System.out.println(pro.getIdProject());
+		
 		
 	}
 	

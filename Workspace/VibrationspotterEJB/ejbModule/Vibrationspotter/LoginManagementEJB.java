@@ -14,6 +14,8 @@ import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 import model.Leerkracht;
+import model.Persoon;
+
 
 @Stateless
 public class LoginManagementEJB implements LoginManagementEJBLocal {
@@ -23,42 +25,27 @@ public class LoginManagementEJB implements LoginManagementEJBLocal {
 		
 		@Resource
 		private SessionContext ctx;
+		private BCrypt bcrypt;
 
-		@Override
-		public boolean controleerpaswoord (String user, String pwd) {
-			Query q = em.createQuery("SELECT p FROM Leerkracht p WHERE p.emailadres = :emailadres" );
-			q.setParameter("emailadres", user);
-				List<Leerkracht> Leerkracht = q.getResultList();
-				if(Leerkracht.size() == 1){
-					try {
-						MessageDigest md = java.security.MessageDigest.getInstance("SHA-256");
-					 
-					try {
-						md.update(pwd.getBytes("UTF-8"));
-					} catch (UnsupportedEncodingException e) {
-						e.printStackTrace();
-					}
-					byte[] paswoordDigest = md.digest();
-					String pHash = DatatypeConverter.printBase64Binary(paswoordDigest);
-					System.out.println(pHash);
-					if(Leerkracht.get(0).getPaswoord().equals(pHash)){
-						return true;
-					}
-			
-					
-					
-					
-					}
-					catch (NoSuchAlgorithmException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-					
-				/*	if(Leerkracht.get(0).getPaswoord().equals(pwd)){
-						return true;
-					}*/
 		
-				}
+		public boolean controleerpaswoord (String emailadres, String pwd) {
+			Query q = em.createQuery("SELECT p FROM Persoon p WHERE p.emailadres = :emailadres" );
+			q.setParameter("emailadres", emailadres);
+				List<Persoon> personen = q.getResultList();
+				System.out.println(personen.get(0).getPaswoord());
+				/*
+				if(personen.size() == 1){
+					if(pwd.equals(bcrypt.checkpw(pwd,personen.get(0).getPaswoord()))){
+						return true;		
+						
+					}
+					else{
+						return false;
+					}
+					}
+					*/
+				
+
 				
 			return false ;
 		}

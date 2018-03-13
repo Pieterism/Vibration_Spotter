@@ -13,6 +13,8 @@ public interface PersonManagementEJBLocal {
 	Persoon findPersoon(String voornaam, String achternaam);
 
 	void addPersoon(Persoon p);
+	
+	public Persoon findPersoonByEmail(String e);
 		
 
 	}
