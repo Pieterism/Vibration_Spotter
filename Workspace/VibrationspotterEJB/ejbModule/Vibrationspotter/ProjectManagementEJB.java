@@ -9,12 +9,17 @@ import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+
 import java.util.List;
 
-import model.Leerkracht;
-import model.Persoon;
-import model.Meting;
 import model.Project;
+
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.WriterException;
+import com.google.zxing.client.j2se.MatrixToImageWriter;
+import com.google.zxing.common.BitMatrix;
+import com.google.zxing.qrcode.QRCodeWriter;
+
 @Named
 @Stateless
 public class ProjectManagementEJB implements ProjectManagementEJBLocal{
@@ -30,6 +35,11 @@ public class ProjectManagementEJB implements ProjectManagementEJBLocal{
 		Query q = em.createQuery("SELECT p FROM Project  WHERE p.titel = : titel" );
 		q.setParameter(1, titel);
 		return null;
+	}
+	
+	@Override
+	public void createQR(Project project){
+
 	}
 
 	@Override

@@ -1,7 +1,5 @@
 package Vibrationspotter;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -9,14 +7,10 @@ import javax.ejb.SessionContext;
 import javax.ejb.Stateless;
 import javax.persistence.Query;
 
-import com.sun.corba.se.pept.transport.Connection;
-
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-import model.Meting;
 import model.Persoon;
-import model.Project;
 
 
 @Stateless
@@ -41,10 +35,6 @@ public class PersonManagementEJB implements PersonManagementEJBLocal {
 		q.setParameter(1, voornaam);
 		q.setParameter(2, achternaam);
 		return null;
-	}
-
-	public void HashPassword(String s, String id) {
-		// TODO
 	}
 
 	@Override
