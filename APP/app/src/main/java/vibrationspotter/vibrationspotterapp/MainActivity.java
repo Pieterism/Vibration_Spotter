@@ -1,5 +1,6 @@
 package vibrationspotter.vibrationspotterapp;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -23,11 +24,14 @@ public class MainActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final String REQUEST_TAG = "Stringrequest";
 
+                Intent intent = new Intent(MainActivity.super.getApplicationContext(),Meter.class);
+                startActivity(intent);
+
+                /*final String REQUEST_TAG = "Stringrequest";
 
                 StringRequest strReq = new StringRequest(Request.Method.GET,
-                        "http://192.168.1.37:8080/VibrationspotterREST/Restservice/restTest",
+                        "http://localhost:8080/VibrationspotterREST/Restservice/restTest",
                         new Response.Listener<String>() {
                             @Override
                             public void onResponse(String response) {
@@ -43,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
                 );
 
                 VolleyClass.getInstance(getApplicationContext()).addToRequestQueue(strReq, REQUEST_TAG);
+                */
             }
         });
 

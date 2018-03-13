@@ -11,6 +11,7 @@ import javax.persistence.Query;
 import java.util.List;
 
 import model.Meting;
+
 @Named
 @Stateless
 public class MetingManagementEJB implements MetingManagementEJBLocal{
