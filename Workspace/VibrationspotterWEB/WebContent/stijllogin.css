@@ -15,3 +15,21 @@ margin-top: 50px;
 color: red;
 margin: auto;
 }
+
+
+.paragraph{
+	background-color: #f1f1f1;
+	margin:0 auto;
+	margin-top: 20px;
+	border-style: solid;
+	width: 20%;
+	height: 450px;
+	padding: 25px;
+	text-align: center;
+	
+}
+
+.knop{
+	background-color: white;
+		
+}

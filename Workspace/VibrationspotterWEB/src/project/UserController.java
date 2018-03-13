@@ -23,10 +23,18 @@ private static final long serialVersionUID = 1L;
 private PersonManagementEJBLocal persoonejb;
 
 private Persoon persoon=new Persoon();
+private String checkpwd;
 
 public String submit() {
-persoonejb.addPersoon(persoon);
-return "createaccount.xhtml";
+	if(persoon.getPaswoord().equals(checkpwd)){
+		FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_INFO,"gelieve tweemaal hetzelfde passwoord in te geven","gelieve tweemaal hetzelfde passwoord in te geven"));
+		return null;
+	}
+	else{
+		persoonejb.addPersoon(persoon);
+		FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_INFO,"account is met succes aangemaakt","account is met succes aangemaakt"));
+		return null;
+	}
 }
 
 public Persoon getPersoon() {
@@ -36,5 +44,15 @@ public Persoon getPersoon() {
 public void setPersoon(Persoon persoon) {
 	this.persoon = persoon;
 }
+
+public String getCheckpwd() {
+	return checkpwd;
+}
+
+public void setCheckpwd(String checkpwd) {
+	this.checkpwd = checkpwd;
+}
+
+
 
 }

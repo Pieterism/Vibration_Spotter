@@ -10,24 +10,25 @@
 <div class="header">
        <h1><b>account aanmaken</b><img src="logo.png" width="50" height="50"/> </h1>
 </div>
+<div class="paragraph" style="text-align: center">
 	<h:form>
-        <div class="paragraph" style="text-align: center">
 		<h:panelGrid columns ="2" cellpadding = "10" cellspacing = "1" styleClass="panel" >
 			<h:outputText value="voornaam:" />
-			<h:inputText  value="#{userController.persoon.voornaam}"></h:inputText>
+			<h:inputText required ="true"  value="#{userController.persoon.voornaam}" requiredMessage="voornaam is niet ingevuld"></h:inputText>
 			<h:outputText value="achternaam:" />
-			<h:inputText  value="#{userController.persoon.achternaam}"></h:inputText>
+			<h:inputText required ="true"  value="#{userController.persoon.achternaam}" requiredMessage="achternaam is niet ingevuld"></h:inputText>
 			<h:outputText value="emailadres:" />
-			<h:inputText value="#{userController.persoon.emailadres}"></h:inputText>
+			<h:inputText required ="true" value="#{userController.persoon.emailadres}" requiredMessage="emailadres is niet ingevuld"></h:inputText>
 			<h:outputText value="paswoord:" />
-			<h:inputSecret value="#{userController.persoon.paswoord}"></h:inputSecret>
+			<h:inputSecret required ="true" value="#{userController.persoon.paswoord}" requiredMessage="paswoord is niet ingevuld"></h:inputSecret>
+			<h:outputText value="herhaal paswoord:" />
+			<h:inputSecret required ="true" value="#{userController.checkpwd}" requiredMessage="paswoord is niet ingevuld"></h:inputSecret>
 		 </h:panelGrid>
 		<br></br>
-		<h:commandButton value = "account aanamaken" action="#{userController.submit}"></h:commandButton>
+		<h:commandButton styleClass="knop" value = "account aanmaken" action="#{userController.submit}"></h:commandButton>
 		<br></br><br></br>
+		</h:form>
 		<h:messages  layout="table" styleClass="fail" />
-		</div>
-	</h:form>
-	
+	</div>
 </h:body>
 </html>
