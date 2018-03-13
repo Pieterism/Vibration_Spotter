@@ -20,6 +20,8 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import java.util.UUID;
+
 @Entity
 @Table(name = "Project")
 @NamedQuery(name = "Project.findAll", query = "SELECT p FROM Project p")
@@ -66,7 +68,7 @@ public class Project implements Serializable {
 		this.latitude = 0;
 		this.longtitude = 0;
 		this.goedgekeurd = false;
-		QR = "0";
+		QR = UUID.randomUUID().toString();
 
 	}
 

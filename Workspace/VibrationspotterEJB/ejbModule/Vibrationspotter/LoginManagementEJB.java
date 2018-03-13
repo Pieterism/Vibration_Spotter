@@ -6,16 +6,8 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-import javax.xml.bind.DatatypeConverter;
-
 import Bcrypt.BCrypt;
-
-import java.io.UnsupportedEncodingException;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.util.List;
-
-import model.Leerkracht;
 import model.Persoon;
 
 @Stateless
@@ -32,11 +24,8 @@ public class LoginManagementEJB implements LoginManagementEJBLocal {
 		Query q = em.createQuery("SELECT p FROM Persoon p WHERE p.emailadres = :emailadres");
 		q.setParameter("emailadres", emailadres);
 		List<Persoon> personen = q.getResultList();
-		System.out.println(personen.get(0).getPaswoord());
-
-		if (personen.size() == 0) {
-			System.out.println("ERROR! Gebruiker bestaat niet! ");
-
+		if(personen.size()!=1){
+			return false;
 		}
 		return bcrypt.checkpw(pwd, personen.get(0).getPaswoord());
 	}
