@@ -26,7 +26,7 @@ private Persoon persoon=new Persoon();
 private String checkpwd;
 
 public String submit() {
-	if(persoon.getPaswoord().equals(checkpwd)){
+	if(!persoon.getPaswoord().equals(checkpwd)){
 		FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_INFO,"gelieve tweemaal hetzelfde passwoord in te geven","gelieve tweemaal hetzelfde passwoord in te geven"));
 		return null;
 	}
