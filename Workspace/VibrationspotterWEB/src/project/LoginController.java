@@ -27,7 +27,7 @@ private LoginManagementEJBLocal loginEJB;
  
  
  private String pwd;
- private String user;
+ private String emailadres;
  private String msg;
  
  
@@ -35,7 +35,7 @@ private LoginManagementEJBLocal loginEJB;
 	 //System.out.println(user);
 	 //System.out.println(pwd);
 	 boolean valid;
-	 valid=loginEJB.controleerpaswoord(user,pwd);
+	 valid=loginEJB.controleerpaswoord(emailadres,pwd);
 	 if(valid){
 		 return "index";
 	 }
@@ -55,12 +55,20 @@ public String getPwd() {
 public void setPwd(String pwd) {
 	this.pwd = pwd;
 }
-public String getUser() {
-	return user;
+
+
+
+public String getEmailadres() {
+	return emailadres;
 }
-public void setUser(String user) {
-	this.user = user;
+
+
+
+public void setEmailadres(String emailadres) {
+	this.emailadres = emailadres;
 }
+
+
 
 public String getMsg() {
 	return msg;
