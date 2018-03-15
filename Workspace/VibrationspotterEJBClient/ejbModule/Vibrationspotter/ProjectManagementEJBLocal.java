@@ -15,6 +15,6 @@ public interface ProjectManagementEJBLocal {
 
 	void wissenProject(int id);
 
-	void createQR(Project project);
+	//void createQR(Project project);
 
 }

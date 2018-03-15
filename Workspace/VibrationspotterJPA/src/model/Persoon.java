@@ -31,11 +31,11 @@ public class Persoon implements Serializable {
 	@Column(name = "paswoord", nullable = false)
 	private String paswoord;
 
-	@Column(name = "emailadres", nullable = false)
+	@Column(name = "emailadres", nullable = false, unique=true)
 	private String emailadres;
 
 	@Column(name = "admin", nullable = false)
-	private boolean admin;
+	private String admin;
 
 	@Column(name = "salt", nullable = false)
 	private String salt;
@@ -48,7 +48,7 @@ public class Persoon implements Serializable {
 		salt=BCrypt.gensalt();
 	}
 
-	public Persoon(int idPersoon, String voornaam, String achternaam, String paswoord, String emailadres,boolean admin,String salt,Set projects) {
+	public Persoon(int idPersoon, String voornaam, String achternaam, String paswoord, String emailadres,String admin,String salt,Set projects) {
 		super();
 		this.salt = BCrypt.gensalt();
 		this.idPersoon = idPersoon;
@@ -102,11 +102,11 @@ public class Persoon implements Serializable {
 		this.emailadres = emailadres;
 	}
 
-	public boolean isAdmin() {
+	public String isAdmin() {
 		return admin;
 	}
 
-	public void setAdmin(boolean admin) {
+	public void setAdmin(String admin) {
 		this.admin = admin;
 	}
 

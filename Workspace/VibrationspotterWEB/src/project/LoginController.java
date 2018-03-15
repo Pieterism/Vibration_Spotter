@@ -1,6 +1,7 @@
 package project;
 
 import javax.faces.application.FacesMessage;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
@@ -12,6 +13,8 @@ import javax.ejb.EJB;
 import Vibrationspotter.LoginManagementEJBLocal;
 import Vibrationspotter.MetingManagementEJBLocal;
 import Vibrationspotter.PersonManagementEJBLocal;
+import jdk.nashorn.internal.runtime.Context;
+import model.Persoon;
 
 
 
@@ -25,6 +28,8 @@ private static final long serialVersionUID = 1L;
 @EJB
 private LoginManagementEJBLocal loginEJB;
  
+ @EJB
+ private PersonManagementEJBLocal personEJB;
  
  private String pwd;
  private String emailadres;
@@ -36,7 +41,12 @@ private LoginManagementEJBLocal loginEJB;
 	 //System.out.println(pwd);
 	 boolean valid;
 	 valid=loginEJB.controleerpaswoord(emailadres,pwd);
+	 
+	 FacesContext context = FacesContext.getCurrentInstance();
+	 ExternalContext externalContext = context.getExternalContext();
+	 Persoon user = personEJB.findPersoonByEmail(emailadres);
 	 if(valid){
+		 externalContext.getSessionMap().put("Persoon", user);
 		 return "index";
 	 }
 	 else{

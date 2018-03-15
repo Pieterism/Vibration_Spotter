@@ -45,7 +45,7 @@ public class ProjectManagementEJB implements ProjectManagementEJBLocal {
 		return null;
 	}
 
-	@Override
+/*	@Override
 	public void createQR(Project project) {
 		int id = project.getIdProject();
 		Query q = em.createQuery("SELECT p FROM Project WHERE p.idProject = :idProject ");
@@ -66,7 +66,7 @@ public class ProjectManagementEJB implements ProjectManagementEJBLocal {
 
 			// Now with zxing version 3.2.1 you could change border size (white
 			// border size to just 1)
-			hintMap.put(EncodeHintType.MARGIN, 1); /* default = 4 */
+			hintMap.put(EncodeHintType.MARGIN, 1); /* default = 4 *//*
 			hintMap.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.L);
 
 			QRCodeWriter qrCodeWriter = new QRCodeWriter();
@@ -95,7 +95,7 @@ public class ProjectManagementEJB implements ProjectManagementEJBLocal {
 		}
 		System.out.println("\n\nYou have successfully created QR Code.");
 	}
-
+*/
 	@Override
 	public void addProject(Project project) {
 		em.persist(project);
