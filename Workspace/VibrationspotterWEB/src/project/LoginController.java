@@ -46,6 +46,7 @@ private LoginManagementEJBLocal loginEJB;
 	 //FacesContext context = FacesContext.getCurrentInstance();
 	 //ExternalContext externalContext = context.getExternalContext();
 	 Persoon user = personEJB.findPersoonByEmail(emailadres);
+	 System.out.println("PJ HULP: " + user.getIdPersoon());
 	 if(valid){
 		 HttpSession session = SessionUtils.getSession();
 		 session.setAttribute("emailadres", user);
@@ -54,7 +55,7 @@ private LoginManagementEJBLocal loginEJB;
 		 
 		 
 		// externalContext.getSessionMap().put("Persoon", user);
-		 return "/Home/index.xhtml?faces-redirect=true";
+		 return "/index.xhtml?faces-redirect=true";
 	 }
 	 else{
 		 FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_INFO,"wachtwoord en gebruikersnaam komen niet overeen!","Please enter correct username and Password"));

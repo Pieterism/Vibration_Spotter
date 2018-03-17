@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-/*@WebFilter(filterName = "AuthFilter", urlPatterns = { "*.xhtml" })
+@WebFilter(filterName = "AuthFilter", urlPatterns = { "/projecten.xhtml" })
 public class AuthorizationFilter implements Filter {
 
 	public AuthorizationFilter() {
@@ -22,8 +22,26 @@ public class AuthorizationFilter implements Filter {
 	public void init(FilterConfig filterConfig) throws ServletException {
 
 	}
+	
+	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws ServletException, IOException {
+	    if (((HttpServletRequest) request).getSession().getAttribute("idPersoon") == null) {
+	        // User is not logged in. Redirect to login page.
+	        ((HttpServletResponse) response).sendRedirect("/VibrationspotterWEB/login.xhtml");
+	    } else {
+	        // User is logged in. Just continue with request.
+	        chain.doFilter(request, response);
+	    }
+	}
 
 	@Override
+	public void destroy() {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	
+
+	/*@Override
 	public void doFilter(ServletRequest request, ServletResponse response,
 			FilterChain chain) throws IOException, ServletException {
 		try {
@@ -36,11 +54,11 @@ public class AuthorizationFilter implements Filter {
 			
 			//inlog uitzetten kan door door deze if te vervangen door "chain.doFilter(request, response);"
 
-			System.out.println("Huidige sessie: role="+ses.getAttribute("role")+"; name="+ses.getAttribute("username"));;
+			System.out.println("Huidige sessie: admin="+ses.getAttribute("admin")+"; emailadres="+ses.getAttribute("emailadres"));;
 			
 		    if((ses != null && ses.getAttribute("username") != null)){ //checkt of er ingelogd is
 				if(reqURI.indexOf("/Home")>0){						// checkt of het een matchid pagina is (waar enkel matchid toegang mag tot hebben) doet dit aan dehand van  de mappenstructuur van de xhtml bestanden
-					if(ses.getAttribute("role").equals("admin")){				// checkt of het een matchid account is
+					if(ses.getAttribute("admin").equals("admin")){				// checkt of het een matchid account is
 						chain.doFilter(request, response);				// in dit geval mag de request door gaaan
 						return;
 					}else{
@@ -53,7 +71,7 @@ public class AuthorizationFilter implements Filter {
 					return;
 				}
 			}else{
-				if(reqURI.indexOf("/protected")>0){						
+				if(reqURI.indexOf("/")>0){						
 					resp.sendRedirect("/");
 					System.out.println("redirect-------------------------------------------------------");
 					return;
@@ -74,6 +92,5 @@ public class AuthorizationFilter implements Filter {
 	@Override
 	public void destroy() {
 
-	}
+	}*/
 }
-*/
