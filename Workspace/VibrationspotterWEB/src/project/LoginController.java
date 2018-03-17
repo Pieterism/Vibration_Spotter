@@ -55,7 +55,7 @@ private LoginManagementEJBLocal loginEJB;
 		 
 		 
 		// externalContext.getSessionMap().put("Persoon", user);
-		 return "/index.xhtml?faces-redirect=true";
+		 return "/Home/index.xhtml?faces-redirect=true";
 	 }
 	 else{
 		 FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_INFO,"wachtwoord en gebruikersnaam komen niet overeen!","Please enter correct username and Password"));
