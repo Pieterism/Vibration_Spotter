@@ -3,14 +3,8 @@ package vibrationspotter.vibrationspotterapp;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-
-import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -19,37 +13,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Button button = findViewById(R.id.knoppie);
+        Button button = findViewById(R.id.Login_knop);
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                Intent intent = new Intent(MainActivity.super.getApplicationContext(),Meter.class);
+                Intent intent = new Intent(MainActivity.super.getApplicationContext(),LoginSelector.class);
                 startActivity(intent);
-
-                /*final String REQUEST_TAG = "Stringrequest";
-
-                StringRequest strReq = new StringRequest(Request.Method.GET,
-                        "http://localhost:8080/VibrationspotterREST/Restservice/restTest",
-                        new Response.Listener<String>() {
-                            @Override
-                            public void onResponse(String response) {
-                                Log.d(REQUEST_TAG, response);
-                            }
-                        },
-                        new Response.ErrorListener() {
-                            @Override
-                            public void onErrorResponse(VolleyError error) {
-                                Log.d(REQUEST_TAG, "Error: " + error.toString() + ", " + error.getMessage());
-                            }
-                        }
-                );
-
-                VolleyClass.getInstance(getApplicationContext()).addToRequestQueue(strReq, REQUEST_TAG);
-                */
             }
         });
-
     }
 }

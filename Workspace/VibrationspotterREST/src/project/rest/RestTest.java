@@ -15,10 +15,10 @@ public class RestTest {
 			
 	@POST
 	@Consumes({MediaType.APPLICATION_JSON})
-	public Boolean postTest(String jsonarray){
+	public String postTest(String jsonarray){
 		if(jsonarray == null) throw new BadRequestException();
 		System.out.println(jsonarray);
-	return true;
+	return "YEZZZ!!!";
 	}
 	
 	@GET

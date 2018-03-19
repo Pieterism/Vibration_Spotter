@@ -4,41 +4,33 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="vibrationspotter.vibrationspotterapp.MainActivity">
+    android:layout_height="match_parent">
 
     <Button
-        android:id="@+id/Login_knop"
-        android:layout_width="wrap_content"
-        android:layout_height="48dp"
-        android:layout_marginEnd="4dp"
-        android:text="TO LOGIN ->"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/Menu_knop"
+        android:id="@+id/leerkrachtlogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text=":::::"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="0dp" />
-
-    <EditText
-        android:id="@+id/editText"
-        android:layout_width="252dp"
-        android:layout_height="42dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Welcome to Vibrationspotter"
+        android:text="LeerkrachtLogin ->"
+        app:layout_constraintBottom_toTopOf="@+id/leerlinglogin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/leerlinglogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="LeerlingenLogin ->"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Login_knop"
-        app:layout_constraintVertical_bias="0.441" />
-
+        app:layout_constraintTop_toBottomOf="@+id/leerkrachtlogin" />
 </android.support.constraint.ConstraintLayout>
