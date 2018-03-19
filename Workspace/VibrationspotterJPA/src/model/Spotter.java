@@ -22,7 +22,7 @@ import javax.persistence.Table;
 @Table(name = "Spotter")
 @NamedQuery(name = "Spotter.findAll", query = "SELECT p FROM Spotter p")
 @PrimaryKeyJoinColumn(referencedColumnName = "idPersoon")
-@DiscriminatorValue("2")
+@DiscriminatorValue("Spotter")
 public class Spotter extends Persoon {
 
 	/**

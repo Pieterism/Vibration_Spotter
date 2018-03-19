@@ -12,7 +12,7 @@ import javax.persistence.*;
 @Table(name = "Persoon")
 @NamedQuery(name = "Persoon.findAll", query = "SELECT p FROM Persoon p")
 @Inheritance(strategy = InheritanceType.JOINED)
-@DiscriminatorColumn(discriminatorType = DiscriminatorType.INTEGER, name = "idPersoon", columnDefinition = "TINYINT(1)")
+@DiscriminatorColumn(discriminatorType = DiscriminatorType.STRING, name = "type", columnDefinition = "TINYINT(1)")
 
 public class Persoon implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -35,20 +35,25 @@ public class Persoon implements Serializable {
 	private String emailadres;
 
 	@Column(name = "admin", nullable = false)
-	private String admin;
+	private boolean admin;
 
 	@Column(name = "salt", nullable = false)
 	private String salt;
+	
+	@Column(name = "type")
+	private String type;
 
 	@ManyToMany(targetEntity = Project.class)
 	private Set projects;
 
 	public Persoon() {
-		paswoord = "amdin";
+		type = "Leerkracht";
+		paswoord = "admin";
+		admin = false;
 		salt=BCrypt.gensalt();
 	}
 
-	public Persoon(int idPersoon, String voornaam, String achternaam, String paswoord, String emailadres,String admin,String salt,Set projects) {
+	public Persoon(int idPersoon, String voornaam, String achternaam, String paswoord, String emailadres,boolean admin,String salt,Set projects) {
 		super();
 		this.salt = BCrypt.gensalt();
 		this.idPersoon = idPersoon;
@@ -102,11 +107,11 @@ public class Persoon implements Serializable {
 		this.emailadres = emailadres;
 	}
 
-	public String isAdmin() {
+	public boolean isAdmin() {
 		return admin;
 	}
 
-	public void setAdmin(String admin) {
+	public void setAdmin(boolean admin) {
 		this.admin = admin;
 	}
 
@@ -124,6 +129,15 @@ public class Persoon implements Serializable {
 
 	public void setProjects(Set projects) {
 		this.projects = projects;
+	}
+	
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
 	}
 
 	public String hashPasswd(String passwd,String salt){

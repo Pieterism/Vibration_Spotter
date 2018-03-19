@@ -20,7 +20,7 @@ import javax.persistence.Table;
 @Table(name = "leerkracht")
 @NamedQuery(name = "leerkracht.findAll", query = "SELECT p FROM Leerkracht p")
 @PrimaryKeyJoinColumn(referencedColumnName = "idPersoon")
-@DiscriminatorValue("1")
+@DiscriminatorValue("Leerkracht")
 public class Leerkracht extends Persoon {
 
 	/**

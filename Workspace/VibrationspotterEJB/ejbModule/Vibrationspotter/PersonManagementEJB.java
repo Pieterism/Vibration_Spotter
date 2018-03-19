@@ -42,15 +42,17 @@ public class PersonManagementEJB implements PersonManagementEJBLocal {
 		em.persist(p);
 		
 	}
-	public Persoon findPersoonByEmail(String email){
+	public Persoon findPersoonByEmail(String emailadres){
 			Query q = em.createQuery("SELECT p FROM Persoon p WHERE p.emailadres = :emailadres");
-			q.setParameter("emailadres", email);
+			q.setParameter("emailadres", emailadres);
 			List<Persoon> personen = q.getResultList();
 			if(personen.size()!=1){
 				return null;
 			}
+			else{
 			Persoon p=personen.get(0);
 			return p;
+			}
 		}
 	
 		
