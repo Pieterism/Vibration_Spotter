@@ -16,36 +16,34 @@ import model.Project;
 @ViewScoped
 public class ProjectController implements Serializable {
 
-private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-@EJB
-private ProjectManagementEJBLocal projectejb;
+	@EJB
+	private ProjectManagementEJBLocal projectejb;
 
-private Project project=new Project();
+	private Project project = new Project();
 
-public String submit() {
+	public String submit() {
 
-projectejb.addProject(project);
-FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_INFO,"Uw project is aangemaakt","Uw project is aangemaakt"));
+		projectejb.addProject(project);
+		FacesContext.getCurrentInstance().addMessage(null,
+				new FacesMessage(FacesMessage.SEVERITY_INFO, "Uw project is aangemaakt", "Uw project is aangemaakt"));
 
+		return "index.xhtml";
+	}
 
-return "index.xhtml";
-}
+	public String wissen(Project pro) {
+		System.out.println(pro.getIdProject());
+		projectejb.wissenProject(pro.getIdProject());
+		return "projecten.xhtml";
+	}
 
-public String wissen(Project pro){
-	System.out.println(pro.getIdProject());
-	projectejb.wissenProject(pro.getIdProject());
-	return "projecten.xhtml";
-}
+	public Project getProject() {
+		return project;
+	}
 
-public Project getProject() {
-	return project;
-}
-
-public void setProject(Project project) {
-	this.project = project;
-}
-
-
+	public void setProject(Project project) {
+		this.project = project;
+	}
 
 }

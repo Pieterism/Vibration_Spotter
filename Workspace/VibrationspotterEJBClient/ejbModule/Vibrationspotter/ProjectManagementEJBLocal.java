@@ -5,7 +5,8 @@ import java.util.List;
 import model.Project;
 
 public interface ProjectManagementEJBLocal {
-	public Project findProject(String titel);
+
+	public int findProject(String titel);
 
 	void addProject(Project project);
 
@@ -14,7 +15,5 @@ public interface ProjectManagementEJBLocal {
 	void RemoveProject(Project project);
 
 	void wissenProject(int id);
-
-	//void createQR(Project project);
 
 }
