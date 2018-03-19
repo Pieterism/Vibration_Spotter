@@ -17,6 +17,8 @@ package Vibrationspotter;
 import java.io.UnsupportedEncodingException;
 import java.security.SecureRandom;
 
+import javax.ejb.Stateless;
+
 /**
  * BCrypt implements OpenBSD-style Blowfish password hashing using
  * the scheme described in "A Future-Adaptable Password Scheme" by
@@ -60,6 +62,7 @@ import java.security.SecureRandom;
  * @author Damien Miller
  * @version 0.2
  */
+@Stateless
 public class BCrypt {
 	// BCrypt parameters
 	private static final int GENSALT_DEFAULT_LOG2_ROUNDS = 10;
@@ -774,4 +777,11 @@ public class BCrypt {
 			ret |= hashed_bytes[i] ^ try_bytes[i];
 		return ret == 0;
 	}
+
+	public boolean test() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+
 }

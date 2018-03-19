@@ -14,7 +14,7 @@ public interface PersonManagementEJBLocal {
 
 	void addPersoon(Persoon p);
 	
-	public Persoon findPersoonByEmail(String e);
+	public Persoon findPersoonByEmail(String emailadres);
 		
 
 	}
