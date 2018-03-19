@@ -7,17 +7,21 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.StringRequest;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.util.Map;
 
 public class Meter extends Activity implements SensorEventListener{
 
@@ -34,7 +38,7 @@ public class Meter extends Activity implements SensorEventListener{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_meter);
         mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
-        mAccelerometer = mSensorManager.getDefaultSensor(Sensor.TYPE_LINEAR_ACCELERATION);
+        mAccelerometer = mSensorManager.getDefaultSensor(Sensor.TYPE_LINEAR_ACCELERATION); //trycatch?
         final Button button = findViewById(R.id.button);
         tekst = "Start";
         button.setText(tekst);
@@ -99,5 +103,27 @@ public class Meter extends Activity implements SensorEventListener{
     protected void onStop(){
         super.onStop();
         System.out.println(jArray.toString());
+
+        final String REQUEST_TAG = "Stringrequest";
+
+        JsonArrayRequest strReq = new JsonArrayRequest(Request.Method.POST,
+                "http://10.108.0.111:8080/VibrationspotterREST/Restservice/restTest",
+                jArray,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        Log.d(REQUEST_TAG, response.toString());
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.d(REQUEST_TAG, "Error: " + error.toString() + ", " + error.getMessage());
+                    }
+                }
+        ){
+        };
+
+        VolleyClass.getInstance(getApplicationContext()).addToRequestQueue(strReq, REQUEST_TAG);
     }
 }
