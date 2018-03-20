@@ -6,7 +6,7 @@ import model.Project;
 
 public interface ProjectManagementEJBLocal {
 
-	public int findProject(String titel);
+	public Project findProject(String titel);
 
 	void addProject(Project project);
 
