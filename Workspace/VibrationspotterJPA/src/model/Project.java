@@ -88,7 +88,7 @@ public class Project implements Serializable {
 		this.latitude = latitude;
 		this.longtitude = longtitude;
 		this.goedgekeurd = goedgekeurd;
-		QR = qR;
+		this.QR = qR;
 		this.beschrijving = beschrijving;
 		this.personen = personen;
 	}

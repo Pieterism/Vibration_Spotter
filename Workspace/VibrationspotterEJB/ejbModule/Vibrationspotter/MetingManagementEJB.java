@@ -11,6 +11,7 @@ import javax.persistence.Query;
 import java.util.List;
 
 import model.Meting;
+import model.Project;
 
 @Named
 @Stateless
@@ -21,6 +22,9 @@ public class MetingManagementEJB implements MetingManagementEJBLocal{
 
 	@EJB
 	private PersonManagementEJBLocal personEJB;
+	
+	@EJB
+	private ProjectManagementEJB projectEJB;
 
 	@Resource
 	private SessionContext ctx;
@@ -46,6 +50,12 @@ public class MetingManagementEJB implements MetingManagementEJBLocal{
 		q.setParameter("fname", idProject);
 		List<Meting> metingen = q.getResultList();
 		return metingen;
+	}
+	
+	public void nieuweMeting(String jsonArray){
+		Project p = projectEJB.findProject("tom");
+		Meting m = new Meting(0,"testV1","20/03/2018",jsonArray,"opmerking",p);
+		addMeting(m);
 	}
 
 }

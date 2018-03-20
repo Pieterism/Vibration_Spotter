@@ -18,7 +18,7 @@ public class RestTest {
 	public String postTest(String jsonarray){
 		if(jsonarray == null) throw new BadRequestException();
 		System.out.println(jsonarray);
-	return "YEZZZ!!!";
+	return "[{\"Gelukt?:\": YEZZZ!!!}]";
 	}
 	
 	@GET
