@@ -27,9 +27,13 @@ public class LoginManagementEJB implements LoginManagementEJBLocal {
 		q.setParameter("email", email);
 		List<Persoon> personen = q.getResultList();
 
+<<<<<<< HEAD
 		if (personen.size() == 1) {
 			System.out.println(pwd);
 			System.out.println(personen.get(0).getPaswoord());
+=======
+		if(personen.size()==1){
+>>>>>>> master
 			return bcrypt.checkpw(pwd, personen.get(0).getPaswoord());
 		}
 		return false;
