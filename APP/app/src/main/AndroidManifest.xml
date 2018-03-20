@@ -3,6 +3,7 @@
     package="vibrationspotter.vibrationspotterapp">
 
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.CAMERA"/>
 
     <application
         android:allowBackup="true"
@@ -11,6 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <meta-data android:name="com.google.android.gms.vision.DEPENDENCIES"
+            android:value="barcode"/>
         <activity
             android:name=".MainActivity"
             android:screenOrientation="portrait">
@@ -41,6 +44,10 @@
         </activity>
         <activity
             android:name=".LeerkrachtLogin"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name=".QR_hub"
             android:screenOrientation="portrait">
         </activity>
     </application>
