@@ -28,11 +28,6 @@ private String checkpwd2;
 
 public String submit() {
 
-	System.out.println(persoon.getEmailadres());
-	if(!(persoonejb.findPersoonByEmail(persoon.getEmailadres())==null)){
-		FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_INFO,"iemand heeft al een account met dit emailadres","iemand heeft al een account met dit emailadres"));
-		return null;
-	}
 	if(!checkpwd1.equals(checkpwd2)){
 		FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_INFO,"gelieve tweemaal hetzelfde passwoord in te geven","gelieve tweemaal hetzelfde passwoord in te geven"));
 		return null;
