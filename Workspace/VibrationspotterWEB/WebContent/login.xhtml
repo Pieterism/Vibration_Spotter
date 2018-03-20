@@ -14,9 +14,9 @@
         <div class="paragraph" style="text-align: center">
 		<h:panelGrid columns ="2" cellpadding = "10" cellspacing = "1" styleClass="panel" >
 			<h:outputText value="emailadres:" />
-			<h:inputText required ="true" id="username" value="#{loginController.emailadres}" requiredMessage="geleive uw emailadres in te geven"></h:inputText>
+			<h:inputText id="username" value="#{loginController.emailadres}"></h:inputText>
 			<h:outputText value="wachtwoord:" />
-			<h:inputSecret required ="true" id="password" value="#{loginController.pwd}" requiredMessage="geleive uw password in te geven"></h:inputSecret>
+			<h:inputSecret id="password" value="#{loginController.pwd}"></h:inputSecret>
 		 </h:panelGrid>
 		<br></br>
 		<h:commandButton value = "aanmelden" action="#{loginController.submit}"></h:commandButton>
