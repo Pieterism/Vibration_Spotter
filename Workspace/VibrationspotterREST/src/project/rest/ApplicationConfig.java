@@ -9,13 +9,13 @@ import javax.ws.rs.core.Application;
 
 import org.glassfish.jersey.server.ResourceConfig;
 
-import com.owlike.genson.ext.jaxrs.GensonJsonConverter;
+//import com.owlike.genson.ext.jaxrs.GensonJsonConverter;
 
 @ApplicationPath("Restservice")
 public class ApplicationConfig extends Application{
 private final Set<Class<?>> classes;
 	
-	final ResourceConfig config = new ResourceConfig().register(GensonJsonConverter.class);
+	//final ResourceConfig config = new ResourceConfig().register(GensonJsonConverter.class);
 
 	public ApplicationConfig() {
 		HashSet<Class<?>> c = new HashSet<>();

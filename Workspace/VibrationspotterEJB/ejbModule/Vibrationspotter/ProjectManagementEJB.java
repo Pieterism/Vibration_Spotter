@@ -42,7 +42,9 @@ public class ProjectManagementEJB implements ProjectManagementEJBLocal {
 	public Project findProject(String titel) {
 		Query q = em.createQuery("SELECT p FROM Project  WHERE p.titel = : titel");
 		q.setParameter(1, titel);
-		return null;
+		List<Project> p = q.getResultList();
+		if(p.size() != 1) System.out.println("Meerdere dezelfde titels!");
+		return p.get(0);
 	}
 
 /*	@Override
