@@ -103,18 +103,36 @@ public class ProjectManagementEJB implements ProjectManagementEJBLocal {
 	 */
 
 	@Override
-	@Schedule(second = "0", minute = "*/15", hour = "*")
-	public void createQR(int id) {
+	@Schedule(second = "0", minute = "*/30", hour = "*")
+	public void refreshQR() {
 
-		String UniqueID = UUID.randomUUID().toString();
+		List<Project> alleprojecten = findAllProjecten();
 
-		EntityTransaction updateTransaction = em.getTransaction();
-		updateTransaction.begin();
-		Query q = em.createQuery("UPDATE project SET project.QR = :UUID " + "WHERE project.idProject= :id");
-		q.setParameter("UUID", UniqueID);
-		q.setParameter("id", id);
-		q.executeUpdate();
-		updateTransaction.commit();
+		for (Project p : alleprojecten) {
+			int idProject = p.getIdProject();
+			String UniqueID = UUID.randomUUID().toString();
+
+			EntityTransaction updateTransaction = em.getTransaction();
+			updateTransaction.begin();
+			Query q = em.createQuery("UPDATE project SET project.QR = :UUID " + "WHERE project.idProject = :id");
+			q.setParameter(1, UniqueID);
+			q.setParameter(2, idProject);
+			q.executeUpdate();
+			updateTransaction.commit();
+		}
+	}
+
+	@Override
+	public void getQRCode(int id) {
+		String uniqueID = null;
+
+		Query q = em.createQuery("SELECT p FROM Project  WHERE p.idProject = : id");
+		q.setParameter(1, id);
+		List<Project> p = q.getResultList();
+		if (p.size() != 1)
+			System.out.println("Foutieve id");
+		else
+			uniqueID = p.get(0).getQR();
 
 		String filePath = "D:\\Google Drive\\School\\2017-2018\\Project\\Test.png";
 		int size = 450;
@@ -132,7 +150,7 @@ public class ProjectManagementEJB implements ProjectManagementEJBLocal {
 			hintMap.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.L);
 
 			QRCodeWriter qrCodeWriter = new QRCodeWriter();
-			BitMatrix byteMatrix = qrCodeWriter.encode(UniqueID, BarcodeFormat.QR_CODE, size, size, hintMap);
+			BitMatrix byteMatrix = qrCodeWriter.encode(uniqueID, BarcodeFormat.QR_CODE, size, size, hintMap);
 			int CrunchifyWidth = byteMatrix.getWidth();
 			BufferedImage image = new BufferedImage(CrunchifyWidth, CrunchifyWidth, BufferedImage.TYPE_INT_RGB);
 			image.createGraphics();

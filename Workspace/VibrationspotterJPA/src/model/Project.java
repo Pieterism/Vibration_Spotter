@@ -22,7 +22,6 @@ import javax.persistence.ManyToMany;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
-
 @Entity
 @Table(name = "Project")
 @NamedQuery(name = "Project.findAll", query = "SELECT p FROM Project p")
@@ -42,8 +41,9 @@ public class Project implements Serializable {
 	private String titel;
 
 	@Column(name = "type", nullable = false)
-	private String type; // aan elk type meting een int toekennen en adhv deze int
-						// bepalen welk type het is.
+	private String type; // aan elk type meting een int toekennen en adhv deze
+							// int
+							// bepalen welk type het is.
 
 	@Column(name = "latitude", nullable = false)
 	private float latitude;
@@ -65,24 +65,25 @@ public class Project implements Serializable {
 	private Set personen;
 
 	public Project() {
-		//super();
+		// super();
 		this.latitude = 0;
 		this.longtitude = 0;
 		this.goedgekeurd = false;
 
 	}
 
-	public Project(int idProject, String titel, String type, float latitude, float longtitude, boolean goedgekeurd, String beschrijving, Set personen) {
+	public Project(int idProject, String titel, String type, float latitude, float longtitude, boolean goedgekeurd,String QR,
+			String beschrijving, Set personen) {
 		super();
 		this.idProject = idProject;
 		this.titel = titel;
 		this.type = type;
 		this.latitude = latitude;
 		this.longtitude = longtitude;
+		this.QR = QR;
 		this.beschrijving = beschrijving;
 		this.personen = personen;
 	}
-	
 
 	public int getIdProject() {
 		return idProject;
@@ -146,6 +147,14 @@ public class Project implements Serializable {
 
 	public void setPersonen(Set personen) {
 		this.personen = personen;
+	}
+
+	public String getQR() {
+		return QR;
+	}
+
+	public void setQR(String qR) {
+		QR = qR;
 	}
 
 }

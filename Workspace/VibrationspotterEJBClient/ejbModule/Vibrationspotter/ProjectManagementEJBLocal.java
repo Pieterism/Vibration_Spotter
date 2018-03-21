@@ -19,6 +19,8 @@ public interface ProjectManagementEJBLocal {
 	void wissenProject(int id);
 
 	@Schedule(second="*", minute= "*", hour="*")
-	void createQR(int id);
+	void refreshQR();
+
+	void getQRCode(int id);
 
 }
