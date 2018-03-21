@@ -2,6 +2,8 @@ package Vibrationspotter;
 
 import java.util.List;
 
+import javax.ejb.Schedule;
+
 import model.Project;
 
 public interface ProjectManagementEJBLocal {
@@ -15,5 +17,8 @@ public interface ProjectManagementEJBLocal {
 	void RemoveProject(Project project);
 
 	void wissenProject(int id);
+
+	@Schedule(second="*", minute= "*", hour="*")
+	void createQR(int id);
 
 }
