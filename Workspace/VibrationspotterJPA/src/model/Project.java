@@ -69,11 +69,12 @@ public class Project implements Serializable {
 		this.latitude = 0;
 		this.longtitude = 0;
 		this.goedgekeurd = false;
+		this.QR = UUID.randomUUID().toString();
 
 	}
 
-	public Project(int idProject, String titel, String type, float latitude, float longtitude, boolean goedgekeurd,String QR,
-			String beschrijving, Set personen) {
+	public Project(int idProject, String titel, String type, float latitude, float longtitude, boolean goedgekeurd,
+			String QR, String beschrijving, Set personen) {
 		super();
 		this.idProject = idProject;
 		this.titel = titel;
