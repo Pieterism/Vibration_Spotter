@@ -11,7 +11,7 @@
        <h1><b>aanmelden bij de vibration spotter</b><img src="logo.png" width="50" height="50"/> </h1>
 </div>
 	<h:form>
-        <div class="paragraph" style="text-align: center">
+        <div class="paragraph">
 		<h:panelGrid columns ="2" cellpadding = "10" cellspacing = "1" styleClass="panel" >
 			<h:outputText value="emailadres:" />
 			<h:inputText required ="true" id="username" value="#{loginController.emailadres}" requiredMessage="geleive uw emailadres in te geven"></h:inputText>
@@ -24,6 +24,11 @@
 		<h:messages  layout="table" styleClass="fail" />
 		</div>
 	</h:form>
+	
+	<div id="registreer">
+	<a href="createaccount.xhtml">Nog geen account? Registreer nu.</a>
+	
+	</div>
 	
 </h:body>
 </html>
