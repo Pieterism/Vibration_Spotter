@@ -46,4 +46,12 @@ public class ProjectController implements Serializable {
 		this.project = project;
 	}
 
+	public void aanvaardProject(Project pro) {
+		pro.setGoedgekeurd(true);
+	}
+
+	public void keurProjectAf(Project pro) {
+		pro.setGoedgekeurd(false);
+	}
+
 }
