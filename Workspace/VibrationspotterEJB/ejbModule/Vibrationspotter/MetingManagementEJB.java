@@ -24,7 +24,7 @@ public class MetingManagementEJB implements MetingManagementEJBLocal{
 	private PersonManagementEJBLocal personEJB;
 	
 	@EJB
-	private ProjectManagementEJB projectEJB;
+	private ProjectManagementEJBLocal projectEJB;
 
 	@Resource
 	private SessionContext ctx;
@@ -57,5 +57,5 @@ public class MetingManagementEJB implements MetingManagementEJBLocal{
 		Meting m = new Meting(0,"testV1","20/03/2018",jsonArray,"opmerking",p);
 		addMeting(m);
 	}
-
+	
 }
