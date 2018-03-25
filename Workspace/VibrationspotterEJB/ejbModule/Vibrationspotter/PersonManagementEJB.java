@@ -11,6 +11,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import model.Persoon;
+import model.Project;
 
 
 @Stateless
@@ -21,6 +22,22 @@ public class PersonManagementEJB implements PersonManagementEJBLocal {
 
 	@Resource
 	private SessionContext ctx;
+	
+    @Override
+	public Persoon findPersoonByid(int id){
+		Query q = em.createQuery("SELECT p FROM Persoon p WHERE p.idPersoon = :id");
+		q.setParameter("id", id);
+		List<Persoon> personen = q.getResultList();
+		return personen.get(0);
+	
+	}
+    
+	public List<Persoon> findAllPersons() {
+		Query q = em.createQuery("SELECT p FROM Persoon p ORDER BY p.idPersoon ASC");
+		List<Persoon> personen = q.getResultList();
+		return personen;
+	}
+    
 
 	/*
 	 * @Override public Persoon findPersoon(String gebruikersnaam) { Query q =
@@ -54,6 +71,25 @@ public class PersonManagementEJB implements PersonManagementEJBLocal {
 			return p;
 			}
 		}
+	
+
+	
+/*	@Override
+	public Persoon findPersoonByid(String id){
+		Persoon p = (Persoon) em.createNativeQuery("SELECT p FROM Persoon p WHERE p.idPersoon = " + id).getSingleResult();
+		return p;
+	}*/
+	
+	
+    /*
+    @Override
+    public User findByEmail(String email) {
+        Object obj = em.createNativeQuery("SELECT * FROM User WHERE EMAIL = " + email).getSingleResult();
+        User user = (User)obj;
+        return user;        
+    }*/
+	
+
 	
 		
 	}

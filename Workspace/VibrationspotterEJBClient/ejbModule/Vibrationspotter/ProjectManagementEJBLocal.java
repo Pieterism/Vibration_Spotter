@@ -14,6 +14,8 @@ public interface ProjectManagementEJBLocal {
 	void RemoveProject(Project project);
 
 	void wissenProject(int id);
+	
+	//public List<Project> findProjectenBijPesoon(int id);
 
 	//void createQR(Project project);
 

@@ -2,6 +2,7 @@ package model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -59,9 +60,38 @@ public class Project implements Serializable {
 	@Lob
 	@Column(name = "beschrijving", length = 512)
 	private String beschrijving;
-
+	
+	// private Set<Persoon> personen;
+	
+/*	   @ManyToMany(mappedBy = "projecten")
+	    public Set<Persoon> getPersonen() {
+	        return personen;
+	    }
+	
+	
+	   public void setPublishers(Set<Persoon> personen) {
+	        this.personen = personen;
+	    }*/
+	
+	
+	
 	@ManyToMany(targetEntity = Persoon.class)
+	@JoinTable(
+	      name="persoon_project",
+	    //  joinColumns = @JoinColumn(name = "Persoon_idPersoon"),
+	    //  inverseJoinColumns=@JoinColumn(name="Project_idProject"))
+	      joinColumns=@JoinColumn(name="Persoon_idPersoon", referencedColumnName="idProject"),
+	      inverseJoinColumns=@JoinColumn(name="Project_idProject", referencedColumnName="idPersoon"))
 	private Set personen;
+	
+	   
+	   //OUDE GOEDE
+	/* @ManyToMany(mappedBy="projects")
+	  private Set<Persoon> personen;*/
+
+	//@ManyToMany(targetEntity = Persoon.class)
+	//private Set personen;
+
 
 	public Project() {
 		//super();
@@ -69,6 +99,7 @@ public class Project implements Serializable {
 		this.longtitude = 0;
 		this.goedgekeurd = false;
 		QR = UUID.randomUUID().toString();
+		personen = new HashSet<Persoon>();
 
 	}
 
@@ -83,7 +114,7 @@ public class Project implements Serializable {
 		this.goedgekeurd = goedgekeurd;
 		QR = qR;
 		this.beschrijving = beschrijving;
-		this.personen = personen;
+	//	this.personen = personen;
 	}
 	
 
@@ -157,6 +188,10 @@ public class Project implements Serializable {
 
 	public void setPersonen(Set personen) {
 		this.personen = personen;
+	}
+	
+	public void addPersonen(Persoon persoon){
+		this.personen.add(persoon);
 	}
 
 }

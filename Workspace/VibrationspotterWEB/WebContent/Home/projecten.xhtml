@@ -25,7 +25,7 @@
  		<a href="about.xhtml">About</a>
 	</div>
 <h:form>
-    <h:dataTable id="projectlist" value="#{projectManagementEJB.findAllProjecten()}" var="pro" border="5" cellpadding ="5" styleClass="tabel" headerClass="htabel">
+    <h:dataTable id="projectlist" value="#{projectController.geefProjectenweer2()}" var="pro" border="5" cellpadding ="5" styleClass="tabel" headerClass="htabel">
 
        <h:column>
         <f:facet name="header">

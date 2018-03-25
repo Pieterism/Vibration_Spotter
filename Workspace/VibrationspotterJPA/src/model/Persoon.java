@@ -3,6 +3,7 @@ package model;
 import java.io.Serializable;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
+import java.util.HashSet;
 import java.util.Set;
 import Bcrypt.BCrypt;
 
@@ -42,15 +43,48 @@ public class Persoon implements Serializable {
 	
 	@Column(name = "type")
 	private String type;
-
+	
+//	private Set<Project> projecten;		//nieuw
+	
+	/*  @ManyToMany
+	  @JoinTable(name = "project_persoon", joinColumns = @JoinColumn(name = "Persoon_idPersoon", referencedColumnName = "idPersoon"), inverseJoinColumns = @JoinColumn(name = "Project_idProject", referencedColumnName = "idProject"))
+	    public Set<Project> getProjecten() {
+	        return projecten;
+	        }
+	  
+	   public void setBooks(Set<Project> projecten) {
+	        this.projecten = projecten;
+	    }		*/							//nieuw deel 2
+	
+	
+	
+	//GOEDE OUDE
 	@ManyToMany(targetEntity = Project.class)
-	private Set projects;
+	@JoinTable(
+	      name="persoon_project",											//oude project_persoon
+	    //  joinColumns = @JoinColumn(name = "Persoon_idPersoon"),
+	    //  inverseJoinColumns=@JoinColumn(name="Project_idProject"))
+	      joinColumns=@JoinColumn(name="Persoon_idPersoon", referencedColumnName="idPersoon"),
+	      inverseJoinColumns=@JoinColumn(name="Project_idProject", referencedColumnName="idProject"))
+	private Set projecten;
+	
+	
+
+	/*@ManyToMany(targetEntity = Project.class)
+	private Set projects;*/
+	
+
+	
+	/*@ManyToMany
+	public Set<Persoon> getCustomers();*/
 
 	public Persoon() {
+		
 		type = "Leerkracht";
 		paswoord = "admin";
 		admin = false;
 		salt=BCrypt.gensalt();
+		projecten = new HashSet<Project>();
 	}
 
 	public Persoon(int idPersoon, String voornaam, String achternaam, String paswoord, String emailadres,boolean admin,String salt,Set projects) {
@@ -63,7 +97,7 @@ public class Persoon implements Serializable {
 		System.out.println(paswoord);
 		this.paswoord = hashPasswd(paswoord,salt);
 		this.admin = admin;
-		this.projects=projects;
+	//	this.projects=projects;
 	}
 
 	public int getIdPersoon() {
@@ -123,12 +157,12 @@ public class Persoon implements Serializable {
 		salt = s;
 	}
 
-	public Set getProjects() {
-		return projects;
+	public Set getProjecten() {
+		return projecten;
 	}
 
-	public void setProjects(Set projects) {
-		this.projects = projects;
+	public void setProjecten(Set projects) {
+		this.projecten = projects;
 	}
 	
 
@@ -142,6 +176,10 @@ public class Persoon implements Serializable {
 
 	public String hashPasswd(String passwd,String salt){
 		return BCrypt.hashpw(passwd, salt);
+	}
+	
+	public void addProject(Project project){
+		projecten.add(project);
 	}
 	
 

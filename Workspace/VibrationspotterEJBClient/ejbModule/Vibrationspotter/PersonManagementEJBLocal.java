@@ -1,5 +1,7 @@
 package Vibrationspotter;
 
+import java.util.List;
+
 import javax.ejb.Local;
 
 import model.Persoon;
@@ -15,6 +17,10 @@ public interface PersonManagementEJBLocal {
 	void addPersoon(Persoon p);
 	
 	public Persoon findPersoonByEmail(String emailadres);
+	
+	public Persoon findPersoonByid(int id);
+	
+	public List<Persoon> findAllPersons();
 		
 
 	}
