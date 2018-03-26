@@ -50,6 +50,10 @@
             android:name=".QR_hub"
             android:screenOrientation="portrait">
         </activity>
+        <activity
+            android:name="vibrationspotter.QR_Utilities.BarcodeCaptureActivity"
+            android:screenOrientation="portrait">
+        </activity>
     </application>
 
 </manifest>

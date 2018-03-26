@@ -10,8 +10,11 @@ import android.widget.TextView;
 import com.google.android.gms.common.api.CommonStatusCodes;
 import com.google.android.gms.vision.barcode.Barcode;
 
+import vibrationspotter.QR_Utilities.BarcodeCaptureActivity;
+
 public class QR_hub extends Activity{
     TextView textView;
+    final int BARCODE_READER_REQUEST_CODE = 9966;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -19,29 +22,28 @@ public class QR_hub extends Activity{
 
         Button naarQRlezer = findViewById(R.id.naarQRlezer);
         textView = findViewById(R.id.QRresultaat);
-    }
 
-    private void qrLezen(View v){
-        Intent intent = new Intent(this,QR_lezer.class);
-        startActivityForResult(intent,0);
+        naarQRlezer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), BarcodeCaptureActivity.class);
+                startActivityForResult(intent, BARCODE_READER_REQUEST_CODE);
+            }
+        });
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if(requestCode==0){
-            if(resultCode== CommonStatusCodes.SUCCESS){
-                if(data!=null){
-                    Barcode barcode = data.getParcelableExtra("barcode");
+        if(requestCode == BARCODE_READER_REQUEST_CODE){
+            if(resultCode == CommonStatusCodes.SUCCESS){
+                if(data != null){
+                    Barcode barcode = data.getParcelableExtra(BarcodeCaptureActivity.BarcodeObject);
                     textView.setText(barcode.displayValue);
                 }
-                else{
-                    textView.setText("Mislukt");
-                }
+                else textView.setText("Data == null");
             }
-            else{
-
-            }
+            else textView.setText("Geen Succes");
         }
-        else super.onActivityResult(requestCode, resultCode, data);
+        else textView.setText("Mislukt");
     }
 }
