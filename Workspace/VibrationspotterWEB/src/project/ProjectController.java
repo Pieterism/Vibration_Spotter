@@ -1,6 +1,8 @@
 package project;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
@@ -12,6 +14,7 @@ import javax.servlet.http.HttpSession;
 import Vibrationspotter.MetingManagementEJBLocal;
 import Vibrationspotter.PersonManagementEJBLocal;
 import Vibrationspotter.ProjectManagementEJBLocal;
+import model.Persoon;
 import model.Project;
 
 @Named
@@ -33,8 +36,7 @@ public class ProjectController implements Serializable {
 
 HttpSession session = SessionUtils.getSession();
 	int id = (int)session.getAttribute(("idPersoon"));
-	user = personejb.findPersoonByid(id);
-	
+	Persoon	user = personejb.findPersoonByid(id);
 	project.setIdPersoon(user);
 
 		
@@ -71,9 +73,7 @@ HttpSession session = SessionUtils.getSession();
 		pro.setGoedgekeurd(false);
 	}
 	
-	public List<Project> geefProjectenweer2(){
-//		boolean aanwezig = false;
-//		List<Persoon> personen = personejb.findAllPersons();
+	public List<Project> geefProjectenweer(){
 		Persoon gebruiker;
 		HttpSession session = SessionUtils.getSession();
 		int id = (int) session.getAttribute(("idPersoon"));

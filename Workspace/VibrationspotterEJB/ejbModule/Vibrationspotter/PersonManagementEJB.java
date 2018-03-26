@@ -36,6 +36,15 @@ public class PersonManagementEJB implements PersonManagementEJBLocal {
 		q.setParameter(2, achternaam);
 		return null;
 	}
+	
+    @Override
+	public Persoon findPersoonByid(int id){
+		Query q = em.createQuery("SELECT p FROM Persoon p WHERE p.idPersoon = :id");
+		q.setParameter("id", id);
+		List<Persoon> personen = q.getResultList();
+		return personen.get(0);
+    }
+	
 
 	@Override
 	public void addPersoon(Persoon p) {
