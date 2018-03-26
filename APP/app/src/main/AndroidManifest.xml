@@ -39,10 +39,6 @@
             android:screenOrientation="portrait">
         </activity>
         <activity
-            android:name=".QR_lezer"
-            android:screenOrientation="portrait">
-        </activity>
-        <activity
             android:name=".LeerkrachtLogin"
             android:screenOrientation="portrait">
         </activity>

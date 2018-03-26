@@ -8,11 +8,9 @@ import javax.ws.rs.Path;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-@Path("restTest")
-public class RestTest {
+@Path("Metingen")
+public class MetingenREST {
 	
-	
-			
 	@POST
 	@Consumes({MediaType.APPLICATION_JSON})
 	public String postTest(String jsonarray){

@@ -19,7 +19,8 @@ private final Set<Class<?>> classes;
 
 	public ApplicationConfig() {
 		HashSet<Class<?>> c = new HashSet<>();
-		c.add(RestTest.class);
+		c.add(MetingenREST.class);
+		c.add(QRcodeREST.class);
 		classes = Collections.unmodifiableSet(c);
 	}
 	
