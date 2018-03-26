@@ -93,12 +93,13 @@
       #target {
         width: 345px;
       }
-             #legend {
-        font-family: Arial, sans-serif;
-        background: #fff;
-        padding: 10px;
-        margin: 10px;
-        border: 3px solid #000;
+      
+      #legend {
+         font-family: Arial, sans-serif;
+         background: #fff;
+         padding: 10px;
+         margin: 10px;
+         border: 3px solid #000;
       }
       #legend h3 {
         margin-top: 0;
@@ -112,31 +113,33 @@
     <div class="header">
          <h1><b>Welcome to the vibrationspotter</b><img src="logo.png" width="50" height="50"/></h1>
      </div>
-     <div class="topnav">
+      <div class="topnav">
 		<a href="index.xhtml">Home</a>
 		<a href="projecten.xhtml">Projecten</a>
 		<a class="active" href="kaart.xhtml">Kaart</a>
  		<a href="about.xhtml">About</a>
  		<a href="createaccount.xhtml">Create account</a>
+ 		<h:form >
+ 		<h:commandButton styleClass="logout" image="logout.png" value = "uitloggen" action="#{loginController.logout}"/>
+ 		</h:form>
 	</div>
     <input id="pac-input" class="controls" type="text" placeholder="Search Box"/>
     <div id="map"></div>
     <div id="legend"><h3>Legende</h3></div>
     <script>
-
+	var b=0;
+	var k=0;
       function initAutocomplete() {
     	  
     	  function controle(x) {
     		  var image;
     		    if(x=='brug'){
-    		    	var image = {url: 'rood.png',
-    		    			scaledSize: new google.maps.Size(30, 50)
-    		    	};
+    		    	var image = {url: 'rood.png',scaledSize: new google.maps.Size(30, 50)};
+    		    	b++;
     		    }
     		    else if(x=='kraan'){
-    		    	var image = {url: 'blauw.png',
-    		    			scaledSize: new google.maps.Size(30, 50)
-    		    	};
+    		    	var image = {url: 'blauw.png',scaledSize: new google.maps.Size(30, 50)};
+    		    	k++;
     		    	
     		    }
     		    return image;
@@ -144,7 +147,7 @@
     	  
         var map = new google.maps.Map(document.getElementById('map'), {
           center: {lat: 51.0624935, lng: 3.7066803000000164},
-          zoom: 13,
+          zoom: 10,
           mapTypeId: 'roadmap'
         });
 
@@ -223,10 +226,10 @@
      //legende toegevoegd
      var legend = document.getElementById('legend');
      var div = document.createElement('div');
-     div.innerHTML = "STEM            :"+ '<img src='blauw.png' style="width: 20%; height: 20%"/>';
+     div.innerHTML = "STEM            :"+ '<img src='blauw.png' style="width: 15%; height: 15%"/>'+"    aantal: "+k+"    ("+k/(k+b)*100+"%)";
      legend.appendChild(div);
      var div = document.createElement('div');
-     div.innerHTML = "vibrationspotter:"+ '<img src='rood.png' style="width: 20%; height: 20%"/>';
+     div.innerHTML = "vibrationspotter:"+ '<img src='rood.png' style="width: 15%; height: 15%"/>'+"     aantal: "+b+"    ("+b/(k+b)*100+"%)";
      legend.appendChild(div);
      map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(legend);
       }
