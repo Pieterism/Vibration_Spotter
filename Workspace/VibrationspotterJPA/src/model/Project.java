@@ -17,8 +17,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
@@ -60,9 +62,13 @@ public class Project implements Serializable {
 	@Lob
 	@Column(name = "beschrijving", length = 512)
 	private String beschrijving;
+	
+	@ManyToOne
+	@JoinColumn(name = "idPersoon")
+	private Persoon idPersoon;
 
-	@ManyToMany(targetEntity = Persoon.class)
-	private Set personen;
+	/*@ManyToMany(targetEntity = Persoon.class)
+	private Set personen;*/
 
 	public Project() {
 		// super();
@@ -74,7 +80,7 @@ public class Project implements Serializable {
 	}
 
 	public Project(int idProject, String titel, String type, float latitude, float longtitude, boolean goedgekeurd,
-			String QR, String beschrijving, Set personen) {
+			String QR, String beschrijving, Persoon idPersoon) {
 		super();
 		this.idProject = idProject;
 		this.titel = titel;
@@ -83,7 +89,7 @@ public class Project implements Serializable {
 		this.longtitude = longtitude;
 		this.QR = QR;
 		this.beschrijving = beschrijving;
-		this.personen = personen;
+		this.idPersoon = idPersoon;
 	}
 
 	public int getIdProject() {
@@ -142,13 +148,13 @@ public class Project implements Serializable {
 		this.beschrijving = beschrijving;
 	}
 
-	public Set getPersonen() {
+	/*public Set getPersonen() {
 		return personen;
 	}
 
 	public void setPersonen(Set personen) {
 		this.personen = personen;
-	}
+	}*/
 
 	public String getQR() {
 		return QR;
@@ -158,4 +164,16 @@ public class Project implements Serializable {
 		QR = qR;
 	}
 
+	
+	public Persoon getIdPersoon() {
+		return idPersoon;
+	}
+
+	public void setIdPersoon(Persoon idPersoon) {
+		this.idPersoon = idPersoon;
+	}
+	
+	
+
+	
 }

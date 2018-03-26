@@ -43,8 +43,8 @@ public class Persoon implements Serializable {
 	@Column(name = "type")
 	private String type;
 
-	@ManyToMany(targetEntity = Project.class)
-	private Set projects;
+/*	@ManyToMany(targetEntity = Project.class)
+	private Set projects;*/
 
 	public Persoon() {
 		type = "Leerkracht";
@@ -63,7 +63,7 @@ public class Persoon implements Serializable {
 		System.out.println(paswoord);
 		this.paswoord = hashPasswd(paswoord,salt);
 		this.admin = admin;
-		this.projects=projects;
+	//	this.projects=projects;
 	}
 
 	public int getIdPersoon() {
@@ -123,13 +123,13 @@ public class Persoon implements Serializable {
 		salt = s;
 	}
 
-	public Set getProjects() {
+	/*public Set getProjects() {
 		return projects;
 	}
 
 	public void setProjects(Set projects) {
 		this.projects = projects;
-	}
+	}*/
 	
 
 	public String getType() {
