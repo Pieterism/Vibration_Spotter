@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".QR_lezer">
+    android:orientation="vertical"
+    android:id="@+id/topLayout">
 
-    <SurfaceView
-        android:id="@+id/surfaceview"
+    <vibrationspotter.QR_Utilities.CameraSourcePreview
+        android:layout_height="0dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:id="@+id/preview"
+        android:layout_weight="1">
+    </vibrationspotter.QR_Utilities.CameraSourcePreview>
 
 </android.support.constraint.ConstraintLayout>

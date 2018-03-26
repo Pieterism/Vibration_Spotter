@@ -26,7 +26,7 @@ public class ScholenLoginSelector extends Activity {
         leerling.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent_leerling = new Intent(ScholenLoginSelector.super.getApplicationContext(),QR_lezer.class);
+                Intent intent_leerling = new Intent(ScholenLoginSelector.super.getApplicationContext(),QR_hub.class);
                 startActivity(intent_leerling);
             }
         });

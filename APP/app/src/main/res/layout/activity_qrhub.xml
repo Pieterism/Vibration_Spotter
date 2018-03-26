@@ -16,7 +16,6 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="Naar QR-lezer"
-        android:onClick="qrLezen"
         app:layout_constraintBottom_toTopOf="@+id/QRresultaat"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
