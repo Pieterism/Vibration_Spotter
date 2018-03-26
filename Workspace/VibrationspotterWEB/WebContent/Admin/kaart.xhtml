@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core">
+  <head>
+  <link rel = "stylesheet" href ="stijl.css"></link>
+    <title>welcome!</title>
+    <meta name="viewport" content="initial-scale=1.0"/>
+    <meta charset="utf-8"/>
+    <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 75%;
+        width: 80%;
+        margin: 0 auto;
+		margin-top: 10px;
+		}
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 4px;
+        padding: 0;
+      }
+       #legend {
+        font-family: Arial, sans-serif;
+        background: #fff;
+        padding: 10px;
+        margin: 10px;
+        border: 3px solid #000;
+      }
+      #legend h3 {
+        margin-top: 0;
+      }
+      #legend img {
+        vertical-align: middle;
+        }
+    </style>
+  </head>
+  <body>
+  	<div class="header">
+         <h1><b>Welcome to the vibrationspotter</b><img src="logo.png" width="50" height="50"/></h1>
+     </div>
+     <div class="topnav">
+		<a href="index.xhtml">Home</a>
+		<a href="projecten.xhtml">Projecten</a>
+		<a class="active" href="kaart.xhtml">Kaart</a>
+ 		<a href="about.xhtml">About</a>
+ 		<a href="createaccount.xhtml">Create account</a>
+	</div>
+     
+
+    <div id="map"></div>
+    <div id="legend"><h3>Legende</h3></div>
+    
+
+    <script>
+
+      var map;
+ 
+      function initMap() {
+    	  
+    	  function controle(x) {
+    		  var image;
+    		    if(x=='brug'){
+    		    	var image = {url: 'rood.png',
+    		    			scaledSize: new google.maps.Size(30, 50)
+    		    	};
+    		    }
+    		    else if(x=='kraan'){
+    		    	var image = {url: 'blauw.png',
+    		    			scaledSize: new google.maps.Size(30, 50)
+    		    	};
+    		    	
+    		    }
+    		    return image;
+    		}
+          
+        map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: 51.0624935, lng: 3.7066803000000164},
+          zoom: 8
+          
+        });
+        
+        var infoWindow = new google.maps.InfoWindow;
+        <ui:repeat value="#{projectManagementEJB.findAllProjecten()}" var="point">
+        var marker = new google.maps.Marker({
+            position: {lat: #{point.latitude}, lng: #{point.longtitude}},
+            map: map,
+            title: '#{point.titel}',
+            animation: google.maps.Animation.DROP,
+            icon: controle('#{point.type}')
+          
+          });
+        
+     </ui:repeat>
+     
+     var legend = document.getElementById('legend');
+       var div = document.createElement('div');
+       div.innerHTML = "STEM            :"+ '<img src='blauw.png' style="width: 20%; height: 20%"/>';
+       legend.appendChild(div);
+       var div = document.createElement('div');
+       div.innerHTML = "vibrationspotter:"+ '<img src='rood.png' style="width: 20%; height: 20%"/>';
+       legend.appendChild(div);
+       map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(legend);
+
+  
+      }
+</script>
+      <script async = "async" defer = "defer"
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB4iQ9wgoR3FsIhTKbM8jXAMEJ4TzQwTo0&amp;callback=initMap"> 
+      </script>
+  </body>
+</html>
