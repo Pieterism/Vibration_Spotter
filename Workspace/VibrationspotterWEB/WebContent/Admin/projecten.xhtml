@@ -23,9 +23,11 @@
 		<a class="active" href="projecten.xhtml">Projecten</a>
 		<a href="kaart.xhtml">Kaart</a>
  		<a href="about.xhtml">About</a>
+ 		<a href="createaccount.xhtml">Create account</a>
+ 		
 	</div>
 <h:form>
-    <h:dataTable id="projectlist" value="#{projectController.geefProjectenweer()}" var="pro" border="5" cellpadding ="5" styleClass="tabel" headerClass="htabel">
+    <h:dataTable id="projectlist" value="#{projectManagementEJB.findAllProjecten()}" var="pro" border="5" cellpadding ="5" styleClass="tabel" headerClass="htabel">
 
        <h:column>
         <f:facet name="header">

@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core">
+      
+<h:head>
+  <title>
+    <ui:insert name="title">Metingen</ui:insert>
+  </title>
+  	<link rel = "stylesheet" href ="stijlmetingen.css"></link>
+</h:head>
+
+ <f:metadata>
+ 	<f:viewParam name="id" value="#{metingController.project.idProject}" />
+ 	<f:viewAction action="#{metingController.findMetingenByIdProject}"></f:viewAction>
+ </f:metadata>  
+      
+<h:body>
+<div class="header">
+       <h1><b>Metingen</b> </h1>
+</div>
+
+    <h:dataTable id="metinglist" value="#{metingController.metingen}" var="met" border="5" styleClass="tabel" headerClass="htabel">
+
+       <h:column>
+        <f:facet name="header">
+          <h:outputText value="IdMeting"/>
+        </f:facet>
+         <h:outputText value="#{met.idMeting}"/>
+      </h:column>
+      
+      
+      <h:column>
+        <f:facet name="header">
+          <h:outputText value="Title"/>
+        </f:facet>
+         <h:outputText value="#{met.titel}"/>
+      </h:column>
+      
+      <h:column>
+        <f:facet name="header">
+          <h:outputText value="tijdstip"/>
+        </f:facet>
+         <h:outputText value="#{met.tijdstip}"/>
+      </h:column>
+
+      <h:column>
+        <f:facet name="header">
+          <h:outputText value="opmerking"/>
+        </f:facet>
+        <h:outputText value="#{met.opmerking}"/>
+      </h:column>
+      
+
+      <h:column>
+        <f:facet name="header">
+          <h:outputText value="foto"/>
+        </f:facet>
+        <a href="#{met.foto}">foto tonen</a>
+      </h:column>
+
+    </h:dataTable>
+    
+    <h:button id="terug" value="terug naar projecten" outcome="projecten.xhtml"/>
+</h:body>
+</html>

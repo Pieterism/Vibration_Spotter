@@ -51,7 +51,7 @@ private LoginManagementEJBLocal loginEJB;
 		 HttpSession session = SessionUtils.getSession();
 		 session.setAttribute("emailadres", user);
 		 session.setAttribute("idPersoon", user.getIdPersoon());
-		 session.setAttribute("idPersoon", user.isAdmin());
+		 session.setAttribute("admin", user.isAdmin());
 		 
 		 
 		// externalContext.getSessionMap().put("Persoon", user);

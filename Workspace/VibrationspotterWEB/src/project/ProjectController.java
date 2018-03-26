@@ -1,15 +1,20 @@
 package project;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
+import javax.servlet.http.HttpSession;
 
 import Vibrationspotter.MetingManagementEJBLocal;
+import Vibrationspotter.PersonManagementEJBLocal;
 import Vibrationspotter.ProjectManagementEJBLocal;
+import model.Persoon;
 import model.Project;
 
 @Named
@@ -20,10 +25,24 @@ public class ProjectController implements Serializable {
 
 	@EJB
 	private ProjectManagementEJBLocal projectejb;
+	
+	@EJB 
+	private PersonManagementEJBLocal personejb;
+	
 
 	private Project project = new Project();
 
 	public String submit() {
+
+HttpSession session = SessionUtils.getSession();
+	int id = (int)session.getAttribute(("idPersoon"));
+	Persoon	user = personejb.findPersoonByid(id);
+	project.setIdPersoon(user);
+
+		
+		
+		
+		
 
 		projectejb.addProject(project);
 		FacesContext.getCurrentInstance().addMessage(null,
@@ -52,6 +71,22 @@ public class ProjectController implements Serializable {
 
 	public void keurProjectAf(Project pro) {
 		pro.setGoedgekeurd(false);
+	}
+	
+	public List<Project> geefProjectenweer(){
+		Persoon gebruiker;
+		HttpSession session = SessionUtils.getSession();
+		int id = (int) session.getAttribute(("idPersoon"));
+		List<Project> projecten = projectejb.findAllProjecten();
+		List<Project> goedeprojecten =  new ArrayList<Project>();
+		
+		for(int i=0;i<projecten.size();i++){
+			if(projecten.get(i).getIdPersoon().getIdPersoon()==id){
+				goedeprojecten.add(projecten.get(i));
+			}
+		}
+		
+		return goedeprojecten;
 	}
 
 }
