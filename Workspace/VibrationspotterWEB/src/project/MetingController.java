@@ -2,6 +2,7 @@ package project;
 
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
+import javax.servlet.http.HttpSession;
 
 import java.io.Serializable;
 
@@ -47,8 +48,15 @@ private static final long serialVersionUID = 1L;
  
  
  public void findMetingenByIdProject(){
-		metingen=metingejb.findMetingenByIdProject(project.getIdProject());
+	 	HttpSession session = SessionUtils.getSession();
+	 	int idProject = 0;
+	 	if(session.getAttribute("idProject")!=null){
+	 	 idProject = (int) session.getAttribute("idProject");
+	 	}
+	 	metingen=metingejb.findMetingenByIdProject(idProject);
+		//metingen=metingejb.findMetingenByIdProject(project.getIdProject());
 	}
+ 
 
 
 public Meting getMeting() {

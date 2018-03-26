@@ -14,7 +14,7 @@ import javax.servlet.http.HttpSession;
 
 @WebFilter(filterName = "AuthFilter", urlPatterns = { "/Home/*", "/Admin/*" })
 public class AuthorizationFilter implements Filter {
-
+//	"/metingen.xhtml/*"
 	public AuthorizationFilter() {
 	}
 
@@ -44,6 +44,10 @@ public class AuthorizationFilter implements Filter {
 	    		
 	    		
 	    	}
+	    	
+	/*    	else if (reqURI.indexOf("/metingen.xthml")>0){
+	    		(boolean) ((HttpServletRequest) request).getSession().getAttribute("admin")
+	    	}*/
 	    	
 	    	//gewone gebruiker die attribute heeft
 	    	else{

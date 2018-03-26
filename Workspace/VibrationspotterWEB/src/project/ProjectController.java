@@ -1,5 +1,6 @@
 package project;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -55,6 +56,13 @@ HttpSession session = SessionUtils.getSession();
 		System.out.println(pro.getIdProject());
 		projectejb.wissenProject(pro.getIdProject());
 		return "projecten.xhtml";
+	}
+	
+	public void gaNaarMeting(Project pro) throws IOException{
+		HttpSession session = SessionUtils.getSession();
+		int idproject = pro.getIdProject();
+		session.setAttribute("idProject", idproject);		
+		FacesContext.getCurrentInstance().getExternalContext().redirect("metingen.xhtml?id="+idproject);
 	}
 
 	public Project getProject() {
