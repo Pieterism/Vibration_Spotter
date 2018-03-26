@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-@WebFilter(filterName = "AuthFilter", urlPatterns = { "/Home/*" })
+@WebFilter(filterName = "AuthFilter", urlPatterns = { "/Home/*", "/Admin/*" })
 public class AuthorizationFilter implements Filter {
 
 	public AuthorizationFilter() {
@@ -24,12 +24,40 @@ public class AuthorizationFilter implements Filter {
 	}
 	
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws ServletException, IOException {
+		String reqURI = ((HttpServletRequest) request).getRequestURI();
+		boolean toegang = false;
+		
 	    if (((HttpServletRequest) request).getSession().getAttribute("idPersoon") == null) {
-	        // User is not logged in. Redirect to login page.
-	        ((HttpServletResponse) response).sendRedirect("/VibrationspotterWEB/login.xhtml");
+	    	toegang = false;
+	    	((HttpServletResponse) response).sendRedirect("/VibrationspotterWEB/login.xhtml");
+	    	
+	    	// User is not logged in. Redirect to login page.
+	 
 	    } else {
+	    	if(reqURI.indexOf("/Admin")>0){	
+	    		if((boolean) ((HttpServletRequest) request).getSession().getAttribute("admin")){
+	    			toegang = true;
+	    		}
+	    		else{
+	    			toegang = false;
+	    		}
+	    		
+	    		
+	    	}
+	    	
+	    	//gewone gebruiker die attribute heeft
+	    	else{
+	    		toegang = true;
+	    	}
+
 	        // User is logged in. Just continue with request.
-	        chain.doFilter(request, response);
+	    	if(toegang){
+	    	 chain.doFilter(request, response);
+	    	}
+	    	else{
+	    	      ((HttpServletResponse) response).sendRedirect("/VibrationspotterWEB/login.xhtml");
+	    	}
+	      
 	    }
 	}
 

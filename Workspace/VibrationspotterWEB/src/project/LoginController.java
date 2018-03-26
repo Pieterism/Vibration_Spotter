@@ -54,8 +54,17 @@ private LoginManagementEJBLocal loginEJB;
 		 session.setAttribute("admin", user.isAdmin());
 		 
 		 
-		// externalContext.getSessionMap().put("Persoon", user);
-		 return "/Home/index.xhtml?faces-redirect=true";
+		 if((boolean) session.getAttribute("admin")){
+		
+			 
+			 
+			 return "/Admin/index.xhtml?faces-redirect=true";			//als admin, redirect naar admin
+		 }
+		 else{
+			 return "/Home/index.xhtml?faces-redirect=true";			//a,anders gewone pagina
+		 }
+		 
+		
 	 }
 	 else{
 		 FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_INFO,"wachtwoord en gebruikersnaam komen niet overeen!","Please enter correct username and Password"));
