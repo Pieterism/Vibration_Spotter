@@ -41,6 +41,8 @@ public String submit() {
 	//user = personejb.findPersoonByid((int) session.getAttribute(("idPersoon")));  
 	int id = (int)session.getAttribute(("idPersoon"));
 	user = personejb.findPersoonByid(id);
+	
+	project.setIdPersoon(user);
 	//System.out.println("PJ: " + user.getIdPersoon());
 	//user = personejb.findPersoonByid(session.getAttribute(("idPersoon")));  
 	//user = personejb.findPersoonByid(Integer.parseInt(session.getId())); 
@@ -48,8 +50,10 @@ public String submit() {
 	//project.getPersonen().add(user);
 	//user.getProjects().add(project);
 	
+	//OUDE GOEDE
+	
 //	project.addPersonen(user);
-	user.addProject(project);
+//	user.addProject(project);
 	
 	
 	//LOGGING
@@ -86,7 +90,7 @@ public void setProject(Project project) {
 	this.project = project;
 }
 
-public List<Project> geefProjectenweer(){
+/*public List<Project> geefProjectenweer(){
 	boolean aanwezig = false;
 	List<Project> projecten = projectejb.findAllProjecten();
 	HttpSession session = SessionUtils.getSession();
@@ -108,9 +112,9 @@ public List<Project> geefProjectenweer(){
 	}
 	
 	return projecten;
-}
+}*/
 
-public List<Project> geefProjectenweer2(){
+/*public List<Project> geefProjectenweer2(){
 //	boolean aanwezig = false;
 //	List<Persoon> personen = personejb.findAllPersons();
 	Persoon gebruiker;
@@ -125,8 +129,25 @@ public List<Project> geefProjectenweer2(){
 	
 	
 	return projecten;
-}
+}*/
 
+public List<Project> geefProjectenweer2(){
+//	boolean aanwezig = false;
+//	List<Persoon> personen = personejb.findAllPersons();
+	Persoon gebruiker;
+	HttpSession session = SessionUtils.getSession();
+	int id = (int) session.getAttribute(("idPersoon"));
+	List<Project> projecten = projectejb.findAllProjecten();
+	List<Project> goedeprojecten =  new ArrayList<Project>();
+	
+	for(int i=0;i<projecten.size();i++){
+		if(projecten.get(i).getIdPersoon().getIdPersoon()==id){
+			goedeprojecten.add(projecten.get(i));
+		}
+	}
+	
+	return goedeprojecten;
+}
 
 
 }

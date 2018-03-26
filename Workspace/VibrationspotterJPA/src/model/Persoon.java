@@ -59,14 +59,14 @@ public class Persoon implements Serializable {
 	
 	
 	//GOEDE OUDE
-	@ManyToMany(targetEntity = Project.class)
+/*	@ManyToMany(targetEntity = Project.class)
 	@JoinTable(
 	      name="persoon_project",											//oude project_persoon
 	    //  joinColumns = @JoinColumn(name = "Persoon_idPersoon"),
 	    //  inverseJoinColumns=@JoinColumn(name="Project_idProject"))
 	      joinColumns=@JoinColumn(name="Persoon_idPersoon", referencedColumnName="idPersoon"),
 	      inverseJoinColumns=@JoinColumn(name="Project_idProject", referencedColumnName="idProject"))
-	private Set projecten;
+	private Set projecten;*/
 	
 	
 
@@ -84,7 +84,7 @@ public class Persoon implements Serializable {
 		paswoord = "admin";
 		admin = false;
 		salt=BCrypt.gensalt();
-		projecten = new HashSet<Project>();
+//		projecten = new HashSet<Project>();
 	}
 
 	public Persoon(int idPersoon, String voornaam, String achternaam, String paswoord, String emailadres,boolean admin,String salt,Set projects) {
@@ -157,14 +157,14 @@ public class Persoon implements Serializable {
 		salt = s;
 	}
 
-	public Set getProjecten() {
+/*	public Set getProjecten() {
 		return projecten;
 	}
 
 	public void setProjecten(Set projects) {
 		this.projecten = projects;
 	}
-	
+	*/
 
 	public String getType() {
 		return type;
@@ -178,9 +178,9 @@ public class Persoon implements Serializable {
 		return BCrypt.hashpw(passwd, salt);
 	}
 	
-	public void addProject(Project project){
+	/*public void addProject(Project project){
 		projecten.add(project);
-	}
+	}*/
 	
 
 }

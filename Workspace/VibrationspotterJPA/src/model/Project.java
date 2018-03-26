@@ -61,6 +61,11 @@ public class Project implements Serializable {
 	@Column(name = "beschrijving", length = 512)
 	private String beschrijving;
 	
+	@ManyToOne
+	@JoinColumn(name = "idPersoon")
+	private Persoon idPersoon;
+	
+	
 	// private Set<Persoon> personen;
 	
 /*	   @ManyToMany(mappedBy = "projecten")
@@ -75,14 +80,14 @@ public class Project implements Serializable {
 	
 	
 	
-	@ManyToMany(targetEntity = Persoon.class)
+	/*@ManyToMany(targetEntity = Persoon.class)
 	@JoinTable(
 	      name="persoon_project",
 	    //  joinColumns = @JoinColumn(name = "Persoon_idPersoon"),
 	    //  inverseJoinColumns=@JoinColumn(name="Project_idProject"))
 	      joinColumns=@JoinColumn(name="Persoon_idPersoon", referencedColumnName="idProject"),
 	      inverseJoinColumns=@JoinColumn(name="Project_idProject", referencedColumnName="idPersoon"))
-	private Set personen;
+	private Set personen;*/
 	
 	   
 	   //OUDE GOEDE
@@ -99,12 +104,12 @@ public class Project implements Serializable {
 		this.longtitude = 0;
 		this.goedgekeurd = false;
 		QR = UUID.randomUUID().toString();
-		personen = new HashSet<Persoon>();
+	//	personen = new HashSet<Persoon>();
 
 	}
 
 	public Project(int idProject, String titel, String type, float latitude, float longtitude, boolean goedgekeurd,
-			String qR, String beschrijving, Set personen) {
+			String qR, String beschrijving, Persoon idPersoon) {
 		super();
 		this.idProject = idProject;
 		this.titel = titel;
@@ -114,6 +119,7 @@ public class Project implements Serializable {
 		this.goedgekeurd = goedgekeurd;
 		QR = qR;
 		this.beschrijving = beschrijving;
+		this.idPersoon= idPersoon;
 	//	this.personen = personen;
 	}
 	
@@ -182,7 +188,17 @@ public class Project implements Serializable {
 		this.beschrijving = beschrijving;
 	}
 
-	public Set getPersonen() {
+	public Persoon getIdPersoon() {
+		return idPersoon;
+	}
+
+	public void setIdPersoon(Persoon idPersoon) {
+		this.idPersoon = idPersoon;
+	}
+	
+	
+
+/*	public Set getPersonen() {
 		return personen;
 	}
 
@@ -192,6 +208,6 @@ public class Project implements Serializable {
 	
 	public void addPersonen(Persoon persoon){
 		this.personen.add(persoon);
-	}
+	}*/
 
 }

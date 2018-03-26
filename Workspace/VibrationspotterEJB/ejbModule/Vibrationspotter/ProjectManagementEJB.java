@@ -131,6 +131,7 @@ public class ProjectManagementEJB implements ProjectManagementEJBLocal {
 	
 	
 	
+	
 /*	public List<Project> findProjectenBijPesoon(int id){
 		Query q = em.createQuery("SELECT p FROM Project p WHERE idPersoon = id AND  = ORDER BY p.idProject ASC");
 		return null;
