@@ -16,6 +16,9 @@
 		<a href="projecten.xhtml">Projecten</a>
 		<a href="kaart.xhtml">Kaart</a>
  		<a href="about.xhtml">About</a>
+ 		<h:form >
+ 		<h:commandButton styleClass="logout" image="logout.png" value = "uitloggen" action="#{loginController.logout}"/>
+ 		</h:form>
 	</div>
      <div class="paragraph">
 		<h2 >Nieuw Project aanmaken</h2>
@@ -34,7 +37,7 @@
 					</h:selectOneMenu>   
 					
 			   </h:panelGrid>
-			   <h:commandButton styleClass="knop" value = "project aanmaken" action="#{projectController.submit}"/> 
+			   
 				<br/>
 				<br/>
 			</h:form>

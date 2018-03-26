@@ -117,6 +117,9 @@
 		<a href="projecten.xhtml">Projecten</a>
 		<a class="active" href="kaart.xhtml">Kaart</a>
  		<a href="about.xhtml">About</a>
+ 		 <h:form >
+ 		<h:commandButton styleClass="logout" image="logout.png" value = "uitloggen" action="#{loginController.logout}"/>
+ 		</h:form>
 	</div>
     <input id="pac-input" class="controls" type="text" placeholder="Search Box"/>
     <div id="map"></div>
@@ -128,13 +131,11 @@
     	  function controle(x) {
     		  var image;
     		    if(x=='brug'){
-    		    	var image = {url: 'rood.png',
-    		    			scaledSize: new google.maps.Size(30, 50)
+    		    	var image = {url: 'rood.png',scaledSize: new google.maps.Size(30, 50)
     		    	};
     		    }
     		    else if(x=='kraan'){
-    		    	var image = {url: 'blauw.png',
-    		    			scaledSize: new google.maps.Size(30, 50)
+    		    	var image = {url: 'blauw.png',scaledSize: new google.maps.Size(30, 50)
     		    	};
     		    	
     		    }

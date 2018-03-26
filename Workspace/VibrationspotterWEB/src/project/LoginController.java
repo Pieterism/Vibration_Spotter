@@ -74,7 +74,11 @@ private LoginManagementEJBLocal loginEJB;
 
  }
  
- 
+ public String logout() {
+	 System.out.println("hallo");
+     FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+     return "/login.xhtml?faces-redirect=true";
+ }
  
 public String getPwd() {
 	return pwd;
