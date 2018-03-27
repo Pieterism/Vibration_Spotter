@@ -52,6 +52,7 @@ private LoginManagementEJBLocal loginEJB;
 		 session.setAttribute("emailadres", user);
 		 session.setAttribute("idPersoon", user.getIdPersoon());
 		 session.setAttribute("admin", user.isAdmin());
+		 session.setAttribute("idProject", 0);
 		 
 		 
 		 if((boolean) session.getAttribute("admin")){
