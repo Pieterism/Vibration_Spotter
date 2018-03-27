@@ -33,24 +33,28 @@ public class ProjectController implements Serializable {
 
 	private Project project = new Project();
 
-	public String submit() {
-
-HttpSession session = SessionUtils.getSession();
+	public String submitspotter() {
+    HttpSession session = SessionUtils.getSession();
 	int id = (int)session.getAttribute(("idPersoon"));
 	Persoon	user = personejb.findPersoonByid(id);
 	project.setIdPersoon(user);
-
-		
-		
-		
-		
-
-		projectejb.addProject(project);
-		FacesContext.getCurrentInstance().addMessage(null,
-				new FacesMessage(FacesMessage.SEVERITY_INFO, "Uw project is aangemaakt", "Uw project is aangemaakt"));
+	project.setType("brug");
+	projectejb.addProject(project);
+	FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_INFO, "Uw project is aangemaakt", "Uw project is aangemaakt"));
 
 		return "index.xhtml";
 	}
+	public String submitstem() {
+	    HttpSession session = SessionUtils.getSession();
+		int id = (int)session.getAttribute(("idPersoon"));
+		Persoon	user = personejb.findPersoonByid(id);
+		project.setIdPersoon(user);
+		project.setType("kraan");
+		projectejb.addProject(project);
+		FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_INFO, "Uw project is aangemaakt", "Uw project is aangemaakt"));
+
+			return "index.xhtml";
+		}
 
 	public String wissen(Project pro) {
 		System.out.println(pro.getIdProject());

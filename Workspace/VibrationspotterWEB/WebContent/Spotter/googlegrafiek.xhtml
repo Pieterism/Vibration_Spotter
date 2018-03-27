@@ -1,0 +1,122 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+      
+<h:head>
+<title>Welcome Page!</title>
+ <link rel = "stylesheet" href ="stijl.css"></link>
+ <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <script type="text/javascript">
+      google.charts.load('current', {packages: ['corechart', 'line']});
+      google.charts.setOnLoadCallback(drawChart1);
+      google.charts.setOnLoadCallback(drawChart2);
+
+      function drawChart1() {
+    	  var data = new google.visualization.DataTable();
+          data.addColumn('number', 'tijd');
+          data.addColumn('number', 'versnelling');
+
+          data.addRows([
+            [0, 0],   [1, 10],  [2, 23],  [3, 17],  [4, 18],  [5, 9],
+            [6, 11],  [7, 27],  [8, 33],  [9, 40],  [10, 32], [11, 35],
+            [12, 30], [13, 40], [14, 42], [15, 47], [16, 44], [17, 48],
+            [18, 52], [19, 54], [20, 42], [21, 55], [22, 56], [23, 57],
+            [24, 60], [25, 50], [26, 52], [27, 51], [28, 49], [29, 53],
+            [30, 55], [31, 60], [32, 61], [33, 59], [34, 62], [35, 65],
+            [36, 62], [37, 58], [38, 55], [39, 61], [40, 64], [41, 65],
+            [42, 63], [43, 66], [44, 67], [45, 69], [46, 69], [47, 70],
+            [48, 72], [49, 68], [50, 66], [51, 65], [52, 67], [53, 70],
+            [54, 71], [55, 72], [56, 73], [57, 75], [58, 70], [59, 68],
+            [60, 64], [61, 60], [62, 65], [63, 67], [64, 68], [65, 69],
+            [66, 70], [67, 72], [68, 75], [69, 80]
+          ]);
+
+          var options = {
+        		  'title':'Versnelling in functie van tijd',
+        		  'color':'red',
+            hAxis: {
+              title: 'Tijd [s]'
+            },
+            vAxis: {
+              title: 'Versnelling [m/s^2]'
+            },
+            backgroundColor: '#f7f3ed',
+            curveType: 'function',
+            crosshair: { color: 'red',trigger: 'both' },
+            animation: {
+                duration: 700,
+                easing: 'linear',
+                startup: true
+              },
+          };
+
+          var chart = new google.visualization.LineChart(document.getElementById('grafiek1'));
+          
+
+          chart.draw(data, options);
+          document.getElementById('png1').outerHTML = '<a href="' + chart.getImageURI() + '">grafiek1 opslaan</a>';
+      }
+      
+      function drawChart2() {
+    	  var data = new google.visualization.DataTable();
+          data.addColumn('number', 'Frequentie');
+          data.addColumn('number', 'Amplitude');
+
+          data.addRows([
+            [0, 2]
+          ]);
+          
+          data.addRows([
+              [1, 3]
+            ]);
+
+          var options = {
+        	'title':'Amplitude in functie van frequentie',
+        		chart: {
+        	         title: 'ampltitude in functie van frequentie'
+        	         
+        	        },
+            hAxis: {
+              title: 'Frequentie [Hz]'
+            },
+            vAxis: {
+              title: 'Amplitude[m/s^2/Hz]'
+            },
+            backgroundColor: '#f7f3ed',
+            crosshair: { color: 'red',trigger: 'both' },
+            animation: {
+                duration: 700,
+                easing: 'linear',
+                startup: true
+              },
+           
+          };
+
+          var chart = new google.visualization.LineChart(document.getElementById('grafiek2'));
+    
+          chart.draw(data, options);
+          document.getElementById('png2').outerHTML = '<a href="' + chart.getImageURI() + '">grafiek2 opslaan</a>';
+      }
+    </script>
+</h:head>
+
+<h:body>
+ 	<div class="header">
+         <h1><b>resultaten van meting</b></h1>
+     </div>
+	<div style="margin-top: 50px">
+  		<div id="grafiek1" ></div>
+  		<div id='png1'></div>
+	</div>
+
+	<div style="margin-top: 50px">
+  		<div id="grafiek2"></div>
+  		<div id='png2'></div>
+	</div>
+	
+
+</h:body>
+</html>
