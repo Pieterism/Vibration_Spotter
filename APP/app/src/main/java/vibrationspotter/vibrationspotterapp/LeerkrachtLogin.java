@@ -11,7 +11,7 @@ public class LeerkrachtLogin extends Activity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_leerkrachtlogin);
-        Button naarMeter = findViewById(R.id.naarMeterG);
+        Button naarMeter = findViewById(R.id.naarMeterL);
 
         naarMeter.setOnClickListener(new View.OnClickListener() {
             @Override

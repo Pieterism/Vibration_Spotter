@@ -1,6 +1,8 @@
 package vibrationspotter.vibrationspotterapp;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -15,8 +17,6 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.google.android.gms.common.api.CommonStatusCodes;
 import com.google.android.gms.vision.barcode.Barcode;
 
-import com.android.volley.toolbox.StringRequest;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -27,13 +27,15 @@ import java.util.Map;
 import vibrationspotter.QR_Utilities.BarcodeCaptureActivity;
 
 public class QR_hub extends Activity{
-    TextView textView;
+    private TextView textView;
+    private String baseurl;
     final int BARCODE_READER_REQUEST_CODE = 9966;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_qrhub);
 
+        baseurl = getString(R.string.url);
         Button naarQRlezer = findViewById(R.id.naarQRlezer);
         textView = findViewById(R.id.QRresultaat);
 
@@ -61,13 +63,17 @@ public class QR_hub extends Activity{
                     JSONArray jArray = new JSONArray();
                     jArray.put(jObject);
                     JsonArrayRequest stringRequest = new JsonArrayRequest(Request.Method.POST,
-                            "http://192.168.0.104:8080/VibrationspotterREST/Restservice/QR",
+                            baseurl + "QR",
                             jArray,
                             new Response.Listener<JSONArray>() {
                                 @Override
                                 public void onResponse(JSONArray response) {
                                     Log.d("QR", response.toString());
-                                    textView.setText(response.toString());
+                                    AlertDialog.Builder builder = new AlertDialog.Builder(QR_hub.this);
+                                    builder.setMessage(response.toString())
+                                            .setNegativeButton("Close",null)
+                                            .create()
+                                            .show();
                                 }
                             },
                             new Response.ErrorListener() {

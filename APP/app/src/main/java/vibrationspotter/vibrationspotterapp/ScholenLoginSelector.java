@@ -18,7 +18,7 @@ public class ScholenLoginSelector extends Activity {
         leerkracht.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent_leerkracht = new Intent(ScholenLoginSelector.super.getApplicationContext(),LeerkrachtLogin.class);
+                Intent intent_leerkracht = new Intent(ScholenLoginSelector.this,LeerkrachtLogin.class);
                 startActivity(intent_leerkracht);
             }
         });
@@ -26,7 +26,7 @@ public class ScholenLoginSelector extends Activity {
         leerling.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent_leerling = new Intent(ScholenLoginSelector.super.getApplicationContext(),QR_hub.class);
+                Intent intent_leerling = new Intent(ScholenLoginSelector.this,QR_hub.class);
                 startActivity(intent_leerling);
             }
         });
