@@ -104,7 +104,7 @@ public class Meter extends Activity implements SensorEventListener{
         final String REQUEST_TAG = "Stringrequest";
 
         JsonArrayRequest strReq = new JsonArrayRequest(Request.Method.POST,
-                "@string/url" + "Metingen",
+                getString(R.string.url) + "Metingen",
                 jArray,
                 new Response.Listener<JSONArray>() {
                     @Override

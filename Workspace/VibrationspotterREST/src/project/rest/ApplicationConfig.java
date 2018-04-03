@@ -21,6 +21,7 @@ private final Set<Class<?>> classes;
 		HashSet<Class<?>> c = new HashSet<>();
 		c.add(MetingenREST.class);
 		c.add(QRcodeREST.class);
+		c.add(RegistratieREST.class);
 		classes = Collections.unmodifiableSet(c);
 	}
 	
