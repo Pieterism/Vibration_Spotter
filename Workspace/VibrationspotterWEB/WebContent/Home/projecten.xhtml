@@ -9,8 +9,8 @@
   <title>
     <ui:insert name="title">Projecten</ui:insert>
   </title>
-  	<link rel = "stylesheet" href ="stijl.css"></link>
-  	<link rel = "stylesheet" href ="stijlmetingen.css"></link>
+  	<link rel = "stylesheet" href ="../stijl/stijl.css"></link>
+  	<link rel = "stylesheet" href ="../stijl/stijlmetingen.css"></link>
 
 
 </h:head>
@@ -72,7 +72,7 @@
         <f:facet name="header">
           <h:outputText value="wissen"/>
         </f:facet>
-         <h:commandButton value = "project wissen" onclick = "return confirm('wilt u zeker dit project wisen?')" action="#{projectController.wissen(pro)}" ></h:commandButton>
+         <h:commandButton value = "project wissen" onclick = "return confirm('wilt u zeker dit project wissen?')" action="#{projectController.wissen(pro)}" ></h:commandButton>
       </h:column>
     </h:dataTable>
     </h:form>

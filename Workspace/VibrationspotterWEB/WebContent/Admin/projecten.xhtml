@@ -9,8 +9,8 @@
   <title>
     <ui:insert name="title">Projecten</ui:insert>
   </title>
-  	<link rel = "stylesheet" href ="stijl.css"></link>
-  	<link rel = "stylesheet" href ="stijlmetingen.css"></link>
+  	<link rel = "stylesheet" href ="../stijl/stijl.css"></link>
+  	<link rel = "stylesheet" href ="../stijl/stijlmetingen.css"></link>
 </h:head>
      
       
@@ -24,6 +24,9 @@
 		<a href="kaart.xhtml">Kaart</a>
  		<a href="about.xhtml">About</a>
  		<a href="createaccount.xhtml">Create account</a>
+ 		 <h:form >
+ 		<h:commandButton styleClass="logout" image="logout.png" value = "uitloggen" action="#{loginController.logout}"/>
+ 		</h:form>
  		
 	</div>
 <h:form>
@@ -71,7 +74,7 @@
         <f:facet name="header">
           <h:outputText value="wissen"/>
         </f:facet>
-         <h:commandButton value = "project wissen" onclick = "return confirm('wilt u zeker dit project wisen?')" action="#{projectController.wissen(pro)}"></h:commandButton>
+         <h:commandButton value = "project wissen" onclick = "return confirm('wilt u zeker dit project wissen?')" action="#{projectController.wissen(pro)}"></h:commandButton>
       </h:column>
     </h:dataTable>
     </h:form>

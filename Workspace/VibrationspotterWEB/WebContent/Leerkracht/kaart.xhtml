@@ -4,10 +4,10 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:f="http://java.sun.com/jsf/core">
   <head>
-   <link rel = "stylesheet" href ="stijl.css"></link>
+   <link rel = "stylesheet" href ="../stijl/stijl.css"></link>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no"/>
     <meta charset="utf-8"/>
-    <title>Places Searchbox</title>
+    <title>kaart</title>
     <style>
       /* Always set the map height explicitly to define the size of the div
        * element that contains the map. */
@@ -225,10 +225,12 @@
      //legende toegevoegd
      var legend = document.getElementById('legend');
      var div = document.createElement('div');
-     div.innerHTML = "STEM            :"+ '<img src='blauw.png' style="width: 15%; height: 15%"/>'+"    aantal: "+k+"    ("+k/(k+b)*100+"%)";
+     var percentstem=parseFloat(k/(k+b)*100).toFixed(2);
+     var percentvib=parseFloat(b/(k+b)*100).toFixed(2);
+     div.innerHTML = "STEM            :"+ '<img src='blauw.png' style="width: 10%; height: 10%"/>'+"    aantal: "+k+"    ("+percentstem+"%)";
      legend.appendChild(div);
      var div = document.createElement('div');
-     div.innerHTML = "vibrationspotter:"+ '<img src='rood.png' style="width: 15%; height: 15%"/>'+"     aantal: "+b+"    ("+b/(k+b)*100+"%)";
+     div.innerHTML = "vibrationspotter:"+ '<img src='rood.png' style="width: 10%; height: 10%"/>'+"     aantal: "+b+"    ("+percentvib+"%)";
      legend.appendChild(div);
      map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(legend);
       }

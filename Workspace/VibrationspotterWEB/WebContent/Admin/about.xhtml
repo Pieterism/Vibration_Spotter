@@ -5,7 +5,7 @@
       xmlns:h="http://java.sun.com/jsf/html"> 
 <h:head>
 <title>Welcome Page!</title>
-<link rel = "stylesheet" href ="stijl.css"></link>
+<link rel = "stylesheet" href ="../stijl/stijl.css"></link>
 </h:head>
 <h:body>
 	<div class="header">
@@ -17,6 +17,9 @@
 		<a href="kaart.xhtml">Kaart</a>
  		<a class="active" href="#about">About</a>
  		<a href="createaccount.xhtml">Create account</a>
+ 		 <h:form >
+ 		<h:commandButton styleClass="logout" image="logout.png" value = "uitloggen" action="#{loginController.logout}"/>
+ 		</h:form>
 	</div>
   
   <p>
