@@ -31,22 +31,22 @@ public class Spotter extends Persoon {
 	private static final long serialVersionUID = 1L;
 
 	@Column(name = "gebruikersnaam", nullable = false, unique = true)
-	private int gebruikersnaam;
+	private String gebruikersnaam;
 
-	public Spotter() throws NoSuchAlgorithmException {
+	public Spotter(){
 		super();
 	}
 
-	public Spotter(int gebruikersnaam) throws NoSuchAlgorithmException {
+	public Spotter(String gebruikersnaam){
 		super();
 		this.gebruikersnaam = gebruikersnaam;
 	}
 
-	public int getGebruikersnaam() {
+	public String getGebruikersnaam() {
 		return gebruikersnaam;
 	}
 
-	public void setGebruikersnaam(int gebruikersnaam) {
+	public void setGebruikersnaam(String gebruikersnaam) {
 		this.gebruikersnaam = gebruikersnaam;
 	}
 

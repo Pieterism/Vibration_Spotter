@@ -11,6 +11,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import model.Persoon;
+import model.Spotter;
 
 
 @Stateless
@@ -64,7 +65,20 @@ public class PersonManagementEJB implements PersonManagementEJBLocal {
 			}
 		}
 	
-		
+	
+	
+	public Spotter findSpotterByGebruiksnaam(String gebruikersnaam){
+		Query q = em.createQuery("SELECT s FROM Spotter s WHERE s.gebruikersnaam = :gebruikersnaam");
+		q.setParameter("gebruikersnaam", gebruikersnaam);
+		List<Spotter> spotters = q.getResultList();
+		if(spotters.size()!=1){
+			return null;
+		}
+		else{
+		Spotter s=spotters.get(0);
+		return s;
+		}
 	}
+	
 
-
+}
