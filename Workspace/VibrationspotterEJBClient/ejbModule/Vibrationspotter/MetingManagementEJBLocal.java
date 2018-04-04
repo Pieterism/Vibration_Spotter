@@ -12,4 +12,8 @@ public interface MetingManagementEJBLocal {
 	void addMeting(Meting meting);
 	
 	public List<Meting> findMetingenByIdProject(int idProject);
+
+	public void wissenMetingenByProjectid(int idProject);
+
+
 }

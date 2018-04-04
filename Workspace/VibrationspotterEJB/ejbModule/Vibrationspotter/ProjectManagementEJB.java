@@ -11,6 +11,7 @@ import java.util.Map;
 import java.util.UUID;
 
 import javax.annotation.Resource;
+import javax.ejb.EJB;
 import javax.ejb.Schedule;
 import javax.ejb.SessionContext;
 import javax.ejb.Stateless;
@@ -39,6 +40,9 @@ public class ProjectManagementEJB implements ProjectManagementEJBLocal {
 
 	@Resource
 	private SessionContext ctx;
+	
+	@EJB
+	private MetingManagementEJBLocal metingejb;
 
 	@Override
 	public Project findProject(String titel) {
@@ -63,19 +67,13 @@ public class ProjectManagementEJB implements ProjectManagementEJBLocal {
 	}
 
 	public void wissenProject(int idProject) {
-		/*
-		 * Query q = em.
-		 * createQuery("SELECT p FROM Project p WHERE p.idProject = :idProject"
-		 * ); q.setParameter("idProject", idProject); List<Project> projecten =
-		 * q.getResultList();
-		 * System.out.println(projecten.get(0).getIdProject());
-		 */
-
+		// eerst metingen van project wissen, vooraleer project wissen
+		metingejb.wissenMetingenByProjectid(idProject);
 		Project pro = em.find(Project.class, idProject);
 		em.remove(pro);
-		System.out.println(pro.getIdProject());
 
 	}
+
 
 	public List<Project> findAllProjecten() {
 		Query q = em.createQuery("SELECT p FROM Project p ORDER BY p.idProject ASC");

@@ -70,7 +70,7 @@
         <f:facet name="header">
           <h:outputText value="wissen"/>
         </f:facet>
-         <h:commandButton value = "project wissen" action="#{projectController.wissen(pro)}"></h:commandButton>
+        <h:commandButton value = "project wissen" onclick = "return confirm('wilt u zeker dit project wisen?')" action="#{projectController.wissen(pro)}"></h:commandButton>
       </h:column>
     </h:dataTable>
     </h:form>
