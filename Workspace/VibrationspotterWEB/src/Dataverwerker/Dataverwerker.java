@@ -39,6 +39,10 @@ public class Dataverwerker {
             stdin.println("t_resampled = t(1):1/Fs:t(end);");
             stdin.println("data_resampled = interp1(t, data, t_resampled, 'spline');");
             stdin.println("t_resampled = t_resampled - t_resampled(1); ");
+            
+            // tijd en versnelling uitprinten naar csv
+            stdin.println("save t_resampled.csv t_resampled"); //tijd
+            stdin.println("save data_resampled.csv data_resampled"); //versnelling
 
 
             //Stap2
@@ -46,6 +50,10 @@ public class Dataverwerker {
             stdin.println("f = Fs*(0:(L/2))/L;");
             stdin.println("A2_data = fft(data_resampled); A2 = abs(A2_data/L);");
             stdin.println("A_data = A2(1:L/2+1); A_data(2:end-1) = 2*A_data(2:end-1);");
+            
+            // frequentie en amplitude uitprinten naar csv
+            stdin.println("save f.csv f"); //frequentie
+            stdin.println("save A_data.csv A_data"); //amplitude
 
 
             //Stap3
@@ -56,8 +64,6 @@ public class Dataverwerker {
             stdin.println("A2_data = fft(data_filtered); A2 = abs(A2_data/L);");
             stdin.println("A_data = A2(1:L/2+1); A_data(2:end-1) = 2*A_data(2:end-1);");
             
-            stdin.println("save output.csv A_data");
-            stdin.println("A_data");
             
             
             
