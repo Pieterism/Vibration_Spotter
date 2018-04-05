@@ -7,5 +7,5 @@ public interface SpotterManagementEJBLocal {
 
 	void addFoto(Foto foto);
 
-
+	 void aanmakenSpotter(String json);
 }
