@@ -14,5 +14,4 @@ public class RegistratieREST {
 		System.out.println(gegevens);
 		return "[{\"Registratie\": Gelukt!!!}]";
 	}
-
 }

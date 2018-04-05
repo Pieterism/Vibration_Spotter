@@ -72,7 +72,7 @@ public class Registreren extends AppCompatActivity {
                         jArray.put(jsonObject);
 
                         JsonArrayRequest registreerRequest = new JsonArrayRequest(Request.Method.POST,
-                                getString(R.string.url) + "Registratie",
+                                getString(R.string.url) + "Registreren",
                                 jArray,
                                 new Response.Listener<JSONArray>() {
                                     @Override
