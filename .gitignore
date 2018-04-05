@@ -92,4 +92,6 @@ Workspace/VibrationspotterJPA/src/model/Persoon.java
 Workspace/VibrationspotterEJB/ejbModule/Vibrationspotter/MetingManagementEJB.java
 Workspace/VibrationspotterEJB/ejbModule/META-INF/glassfish-ejb-jar.xml
 Workspace/VibrationspotterEJB/build/classes/META-INF/glassfish-ejb-jar.xml
+APP\.idea\misc.xml
+APP\.idea\modules.xml
 *.ini
