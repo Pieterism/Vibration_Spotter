@@ -40,6 +40,9 @@ public class SpotterManagementEJB implements SpotterManagementEJBLocal {
 		
 		spotter.setAdmin(false);
 		spotter.setType("Spotter");
+		em.persist(spotter);
+		
+		
 	}
 	
 	
