@@ -54,16 +54,34 @@ private LoginManagementEJBLocal loginEJB;
 		 session.setAttribute("admin", user.isAdmin());
 		 session.setAttribute("idProject", 0);
 		 
+		 session.setAttribute("type", user.getType());
+		 
 		 
 		 if((boolean) session.getAttribute("admin")){
-		
-			 
-			 
+
 			 return "/Admin/index.xhtml?faces-redirect=true";			//als admin, redirect naar admin
 		 }
+		 
+		 else if(((String)session.getAttribute("type")).equals("Leerkracht")){
+			 
+			 return "/Leerkracht/index.xhtml?faces-redirect=true";    //als leerkracht, redirect naar leerkracht
+			 
+		 }
+		 
+		 else if(((String)session.getAttribute("type")).equals("Spotter")){
+			 
+			 return "/Spotter/index.xhtml?faces-redirect=true";       //als spotter, redirect naar spotter
+			 
+		 }
+		 
+		 return null;
+		 
+		 
+		 /*
 		 else{
 			 return "/Home/index.xhtml?faces-redirect=true";			//a,anders gewone pagina
 		 }
+		 */
 		 
 		
 	 }

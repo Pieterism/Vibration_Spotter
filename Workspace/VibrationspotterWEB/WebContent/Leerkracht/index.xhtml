@@ -21,7 +21,7 @@
  		</h:form>
 	</div>
      <div class="paragraph">
-		<h2 >Nieuw Project aanmaken</h2>
+		<h2>STEM Project aanmaken</h2>
 			<h:form >
 				<h:panelGrid columns ="2" cellpadding = "10">
 					<h:outputLabel value="titel: "/>
@@ -29,15 +29,9 @@
 					
 					<h:outputLabel value="beschrijving: "/>
 					<h:inputText required ="true" value ="#{projectController.project.beschrijving}" requiredMessage="beschrijving is niet ingevuld"/>
-					
-					 <h:outputLabel value="type: "/>
-					<h:selectOneMenu value = "#{projectController.project.type}"> 
-   							<f:selectItem itemValue = "brug" itemLabel = "Vibrationspotter" /> 
-   							<f:selectItem itemValue = "kraan" itemLabel = "STEM" /> 
-					</h:selectOneMenu>   
-					
+
 			   </h:panelGrid>
-			   <h:commandButton styleClass="knop" value = "project aanmaken" action="#{projectController.submit}"/> 
+			   <h:commandButton styleClass="knop" value = "project aanmaken" action="#{projectController.submitStem}"/> 
 				<br/>
 				<br/>
 			</h:form>
