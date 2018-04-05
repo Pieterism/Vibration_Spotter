@@ -6,7 +6,11 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 
 import model.Foto;
 import model.Spotter;
@@ -33,16 +37,37 @@ public class SpotterManagementEJB implements SpotterManagementEJBLocal {
 		
 	}
 	
-	public Spotter aanmakenSpotter(String json){
-		Gson gson = new Gson();
+	public Spotter aanmakenSpotter(String j){
+		
+	//	Gson gson = new Gson();
 	//	String jsonInString = "{\"userId\":\"1\",\"userName\":\"Yasir\"}";
-		Spotter spotter= gson.fromJson(json, Spotter.class);
 		
-		spotter.setAdmin(false);
-		spotter.setType("Spotter");
-		em.persist(spotter);
 		
-		return spotter;
+
+		
+	//	Spotter spotter= gson.fromJson(json, Spotter.class);
+		
+		
+	//	JSONObject jsonObj = new JSONObject("{\"phonetype\":\"N95\",\"cat\":\"WP\"}");
+		
+		JSONObject json = null;
+		try {
+			json = new JSONObject(j);
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		System.out.println(json.get("voornaam"));
+	//	String statistics = json.getString("voornaam");
+	//	JSONObject voornaam = json.getJSONObject("voornaam");
+	//	String ageJohn = name1.getString("Age");
+
+	//	spotter.setAdmin(false);
+	//	spotter.setType("Spotter");
+	//	em.persist(spotter);
+		
+		return null;
 	}
 	
 	
