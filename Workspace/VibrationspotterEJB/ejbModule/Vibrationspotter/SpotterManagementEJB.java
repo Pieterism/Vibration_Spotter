@@ -33,7 +33,7 @@ public class SpotterManagementEJB implements SpotterManagementEJBLocal {
 		
 	}
 	
-	public void aanmakenSpotter(String json){
+	public Spotter aanmakenSpotter(String json){
 		Gson gson = new Gson();
 	//	String jsonInString = "{\"userId\":\"1\",\"userName\":\"Yasir\"}";
 		Spotter spotter= gson.fromJson(json, Spotter.class);
@@ -42,7 +42,7 @@ public class SpotterManagementEJB implements SpotterManagementEJBLocal {
 		spotter.setType("Spotter");
 		em.persist(spotter);
 		
-		
+		return spotter;
 	}
 	
 	
