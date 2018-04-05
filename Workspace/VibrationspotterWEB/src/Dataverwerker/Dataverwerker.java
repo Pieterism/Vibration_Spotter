@@ -56,6 +56,7 @@ public class Dataverwerker {
             stdin.println("A2_data = fft(data_filtered); A2 = abs(A2_data/L);");
             stdin.println("A_data = A2(1:L/2+1); A_data(2:end-1) = 2*A_data(2:end-1);");
             
+            stdin.println("save output.csv A_data");
             stdin.println("A_data");
             
             
