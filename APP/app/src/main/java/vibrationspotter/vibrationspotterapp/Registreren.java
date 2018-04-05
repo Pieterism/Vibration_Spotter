@@ -62,11 +62,11 @@ public class Registreren extends AppCompatActivity {
                     }
                     else{
                         Map<String,String> registratiegegevens = new HashMap<>();
-                        registratiegegevens.put("Voornaam",etVoornaam.getText().toString());
-                        registratiegegevens.put("Achternaam",etAchternaam.getText().toString());
-                        registratiegegevens.put("Gebruikersnaam",etGebruikersnaam.getText().toString());
-                        registratiegegevens.put("Email",etEmail.getText().toString());
-                        registratiegegevens.put("Wachtwoord",etWachtwoord.getText().toString());
+                        registratiegegevens.put("voornaam",etVoornaam.getText().toString());
+                        registratiegegevens.put("achternaam",etAchternaam.getText().toString());
+                        registratiegegevens.put("gebruikersnaam",etGebruikersnaam.getText().toString());
+                        registratiegegevens.put("emailadres",etEmail.getText().toString());
+                        registratiegegevens.put("paswoord",etWachtwoord.getText().toString());
                         JSONObject jsonObject = new JSONObject(registratiegegevens);
                         JSONArray jArray = new JSONArray();
                         jArray.put(jsonObject);
