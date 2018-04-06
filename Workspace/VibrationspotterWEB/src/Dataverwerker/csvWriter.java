@@ -14,7 +14,6 @@ public class csvWriter {
          BufferedReader br = null;
          String line = "";
          String cvsSplitBy = ","; //splitten met komma
-         int j=1;
 
          try {
          	
@@ -45,6 +44,7 @@ public class csvWriter {
              		t_resampled = line.split(cvsSplitBy);
              }
              
+            //frequentie en amplitude printen naar csv
      		FileWriter fw = new FileWriter("output.csv");
      		PrintWriter pw = new PrintWriter(fw);
      		pw.println((f.length)+";"+(A_data.length));
@@ -54,12 +54,12 @@ public class csvWriter {
 
      		pw.close();
      		
+     		// tijd en versnelling printen naar csv
      		FileWriter fw2 = new FileWriter("output2.csv");
      		PrintWriter pw2 = new PrintWriter(fw2);
-     		pw2.println((data_resampled.length)+";"+(t_resampled.length));
-     		System.out.println((data_resampled.length)+";"+(t_resampled.length));
-     		for(int i=0;i<data_resampled.length;i++){
-     			pw2.println(data_resampled[i]+";"+t_resampled[i]);
+     		pw2.println((t_resampled.length)+";"+(data_resampled.length));
+     		for(int i=0;i<t_resampled.length;i++){
+     			pw2.println(t_resampled[i]+";"+data_resampled[i]);
      		}
 
      		pw2.close();
