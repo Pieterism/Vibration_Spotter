@@ -1,5 +1,9 @@
 package Dataverwerker;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
@@ -64,10 +68,64 @@ public class Dataverwerker {
             stdin.println("A2_data = fft(data_filtered); A2 = abs(A2_data/L);");
             stdin.println("A_data = A2(1:L/2+1); A_data(2:end-1) = 2*A_data(2:end-1);");
             
-            
-            
-            
             stdin.close();
+            
+            BufferedReader br = null;
+            String line = "";
+            String cvsSplitBy = " "; //splitten met spatie
+            int j=1;
+
+            try {
+            	//amplitude inlezen
+            	String csvFile1 = "A_data.csv"; 
+                br = new BufferedReader(new FileReader(csvFile1));
+                String[] A_data = null;
+                while ((line = br.readLine()) != null) {
+                	if(j==6){
+                		A_data = line.split(cvsSplitBy);
+                	}
+                   j++;
+
+                }
+                
+              //frequentie inlezen
+                String csvFile2 = "f.csv";  
+                br = new BufferedReader(new FileReader(csvFile2));
+                String[] f = null;
+                j=1;
+                while ((line = br.readLine()) != null) {
+                	if(j==6){
+                		f = line.split(cvsSplitBy);
+                	}
+                   j++;
+
+                }
+                
+                //resultaten naar een csv file printen
+        		FileWriter fw = new FileWriter("output.csv");
+        		PrintWriter pw = new PrintWriter(fw);
+        		pw.println((f.length-1)+";"+(A_data.length-1));
+        		for(int i=1;i<f.length;i++){
+        			pw.println(f[i]+";"+A_data[i]);
+        		}
+        		
+        		pw.close();
+                
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } finally {
+                if (br != null) {
+                    try {
+                        br.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+            
+            
             int returnCode = 0;
             try {
                 returnCode = p.waitFor();
