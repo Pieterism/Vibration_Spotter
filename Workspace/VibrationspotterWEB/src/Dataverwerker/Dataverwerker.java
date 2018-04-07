@@ -45,8 +45,8 @@ public class Dataverwerker {
             stdin.println("t_resampled = t_resampled - t_resampled(1); ");
             
             // tijd en versnelling uitprinten naar txt
-            stdin.println("csvwrite ('t_resampled.txt', t_resampled)"); //tijd
-            stdin.println("csvwrite ('data_resampled.txt', data_resampled)"); //versnelling
+            stdin.println("dataset1 = [t_resampled(:),data_resampled(:)];");
+            stdin.println("csvwrite ('dataset1.txt', dataset1)"); 
 
 
             //Stap2
@@ -55,9 +55,9 @@ public class Dataverwerker {
             stdin.println("A2_data = fft(data_resampled); A2 = abs(A2_data/L);");
             stdin.println("A_data = A2(1:L/2+1); A_data(2:end-1) = 2*A_data(2:end-1);");
             
-            // frequentie en amplitude uitprinten naar txt 
-            stdin.println("csvwrite ('f.txt', f)"); //frequentie
-            stdin.println("csvwrite ('A_data.txt', A_data)");//amplitude
+            // frequentie en amplitude uitprinten naar txt
+            stdin.println("dataset2 = [f(:),A_data(:)];");
+            stdin.println("csvwrite ('dataset2.txt', dataset2)"); 
 
 
             //Stap3
@@ -67,6 +67,15 @@ public class Dataverwerker {
             stdin.println("data_filtered = filtfilt(b,a,data_resampled);");
             stdin.println("A2_data = fft(data_filtered); A2 = abs(A2_data/L);");
             stdin.println("A_data = A2(1:L/2+1); A_data(2:end-1) = 2*A_data(2:end-1);");
+            
+            //gefilterde data uitprinten
+            //tijd en versnelling
+            stdin.println("dataset1_filter = [t_resampled(:),data_filtered(:)];");
+            stdin.println("csvwrite ('dataset1_filter.txt', dataset1_filter)");
+            
+            //frequentie en amplitude
+            stdin.println("dataset2_filter = [f(:),A_data(:)];");
+            stdin.println("csvwrite ('dataset2_filter.txt', dataset2_filter)"); 
             
             stdin.close();
             
