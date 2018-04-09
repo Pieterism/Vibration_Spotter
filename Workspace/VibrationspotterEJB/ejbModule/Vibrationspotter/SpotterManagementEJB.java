@@ -3,6 +3,7 @@ package Vibrationspotter;
 import javax.annotation.Resource;
 import javax.ejb.SessionContext;
 import javax.ejb.Stateless;
+import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -15,7 +16,7 @@ import com.google.gson.JsonObject;
 import model.Foto;
 import model.Spotter;
 
-
+@Named
 @Stateless
 public class SpotterManagementEJB implements SpotterManagementEJBLocal {
 
@@ -58,7 +59,12 @@ public class SpotterManagementEJB implements SpotterManagementEJBLocal {
 			e.printStackTrace();
 		}
 		
-		System.out.println(json.get("voornaam"));
+		try {
+			System.out.println(json.get("voornaam"));
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	//	String statistics = json.getString("voornaam");
 	//	JSONObject voornaam = json.getJSONObject("voornaam");
 	//	String ageJohn = name1.getString("Age");

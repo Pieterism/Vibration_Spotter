@@ -15,10 +15,18 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.data.LineData;
+import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Meter extends Activity implements SensorEventListener{
 
@@ -27,35 +35,80 @@ public class Meter extends Activity implements SensorEventListener{
     private boolean started;
     private double x, y, z;
     private long tijd, starttijd;
-    private String tekst;
     private JSONArray jArray;
+    LineChart lineChartX;
+    LineChart lineChartY;
+    LineChart lineChartZ;
+    ArrayList<String> tijdAs;
+    ArrayList<Entry> xWaarden;
+    ArrayList<Entry> yWaarden;
+    ArrayList<Entry> zWaarden;
+    int entryNummer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_meter);
+        started = false;
         mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         mAccelerometer = mSensorManager.getDefaultSensor(Sensor.TYPE_LINEAR_ACCELERATION); //trycatch?
-        final Button button = findViewById(R.id.button);
-        tekst = "Start";
-        button.setText(tekst);
-        started = false;
-        button.setOnClickListener(new View.OnClickListener() {
+        final Button bStart = findViewById(R.id.bStart);
+        final Button bStop = findViewById(R.id.bStop);
+        bStop.setVisibility(View.INVISIBLE);
+        jArray = new JSONArray();
+        lineChartX = findViewById(R.id.lcx);
+        lineChartY = findViewById(R.id.lcy);
+        lineChartZ = findViewById(R.id.lcz);
+
+        tijdAs = new ArrayList<>();
+        xWaarden = new ArrayList<>();
+        yWaarden = new ArrayList<>();
+        zWaarden = new ArrayList<>();
+
+
+        bStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(started) {
-                    tekst = "Start";
-                    button.setText(tekst);
-                    starttijd = System.currentTimeMillis();
-                }
-                else {
-                    tekst = "Stop";
-                    button.setText(tekst);
-                }
-                started = !started;
+                bStart.setVisibility(View.INVISIBLE);
+                bStop.setVisibility(View.VISIBLE);
+                xWaarden.clear();
+                yWaarden.clear();
+                zWaarden.clear();
+                tijdAs.clear();
+                entryNummer = 0;
+                starttijd = System.currentTimeMillis();
+                started = true;
             }
         });
-        jArray = new JSONArray();
+
+        bStop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                bStop.setVisibility(View.INVISIBLE);
+                bStart.setVisibility(View.VISIBLE);
+                started = false;
+
+                String[] tijdas = new String[tijdAs.size()];
+                for(int i=0; i<tijdAs.size(); i++){
+                    tijdas[i] = tijdAs.get(i);
+                }
+
+
+                LineDataSet xData = new LineDataSet(xWaarden, "x");
+                xData.setDrawCircles(false);
+                LineDataSet yData = new LineDataSet(yWaarden, "y");
+                yData.setDrawCircles(false);
+                LineDataSet zData = new LineDataSet(zWaarden, "z");
+                zData.setDrawCircles(false);
+
+                lineChartX.setData(new LineData(xData));
+                lineChartX.invalidate();
+                lineChartY.setData(new LineData(yData));
+                lineChartY.invalidate();
+                lineChartZ.setData(new LineData(zData));
+                lineChartZ.invalidate();
+            }
+        });
     }
 
     @Override
@@ -66,6 +119,15 @@ public class Meter extends Activity implements SensorEventListener{
             z = event.values[2];
             tijd = System.currentTimeMillis() - starttijd;
             System.out.println(x + ", " + y + ", " + z + ",       " + tijd);
+
+            xWaarden.add(new Entry(tijd,Float.parseFloat(String.valueOf(x))));
+            yWaarden.add(new Entry(tijd,Float.parseFloat(String.valueOf(y))));
+            zWaarden.add(new Entry(tijd,Float.parseFloat(String.valueOf(z))));
+
+            tijdAs.add(entryNummer,String.valueOf(tijd));
+
+            entryNummer++;
+
             JSONObject jObject = new JSONObject();
             try {
                 jObject.put("x", x);
@@ -87,7 +149,7 @@ public class Meter extends Activity implements SensorEventListener{
     @Override
     protected void onResume(){
         super.onResume();
-        mSensorManager.registerListener(this, mAccelerometer, mSensorManager.SENSOR_DELAY_NORMAL);
+        mSensorManager.registerListener(this, mAccelerometer, mSensorManager.SENSOR_DELAY_GAME);
     }
 
     @Override
@@ -121,6 +183,6 @@ public class Meter extends Activity implements SensorEventListener{
         ){
         };
 
-        VolleyClass.getInstance(getApplicationContext()).addToRequestQueue(strReq, REQUEST_TAG);
+        //VolleyClass.getInstance(getApplicationContext()).addToRequestQueue(strReq, REQUEST_TAG);
     }
 }

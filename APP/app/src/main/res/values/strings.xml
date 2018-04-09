@@ -9,5 +9,7 @@
     <string name="permission_camera_rationale">Access to the camera is needed for detection</string>
     <string name="no_camera_permission">This application cannot run because it does not have the camera permission. The application will now exit.</string>
     <string name="low_storage_error">Face detector dependencies cannot be downloaded due to low device storage</string>
-    <string name="url">http://192.168.0.104:8080/VibrationspotterREST/Restservice/</string>
+    <string name="url">http://192.168.0.100:8080/VibrationspotterREST/Restservice/</string>
+    <string name="start">START</string>
+    <string name="stop">STOP</string>
 </resources>
