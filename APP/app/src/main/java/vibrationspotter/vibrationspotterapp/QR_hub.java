@@ -40,6 +40,14 @@ public class QR_hub extends AppCompatActivity{
         Button naarQRlezer = findViewById(R.id.naarQRlezer);
         textView = findViewById(R.id.QRresultaat);
 
+        naarQRlezer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), BarcodeCaptureActivity.class);
+                startActivityForResult(intent, BARCODE_READER_REQUEST_CODE);
+            }
+        });
+
         Intent intent = new Intent(getApplicationContext(), BarcodeCaptureActivity.class);
         startActivityForResult(intent, BARCODE_READER_REQUEST_CODE);
     }

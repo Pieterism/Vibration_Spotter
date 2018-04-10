@@ -84,11 +84,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         if (id == R.id.nav_projecten) {
             // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        } else if (id == R.id.nav_meter) {
+            Intent naar_meter = new Intent(MainActivity.this,Meter.class);
+            startActivity(naar_meter);
 
-        } else if (id == R.id.nav_slideshow) {
+        } else if (id == R.id.nav_login) {
+            Intent naar_login = new Intent(MainActivity.this,LoginSelector.class);
+            startActivity((naar_login));
 
-        } else if (id == R.id.nav_manage) {
+        } else if (id == R.id.nav_registreren) {
+            Intent naar_registreren = new Intent(MainActivity.this,Registreren.class);
+            startActivity(naar_registreren);
 
         } else if (id == R.id.nav_share) {
 

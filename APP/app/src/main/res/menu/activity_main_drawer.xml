@@ -7,19 +7,19 @@
         <item
             android:id="@+id/nav_projecten"
             android:icon="@drawable/ic_folder_black_24dp"
-            android:title="Import" />
+            android:title="Projecten" />
         <item
-            android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="Gallery" />
+            android:id="@+id/nav_meter"
+            android:icon="@drawable/ic_vibration_black_24dp"
+            android:title="Vibratiemeter Testen" />
         <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="Slideshow" />
+            android:id="@+id/nav_login"
+            android:icon="@drawable/ic_person_black_24dp"
+            android:title="Inloggen" />
         <item
-            android:id="@+id/nav_manage"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="Tools" />
+            android:id="@+id/nav_registreren"
+            android:icon="@drawable/ic_person_add_black_24dp"
+            android:title="Registreren" />
     </group>
 
     <item android:title="Communicate">
