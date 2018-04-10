@@ -1,0 +1,28 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+      
+<h:head>
+<title>Welcome Page!</title>
+ <link rel = "stylesheet" href ="../stijl.css"></link>
+</h:head>
+
+<h:body>
+
+<div class="header">
+	<h1><b>resultaten van meting</b></h1>
+</div>
+    
+<div style="margin-top: 50px">
+	<p:chart type="line" model="#{chartView.grafiek1}" style="height:300px;" responsive="true"/>
+</div>
+
+<div style="margin-top: 50px">
+	<p:chart type="line" model="#{chartView.grafiek2}" style="height:300px;" responsive="true"/>
+</div>
+ 
+</h:body> 
+</html>
