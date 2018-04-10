@@ -164,8 +164,8 @@ public class Meter extends Activity implements SensorEventListener{
         System.out.println(jArray.toString());
 
         final String REQUEST_TAG = "Stringrequest";
-
         JsonArrayRequest strReq = new JsonArrayRequest(Request.Method.POST,
+
                 getString(R.string.url) + "Metingen",
                 jArray,
                 new Response.Listener<JSONArray>() {
