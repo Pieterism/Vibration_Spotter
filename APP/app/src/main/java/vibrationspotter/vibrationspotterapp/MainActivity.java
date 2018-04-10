@@ -23,25 +23,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Button button = findViewById(R.id.Login_knop);
-        TextView tvRegistreren = findViewById(R.id.tvRegistreren);
-
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.super.getApplicationContext(),LoginSelector.class);
-                startActivity(intent);
-            }
-        });
-
-        tvRegistreren.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent regeistreerIntent = new Intent(MainActivity.this,Registreren.class);
-                startActivity(regeistreerIntent);
-            }
-        });
-
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -49,8 +30,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Intent qr_intent = new Intent(MainActivity.this,QR_hub.class);
+                startActivity(qr_intent);
             }
         });
 
@@ -101,7 +82,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
+        if (id == R.id.nav_projecten) {
             // Handle the camera action
         } else if (id == R.id.nav_gallery) {
 
