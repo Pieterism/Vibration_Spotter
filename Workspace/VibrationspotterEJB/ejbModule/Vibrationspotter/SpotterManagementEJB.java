@@ -38,42 +38,39 @@ public class SpotterManagementEJB implements SpotterManagementEJBLocal {
 		
 	}
 	
-	public Spotter aanmakenSpotter(String j){
-		
-	//	Gson gson = new Gson();
-	//	String jsonInString = "{\"userId\":\"1\",\"userName\":\"Yasir\"}";
+	public void aanmakenSpotter(String ingegevenstring){
 		
 		
-
-		
-	//	Spotter spotter= gson.fromJson(json, Spotter.class);
-		
-		
-	//	JSONObject jsonObj = new JSONObject("{\"phonetype\":\"N95\",\"cat\":\"WP\"}");
+		ingegevenstring = ingegevenstring.substring(1, ingegevenstring.length()-1);			//zorgen dat [] weg is
+//		System.out.println(ingegevenstring);
 		
 		JSONObject json = null;
-		try {
-			json = new JSONObject(j);
-		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		
 		try {
-			System.out.println(json.get("voornaam"));
-		} catch (JSONException e) {
+			json = new JSONObject(ingegevenstring);
+		} catch (JSONException e1) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			e1.printStackTrace();
 		}
-	//	String statistics = json.getString("voornaam");
-	//	JSONObject voornaam = json.getJSONObject("voornaam");
-	//	String ageJohn = name1.getString("Age");
+		
+	Spotter spotter = new Spotter();
+	try{
+	spotter.setVoornaam(json.getString("voornaam"));
+	spotter.setAchternaam(json.getString("achternaam"));
+	spotter.setPaswoord(json.getString("paswoord"));
+	spotter.setEmailadres(json.getString("emailadres"));
+	spotter.setGebruikersnaam(json.getString("gebruikersnaam"));
+	}
+	catch (JSONException e1) {
+		// TODO Auto-generated catch block
+		e1.printStackTrace();
+	}
+	
+	spotter.setAdmin(false);
+	spotter.setType("Spotter");
+	em.persist(spotter);
+	
 
-	//	spotter.setAdmin(false);
-	//	spotter.setType("Spotter");
-	//	em.persist(spotter);
-		
-		return null;
 	}
 	
 	
