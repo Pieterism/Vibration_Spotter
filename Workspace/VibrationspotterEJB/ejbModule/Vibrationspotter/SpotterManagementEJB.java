@@ -58,7 +58,7 @@ public class SpotterManagementEJB implements SpotterManagementEJBLocal {
 			e.printStackTrace();
 		}
 		
-		System.out.println(json.get("voornaam"));
+	//	System.out.println(json.get("voornaam"));
 	//	String statistics = json.getString("voornaam");
 	//	JSONObject voornaam = json.getJSONObject("voornaam");
 	//	String ageJohn = name1.getString("Age");
