@@ -22,6 +22,7 @@ private final Set<Class<?>> classes;
 		c.add(MetingenREST.class);
 		c.add(QRcodeREST.class);
 		c.add(RegistratieREST.class);
+		c.add(InloggenREST.class);
 		classes = Collections.unmodifiableSet(c);
 	}
 	
