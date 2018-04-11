@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-@WebFilter(filterName = "AuthFilter", urlPatterns = { "/Home/*", "/Admin/*" })
+@WebFilter(filterName = "AuthFilter", urlPatterns = { "/Home/*", "/Admin/*", "/Spotter/*", "/Leerkracht/*"})
 public class AuthorizationFilter implements Filter {
 //	"/metingen.xhtml/*"
 	public AuthorizationFilter() {
@@ -50,8 +50,25 @@ public class AuthorizationFilter implements Filter {
 	    	}*/
 	    	
 	    	//gewone gebruiker die attribute heeft
-	    	else{
-	    		toegang = true;
+	    	
+	    	else if((reqURI.indexOf("/Leerkracht")>0)){
+	    		if((boolean) (((HttpServletRequest) request).getSession().getAttribute("type")).equals("Leerkracht")){
+	    			toegang = true;
+	    		}
+	    		else{
+	    			toegang = false;
+	    		}
+	    		
+	    	}
+	    	
+	    	else if((reqURI.indexOf("/Spotter")>0)){
+	    		if((boolean) (((HttpServletRequest) request).getSession().getAttribute("type")).equals("Spotter")){
+	    			toegang = true;
+	    		}
+	    		else{
+	    			toegang = false;
+	    		}
+	    		
 	    	}
 
 	        // User is logged in. Just continue with request.
