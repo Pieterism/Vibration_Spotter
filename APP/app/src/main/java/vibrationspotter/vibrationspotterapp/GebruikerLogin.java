@@ -16,12 +16,17 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
 
+import android.preference.PreferenceManager;
+import android.content.SharedPreferences;
+
 public class GebruikerLogin extends AppCompatActivity{
+    String email;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +49,7 @@ public class GebruikerLogin extends AppCompatActivity{
         bLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String username = etusername.getText().toString();
+                final String username = etusername.getText().toString();
                 String password = etpassword.getText().toString();
 
                 if(username.equals("") || password.equals("")){
@@ -59,7 +64,7 @@ public class GebruikerLogin extends AppCompatActivity{
                     Map<String,String> inloggegevens = new HashMap<>();
                     inloggegevens.put("email",username);
                     inloggegevens.put("paswoord",password);
-                    JSONObject jsonObject = new JSONObject(inloggegevens);
+                    final JSONObject jsonObject = new JSONObject(inloggegevens);
                     JSONArray jArray = new JSONArray();
                     jArray.put(jsonObject);
 
@@ -70,6 +75,31 @@ public class GebruikerLogin extends AppCompatActivity{
                                 @Override
                                 public void onResponse(JSONArray response) {
                                     Log.d("Inloggen", response.toString());
+                                    if(response.equals("[{\"Inloggen\": Verkeerd_wachtwoord!!!}]")){
+                                        email = null;
+                                    }
+                                    else{
+                                        try {
+                                            email = jsonObject.get("email").toString();
+                                        }
+                                        catch (JSONException e) {
+                                            e.printStackTrace();
+                                        }
+
+                                    }
+
+                                    SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+                                    SharedPreferences.Editor editor = settings.edit();
+
+                         if(!response.toString().contains("Verkeerd")){
+                          editor.putString("email", email);
+                          editor.apply();
+                          Log.d("MyApp",email);
+                          //Sessie is aangemaakt
+                    }
+                    else{
+                        Log.d("MyApp", "verkeerd wachtwoord of gebruikersnaam");
+                    }
                                 }
                             },
                             new Response.ErrorListener() {
@@ -80,7 +110,6 @@ public class GebruikerLogin extends AppCompatActivity{
                             }
                     );
                     VolleyClass.getInstance(getApplicationContext()).addToRequestQueue(inloggenRequest, "Inloggen");
-
 
                 }
             }

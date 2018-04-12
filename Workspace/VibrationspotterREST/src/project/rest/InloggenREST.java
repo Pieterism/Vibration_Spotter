@@ -10,6 +10,7 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.MediaType;
 
+
 import Vibrationspotter.SpotterManagementEJBLocal;
 
 @Named
@@ -33,13 +34,22 @@ public class InloggenREST implements Serializable {
 		}
 		
 		if(spotterEJB.checkInloggen(gegevens)==true){
+			
 			System.out.println("je mag inloggen");
+			
+			
+		
+			
+			
+			return gegevens;	
 		}
 		else{
 			System.out.println("je mag niet inloggen");
+		
+		
+			
+		return "[{\"Inloggen\": Verkeerd!!!}]";
+		
 		}
-		
-		
-		return "[{\"Inloggen\": Gelukt!!!}]";
 	}
 }
