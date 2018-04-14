@@ -64,6 +64,7 @@ public class GebruikerLogin extends AppCompatActivity{
                     Map<String,String> inloggegevens = new HashMap<>();
                     inloggegevens.put("email",username);
                     inloggegevens.put("paswoord",password);
+                    inloggegevens.put("type", "gebruiker");
                     final JSONObject jsonObject = new JSONObject(inloggegevens);
                     JSONArray jArray = new JSONArray();
                     jArray.put(jsonObject);
@@ -93,6 +94,7 @@ public class GebruikerLogin extends AppCompatActivity{
 
                          if(!response.toString().contains("Verkeerd")){
                           editor.putString("email", email);
+                          editor.putString("type", "gebruiker");
                           editor.apply();
                           Log.d("MyApp",email);
                           //Sessie is aangemaakt

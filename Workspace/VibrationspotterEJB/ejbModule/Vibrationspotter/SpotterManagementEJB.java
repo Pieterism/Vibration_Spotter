@@ -79,8 +79,10 @@ public class SpotterManagementEJB implements SpotterManagementEJBLocal {
 	
 	
 	public boolean checkInloggen(String ingegevenstring){
+		boolean valid;
 		String pwd = null;
 		String email = null;
+		String type = null;
 		
 		
 		ingegevenstring = ingegevenstring.substring(1, ingegevenstring.length()-1);	
@@ -97,18 +99,22 @@ public class SpotterManagementEJB implements SpotterManagementEJBLocal {
 		try{
 		 pwd = json.getString("paswoord");
 		 email = json.getString("email");
+		 type = json.getString("type");
+		 
 		}
 		catch (JSONException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
+		if(type.equals("leerkracht")){
+			valid = loginEJB.controleerPaswoordLeerkrachtApp(email, pwd) ;
+			System.out.println("leerkrachtcontrole");
+		}
+		else{
+			valid=loginEJB.controleerpaswoord(email,pwd);
+		}
 		
-		boolean valid=loginEJB.controleerpaswoord(email,pwd);
-		
-	
-		return valid;
-		
-		
+		return valid;	
 		
 	}
 	

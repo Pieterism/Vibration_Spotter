@@ -98,9 +98,9 @@ public class MetingManagementEJB implements MetingManagementEJBLocal{
 		System.out.println(dateFormat.format(date));			//loggen huidige datum
         
 		int idmeting;
-		String meting = "bla";
 		Spotter spotter;
-		Project project = projectEJB.findProjectById(2);
+		Project project = projectEJB.findProjectById(2); //project nog vinden via doorgestuurde jsonarray
+		
 		//Meting meting1 = new Meting(2,"titel","2015-12-12 00:00:00",meting,"foto", project);
 		Meting meting1 = new Meting();
 		meting1.setTitel("titel");
