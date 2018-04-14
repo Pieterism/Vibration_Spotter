@@ -9,6 +9,8 @@ import model.Project;
 public interface ProjectManagementEJBLocal {
 
 	public Project findProject(String titel);
+	
+	public Project findProjectById(int id);
 
 	void addProject(Project project);
 

@@ -2,11 +2,13 @@ package vibrationspotter.vibrationspotterapp;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -163,7 +165,25 @@ public class Meter extends Activity implements SensorEventListener{
         super.onStop();
         System.out.println(jArray.toString());
 
-        final String REQUEST_TAG = "Stringrequest";
+      //DEEL PJ
+        JSONObject jObject = new JSONObject();
+
+        SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        SharedPreferences.Editor editor = settings.edit();
+
+       String email = settings.getString("email",null);
+
+    /*    try {
+            jObject.put("email",email);
+            jObject.put("titel","titel");           //titel moet nog ingevuld worden in APP
+           // jObject.put("idProject", idProject);               //Kiezen bij welk project hoort
+          //  jObject.put("tijdstip","titel");                   //
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        jArray.put(jObject);
+*/
+        final String REQUEST_TAG = "Metingen";
         JsonArrayRequest strReq = new JsonArrayRequest(Request.Method.POST,
 
                 getString(R.string.url) + "Metingen",
@@ -171,18 +191,24 @@ public class Meter extends Activity implements SensorEventListener{
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        Log.d(REQUEST_TAG, response.toString());
+                        Log.d("Metingen", response.toString());
+
+
+
+
+
+
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Log.d(REQUEST_TAG, "Error: " + error.toString() + ", " + error.getMessage());
+                        Log.d("Metingen", "Error: " + error.toString() + ", " + error.getMessage());
                     }
                 }
         ){
         };
 
-        //VolleyClass.getInstance(getApplicationContext()).addToRequestQueue(strReq, REQUEST_TAG);
+        VolleyClass.getInstance(getApplicationContext()).addToRequestQueue(strReq, "Metingen");
     }
 }

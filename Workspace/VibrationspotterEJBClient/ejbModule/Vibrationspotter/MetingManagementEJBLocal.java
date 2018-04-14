@@ -3,6 +3,9 @@ package Vibrationspotter;
 import javax.ejb.Local;
 
 import model.Meting;
+import model.Project;
+import model.Spotter;
+
 import java.util.List;
 
 @Local
@@ -15,5 +18,5 @@ public interface MetingManagementEJBLocal {
 
 	public void wissenMetingenByProjectid(int idProject);
 
-
+	public void ToevoegenMetingResultaten(String JSONarray);
 }
