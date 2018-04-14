@@ -61,9 +61,9 @@ public class OctaveManagementEJB implements OctaveManagementEJBLocal{
            stdin.println("data_resampled = interp1(t, data, t_resampled, 'spline');");
            stdin.println("t_resampled = t_resampled - t_resampled(1); ");
            
-           // tijd en versnelling uitprinten naar txt
-           stdin.println("dataset1 = [t_resampled(:),data_resampled(:)];");
-           stdin.println("csvwrite ('dataset1.txt', dataset1)"); 
+           //tijd en versnelling bijhouden
+           stdin.println("tijd=t_resampled");
+           stdin.println("versnelling=data_resampled");
 
 
            //Stap2
@@ -72,9 +72,9 @@ public class OctaveManagementEJB implements OctaveManagementEJBLocal{
            stdin.println("A2_data = fft(data_resampled); A2 = abs(A2_data/L);");
            stdin.println("A_data = A2(1:L/2+1); A_data(2:end-1) = 2*A_data(2:end-1);");
            
-           // frequentie en amplitude uitprinten naar txt
-           stdin.println("dataset2 = [f(:),A_data(:)];");
-           stdin.println("csvwrite ('dataset2.txt', dataset2)"); 
+           // frequentie en amplitude bijhouden
+           stdin.println("frequentie=f");
+           stdin.println("amplitude=A_data");
 
 
            //Stap3
@@ -85,14 +85,12 @@ public class OctaveManagementEJB implements OctaveManagementEJBLocal{
            stdin.println("A2_data = fft(data_filtered); A2 = abs(A2_data/L);");
            stdin.println("A_data = A2(1:L/2+1); A_data(2:end-1) = 2*A_data(2:end-1);");
            
-           //gefilterde data uitprinten
-           //tijd en versnelling
-           stdin.println("dataset1_filter = [t_resampled(:),data_filtered(:)];");
-           stdin.println("csvwrite ('dataset1_filter.txt', dataset1_filter)");
+           //2 output files uitprinten
+           stdin.println("x1 = [tijd(:),versnelling(:),data_filtered(:)];");
+           stdin.println("csvwrite ('x1.txt', x1)");
            
-           //frequentie en amplitude
-           stdin.println("dataset2_filter = [f(:),A_data(:)];");
-           stdin.println("csvwrite ('dataset2_filter.txt', dataset2_filter)"); 
+           stdin.println("x2 = [frequentie(:),amplitude(:),A_data(:)];");
+           stdin.println("csvwrite ('x2.txt', x2)");
            
            stdin.close();
            
