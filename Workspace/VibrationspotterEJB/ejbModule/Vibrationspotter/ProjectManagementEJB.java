@@ -29,6 +29,7 @@ import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 
+import model.Persoon;
 import model.Project;
 
 @Named
@@ -53,6 +54,14 @@ public class ProjectManagementEJB implements ProjectManagementEJBLocal {
 			System.out.println("Meerdere dezelfde titels!");
 		return p.get(0);
 	}
+	
+    @Override
+	public Project findProjectById(int id){
+		Query q = em.createQuery("SELECT p FROM Project p WHERE p.idProject = :id");
+		q.setParameter("id", id);
+		List<Project> projecten = q.getResultList();
+		return projecten.get(0);
+    }
 
 	@Override
 	public void addProject(Project project) {

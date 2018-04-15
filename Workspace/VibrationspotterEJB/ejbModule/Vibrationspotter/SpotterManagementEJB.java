@@ -1,6 +1,7 @@
 package Vibrationspotter;
 
 import javax.annotation.Resource;
+import javax.ejb.EJB;
 import javax.ejb.SessionContext;
 import javax.ejb.Stateless;
 import javax.inject.Named;
@@ -19,6 +20,9 @@ import model.Spotter;
 @Named
 @Stateless
 public class SpotterManagementEJB implements SpotterManagementEJBLocal {
+	
+	@EJB
+	private LoginManagementEJBLocal loginEJB;
 
 	@PersistenceContext(unitName = "demodb") // Aanpassen met xmlfile?
 	private EntityManager em;
@@ -71,6 +75,47 @@ public class SpotterManagementEJB implements SpotterManagementEJBLocal {
 	em.persist(spotter);
 	
 
+	}
+	
+	
+	public boolean checkInloggen(String ingegevenstring){
+		boolean valid;
+		String pwd = null;
+		String email = null;
+		String type = null;
+		
+		
+		ingegevenstring = ingegevenstring.substring(1, ingegevenstring.length()-1);	
+		JSONObject json = null;
+		
+		try {
+			json = new JSONObject(ingegevenstring);
+		} catch (JSONException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+		
+		try{
+		 pwd = json.getString("paswoord");
+		 email = json.getString("email");
+		 type = json.getString("type");
+		 
+		}
+		catch (JSONException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		if(type.equals("leerkracht")){
+			valid = loginEJB.controleerPaswoordLeerkrachtApp(email, pwd) ;
+			System.out.println("leerkrachtcontrole");
+		}
+		else{
+			valid=loginEJB.controleerpaswoord(email,pwd);
+		}
+		
+		return valid;	
+		
 	}
 	
 	

@@ -5,6 +5,8 @@ import Bcrypt.BCrypt;
 public interface LoginManagementEJBLocal {
 
 	boolean controleerpaswoord(String user, String pwd);
+	
+    boolean controleerPaswoordLeerkrachtApp(String email, String pwd);
 
 	
 	

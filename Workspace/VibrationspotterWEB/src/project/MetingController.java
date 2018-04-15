@@ -1,9 +1,11 @@
 package project;
 
+import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 import javax.servlet.http.HttpSession;
 
+import java.io.IOException;
 import java.io.Serializable;
 
 import javax.ejb.EJB;
@@ -56,6 +58,12 @@ private static final long serialVersionUID = 1L;
 	 	metingen=metingejb.findMetingenByIdProject(idProject);
 		//metingen=metingejb.findMetingenByIdProject(project.getIdProject());
 	}
+ 
+ public void gaTerugNaarMetingen() throws IOException{
+	 HttpSession session = SessionUtils.getSession();
+	 int idProject=(int) session.getAttribute("idProject");
+	 FacesContext.getCurrentInstance().getExternalContext().redirect("metingen.xhtml?id="+idProject);
+ }
  
 
 

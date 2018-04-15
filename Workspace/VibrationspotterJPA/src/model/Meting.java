@@ -44,6 +44,14 @@ public class Meting implements Serializable {
 	@Lob
 	@Column(name = "opmerking", length = 512)
 	private String opmerking;
+	
+	@Lob
+	@Column(name = "dataset1")
+	private byte[] dataset1;
+	
+	@Lob
+	@Column(name = "dataset2")
+	private byte[] dataset2;
 
 	@ManyToOne
 	@JoinColumn(name = "idProject")
@@ -118,6 +126,24 @@ public class Meting implements Serializable {
 	public void setFoto(String foto) {
 		this.foto = foto;
 	}
+
+	public byte[] getDataset1() {
+		return dataset1;
+	}
+
+	public void setDataset1(byte[] dataset1) {
+		this.dataset1 = dataset1;
+	}
+
+	public byte[] getDataset2() {
+		return dataset2;
+	}
+
+	public void setDataset2(byte[] dataset2) {
+		this.dataset2 = dataset2;
+	}
+	
+	
 	
 
 }

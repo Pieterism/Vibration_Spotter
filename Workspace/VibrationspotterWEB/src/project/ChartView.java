@@ -26,9 +26,11 @@ public class ChartView implements Serializable {
 	private void createLineModels() {
         grafiek1 = initLinearModel1();
         grafiek1.setAnimate(true);
+        grafiek1.setZoom(true);
         grafiek1.setLegendPosition("e");
         grafiek1.setTitle("versnelling in functie van tijd");
-        grafiek1.getAxes().put(AxisType.X, new CategoryAxis("tijd [s]"));
+        Axis xAxis1=grafiek1.getAxis(AxisType.X);
+        xAxis1.setLabel("tijd [s]");
         Axis yAxis1 = grafiek1.getAxis(AxisType.Y);
         yAxis1.setLabel("versnelling [m/s^2]");
         yAxis1.setMin(0);
@@ -36,9 +38,11 @@ public class ChartView implements Serializable {
         
         grafiek2 = initLinearModel2();
         grafiek2.setAnimate(true);
+        grafiek2.setZoom(true);
         grafiek2.setLegendPosition("e");
         grafiek2.setTitle("amplitude in functie van frequentie");
-        grafiek2.getAxes().put(AxisType.X, new CategoryAxis("frequentie [Hz]"));
+        Axis xAxis2=grafiek2.getAxis(AxisType.X);
+        xAxis2.setLabel("frequentie [Hz]");
         Axis yAxis2 = grafiek2.getAxis(AxisType.Y);
         yAxis2.setLabel("Amplitude [m/s^2/Hz]");
         yAxis2.setMin(0);
@@ -64,6 +68,7 @@ public class ChartView implements Serializable {
         LineChartSeries series2 = new LineChartSeries();
         series2.setLabel("filtered data");
         series2.setSmoothLine(true);
+       // series2.setShowMarker(false);
  
         
         series2.set(1, 6);
@@ -84,7 +89,7 @@ public class ChartView implements Serializable {
         LineChartSeries series1 = new LineChartSeries();
         series1.setLabel("resampled data");
         series1.setSmoothLine(true);
-       // series1.setShowMarker(false);
+        series1.setShowMarker(false);
  
         series1.set(1, 2);
         series1.set(2, 1);
@@ -94,10 +99,11 @@ public class ChartView implements Serializable {
         LineChartSeries series2 = new LineChartSeries();
         series2.setLabel("filtered data");
         series2.setSmoothLine(true);
+        series2.setShowMarker(false);
  
        
-        series2.set(1, 6);
-        series2.set(2, 3);
+        series2.set(1.3 , 7.5);
+        series2.set(1.2, 3);
         series2.set(3, 2);
         series2.set(4, 7);
         series2.set(5, 9);
