@@ -110,4 +110,20 @@ public class MetingManagementEJB implements MetingManagementEJBLocal{
 		em.persist(meting1);
 	}
 	
+	public byte[] zoekDataset1(int idMeting){
+		Query q = em.createQuery("SELECT m FROM Meting m WHERE m.idMeting= :id");
+		q.setParameter("id", idMeting);
+		List<Meting> metingen = q.getResultList();
+		Meting m=metingen.get(0);
+		return m.getDataset1();
+	}
+	
+	public byte[] zoekDataset2(int idMeting){
+		Query q = em.createQuery("SELECT m FROM Meting m WHERE m.idMeting= :id");
+		q.setParameter("id", idMeting);
+		List<Meting> metingen = q.getResultList();
+		Meting m=metingen.get(0);
+		return m.getDataset2();
+	}
+	
 }

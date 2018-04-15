@@ -61,11 +61,13 @@
         <a href="#{met.foto}">foto tonen</a>
       </h:column>
       
-       <h:column>
+      <h:column>
         <f:facet name="header">
           <h:outputText value="grafiek"/>
         </f:facet>
-        <a href="grafiek.xhtml">grafiek tonen</a>
+         <h:form>
+        	<h:commandLink action="#{metingController.toonGrafiek(met)}" class="subAnchor" value="toon grafiek"/>
+        </h:form>
       </h:column>
 
     </h:dataTable>

@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.io.UnsupportedEncodingException;
 
 import javax.ejb.EJB;
 
@@ -64,6 +65,16 @@ private static final long serialVersionUID = 1L;
 	 int idProject=(int) session.getAttribute("idProject");
 	 FacesContext.getCurrentInstance().getExternalContext().redirect("metingen.xhtml?id="+idProject);
  }
+ 
+ public String toonGrafiek(Meting m) throws UnsupportedEncodingException{
+		HttpSession session = SessionUtils.getSession();
+		int idmeting=m.getIdMeting();
+		session.setAttribute("idMeting", idmeting);
+		if(metingejb.zoekDataset1(idmeting)==null||metingejb.zoekDataset2(idmeting)==null){
+			return null;
+		}
+		return "grafiek.faces?faces-redirect=true";
+	}
  
 
 
