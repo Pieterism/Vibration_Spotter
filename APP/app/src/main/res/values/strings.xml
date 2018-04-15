@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">VibrationspotterAPP</string>
+    <string name="url">http://192.168.0.100:8080/VibrationspotterREST/Restservice/</string>
     <string name="test">Test</string>
     <string name="hometext">Welcome to Vibrationspotter!</string>
     <string name="scan_barcode_button">Scan barcode</string>
@@ -9,7 +10,6 @@
     <string name="permission_camera_rationale">Access to the camera is needed for detection</string>
     <string name="no_camera_permission">This application cannot run because it does not have the camera permission. The application will now exit.</string>
     <string name="low_storage_error">Face detector dependencies cannot be downloaded due to low device storage</string>
-    <string name="url">http://192.168.0.100:8080/VibrationspotterREST/Restservice/</string>
     <string name="start">START</string>
     <string name="stop">STOP</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>

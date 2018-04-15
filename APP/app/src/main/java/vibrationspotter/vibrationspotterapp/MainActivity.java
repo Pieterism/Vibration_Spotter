@@ -1,9 +1,9 @@
 package vibrationspotter.vibrationspotterapp;
 
 import android.content.Intent;
+import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -13,10 +13,17 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
-import android.widget.TextView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
+
+    ScrollView svProjectview;
+    ConstraintLayout clHomePage;
+    LinearLayout llprojecten;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +50,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        svProjectview = findViewById(R.id.svprojectview);
+        svProjectview.setVisibility(View.INVISIBLE);
+
+        clHomePage = findViewById(R.id.clhome_page);
+        llprojecten = findViewById(R.id.llprojecten);
     }
     @Override
     public void onBackPressed() {
@@ -82,8 +95,27 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_projecten) {
-            // Handle the camera action
+        if (id == R.id.nav_home){
+            svProjectview.setVisibility(View.INVISIBLE);
+            clHomePage.setVisibility(View.VISIBLE);
+
+        } else if (id == R.id.nav_projecten) {
+
+            LayoutParams lp = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+
+            llprojecten.removeAllViews();
+
+            for(int i=0; i<20; i++){
+                    Button button = new Button(this);
+                    button.setText("Knop" + i);
+                    button.setId(i);
+                    llprojecten.addView(button,lp);
+                    }
+
+
+            clHomePage.setVisibility(View.INVISIBLE);
+            svProjectview.setVisibility(View.VISIBLE);
+
         } else if (id == R.id.nav_meter) {
             Intent naar_meter = new Intent(MainActivity.this,Meter.class);
             startActivity(naar_meter);
