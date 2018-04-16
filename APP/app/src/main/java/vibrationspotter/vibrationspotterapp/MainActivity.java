@@ -1,6 +1,8 @@
 package vibrationspotter.vibrationspotterapp;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -21,12 +23,14 @@ import android.widget.ScrollView;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
+
     ScrollView svProjectview;
     ConstraintLayout clHomePage;
     LinearLayout llprojecten;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -125,7 +129,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             startActivity((naar_login));
 
         }else if (id == R.id.nav_logout) {
-            
+            //Sessie van APP
+            SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+            SharedPreferences.Editor editor = settings.edit();
+
+            editor.clear();
+            editor.commit();
 
         } else if (id == R.id.nav_registreren) {
             Intent naar_registreren = new Intent(MainActivity.this,Registreren.class);
