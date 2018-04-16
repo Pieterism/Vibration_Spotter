@@ -22,6 +22,10 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.BinaryBitmap;
 import com.google.zxing.EncodeHintType;
@@ -182,6 +186,48 @@ public class ProjectManagementEJB implements ProjectManagementEJBLocal {
 			e.printStackTrace();
 		}
 		System.out.println("\n\nYou have successfully created QR Code.");
+	}
+	
+	public String FindAllProjectsForApp(String ingegevenstring){
+		ingegevenstring = ingegevenstring.substring(1, ingegevenstring.length()-1);	
+		JSONObject json = null;
+		JSONArray jArray = new JSONArray();
+		
+		try {
+			json = new JSONObject(ingegevenstring);
+		} catch (JSONException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+		try {
+		int idPersoon =	(int) json.get("idPersoon");
+		
+		Query q = em.createQuery("SELECT p FROM Project p ORDER BY p.idProject ASC");
+		List<Project> projecten = q.getResultList();
+		
+		
+		for(int i=0; i<projecten.size(); i++){
+			JSONObject json2 = new JSONObject();
+			json2.put("projectid", projecten.get(i).getIdProject());
+			json2.put("projecttitel", projecten.get(i).getTitel());
+			json2.put("projectbeschrijving", projecten.get(i).getBeschrijving());
+			jArray.put(json2);
+		}
+		
+		
+		
+			
+			
+			
+			
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return jArray.toString();
+		
 	}
 
 }
