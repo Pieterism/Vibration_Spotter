@@ -117,6 +117,9 @@ public class ProjectManagementEJB implements ProjectManagementEJBLocal {
 
 	@Override
 	public String checkQR(File qrCodeimage) throws IOException {
+		
+		// TIMESTAMP VERGELIJKEN! 
+		
 		BufferedImage bufferedImage = ImageIO.read(qrCodeimage);
 		LuminanceSource source = new BufferedImageLuminanceSource(bufferedImage);
 		BinaryBitmap bitmap = new BinaryBitmap(new HybridBinarizer(source));
@@ -133,6 +136,8 @@ public class ProjectManagementEJB implements ProjectManagementEJBLocal {
 	@Override
 	public void getQRCode(int id) {
 		String uniqueID = null;
+		
+		//TIMESTAMP UPDATEN
 
 		Query q = em.createQuery("SELECT p FROM Project  WHERE p.idProject = : id");
 		q.setParameter(1, id);

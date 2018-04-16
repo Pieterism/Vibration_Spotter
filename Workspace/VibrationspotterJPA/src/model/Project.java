@@ -1,17 +1,9 @@
 package model;
 
-import java.awt.Color;
-import java.awt.Graphics2D;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 import java.io.Serializable;
-import java.util.EnumMap;
-import java.util.Map;
-import java.util.Set;
+import java.util.Date;
 import java.util.UUID;
 
-import javax.imageio.ImageIO;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -19,10 +11,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "Project")
@@ -59,16 +52,21 @@ public class Project implements Serializable {
 	@Column(name = "QR", nullable = false)
 	private String QR;
 
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "timestamp")
+	private Date timestamp;
+
 	@Lob
 	@Column(name = "beschrijving", length = 512)
 	private String beschrijving;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "idPersoon")
 	private Persoon idPersoon;
 
-	/*@ManyToMany(targetEntity = Persoon.class)
-	private Set personen;*/
+	/*
+	 * @ManyToMany(targetEntity = Persoon.class) private Set personen;
+	 */
 
 	public Project() {
 		// super();
@@ -148,13 +146,11 @@ public class Project implements Serializable {
 		this.beschrijving = beschrijving;
 	}
 
-	/*public Set getPersonen() {
-		return personen;
-	}
-
-	public void setPersonen(Set personen) {
-		this.personen = personen;
-	}*/
+	/*
+	 * public Set getPersonen() { return personen; }
+	 * 
+	 * public void setPersonen(Set personen) { this.personen = personen; }
+	 */
 
 	public String getQR() {
 		return QR;
@@ -164,7 +160,6 @@ public class Project implements Serializable {
 		QR = qR;
 	}
 
-	
 	public Persoon getIdPersoon() {
 		return idPersoon;
 	}
@@ -172,8 +167,13 @@ public class Project implements Serializable {
 	public void setIdPersoon(Persoon idPersoon) {
 		this.idPersoon = idPersoon;
 	}
-	
-	
 
-	
+	public Date getTimestamp() {
+		return timestamp;
+	}
+
+	public void setTimestamp(Date timestamp) {
+		this.timestamp = timestamp;
+	}
+
 }
