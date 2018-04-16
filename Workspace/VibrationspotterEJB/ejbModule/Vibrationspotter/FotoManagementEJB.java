@@ -10,17 +10,17 @@ import javax.persistence.Query;
 import model.Foto;
 
 @Stateless
-public class FotoManagementEJB implements FotoManagementEJBLocal{
+public class FotoManagementEJB implements FotoManagementEJBLocal {
 
-	@PersistenceContext(unitName="demodb")		
+	@PersistenceContext(unitName = "demodb")
 	private EntityManager em;
-	
+
 	@Resource
 	private SessionContext ctx;
 
 	@Override
 	public Foto findFoto(int idFoto) {
-		Query q = em.createQuery("SELECT p FROM Foto  WHERE p.idFoto = : idFoto" );
+		Query q = em.createQuery("SELECT p FROM Foto  WHERE p.idFoto = : idFoto");
 		q.setParameter(1, idFoto);
 		return null;
 	}
@@ -28,9 +28,7 @@ public class FotoManagementEJB implements FotoManagementEJBLocal{
 	@Override
 	public void addFoto(Foto foto) {
 		// TODO Auto-generated method stub
-		
-	} 
-	
+
+	}
+
 }
-
-

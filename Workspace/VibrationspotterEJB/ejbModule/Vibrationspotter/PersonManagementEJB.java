@@ -13,7 +13,6 @@ import javax.persistence.PersistenceContext;
 import model.Persoon;
 import model.Spotter;
 
-
 @Stateless
 public class PersonManagementEJB implements PersonManagementEJBLocal {
 
@@ -37,48 +36,43 @@ public class PersonManagementEJB implements PersonManagementEJBLocal {
 		q.setParameter(2, achternaam);
 		return null;
 	}
-	
-    @Override
-	public Persoon findPersoonByid(int id){
+
+	@Override
+	public Persoon findPersoonByid(int id) {
 		Query q = em.createQuery("SELECT p FROM Persoon p WHERE p.idPersoon = :id");
 		q.setParameter("id", id);
 		List<Persoon> personen = q.getResultList();
 		return personen.get(0);
-    }
-	
+	}
 
 	@Override
 	public void addPersoon(Persoon p) {
 		em.persist(p);
-		
+
 	}
-	public Persoon findPersoonByEmail(String emailadres){
-			Query q = em.createQuery("SELECT p FROM Persoon p WHERE p.emailadres = :emailadres");
-			q.setParameter("emailadres", emailadres);
-			List<Persoon> personen = q.getResultList();
-			if(personen.size()!=1){
-				return null;
-			}
-			else{
-			Persoon p=personen.get(0);
+
+	public Persoon findPersoonByEmail(String emailadres) {
+		Query q = em.createQuery("SELECT p FROM Persoon p WHERE p.emailadres = :emailadres");
+		q.setParameter("emailadres", emailadres);
+		List<Persoon> personen = q.getResultList();
+		if (personen.size() != 1) {
+			return null;
+		} else {
+			Persoon p = personen.get(0);
 			return p;
-			}
 		}
-	
-	
-	
-	public Spotter findSpotterByGebruiksnaam(String gebruikersnaam){
+	}
+
+	public Spotter findSpotterByGebruiksnaam(String gebruikersnaam) {
 		Query q = em.createQuery("SELECT s FROM Spotter s WHERE s.gebruikersnaam = :gebruikersnaam");
 		q.setParameter("gebruikersnaam", gebruikersnaam);
 		List<Spotter> spotters = q.getResultList();
-		if(spotters.size()!=1){
+		if (spotters.size() != 1) {
 			return null;
-		}
-		else{
-		Spotter s=spotters.get(0);
-		return s;
+		} else {
+			Spotter s = spotters.get(0);
+			return s;
 		}
 	}
-	
 
 }
