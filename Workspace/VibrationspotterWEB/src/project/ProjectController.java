@@ -111,5 +111,18 @@ public class ProjectController implements Serializable {
 		
 		return goedeprojecten;
 	}
+	
+	public void update(Project pro){
+		System.out.println("update");
+		System.out.println(pro.isGoedgekeurd());
+		if(pro.isGoedgekeurd()==false){
+			pro.setGoedgekeurd(true);
+		}
+		else{
+			pro.setGoedgekeurd(false);
+		}
+		projectejb.update(pro);
+
+	}
 
 }

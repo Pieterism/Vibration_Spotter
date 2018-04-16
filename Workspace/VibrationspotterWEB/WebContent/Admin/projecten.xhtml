@@ -71,33 +71,33 @@
 					<f:facet name="header">
 						<h:outputText value="metingen" />
 					</f:facet>
-					<p:commandButton value="bekijk metingen"
-						action="#{projectController.gaNaarMeting(pro)}"
-						style="height:25px; font-size:15px"></p:commandButton>
+					<h:commandButton value="bekijk metingen"
+						action="#{projectController.gaNaarMeting(pro)}">
+					</h:commandButton>
 				</h:column>
 
 				<h:column>
 					<f:facet name="header">
 						<h:outputText value="wissen" />
 					</f:facet>
-					<p:commandButton value="project wissen"
+					<h:commandButton value="project wissen"
 						onclick="return confirm('wilt u zeker dit project wissen?')"
-						action="#{projectController.wissen(pro)}"
-						style="height:25px; font-size:15px"></p:commandButton>
+						action="#{projectController.wissen(pro)}">
+					</h:commandButton>
 				</h:column>
 
-				<h:column>
-					<f:facet name="header">
-						<h:outputText value="aanvaarden" />
-					</f:facet>
-					<p:selectBooleanButton id="bol" value="#{booleanButton.checkValue}"
-						onLabel="Yes" offLabel="No"
-						style="width:70px; height:25px; font-size:15px"
-						onIcon="ui-icon-check" offIcon="ui-icon-close" />
-				</h:column>
+				 <h:column>
+        			<f:facet name="header">
+          				<h:outputText value="goedkeuren"/>
+        			</f:facet>
+        		    <h:selectOneMenu value = "#{pro.goedgekeurd}">
+   						<f:selectItem itemValue = "false" itemLabel = "afgekeurd" /> 
+   						<f:selectItem itemValue = "true" itemLabel = "goedgekeurd" />
+   						<f:ajax execute="@this" listener="#{projectController.update(pro)}" render="input" />
+		 			</h:selectOneMenu> 
+      			</h:column>
+      			
 			</h:dataTable>
-			<h:commandButton value="submit"
-				action="#{projectController.wissen(pro)}"></h:commandButton>
 		</h:form>
 	</div>
 </h:body>

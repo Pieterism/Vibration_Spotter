@@ -236,5 +236,9 @@ public class ProjectManagementEJB implements ProjectManagementEJBLocal {
 		return jArray.toString();
 
 	}
+	
+	public void update(Project p){
+		em.merge(p);
+	}
 
 }
