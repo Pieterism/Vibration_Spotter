@@ -104,7 +104,7 @@ public class ProjectController implements Serializable {
 		List<Project> goedeprojecten =  new ArrayList<Project>();
 		
 		for(int i=0;i<projecten.size();i++){
-			if(projecten.get(i).getIdPersoon().getIdPersoon()==id){
+			if(projecten.get(i).getIdPersoon().getIdPersoon()==id&&projecten.get(i).isGoedgekeurd()==true){
 				goedeprojecten.add(projecten.get(i));
 			}
 		}
