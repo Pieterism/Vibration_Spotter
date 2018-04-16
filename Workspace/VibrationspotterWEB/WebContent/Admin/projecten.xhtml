@@ -1,85 +1,104 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:f="http://java.sun.com/jsf/core">
-      
-<h:head>
-  <title>
-    <ui:insert name="title">Projecten</ui:insert>
-  </title>
-  	<link rel = "stylesheet" href ="../stijl/stijl.css"></link>
-  	<link rel = "stylesheet" href ="../stijl/stijlmetingen.css"></link>
-</h:head>
-     
-      
-<h:body>
-<div class="header">
-       <h1><b>Projecten</b><img src="logo.png" width="50" height="50"/> </h1>
-</div>
-     <div class="topnav">
-		<a href="index.xhtml">Home</a>
-		<a class="active" href="projecten.xhtml">Projecten</a>
-		<a href="kaart.xhtml">Kaart</a>
- 		<a href="about.xhtml">About</a>
- 		<a href="createaccount.xhtml">Create account</a>
- 		 <h:form >
- 		<h:commandButton styleClass="logout" image="logout.png" value = "uitloggen" action="#{loginController.logout}"/>
- 		</h:form>
- 		
-	</div>
-<div class="background3">
-<br/>
-<h:form>
-    <h:dataTable id="projectlist" value="#{projectManagementEJB.findAllProjecten()}" var="pro" border="5" cellpadding ="5" styleClass="tabel" headerClass="htabel">
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
 
-       <h:column>
-        <f:facet name="header">
-          <h:outputText value="IdProject"/>
-        </f:facet>
-         <h:outputText value="#{pro.idProject}"/>
-      </h:column>
-      
-      
-      <h:column>
-        <f:facet name="header">
-          <h:outputText value="titel"/>
-        </f:facet>
-         <h:outputText value="#{pro.titel}"/>
-      </h:column>
-      
-       <h:column>
-        <f:facet name="header">
-          <h:outputText value="type"/>
-        </f:facet>
-         <h:outputText value="#{pro.type}"/>
-      </h:column>
-      
-      <h:column>
-        <f:facet name="header">
-          <h:outputText value="beschrijving"/>
-        </f:facet>
-         <h:outputText value="#{pro.beschrijving}"/>
-      </h:column>
-      
-      
-       <h:column>
-        <f:facet name="header">
-          <h:outputText value="metingen"/>
-        </f:facet>
-         <h:commandButton value = "bekijk metingen" action="#{projectController.gaNaarMeting(pro)}"></h:commandButton>
-      </h:column>
-      
-      
-        <h:column>
-        <f:facet name="header">
-          <h:outputText value="wissen"/>
-        </f:facet>
-         <h:commandButton value = "project wissen" onclick = "return confirm('wilt u zeker dit project wissen?')" action="#{projectController.wissen(pro)}"></h:commandButton>
-      </h:column>
-    </h:dataTable>
-    </h:form>
-</div>
+<h:head>
+	<title><ui:insert name="title">Projecten</ui:insert></title>
+	<link rel="stylesheet" href="../stijl/stijl.css"></link>
+	<link rel="stylesheet" href="../stijl/stijlmetingen.css"></link>
+</h:head>
+
+
+<h:body>
+	<div class="header">
+		<h1>
+			<b>Projecten</b><img src="logo.png" width="50" height="50" />
+		</h1>
+	</div>
+	<div class="topnav">
+		<a href="index.xhtml">Home</a> <a class="active"
+			href="projecten.xhtml">Projecten</a> <a href="kaart.xhtml">Kaart</a>
+		<a href="about.xhtml">About</a> <a href="createaccount.xhtml">Create
+			account</a>
+		<h:form>
+			<h:commandButton styleClass="logout" image="logout.png"
+				value="uitloggen" action="#{loginController.logout}" />
+		</h:form>
+
+	</div>
+	<div class="background3">
+		<br />
+		<h:form>
+			<h:dataTable id="projectlist"
+				value="#{projectManagementEJB.findAllProjecten()}" var="pro"
+				border="5" cellpadding="5" styleClass="tabel" headerClass="htabel">
+
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="IdProject" />
+					</f:facet>
+					<h:outputText value="#{pro.idProject}" />
+				</h:column>
+
+
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="titel" />
+					</f:facet>
+					<h:outputText value="#{pro.titel}" />
+				</h:column>
+
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="type" />
+					</f:facet>
+					<h:outputText value="#{pro.type}" />
+				</h:column>
+
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="beschrijving" />
+					</f:facet>
+					<h:outputText value="#{pro.beschrijving}" />
+				</h:column>
+
+
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="metingen" />
+					</f:facet>
+					<p:commandButton value="bekijk metingen"
+						action="#{projectController.gaNaarMeting(pro)}"
+						style="height:25px; font-size:15px"></p:commandButton>
+				</h:column>
+
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="wissen" />
+					</f:facet>
+					<p:commandButton value="project wissen"
+						onclick="return confirm('wilt u zeker dit project wissen?')"
+						action="#{projectController.wissen(pro)}"
+						style="height:25px; font-size:15px"></p:commandButton>
+				</h:column>
+
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="aanvaarden" />
+					</f:facet>
+					<p:selectBooleanButton id="bol" value="#{booleanButton.checkValue}"
+						onLabel="Yes" offLabel="No"
+						style="width:70px; height:25px; font-size:15px"
+						onIcon="ui-icon-check" offIcon="ui-icon-close" />
+				</h:column>
+			</h:dataTable>
+			<h:commandButton value="submit"
+				action="#{projectController.wissen(pro)}"></h:commandButton>
+		</h:form>
+	</div>
 </h:body>
 </html>
