@@ -1,7 +1,7 @@
 /* Add a black background color to the top navigation */
 
 .header{
-  background-color: #f1f1f1;
+  background-color: red;
   padding: 30px;
   text-align: center;
 }
