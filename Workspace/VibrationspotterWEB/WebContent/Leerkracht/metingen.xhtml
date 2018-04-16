@@ -69,6 +69,15 @@
         	<h:commandLink action="#{metingController.toonGrafiek(met)}" class="subAnchor" value="toon grafiek"/>
         </h:form>
       </h:column>
+      
+      <h:column>
+        <f:facet name="header">
+          <h:outputText value="wissen"/>
+        </f:facet>
+        <h:form>
+        	<h:commandButton value = "meting wissen" onclick = "return confirm('wilt u zeker deze meting wissen?')" action="#{metingController.wissen(met)}"></h:commandButton>
+        </h:form>
+      </h:column>
 
     </h:dataTable>
     

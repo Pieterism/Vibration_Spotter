@@ -4,19 +4,21 @@
 	xmlns:h="http://java.sun.com/jsf/html">
 <h:head>
 	<title>login</title>
-	<link rel = "stylesheet" href ="stijllogin.css"></link>
+	<link rel = "stylesheet" href ="stijl/stijllogin.css"></link>
 </h:head>
 <h:body>
 <div class="header">
        <h1><b>aanmelden bij de vibration spotter</b><img src="logo.png" width="50" height="50"/> </h1>
 </div>
+<div class="background3">
+<br/>
 	<h:form>
         <div class="paragraph">
 		<h:panelGrid columns ="2" cellpadding = "10" cellspacing = "1" styleClass="panel" >
 			<h:outputText value="emailadres:" />
-			<h:inputText required ="true" id="username" value="#{loginController.emailadres}" requiredMessage="geleive uw emailadres in te geven"></h:inputText>
+			<h:inputText required ="true" id="username" value="#{loginController.emailadres}" requiredMessage="gelieve uw emailadres in te geven"></h:inputText>
 			<h:outputText value="wachtwoord:" />
-			<h:inputSecret required ="true" id="password" value="#{loginController.pwd}" requiredMessage="geleive uw password in te geven"></h:inputSecret>
+			<h:inputSecret required ="true" id="password" value="#{loginController.pwd}" requiredMessage="gelieve uw password in te geven"></h:inputSecret>
 		 </h:panelGrid>
 		<br></br>
 		<h:commandButton value = "aanmelden" action="#{loginController.submit}"></h:commandButton>
@@ -29,6 +31,7 @@
 	<a href="createaccount.xhtml">Nog geen account? Registreer nu.</a>
 	
 	</div>
+</div>
 	
 </h:body>
 </html>

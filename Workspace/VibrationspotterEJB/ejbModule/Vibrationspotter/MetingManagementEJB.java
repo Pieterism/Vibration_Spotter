@@ -130,4 +130,9 @@ public class MetingManagementEJB implements MetingManagementEJBLocal{
 		return m.getDataset2();
 	}
 	
+	public void wissenMeting(int idMeting){
+		Meting met = em.find(Meting.class, idMeting);
+		em.remove(met);
+	}
+	
 }
