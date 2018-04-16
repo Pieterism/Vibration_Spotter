@@ -13,6 +13,8 @@ public interface ProjectManagementEJBLocal {
 	public Project findProject(String titel);
 
 	public Project findProjectById(int id);
+	
+	public String FindAllProjectsForApp(String ingegevenstring);
 
 	void addProject(Project project);
 
