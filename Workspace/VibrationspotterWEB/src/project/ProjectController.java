@@ -124,5 +124,10 @@ public class ProjectController implements Serializable {
 		projectejb.update(pro);
 
 	}
+	public String zoekEmailadres(Project pro){
+		String emailadres=(String) personejb.zoekEmailadres(pro.getIdPersoon().getIdPersoon());
+		return emailadres;
+
+	}
 
 }
