@@ -124,6 +124,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             Intent naar_login = new Intent(MainActivity.this,LoginSelector.class);
             startActivity((naar_login));
 
+        }else if (id == R.id.nav_logout) {
+            
+
         } else if (id == R.id.nav_registreren) {
             Intent naar_registreren = new Intent(MainActivity.this,Registreren.class);
             startActivity(naar_registreren);

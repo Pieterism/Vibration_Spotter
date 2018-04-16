@@ -21,6 +21,10 @@
             android:icon="@drawable/ic_person_black_24dp"
             android:title="Inloggen" />
         <item
+            android:id="@+id/nav_logout"
+            android:icon="@drawable/ic_perm_identity_black_24dp"
+            android:title="Uitloggen"/>
+        <item
             android:id="@+id/nav_registreren"
             android:icon="@drawable/ic_person_add_black_24dp"
             android:title="Registreren" />
