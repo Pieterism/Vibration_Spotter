@@ -1,5 +1,7 @@
 package Vibrationspotter;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 import javax.ejb.Schedule;
@@ -9,7 +11,7 @@ import model.Project;
 public interface ProjectManagementEJBLocal {
 
 	public Project findProject(String titel);
-	
+
 	public Project findProjectById(int id);
 
 	void addProject(Project project);
@@ -20,9 +22,8 @@ public interface ProjectManagementEJBLocal {
 
 	void wissenProject(int id);
 
-	@Schedule(second="*", minute= "*", hour="*")
-	void refreshQR();
-
 	void getQRCode(int id);
+
+	String checkQR(File qrCodeimage) throws IOException;
 
 }

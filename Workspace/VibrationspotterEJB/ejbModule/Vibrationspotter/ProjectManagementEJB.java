@@ -23,9 +23,16 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import com.google.zxing.BarcodeFormat;
+import com.google.zxing.BinaryBitmap;
 import com.google.zxing.EncodeHintType;
+import com.google.zxing.LuminanceSource;
+import com.google.zxing.MultiFormatReader;
+import com.google.zxing.NotFoundException;
+import com.google.zxing.Result;
 import com.google.zxing.WriterException;
+import com.google.zxing.client.j2se.BufferedImageLuminanceSource;
 import com.google.zxing.common.BitMatrix;
+import com.google.zxing.common.HybridBinarizer;
 import com.google.zxing.qrcode.QRCodeWriter;
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 
@@ -41,7 +48,7 @@ public class ProjectManagementEJB implements ProjectManagementEJBLocal {
 
 	@Resource
 	private SessionContext ctx;
-	
+
 	@EJB
 	private MetingManagementEJBLocal metingejb;
 
@@ -54,14 +61,14 @@ public class ProjectManagementEJB implements ProjectManagementEJBLocal {
 			System.out.println("Meerdere dezelfde titels!");
 		return p.get(0);
 	}
-	
-    @Override
-	public Project findProjectById(int id){
+
+	@Override
+	public Project findProjectById(int id) {
 		Query q = em.createQuery("SELECT p FROM Project p WHERE p.idProject = :id");
 		q.setParameter("id", id);
 		List<Project> projecten = q.getResultList();
 		return projecten.get(0);
-    }
+	}
 
 	@Override
 	public void addProject(Project project) {
@@ -82,7 +89,6 @@ public class ProjectManagementEJB implements ProjectManagementEJBLocal {
 		em.remove(pro);
 
 	}
-
 
 	public List<Project> findAllProjecten() {
 		Query q = em.createQuery("SELECT p FROM Project p ORDER BY p.idProject ASC");
@@ -110,22 +116,17 @@ public class ProjectManagementEJB implements ProjectManagementEJBLocal {
 	 */
 
 	@Override
-	@Schedule(second = "0", minute = "*/30", hour = "*")
-	public void refreshQR() {
+	public String checkQR(File qrCodeimage) throws IOException {
+		BufferedImage bufferedImage = ImageIO.read(qrCodeimage);
+		LuminanceSource source = new BufferedImageLuminanceSource(bufferedImage);
+		BinaryBitmap bitmap = new BinaryBitmap(new HybridBinarizer(source));
 
-		List<Project> alleprojecten = findAllProjecten();
-
-		for (Project p : alleprojecten) {
-			int idProject = p.getIdProject();
-			String UniqueID = UUID.randomUUID().toString();
-
-			EntityTransaction updateTransaction = em.getTransaction();
-			updateTransaction.begin();
-			Query q = em.createQuery("UPDATE project SET project.QR = :UUID " + "WHERE project.idProject = :id");
-			q.setParameter(1, UniqueID);
-			q.setParameter(2, idProject);
-			q.executeUpdate();
-			updateTransaction.commit();
+		try {
+			Result result = new MultiFormatReader().decode(bitmap);
+			return result.getText();
+		} catch (NotFoundException e) {
+			System.out.println("There is no QR code in the image");
+			return null;
 		}
 	}
 
