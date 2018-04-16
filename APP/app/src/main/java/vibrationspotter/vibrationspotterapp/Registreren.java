@@ -47,20 +47,23 @@ public class Registreren extends AppCompatActivity {
 
                 if(!ingevuld) {
                     AlertDialog.Builder nietIngevuld = new AlertDialog.Builder(Registreren.this);
-                    nietIngevuld.setMessage("Niet Ingevuld!")
+                    nietIngevuld.setMessage("Gelieve alle velden in te vullen!")
                             .setNegativeButton("close",null)
                             .create()
                             .show();
-                }
-                else{
-                    if(!etWachtwoord.getText().toString().equals(etWachtwoord2.getText().toString())){
-                        AlertDialog.Builder wachtwoordVerkeerd = new AlertDialog.Builder(Registreren.this);
-                        wachtwoordVerkeerd.setMessage("Wachtwoord verkeerd ingegeven.")
-                                .setNegativeButton("close",null)
-                                .create()
-                                .show();
-                    }
-                    else{
+                } else if(!etWachtwoord.getText().toString().equals(etWachtwoord2.getText().toString())) {
+                    AlertDialog.Builder wachtwoordVerkeerd = new AlertDialog.Builder(Registreren.this);
+                    wachtwoordVerkeerd.setMessage("Wachtwoord verkeerd ingegeven.")
+                            .setNegativeButton("close", null)
+                            .create()
+                            .show();
+                } else if(etEmail.getText().toString().contains("{") || etEmail.getText().toString().contains("}")) {
+                    AlertDialog.Builder verbodenCharacter = new AlertDialog.Builder(Registreren.this);
+                    verbodenCharacter.setMessage("Email bevat verboden karakters.")
+                            .setNegativeButton("close", null)
+                            .create()
+                            .show();
+                } else{
                         Map<String,String> registratiegegevens = new HashMap<>();
                         registratiegegevens.put("voornaam",etVoornaam.getText().toString());
                         registratiegegevens.put("achternaam",etAchternaam.getText().toString());
@@ -89,7 +92,6 @@ public class Registreren extends AppCompatActivity {
                         );
                         VolleyClass.getInstance(getApplicationContext()).addToRequestQueue(registreerRequest, "Registreren");
                     }
-                }
 
             }
         });

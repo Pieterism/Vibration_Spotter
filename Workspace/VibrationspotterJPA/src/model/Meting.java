@@ -1,11 +1,8 @@
 package model;
 
 import java.io.Serializable;
-import java.util.List;
 
 import javax.persistence.Column;
-import javax.persistence.Embeddable;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -13,8 +10,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -33,7 +28,7 @@ public class Meting implements Serializable {
 
 	@Column(name = "tijdstip", nullable = false)
 	private String tijdstip;
-	
+
 	@Column(name = "foto", nullable = false)
 	private String foto;
 
@@ -44,11 +39,11 @@ public class Meting implements Serializable {
 	@Lob
 	@Column(name = "opmerking", length = 512)
 	private String opmerking;
-	
+
 	@Lob
 	@Column(name = "dataset1")
 	private byte[] dataset1;
-	
+
 	@Lob
 	@Column(name = "dataset2")
 	private byte[] dataset2;
@@ -142,8 +137,5 @@ public class Meting implements Serializable {
 	public void setDataset2(byte[] dataset2) {
 		this.dataset2 = dataset2;
 	}
-	
-	
-	
 
 }

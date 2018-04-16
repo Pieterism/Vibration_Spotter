@@ -5,20 +5,21 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.time.Duration;
+import java.time.LocalDateTime;
+import java.time.temporal.Temporal;
+import java.util.Calendar;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 
 import javax.annotation.Resource;
 import javax.ejb.EJB;
-import javax.ejb.Schedule;
 import javax.ejb.SessionContext;
 import javax.ejb.Stateless;
 import javax.imageio.ImageIO;
 import javax.inject.Named;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityTransaction;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
@@ -27,20 +28,12 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.google.zxing.BarcodeFormat;
-import com.google.zxing.BinaryBitmap;
 import com.google.zxing.EncodeHintType;
-import com.google.zxing.LuminanceSource;
-import com.google.zxing.MultiFormatReader;
-import com.google.zxing.NotFoundException;
-import com.google.zxing.Result;
 import com.google.zxing.WriterException;
-import com.google.zxing.client.j2se.BufferedImageLuminanceSource;
 import com.google.zxing.common.BitMatrix;
-import com.google.zxing.common.HybridBinarizer;
 import com.google.zxing.qrcode.QRCodeWriter;
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 
-import model.Persoon;
 import model.Project;
 
 @Named
@@ -120,28 +113,43 @@ public class ProjectManagementEJB implements ProjectManagementEJBLocal {
 	 */
 
 	@Override
-	public String checkQR(File qrCodeimage) throws IOException {
+	public boolean checkQR(String ingegevenstring) throws IOException {
 		
-		// TIMESTAMP VERGELIJKEN! 
+		String qrString = null;
 		
-		BufferedImage bufferedImage = ImageIO.read(qrCodeimage);
-		LuminanceSource source = new BufferedImageLuminanceSource(bufferedImage);
-		BinaryBitmap bitmap = new BinaryBitmap(new HybridBinarizer(source));
-
+		ingegevenstring = ingegevenstring.substring(1, ingegevenstring.length() - 1);
+		JSONObject json = null;
+		
 		try {
-			Result result = new MultiFormatReader().decode(bitmap);
-			return result.getText();
-		} catch (NotFoundException e) {
-			System.out.println("There is no QR code in the image");
-			return null;
+			json = new JSONObject(ingegevenstring);
+			qrString=json.getString("QR_code");				//qrString = waarde van meegegeven JSONArray
+		} catch (JSONException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
 		}
+		
+		
+		// Get qr string value from db
+		Query q = em.createQuery("SELECT p FROM Project  WHERE p.QR = : qr");
+		q.setParameter(1, qrString);
+		List<Project> p = q.getResultList();
+		if (p.size() != 1)
+			return false;
+		else {
+			// compare timestamps
+			Duration duration = Duration.between(LocalDateTime.now(), (Temporal) p.get(0).getTimestamp());
+			long diff = Math.abs(duration.toMinutes());
+			if (diff < 10) {
+				return false;
+			}
+			return true;
+		}
+
 	}
 
 	@Override
 	public void getQRCode(int id) {
 		String uniqueID = null;
-		
-		//TIMESTAMP UPDATEN
 
 		Query q = em.createQuery("SELECT p FROM Project  WHERE p.idProject = : id");
 		q.setParameter(1, id);
@@ -149,7 +157,8 @@ public class ProjectManagementEJB implements ProjectManagementEJBLocal {
 		if (p.size() != 1)
 			System.out.println("Foutieve id");
 		else
-			uniqueID = p.get(0).getQR();
+			p.get(0).setTimestamp(Calendar.getInstance().getTime());
+		uniqueID = p.get(0).getQR();
 
 		String filePath = "D:\\Google Drive\\School\\2017-2018\\Project\\Test.png";
 		int size = 450;
@@ -192,47 +201,40 @@ public class ProjectManagementEJB implements ProjectManagementEJBLocal {
 		}
 		System.out.println("\n\nYou have successfully created QR Code.");
 	}
-	
-	public String FindAllProjectsForApp(String ingegevenstring){
-		ingegevenstring = ingegevenstring.substring(1, ingegevenstring.length()-1);	
+
+	public String FindAllProjectsForApp(String ingegevenstring) {
+		ingegevenstring = ingegevenstring.substring(1, ingegevenstring.length() - 1);
 		JSONObject json = null;
 		JSONArray jArray = new JSONArray();
-		
+
 		try {
 			json = new JSONObject(ingegevenstring);
 		} catch (JSONException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		
+
 		try {
-		int idPersoon =	(int) json.get("idPersoon");
-		
-		Query q = em.createQuery("SELECT p FROM Project p ORDER BY p.idProject ASC");
-		List<Project> projecten = q.getResultList();
-		
-		
-		for(int i=0; i<projecten.size(); i++){
-			JSONObject json2 = new JSONObject();
-			json2.put("projectid", projecten.get(i).getIdProject());
-			json2.put("projecttitel", projecten.get(i).getTitel());
-			json2.put("projectbeschrijving", projecten.get(i).getBeschrijving());
-			jArray.put(json2);
-		}
-		
-		
-		
-			
-			
-			
-			
+			int idPersoon = (int) json.get("idPersoon");
+
+			Query q = em.createQuery("SELECT p FROM Project p ORDER BY p.idProject ASC");
+			List<Project> projecten = q.getResultList();
+
+			for (int i = 0; i < projecten.size(); i++) {
+				JSONObject json2 = new JSONObject();
+				json2.put("projectid", projecten.get(i).getIdProject());
+				json2.put("projecttitel", projecten.get(i).getTitel());
+				json2.put("projectbeschrijving", projecten.get(i).getBeschrijving());
+				jArray.put(json2);
+			}
+
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		return jArray.toString();
-		
+
 	}
 
 }
