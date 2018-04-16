@@ -85,6 +85,10 @@ public class MetingManagementEJB implements MetingManagementEJBLocal{
 		jsonarray = jsonarray.substring(1, jsonarray.length()-1);	
 		JSONObject json = null;
 		
+		int index = jsonarray.lastIndexOf("{");
+		System.out.println(index);
+		jsonarray = jsonarray.substring(0,index-1);
+		
 		try {
 			json = new JSONObject(jsonarray);
 		} catch (JSONException e1) {
