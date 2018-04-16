@@ -92,7 +92,6 @@ public class Registreren extends AppCompatActivity {
                         );
                         VolleyClass.getInstance(getApplicationContext()).addToRequestQueue(registreerRequest, "Registreren");
                     }
-                }
 
             }
         });
