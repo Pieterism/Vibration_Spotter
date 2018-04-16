@@ -5,7 +5,7 @@ import javax.ejb.Local;
 import model.Persoon;
 import model.Spotter;
 
-@Local
+//@Local
 public interface PersonManagementEJBLocal {
 	// public Persoon findPersoon(String gebruikersnaam); //mag verwijderd
 	// worden

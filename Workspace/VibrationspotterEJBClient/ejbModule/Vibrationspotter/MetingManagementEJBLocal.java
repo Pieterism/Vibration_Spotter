@@ -8,7 +8,7 @@ import model.Spotter;
 
 import java.util.List;
 
-@Local
+//@Local
 public interface MetingManagementEJBLocal {
 	public Meting findMeting(String titelMeting);
 
