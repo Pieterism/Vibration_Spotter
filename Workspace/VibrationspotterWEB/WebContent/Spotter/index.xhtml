@@ -20,22 +20,27 @@
  		<h:commandButton styleClass="logout" image="logout.png" value = "uitloggen" action="#{loginController.logout}"/>
  		</h:form>
 	</div>
-     <div class="paragraph">
-		<h2 >Vibrationspotter Project aanmaken</h2>
-			<h:form >
-				<h:panelGrid columns ="2" cellpadding = "10">
-					<h:outputLabel value="titel: "/>
-					<h:inputText required ="true" value ="#{projectController.project.titel}" requiredMessage="titel is niet ingevuld"/>
+    <div class="background">
+	<br/>
+		<div class="paragraphvib">
+		
+			<h2 >Vibrationspotter Project aanmaken</h2>
+				<h:form >
+					<h:panelGrid columns ="2" cellpadding = "10">
+						<h:outputLabel value="titel: "/>
+						<h:inputText required ="true" value ="#{projectController.project.titel}" requiredMessage="titel is niet ingevuld"/>
 					
-					<h:outputLabel value="beschrijving: "/>
-					<h:inputText required ="true" value ="#{projectController.project.beschrijving}" requiredMessage="beschrijving is niet ingevuld"/>
+						<h:outputLabel value="beschrijving: "/>
+						<h:inputText required ="true" value ="#{projectController.project.beschrijving}" requiredMessage="beschrijving is niet ingevuld"/>
 									
-			   </h:panelGrid>
-			   <h:commandButton styleClass="knop" value = "project aanmaken" action="#{projectController.submitSpotter}"/> 
+			  	 </h:panelGrid>
+			   	<h:commandButton styleClass="knop" value = "project aanmaken" action="#{projectController.submitSpotter}"/> 
 				<br/>
 				<br/>
-			</h:form>
+				</h:form>
 			 <h:messages  layout="table" styleClass="fail" />
-	</div>
+    </div>
+     
+    </div>
 </h:body>
 </html>

@@ -1,7 +1,11 @@
 /* Add a black background color to the top navigation */
-
+html, 
+body {
+    height: 100%;
+    
+}
 .header{
-  background-color: red;
+  background-color: #f1f1f1;
   padding: 30px;
   text-align: center;
 }
@@ -86,6 +90,27 @@ color: red;
 
 .TerugMetingen{
 	margin-top:20px;
+	
+}
+
+.background{
+	background-image: url("../brug.jpg");
+  	height: 90%;
+  	
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.paragraphvib{
+	background-color: #f1f1f1;
+	margin-left: 20px;
+	margin-top: 10px;
+	border-style: solid;
+	width: 400px;
+	height: 400px;
+	padding: 25px;
+	display:inline-block;
+	
 	
 }
 
