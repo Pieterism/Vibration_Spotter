@@ -27,6 +27,8 @@
  		<h:commandButton styleClass="logout" image="logout.png" value = "uitloggen" action="#{loginController.logout}"/>
  		</h:form>
 	</div>
+<div class="background3">
+<br/>
 <h:form>
     <h:dataTable id="projectlist" value="#{projectController.geefProjectenweer()}" var="pro" border="5" cellpadding ="5" styleClass="tabel" headerClass="htabel">
 
@@ -74,5 +76,6 @@
       </h:column>
     </h:dataTable>
     </h:form>
+</div>
 </h:body>
 </html>
