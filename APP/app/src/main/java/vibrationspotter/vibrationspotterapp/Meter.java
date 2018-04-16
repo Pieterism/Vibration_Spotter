@@ -163,19 +163,23 @@ public class Meter extends Activity implements SensorEventListener,OnChartValueS
     }
 
     @Override
-    protected void onStop(){
+    protected void onStop() {
         super.onStop();
-        System.out.println(jArray.toString());
-
-      //DEEL PJ
-        JSONObject jObject = new JSONObject();
-
         SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         SharedPreferences.Editor editor = settings.edit();
 
-       String email = settings.getString("email",null);
+        String email = settings.getString("email", null);
 
-    /*    try {
+
+        if (email != null) {
+            System.out.println("email: " + email);
+            System.out.println(jArray.toString());
+
+            //DEEL PJ
+            JSONObject jObject = new JSONObject();
+
+
+        try {
             jObject.put("email",email);
             jObject.put("titel","titel");           //titel moet nog ingevuld worden in APP
            // jObject.put("idProject", idProject);               //Kiezen bij welk project hoort
@@ -184,36 +188,32 @@ public class Meter extends Activity implements SensorEventListener,OnChartValueS
             e.printStackTrace();
         }
         jArray.put(jObject);
-*/
-        final String REQUEST_TAG = "Metingen";
-        JsonArrayRequest strReq = new JsonArrayRequest(Request.Method.POST,
 
-                getString(R.string.url) + "Metingen",
-                jArray,
-                new Response.Listener<JSONArray>() {
-                    @Override
-                    public void onResponse(JSONArray response) {
-                        Log.d("Metingen", response.toString());
+            final String REQUEST_TAG = "Metingen";
+            JsonArrayRequest strReq = new JsonArrayRequest(Request.Method.POST,
 
-
+                    getString(R.string.url) + "Metingen",
+                    jArray,
+                    new Response.Listener<JSONArray>() {
+                        @Override
+                        public void onResponse(JSONArray response) {
+                            Log.d("Metingen", response.toString());
 
 
-
-
+                        }
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            Log.d("Metingen", "Error: " + error.toString() + ", " + error.getMessage());
+                        }
                     }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Log.d("Metingen", "Error: " + error.toString() + ", " + error.getMessage());
-                    }
-                }
-        ){
-        };
+            ) {
+            };
 
-        VolleyClass.getInstance(getApplicationContext()).addToRequestQueue(strReq, "Metingen");
+            VolleyClass.getInstance(getApplicationContext()).addToRequestQueue(strReq, "Metingen");
+        }
     }
-
     @Override
     public void onValueSelected(Entry e, Highlight h) {
 
