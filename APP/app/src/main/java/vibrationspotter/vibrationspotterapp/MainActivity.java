@@ -2,6 +2,7 @@ package vibrationspotter.vibrationspotterapp;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Point;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -13,6 +14,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Display;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -39,11 +41,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     LinearLayout llprojecten;
     ImageView imageView;
 
+    int width;
+    int height;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        /*
+        Display display = getWindowManager().getDefaultDisplay();
+        Point size = new Point();
+        display.getSize(size);
+        width = size.x;
+        height = size.y;
+        */
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -147,14 +160,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         } else if (id == R.id.nav_projecten) {
 
-            LayoutParams lp = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.MATCH_PARENT);
+            LayoutParams lp = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
 
             llprojecten.removeAllViews();
 
             clHomePage.setVisibility(View.INVISIBLE);
             svProjectview.setVisibility(View.VISIBLE);
 
-            for(int i=0; i<10; i++) {
+            for(int i=1; i<=20; i++) {
                 ProjectView projectView = new ProjectView(this, i);
                 llprojecten.addView(projectView, lp);
             }

@@ -4,7 +4,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_height="64dp"
-    android:layout_width="match_parent">
+    android:layout_width="match_parent"
+    android:background="@color/colorPrimary">
 
     <TextView
         android:id="@+id/project_titel"
@@ -29,6 +30,9 @@
         android:layout_height="64dp"
         android:layout_alignParentEnd="true"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/project_titel"
+        app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_open_in_new_black_24dp" />
 
 </android.support.constraint.ConstraintLayout>
