@@ -1,5 +1,6 @@
 package vibrationspotter.vibrationspotterapp;
 
+import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -81,6 +82,18 @@ public class Registreren extends AppCompatActivity {
                                     @Override
                                     public void onResponse(JSONArray response) {
                                         Log.d("Registreren", response.toString());
+                                        if(response.toString().equals("[{\"Registratie\":\"Gelukt!!!\"}]")){
+                                            AlertDialog.Builder geregistreerd = new AlertDialog.Builder(Registreren.this);
+                                            geregistreerd.setMessage("Uw registratie is gelukt.")
+                                                    .setNegativeButton("close", new DialogInterface.OnClickListener() {
+                                                        @Override
+                                                        public void onClick(DialogInterface dialog, int which) {
+                                                            finish();
+                                                        }
+                                                    })
+                                                    .create()
+                                                    .show();
+                                        }
                                     }
                                 },
                                 new Response.ErrorListener() {
