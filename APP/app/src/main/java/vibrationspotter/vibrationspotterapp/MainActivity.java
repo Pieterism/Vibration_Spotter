@@ -21,6 +21,8 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 
+import vibrationspotter.Custom_views.ProjectView;
+
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
 
@@ -105,16 +107,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         } else if (id == R.id.nav_projecten) {
 
-            LayoutParams lp = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+            LayoutParams lp = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.MATCH_PARENT);
 
             llprojecten.removeAllViews();
 
             for(int i=0; i<20; i++){
-                    Button button = new Button(this);
-                    button.setText("Knop" + i);
-                    button.setId(i);
-                    llprojecten.addView(button,lp);
-                    }
+                ProjectView projectView = new ProjectView(getApplicationContext());
+                projectView.setTitel("Titel " + i);
+                projectView.setId(i);
+                llprojecten.addView(projectView, lp);
+            }
 
 
             clHomePage.setVisibility(View.INVISIBLE);
@@ -141,6 +143,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             startActivity(naar_registreren);
 
         } else if (id == R.id.nav_share) {
+
+            //Wat je hier schrijft wordt uitgevoerd waneer de share knop ingeduwd wordt (doet voorlopig nog niets :p)
 
         } else if (id == R.id.nav_send) {
 
