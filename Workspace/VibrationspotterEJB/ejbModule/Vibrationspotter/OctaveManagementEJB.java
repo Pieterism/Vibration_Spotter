@@ -268,4 +268,26 @@ public class OctaveManagementEJB implements OctaveManagementEJBLocal {
 		}
 
 	}
+	
+	public String verwerkstringdata(String invoer){
+		String nieuwe = "";
+		while(invoer.contains("x")){
+		//	invoer.replaceFirst(regex, replacement)	
+			int xx = invoer.indexOf("x");
+			int yy = invoer.indexOf("y");
+			int zz = invoer.indexOf("z");
+			int tt = invoer.indexOf("tijd");
+			int haakje = invoer.indexOf("}");
+			
+			String x = invoer.substring(xx+3, yy-2);
+			String y = invoer.substring(yy+3, zz-2);
+			String z = invoer.substring(zz+3, tt-2);
+			String t = invoer.substring(tt+6, haakje-1);
+			
+			nieuwe = nieuwe + t + "," + x +"," + y + "," + z + '\n';
+			invoer = invoer.substring(haakje+1);		
+		}
+		
+		return nieuwe;
+	}
 }
