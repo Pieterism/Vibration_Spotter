@@ -99,12 +99,14 @@ public class OctaveManagementEJB implements OctaveManagementEJBLocal {
 			stdin.println("A_data = A2(1:L/2+1); A_data(2:end-1) = 2*A_data(2:end-1);");
 
 			// 2 output files uitprinten
+			/*
 			stdin.println("x1 = [tijd(:),versnelling(:),data_filtered(:)];");
 			stdin.println("csvwrite ('x1.txt', x1)");
 
 			stdin.println("x2 = [frequentie(:),amplitude(:),A_data(:)];");
 			stdin.println("csvwrite ('x2.txt', x2)");
-			
+			*/
+			stdin.println("versnellingx=versnelling; data_filteredx=data_filtered; frequentiex=frequentie; amplitudex=amplitude; A_datax=A_data; ");
 			//----------------------------------------y waarde----------------------------------------
 			
 			// Generate data
@@ -143,11 +145,14 @@ public class OctaveManagementEJB implements OctaveManagementEJBLocal {
 			stdin.println("A_data = A2(1:L/2+1); A_data(2:end-1) = 2*A_data(2:end-1);");
 
 			// 2 output files uitprinten
+			/*
 			stdin.println("x1 = [tijd(:),versnelling(:),data_filtered(:)];");
 			stdin.println("csvwrite ('x1.txt', x1)");
 
 			stdin.println("x2 = [frequentie(:),amplitude(:),A_data(:)];");
 			stdin.println("csvwrite ('x2.txt', x2)");
+			*/
+			stdin.println("versnellingy=versnelling; data_filteredy=data_filtered; frequentiey=frequentie; amplitudey=amplitude; A_datay=A_data; ");
 			
 			//----------------------------------------z waarde----------------------------------------
 			
@@ -187,11 +192,33 @@ public class OctaveManagementEJB implements OctaveManagementEJBLocal {
 			stdin.println("A_data = A2(1:L/2+1); A_data(2:end-1) = 2*A_data(2:end-1);");
 
 			// 2 output files uitprinten
+			/*
 			stdin.println("x1 = [tijd(:),versnelling(:),data_filtered(:)];");
 			stdin.println("csvwrite ('x1.txt', x1)");
 
 			stdin.println("x2 = [frequentie(:),amplitude(:),A_data(:)];");
 			stdin.println("csvwrite ('x2.txt', x2)");
+			*/
+			stdin.println("versnellingz=versnelling; data_filteredz=data_filtered; frequentiez=frequentie; amplitudez=amplitude; A_dataz=A_data; ");
+			
+			stdin.println("x1 = [tijd(:),versnellingx(:),data_filteredx(:)];");
+			stdin.println("csvwrite ('x1.txt', x1)");
+
+			stdin.println("x2 = [frequentiex(:),amplitudex(:),A_datax(:)];");
+			stdin.println("csvwrite ('x2.txt', x2)");
+			
+			stdin.println("y1 = [tijd(:),versnellingy(:),data_filteredy(:)];");
+			stdin.println("csvwrite ('y1.txt', y1)");
+
+			stdin.println("y2 = [frequentiey(:),amplitudey(:),A_datay(:)];");
+			stdin.println("csvwrite ('y2.txt', y2)");
+			
+			stdin.println("z1 = [tijd(:),versnellingz(:),data_filteredz(:)];");
+			stdin.println("csvwrite ('z1.txt', z1)");
+
+			stdin.println("z2 = [frequentiez(:),amplitudez(:),A_dataz(:)];");
+			stdin.println("csvwrite ('z2.txt', z2)");
+			
 			
 			
 			
