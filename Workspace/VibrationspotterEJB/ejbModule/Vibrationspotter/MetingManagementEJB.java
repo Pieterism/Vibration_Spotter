@@ -34,6 +34,9 @@ public class MetingManagementEJB implements MetingManagementEJBLocal{
 	private PersonManagementEJBLocal personEJB;
 	
 	@EJB
+	private OctaveManagementEJBLocal octaveEJB;
+	
+	@EJB
 	private ProjectManagementEJBLocal projectEJB;
 
 	@Resource
@@ -83,18 +86,20 @@ public class MetingManagementEJB implements MetingManagementEJBLocal{
 	public void ToevoegenMetingResultaten(String jsonarray){
 		
 		jsonarray = jsonarray.substring(1, jsonarray.length()-1);	
-		JSONObject json = null;
+	//	JSONObject json = null;
 		
 		int index = jsonarray.lastIndexOf("{");
 		System.out.println(index);
 		jsonarray = jsonarray.substring(0,index-1);
 		
-		try {
+		jsonarray = octaveEJB.verwerkstringdata(jsonarray);
+	
+	/*	try {
 			json = new JSONObject(jsonarray);
 		} catch (JSONException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
-		}
+		}*/
 
 		
 		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
