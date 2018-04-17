@@ -2,6 +2,7 @@ package vibrationspotter.vibrationspotterapp;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.constraint.ConstraintLayout;
@@ -28,6 +29,7 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.provider.MediaStore;
 
+import vibrationspotter.Custom_views.ProjectView;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private static final int SELECTED_PIC = 1;
@@ -123,7 +125,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                     Bitmap bitmap = BitmapFactory.decodeFile(filepath);
                     Drawable drawable = new BitmapDrawable(bitmap);
-                    imageView.setBackground(drawable);
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                        imageView.setBackground(drawable);
+                    }
                 }
                 break;
             default:
@@ -143,10 +147,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         } else if (id == R.id.nav_projecten) {
 
-            LayoutParams lp = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+            LayoutParams lp = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.MATCH_PARENT);
 
             llprojecten.removeAllViews();
 
+            for(int i=0; i<20; i++) {
+                ProjectView projectView = new ProjectView(getApplicationContext());
+                projectView.setTitel("Titel " + i);
+                projectView.setId(i);
+                llprojecten.addView(projectView, lp);
+            }
             for (int i = 0; i < 20; i++) {
                 Button button = new Button(this);
                 button.setText("Knop" + i);
@@ -181,6 +191,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else if (id == R.id.nav_share) {
             Intent intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
             startActivityForResult(intent, SELECTED_PIC);
+
+            //Wat je hier schrijft wordt uitgevoerd waneer de share knop ingeduwd wordt (doet voorlopig nog niets :p)
 
         } else if (id == R.id.nav_send) {
 
