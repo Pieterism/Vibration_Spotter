@@ -151,22 +151,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             llprojecten.removeAllViews();
 
-            for(int i=0; i<20; i++) {
-                ProjectView projectView = new ProjectView(getApplicationContext());
-                projectView.setTitel("Titel " + i);
-                projectView.setId(i);
-                llprojecten.addView(projectView, lp);
-            }
-            for (int i = 0; i < 20; i++) {
-                Button button = new Button(this);
-                button.setText("Knop" + i);
-                button.setId(i);
-                llprojecten.addView(button, lp);
-            }
-
-
             clHomePage.setVisibility(View.INVISIBLE);
             svProjectview.setVisibility(View.VISIBLE);
+
+            for(int i=0; i<10; i++) {
+                ProjectView projectView = new ProjectView(this, i);
+                llprojecten.addView(projectView, lp);
+            }
 
         } else if (id == R.id.nav_meter) {
             Intent naar_meter = new Intent(MainActivity.this, Meter.class);

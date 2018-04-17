@@ -262,5 +262,12 @@ public final class BarcodeCaptureActivity extends AppCompatActivity
             }
         }
     }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent();
+        setResult(CommonStatusCodes.CANCELED, intent);
+        finish();
+    }
 }
 
