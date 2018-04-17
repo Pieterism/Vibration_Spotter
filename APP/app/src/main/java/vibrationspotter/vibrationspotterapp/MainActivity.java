@@ -2,6 +2,7 @@ package vibrationspotter.vibrationspotterapp;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.constraint.ConstraintLayout;
@@ -28,12 +29,7 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.provider.MediaStore;
 
-<<<<<<< HEAD
 import vibrationspotter.Custom_views.ProjectView;
-
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
-=======
->>>>>>> 88be8b0e76e3fb49c99857e64a0393d51f262312
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private static final int SELECTED_PIC = 1;
@@ -129,7 +125,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                     Bitmap bitmap = BitmapFactory.decodeFile(filepath);
                     Drawable drawable = new BitmapDrawable(bitmap);
-                    imageView.setBackground(drawable);
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                        imageView.setBackground(drawable);
+                    }
                 }
                 break;
             default:
@@ -153,19 +151,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             llprojecten.removeAllViews();
 
-<<<<<<< HEAD
-            for(int i=0; i<20; i++){
+            for(int i=0; i<20; i++) {
                 ProjectView projectView = new ProjectView(getApplicationContext());
                 projectView.setTitel("Titel " + i);
                 projectView.setId(i);
                 llprojecten.addView(projectView, lp);
-=======
+            }
             for (int i = 0; i < 20; i++) {
                 Button button = new Button(this);
                 button.setText("Knop" + i);
                 button.setId(i);
                 llprojecten.addView(button, lp);
->>>>>>> 88be8b0e76e3fb49c99857e64a0393d51f262312
             }
 
 
