@@ -45,7 +45,7 @@ public class OctaveManagementEJB implements OctaveManagementEJBLocal {
 	   	  		String t=getallen[0];
 	   	  		String x=getallen[1];
 	   	  		String y=getallen[2];
-	   	  		String z=getallen[4];
+	   	  		String z=getallen[3];
 	   	  		
 	   	  		sb1.append(t+" ");
 	   	  		sb2.append(x+" ");

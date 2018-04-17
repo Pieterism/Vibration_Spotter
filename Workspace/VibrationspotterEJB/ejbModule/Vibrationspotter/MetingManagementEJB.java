@@ -111,15 +111,20 @@ public class MetingManagementEJB implements MetingManagementEJBLocal{
 		Project project = projectEJB.findProjectById(2); //project nog vinden via doorgestuurde jsonarray
 		
 		//Meting meting1 = new Meting(2,"titel","2015-12-12 00:00:00",meting,"foto", project);
+		String [] resultaten = octaveEJB.createdata(jsonarray);
+		
 		Meting meting1 = new Meting();
 		meting1.setTitel("titel");
 		meting1.setTijdstip(dateFormat.format(date));
 		meting1.setResultaten(jsonarray);
 		meting1.setIdProject(project);
-		em.persist(meting1);
+		//meting1.setDataset1(resultaten[0]);
+		//meting1.setDataset2(resultaten[1]);
+		em.persist(meting1);	
+		
 	}
 	
-	public byte[] zoekDataset1(int idMeting){
+	public String zoekDataset1(int idMeting){
 		Query q = em.createQuery("SELECT m FROM Meting m WHERE m.idMeting= :id");
 		q.setParameter("id", idMeting);
 		List<Meting> metingen = q.getResultList();
@@ -127,7 +132,7 @@ public class MetingManagementEJB implements MetingManagementEJBLocal{
 		return m.getDataset1();
 	}
 	
-	public byte[] zoekDataset2(int idMeting){
+	public String zoekDataset2(int idMeting){
 		Query q = em.createQuery("SELECT m FROM Meting m WHERE m.idMeting= :id");
 		q.setParameter("id", idMeting);
 		List<Meting> metingen = q.getResultList();
