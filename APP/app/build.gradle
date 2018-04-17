@@ -33,5 +33,4 @@ dependencies {
     implementation 'com.github.PhilJay:MPAndroidChart:v3.0.3'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
-    compile 'io.jsonwebtoken:jjwt:0.9.0'
 }
