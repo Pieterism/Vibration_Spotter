@@ -30,12 +30,11 @@ public class OctaveManagementEJB implements OctaveManagementEJBLocal {
 	public OctaveManagementEJB() {
 	};
 
-	public String[] createdata() {
+	public String[] createdata(String s) {
 		String s1 = null;
 		String s2 = null;
 		String[] resultaten = new String[2];
 		try {
-		  	String s=null;
 	   	  	String lijnen[] = s.split("\\r?\\n");
 	   	  	StringBuilder sb1 = new StringBuilder();
 	  		StringBuilder sb2 = new StringBuilder();

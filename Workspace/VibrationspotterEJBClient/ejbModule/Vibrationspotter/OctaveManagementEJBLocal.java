@@ -2,7 +2,7 @@ package Vibrationspotter;
 
 public interface OctaveManagementEJBLocal {
 	
-	void createdata();
+	String[] createdata(String s);
 	
 	String verwerkstringdata(String invoer);
 
