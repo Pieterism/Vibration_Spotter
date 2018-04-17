@@ -1,5 +1,7 @@
 package Vibrationspotter;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
@@ -29,6 +31,8 @@ public class OctaveManagementEJB implements OctaveManagementEJBLocal {
 	};
 
 	public void createdata() {
+		String s1;
+		String s2;
 		try {
 		  	String s=null;
 	   	  	String lijnen[] = s.split("\\r?\\n");
@@ -201,27 +205,54 @@ public class OctaveManagementEJB implements OctaveManagementEJBLocal {
 			*/
 			stdin.println("versnellingz=versnelling; data_filteredz=data_filtered; frequentiez=frequentie; amplitudez=amplitude; A_dataz=A_data; ");
 			
-			stdin.println("x1 = [tijd(:),versnellingx(:),data_filteredx(:)];");
+			
+			//p
+			stdin.println("x1 = [tijd(:),versnellingx(:),data_filteredx(:),versnellingy(:),data_filteredy(:),versnellingz(:),data_filteredz(:)];");
 			stdin.println("csvwrite ('x1.txt', x1)");
 
-			stdin.println("x2 = [frequentiex(:),amplitudex(:),A_datax(:)];");
+			stdin.println("x2 = [frequentiex(:),amplitudex(:),A_datax(:),amplitudey(:),A_datay(:),amplitudez(:),A_dataz(:)];");
 			stdin.println("csvwrite ('x2.txt', x2)");
 			
-			stdin.println("y1 = [tijd(:),versnellingy(:),data_filteredy(:)];");
-			stdin.println("csvwrite ('y1.txt', y1)");
+			BufferedReader br = null;
+			   try {
 
-			stdin.println("y2 = [frequentiey(:),amplitudey(:),A_datay(:)];");
-			stdin.println("csvwrite ('y2.txt', y2)");
-			
-			stdin.println("z1 = [tijd(:),versnellingz(:),data_filteredz(:)];");
-			stdin.println("csvwrite ('z1.txt', z1)");
+	                String sCurrentLine;
+	                String nl=System.getProperty("line.separator");
+	                br = new BufferedReader(new FileReader("x1.txt"));
+	                StringBuffer sBuffer = new StringBuffer();
+	                while ((sCurrentLine = br.readLine()) != null) {
+	                    System.out.println(sCurrentLine);
+	                    sBuffer.append(sCurrentLine);
+	                    sBuffer.append(nl);
+	                }
+	                s1=sBuffer.toString();
 
-			stdin.println("z2 = [frequentiez(:),amplitudez(:),A_dataz(:)];");
-			stdin.println("csvwrite ('z2.txt', z2)");
-			
-			
-			
-			
+	            } 
+
+	            catch (IOException e) {
+	                e.printStackTrace();
+	            }
+			   
+			   BufferedReader br2 = null;
+			   try {
+
+	                String sCurrentLine;
+	                String nl=System.getProperty("line.separator");
+	                br2 = new BufferedReader(new FileReader("x2.txt"));
+	                StringBuffer sBuffer = new StringBuffer();
+	                while ((sCurrentLine = br2.readLine()) != null) {
+	                    System.out.println(sCurrentLine);
+	                    sBuffer.append(sCurrentLine);
+	                    sBuffer.append(nl);
+	                }
+	                s2=sBuffer.toString();
+
+	            } 
+
+	            catch (IOException e) {
+	                e.printStackTrace();
+	            }
+
 			stdin.close();
 
 			int returnCode = 0;
