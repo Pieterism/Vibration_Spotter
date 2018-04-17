@@ -104,12 +104,30 @@ public class ProjectController implements Serializable {
 		List<Project> goedeprojecten =  new ArrayList<Project>();
 		
 		for(int i=0;i<projecten.size();i++){
-			if(projecten.get(i).getIdPersoon().getIdPersoon()==id){
+			if(projecten.get(i).getIdPersoon().getIdPersoon()==id&&projecten.get(i).isGoedgekeurd()==true){
 				goedeprojecten.add(projecten.get(i));
 			}
 		}
 		
 		return goedeprojecten;
+	}
+	
+	public void update(Project pro){
+		System.out.println("update");
+		System.out.println(pro.isGoedgekeurd());
+		if(pro.isGoedgekeurd()==false){
+			pro.setGoedgekeurd(true);
+		}
+		else{
+			pro.setGoedgekeurd(false);
+		}
+		projectejb.update(pro);
+
+	}
+	public String zoekEmailadres(Project pro){
+		String emailadres=(String) personejb.zoekEmailadres(pro.getIdPersoon().getIdPersoon());
+		return emailadres;
+
 	}
 
 }

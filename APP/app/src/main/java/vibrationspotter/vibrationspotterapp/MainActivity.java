@@ -2,6 +2,7 @@ package vibrationspotter.vibrationspotterapp;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.FloatingActionButton;
@@ -10,25 +11,37 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.ScrollView;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.net.Uri;
+import android.provider.MediaStore;
 
+<<<<<<< HEAD
 import vibrationspotter.Custom_views.ProjectView;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
+=======
+>>>>>>> 88be8b0e76e3fb49c99857e64a0393d51f262312
 
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+    private static final int SELECTED_PIC = 1;
 
     ScrollView svProjectview;
     ConstraintLayout clHomePage;
     LinearLayout llprojecten;
+    ImageView imageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +56,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent qr_intent = new Intent(MainActivity.this,QR_hub.class);
+                Intent qr_intent = new Intent(MainActivity.this, QR_hub.class);
                 startActivity(qr_intent);
             }
         });
@@ -63,6 +76,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         clHomePage = findViewById(R.id.clhome_page);
         llprojecten = findViewById(R.id.llprojecten);
     }
+
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -95,13 +109,41 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        super.onActivityResult(requestCode, resultCode, data);
+
+        switch (requestCode) {
+            case SELECTED_PIC:
+                if (resultCode == RESULT_OK) {
+                    Uri uri = data.getData();
+                    String[] projection = {MediaStore.Images.Media.DATA};
+
+                    Cursor cursor = getContentResolver().query(uri, projection, null, null, null);
+                    cursor.moveToFirst();
+
+                    int columnIndex = cursor.getColumnIndex(projection[0]);
+                    String filepath = cursor.getString(columnIndex);
+                    cursor.close();
+
+                    Bitmap bitmap = BitmapFactory.decodeFile(filepath);
+                    Drawable drawable = new BitmapDrawable(bitmap);
+                    imageView.setBackground(drawable);
+                }
+                break;
+            default:
+                break;
+        }
+    }
+
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_home){
+        if (id == R.id.nav_home) {
             svProjectview.setVisibility(View.INVISIBLE);
             clHomePage.setVisibility(View.VISIBLE);
 
@@ -111,11 +153,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             llprojecten.removeAllViews();
 
+<<<<<<< HEAD
             for(int i=0; i<20; i++){
                 ProjectView projectView = new ProjectView(getApplicationContext());
                 projectView.setTitel("Titel " + i);
                 projectView.setId(i);
                 llprojecten.addView(projectView, lp);
+=======
+            for (int i = 0; i < 20; i++) {
+                Button button = new Button(this);
+                button.setText("Knop" + i);
+                button.setId(i);
+                llprojecten.addView(button, lp);
+>>>>>>> 88be8b0e76e3fb49c99857e64a0393d51f262312
             }
 
 
@@ -123,14 +173,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             svProjectview.setVisibility(View.VISIBLE);
 
         } else if (id == R.id.nav_meter) {
-            Intent naar_meter = new Intent(MainActivity.this,Meter.class);
+            Intent naar_meter = new Intent(MainActivity.this, Meter.class);
             startActivity(naar_meter);
 
         } else if (id == R.id.nav_login) {
-            Intent naar_login = new Intent(MainActivity.this,LoginSelector.class);
+            Intent naar_login = new Intent(MainActivity.this, LoginSelector.class);
             startActivity((naar_login));
 
-        }else if (id == R.id.nav_logout) {
+        } else if (id == R.id.nav_logout) {
             //Sessie van APP
             SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
             SharedPreferences.Editor editor = settings.edit();
@@ -139,10 +189,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             editor.commit();
 
         } else if (id == R.id.nav_registreren) {
-            Intent naar_registreren = new Intent(MainActivity.this,Registreren.class);
+            Intent naar_registreren = new Intent(MainActivity.this, Registreren.class);
             startActivity(naar_registreren);
 
         } else if (id == R.id.nav_share) {
+            Intent intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+            startActivityForResult(intent, SELECTED_PIC);
 
             //Wat je hier schrijft wordt uitgevoerd waneer de share knop ingeduwd wordt (doet voorlopig nog niets :p)
 

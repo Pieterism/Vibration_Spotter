@@ -113,8 +113,22 @@ public class ProjectManagementEJB implements ProjectManagementEJBLocal {
 	 */
 
 	@Override
-	public boolean checkQR(String qrString) throws IOException {
-
+	public boolean checkQR(String ingegevenstring) throws IOException {
+		
+		String qrString = null;
+		
+		ingegevenstring = ingegevenstring.substring(1, ingegevenstring.length() - 1);
+		JSONObject json = null;
+		
+		try {
+			json = new JSONObject(ingegevenstring);
+			qrString=json.getString("QR_code");				//qrString = waarde van meegegeven JSONArray
+		} catch (JSONException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+		
 		// Get qr string value from db
 		Query q = em.createQuery("SELECT p FROM Project  WHERE p.QR = : qr");
 		q.setParameter(1, qrString);
@@ -221,6 +235,10 @@ public class ProjectManagementEJB implements ProjectManagementEJBLocal {
 
 		return jArray.toString();
 
+	}
+	
+	public void update(Project p){
+		em.merge(p);
 	}
 
 }

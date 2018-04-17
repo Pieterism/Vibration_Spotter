@@ -76,6 +76,13 @@ private static final long serialVersionUID = 1L;
 		return "grafiek.faces?faces-redirect=true";
 	}
  
+ public void wissen(Meting met) throws IOException {
+	 	HttpSession session = SessionUtils.getSession();
+	 	int idProject=(int) session.getAttribute("idProject");
+		metingejb.wissenMeting(met.getIdMeting());
+		FacesContext.getCurrentInstance().getExternalContext().redirect("metingen.xhtml?id="+idProject);
+	}
+ 
 
 
 public Meting getMeting() {

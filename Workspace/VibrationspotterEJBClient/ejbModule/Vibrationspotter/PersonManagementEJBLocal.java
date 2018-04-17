@@ -20,6 +20,9 @@ public interface PersonManagementEJBLocal {
 	Persoon findPersoonByid(int id);
 	
 	public Spotter findSpotterByGebruiksnaam(String gebruikersnaam);
+
+	String zoekEmailadres(int idPersoon);
+
 		
 
 	}
