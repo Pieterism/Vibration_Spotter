@@ -37,6 +37,7 @@ import android.widget.TextView;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.toolbox.JsonArrayRequest;
@@ -298,7 +299,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             AlertDialog.Builder settings = new AlertDialog.Builder(this);
             settings.setMessage(imageString)
-                    .setNegativeButton("close",null)
+                    .setNegativeButton("close", null)
                     .create()
                     .show();
 
@@ -313,9 +314,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     new Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
-                            Toast.makeText(MainActivity.this,"Upload ail :(", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(MainActivity.this, "Upload ail :(", Toast.LENGTH_SHORT).show();
                         }
-                    });
+                    }) {
+                        @Override
+                        protected Map<String, String> getParams () throws AuthFailureError {
+                            Map<String,String> parameters = new HashMap<>();
+                            parameters.put("image",imageString);
+                            return parameters;
+                        }
+            };
 
         } else if (id == R.id.nav_send) {
 
