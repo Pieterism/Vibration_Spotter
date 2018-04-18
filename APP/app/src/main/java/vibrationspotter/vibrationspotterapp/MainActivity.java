@@ -32,6 +32,20 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.provider.MediaStore;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.VolleyError;
+
+import android.util.Log;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
+
 import vibrationspotter.Custom_views.ProjectView;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -174,6 +188,77 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             clHomePage.setVisibility(View.INVISIBLE);
             svProjectview.setVisibility(View.VISIBLE);
+
+            //Deel PJ:
+      /*      SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+            SharedPreferences.Editor editor = settings.edit();
+
+            String email = settings.getString("email",null);
+            if(email!=null){
+                Map<String,String> gegevens = new HashMap<>();
+                gegevens.put("email", email);
+                final JSONObject jsonObject = new JSONObject(gegevens);
+                final JSONArray jArray = new JSONArray();
+                jArray.put(jsonObject);
+                final Map<Integer,String> map = new HashMap<>();
+
+                JsonArrayRequest inloggenRequest = new JsonArrayRequest(Request.Method.POST,
+                        getString(R.string.url) + "Projecten",
+                        jArray,
+                        new Response.Listener<JSONArray>() {
+                            @Override
+                            public void onResponse(JSONArray response) {
+                                String geg = response.toString();
+                                geg = geg.substring(1, geg.length() - 1);
+                                for(int i=0; i<response.length();i++) {
+                                    try {
+
+
+                                        int index1 = geg.indexOf("{");
+                                        int index2 = geg.indexOf("}");
+                                        String deel = geg.substring(index1, index2);
+                                        JSONObject jsonObject2 = new JSONObject(deel);
+                                        geg = geg.substring(index2 + 1);
+                                        map.put(i, jsonObject2.getString("projecttitel"));
+
+
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+
+                                  //  ProjectView projectView = new ProjectView(this, i);
+                                  //  llprojecten.addView(projectView, lp);
+
+                                }
+
+
+
+                            }
+
+                        },
+                        new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                Log.d("Projecten","Error: " + error.toString() + ", " + error.getMessage());
+                            }
+                        }
+
+                );
+                VolleyClass.getInstance(getApplicationContext()).addToRequestQueue(inloggenRequest, "Inloggen");
+
+
+                for(int i=1; i<=map.size(); i++) {
+                    ProjectView projectView = new ProjectView(this, i);
+                    llprojecten.addView(projectView, lp);
+                }
+
+
+            }
+
+            //EINDE DEEL PJ
+
+*/
+
 
             for(int i=1; i<=20; i++) {
                 ProjectView projectView = new ProjectView(this, i);
