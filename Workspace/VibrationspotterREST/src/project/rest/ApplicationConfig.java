@@ -23,6 +23,7 @@ private final Set<Class<?>> classes;
 		c.add(QRcodeREST.class);
 		c.add(RegistratieREST.class);
 		c.add(InloggenREST.class);
+		c.add(ProjectenRest.class);
 		classes = Collections.unmodifiableSet(c);
 	}
 	

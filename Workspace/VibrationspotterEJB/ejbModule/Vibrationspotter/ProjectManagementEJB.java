@@ -66,6 +66,14 @@ public class ProjectManagementEJB implements ProjectManagementEJBLocal {
 		List<Project> projecten = q.getResultList();
 		return projecten.get(0);
 	}
+	
+	public Project findProjectByEmail(String email) {
+		Query q = em.createQuery("SELECT p FROM Project p WHERE p.idProject = :email");
+		q.setParameter("email", email);
+		List<Project> projecten = q.getResultList();
+		return projecten.get(0);
+	}
+
 
 	@Override
 	public void addProject(Project project) {
@@ -215,7 +223,6 @@ public class ProjectManagementEJB implements ProjectManagementEJBLocal {
 		}
 
 		try {
-			int idPersoon = (int) json.get("idPersoon");
 
 			Query q = em.createQuery("SELECT p FROM Project p ORDER BY p.idProject ASC");
 			List<Project> projecten = q.getResultList();

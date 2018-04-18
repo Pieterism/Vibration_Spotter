@@ -10,6 +10,8 @@ public interface ProjectManagementEJBLocal {
 	public Project findProject(String titel);
 
 	public Project findProjectById(int id);
+	
+	Project findProjectByEmail(String email);
 
 	public String FindAllProjectsForApp(String ingegevenstring);
 
