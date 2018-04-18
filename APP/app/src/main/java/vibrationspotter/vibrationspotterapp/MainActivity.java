@@ -51,6 +51,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -109,6 +110,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         clHomePage = findViewById(R.id.clhome_page);
         llprojecten = findViewById(R.id.llprojecten);
+
+        imageView = findViewById(R.id.vbAfbeelding);
     }
 
     @Override
@@ -160,10 +163,34 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 if (resultCode == RESULT_OK && data != null && data.getData() != null) {
                     Uri uri = data.getData();
                     try {
-                        bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(),uri);
+                        final InputStream baos = getContentResolver().openInputStream(uri);
+                        bitmap = BitmapFactory.decodeStream(baos);
+                        imageView.setImageBitmap(bitmap);
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
+
+                    /*StringRequest request = new StringRequest(Request.Method.POST,
+                            getString(R.string.url) + "Foto",
+                            new Response.Listener<String>() {
+                                @Override
+                                public void onResponse(String response) {
+                                    Toast.makeText(MainActivity.this, "Upload succes!", Toast.LENGTH_SHORT).show();
+                                }
+                            },
+                            new Response.ErrorListener() {
+                                @Override
+                                public void onErrorResponse(VolleyError error) {
+                                    Toast.makeText(MainActivity.this, "Upload ail :(", Toast.LENGTH_SHORT).show();
+                                }
+                            }) {
+                        @Override
+                        protected Map<String, String> getParams () throws AuthFailureError {
+                            Map<String,String> parameters = new HashMap<>();
+                            parameters.put("image",imageString);
+                            return parameters;
+                        }
+                    };*/
                 }
                 break;
             default:
@@ -287,43 +314,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             startActivity(naar_registreren);
 
         } else if (id == R.id.nav_share) {
-            Intent intent = new Intent();
+            Intent intent = new Intent(Intent.ACTION_PICK);
             intent.setType("image/*");
-            intent.setAction(Intent.ACTION_PICK);
-            startActivityForResult(Intent.createChooser(intent, "Select Image"), SELECTED_PIC);
-
-            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-            byte[] imageBytes = baos.toByteArray();
-            final String imageString = Base64.encodeToString(imageBytes, Base64.DEFAULT);
-
-            AlertDialog.Builder settings = new AlertDialog.Builder(this);
-            settings.setMessage(imageString)
-                    .setNegativeButton("close", null)
-                    .create()
-                    .show();
-
-            StringRequest request = new StringRequest(Request.Method.POST,
-                    getString(R.string.url) + "Foto",
-                    new Response.Listener<String>() {
-                        @Override
-                        public void onResponse(String response) {
-                            Toast.makeText(MainActivity.this, "Upload succes!", Toast.LENGTH_SHORT).show();
-                        }
-                    },
-                    new Response.ErrorListener() {
-                        @Override
-                        public void onErrorResponse(VolleyError error) {
-                            Toast.makeText(MainActivity.this, "Upload ail :(", Toast.LENGTH_SHORT).show();
-                        }
-                    }) {
-                        @Override
-                        protected Map<String, String> getParams () throws AuthFailureError {
-                            Map<String,String> parameters = new HashMap<>();
-                            parameters.put("image",imageString);
-                            return parameters;
-                        }
-            };
+            startActivityForResult(intent, SELECTED_PIC);
 
         } else if (id == R.id.nav_send) {
 
