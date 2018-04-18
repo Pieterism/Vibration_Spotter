@@ -1,5 +1,7 @@
 package Vibrationspotter;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 import javax.ejb.SessionContext;
 import javax.ejb.Stateless;
@@ -7,7 +9,12 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import model.Foto;
+import model.Meting;
+import model.Persoon;
 
 @Stateless
 public class FotoManagementEJB implements FotoManagementEJBLocal {
@@ -29,6 +36,36 @@ public class FotoManagementEJB implements FotoManagementEJBLocal {
 	public void addFoto(Foto foto) {
 		// TODO Auto-generated method stub
 
+	}
+	
+	public void doorsturenfoto(String gegevens){
+		gegevens = gegevens.substring(1, gegevens.length()-1);	
+		JSONObject json = null;
+		String foto = null;
+		try {
+			 json = new JSONObject(gegevens);
+			 foto = json.getString("foto");
+		} catch (JSONException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+		
+		
+		
+		Query q = em.createQuery("SELECT p FROM Meting  WHERE p.idMeting = : 43");
+		List<Meting> metingen = q.getResultList();
+		Meting meting;
+		if (metingen.size() != 1) {
+			meting = null;
+		} else {
+		 meting = metingen.get(0);
+		}
+		
+		
+		
+		meting.setFoto(foto);
+		em.persist(meting);
 	}
 
 }

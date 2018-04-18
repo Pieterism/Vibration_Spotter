@@ -6,5 +6,7 @@ public interface FotoManagementEJBLocal {
 	public Foto findFoto(int idFoto);
 
 	void addFoto(Foto foto);
+	
+	void doorsturenfoto(String gegevens);
 
 }
