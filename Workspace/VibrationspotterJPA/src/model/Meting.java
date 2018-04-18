@@ -14,7 +14,11 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "Meting")
-// @NamedQuery(name="Meting.findAll", query="SELECT m FROM Meting m")
+/*
+ * Meting heeft gegevens met titel, opmerkingen...
+ * Ook een foto toevoegen aan de meting is mogelijk.
+ * Er worden ook nog 2 datasets aangemaakt voor de verwerking van de grafieken (met filter en zonder).
+ */
 public class Meting implements Serializable {
 	private static final long serialVersionUID = 1L;
 

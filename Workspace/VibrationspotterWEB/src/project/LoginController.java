@@ -38,8 +38,10 @@ private LoginManagementEJBLocal loginEJB;
  
  
  public String submit() {
-	 //System.out.println(user);
-	 //System.out.println(pwd);
+	 /*
+	  * Kijkt of email en paswoord geldig is, indien wel wordt er doorverwezen naar de webpagina en worden de attributen
+	  * meegegeven aan de sessie. Indien ongeldig zal je terug naar de login verwezen worden met een melding van ongeldig login.
+	  */
 	 boolean valid;
 	 valid=loginEJB.controleerpaswoord(emailadres,pwd);
 	 

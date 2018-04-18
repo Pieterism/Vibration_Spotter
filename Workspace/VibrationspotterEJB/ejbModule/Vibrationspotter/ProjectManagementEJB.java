@@ -157,6 +157,10 @@ public class ProjectManagementEJB implements ProjectManagementEJBLocal {
 
 	@Override
 	public void getQRCode(int id) {
+		/*
+		 * Methode om een QR code te genereren.
+		 * Zal het als een png opslaan op google Drive.
+		 */
 		String uniqueID = null;
 
 		Query q = em.createQuery("SELECT p FROM Project  WHERE p.idProject = : id");
@@ -211,6 +215,10 @@ public class ProjectManagementEJB implements ProjectManagementEJBLocal {
 	}
 
 	public String FindAllProjectsForApp(String ingegevenstring) {
+		/*
+		 * Methode die de lijst van projecten met de gegevens terug doorstuurt naar de APP. 
+		 * We geven 3 argumenten mee voor ieder project.
+		 */
 		ingegevenstring = ingegevenstring.substring(1, ingegevenstring.length() - 1);
 		JSONObject json = null;
 		JSONArray jArray = new JSONArray();
@@ -234,6 +242,7 @@ public class ProjectManagementEJB implements ProjectManagementEJBLocal {
 				json2.put("projectbeschrijving", projecten.get(i).getBeschrijving());
 				jArray.put(json2);
 			}
+			System.out.println(jArray.toString());
 
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block

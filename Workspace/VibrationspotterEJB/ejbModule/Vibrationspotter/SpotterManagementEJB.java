@@ -40,12 +40,13 @@ public class SpotterManagementEJB implements SpotterManagementEJBLocal {
 	}
 
 	public void aanmakenSpotter(String ingegevenstring) {
+		/*
+		 * Aanmaken van spotter door nieuwe spotter te creeëren en attributen toe te wijzen,
+		 * zal daarna persisten naar databank
+		 */
 
-		ingegevenstring = ingegevenstring.substring(1, ingegevenstring.length() - 1); // zorgen
-																						// dat
-																						// []
-																						// weg
-																						// is
+		ingegevenstring = ingegevenstring.substring(1, ingegevenstring.length() - 1); // zorgen dat [] weg is
+																					
 		// System.out.println(ingegevenstring);
 
 		JSONObject json = null;
@@ -76,6 +77,10 @@ public class SpotterManagementEJB implements SpotterManagementEJBLocal {
 	}
 
 	public boolean checkInloggen(String ingegevenstring) {
+		/*
+		 * Inloggegegevens vergelijken met de doorgestuurde gegevens van de APP.
+		 * Kijkt ook of gebruiker leerkracht of Spotter is
+		 */
 		boolean valid;
 		String pwd = null;
 		String email = null;

@@ -46,6 +46,7 @@ public class MetingManagementEJB implements MetingManagementEJBLocal{
 
 	@Override
 	public Meting findMeting(String titelMeting) {
+		//Methode zoeken van meting met bepaalde titel.
 		Query q = em.createQuery("SELECT id FROM Meting m WHERE m.titel = :titel");
 		q.setParameter(1, titelMeting);
 
@@ -84,6 +85,11 @@ public class MetingManagementEJB implements MetingManagementEJBLocal{
 	}
 	
 	public void ToevoegenMetingResultaten(String jsonarray){
+		/*
+		 * Methode die Resultaten gekregen van APP verwerkt en dan doorstuurt naar databank.
+		 * De verwerking gebeurt in de OctaveManagementEJB klassen opgeroepen door verwerkstringdata(String data)
+		 * en CreateData(String s)
+		 */
 		
 		jsonarray = jsonarray.substring(1, jsonarray.length()-1);	
 	//	JSONObject json = null;

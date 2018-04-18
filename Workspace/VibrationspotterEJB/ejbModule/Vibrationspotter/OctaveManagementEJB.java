@@ -31,6 +31,11 @@ public class OctaveManagementEJB implements OctaveManagementEJBLocal {
 	};
 
 	public String[] createdata(String s) {
+		/*
+		 * Methode die Octave oproept via commandline en bewerkingen uitvoert op onze ingelezen String (data).
+		 * We returnen 2 datasets terug die dan naar de databank gestuurd kunnen worden.
+		 */  
+		
 		String s1 = null;
 		String s2 = null;
 		String[] resultaten = new String[2];

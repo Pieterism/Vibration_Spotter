@@ -12,9 +12,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+/*
+ * Aanmaken van filter, pagina's Home, Spotter en Leerkracht zijn beveiligd zodat enkel via login webpagina bekeken kan worden.
+ * Er wordt ook een pagina weergegeven aan de hand of Persoon Leerkracht of Admin is, waarbij de Adminpagina meer rechten heeft.
+ * Bij het uitloggen wordt de sessie terug gewissed waardoor je opnieuw moet inloggen.
+ * Voor de Sessies is er een hulpklasse SessionUtils aangemaakt.
+ * 
+ */
 @WebFilter(filterName = "AuthFilter", urlPatterns = { "/Home/*", "/Admin/*", "/Spotter/*", "/Leerkracht/*"})
 public class AuthorizationFilter implements Filter {
-//	"/metingen.xhtml/*"
 	public AuthorizationFilter() {
 	}
 

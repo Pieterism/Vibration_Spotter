@@ -25,6 +25,9 @@ public class LoginManagementEJB implements LoginManagementEJBLocal {
 	private BCrypt bcrypt;
 
 	public boolean controleerpaswoord(String email, String pwd) {
+		/*
+		 * Methode dat Passwoord en Email van Web gekregen vergelijkt met databank.
+		 */
 		Query q = em.createQuery("SELECT p FROM Persoon p WHERE p.emailadres = :email");
 		q.setParameter("email", email);
 		List<Persoon> personen = q.getResultList();
@@ -36,6 +39,9 @@ public class LoginManagementEJB implements LoginManagementEJBLocal {
 	}
 
 	public boolean controleerPaswoordLeerkrachtApp(String email, String pwd) {
+		/*
+		 * Methode dat Passwoord en Email van App gekregen vergelijkt met databank (zelfde manier van APP).
+		 */
 		Query q = em.createQuery("SELECT p FROM Persoon p WHERE p.emailadres = :email");
 		q.setParameter("email", email);
 		List<Persoon> personen = q.getResultList();
