@@ -42,11 +42,11 @@ public class Meting implements Serializable {
 
 	@Lob
 	@Column(name = "dataset1")
-	private String dataset1;
+	private byte[] dataset1;
 
 	@Lob
 	@Column(name = "dataset2")
-	private String dataset2;
+	private byte[] dataset2;
 
 	@ManyToOne
 	@JoinColumn(name = "idProject")
@@ -122,20 +122,22 @@ public class Meting implements Serializable {
 		this.foto = foto;
 	}
 
-	public String getDataset1() {
+	public byte[] getDataset1() {
 		return dataset1;
 	}
 
-	public void setDataset1(String dataset1) {
+	public void setDataset1(byte[] dataset1) {
 		this.dataset1 = dataset1;
 	}
 
-	public String getDataset2() {
+	public byte[] getDataset2() {
 		return dataset2;
 	}
 
-	public void setDataset2(String dataset2) {
+	public void setDataset2(byte[] dataset2) {
 		this.dataset2 = dataset2;
 	}
+
+
 
 }

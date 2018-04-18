@@ -124,7 +124,7 @@ public class MetingManagementEJB implements MetingManagementEJBLocal{
 		
 	}
 	
-	public String zoekDataset1(int idMeting){
+	public byte[] zoekDataset1(int idMeting){
 		Query q = em.createQuery("SELECT m FROM Meting m WHERE m.idMeting= :id");
 		q.setParameter("id", idMeting);
 		List<Meting> metingen = q.getResultList();
@@ -132,7 +132,7 @@ public class MetingManagementEJB implements MetingManagementEJBLocal{
 		return m.getDataset1();
 	}
 	
-	public String zoekDataset2(int idMeting){
+	public byte[] zoekDataset2(int idMeting){
 		Query q = em.createQuery("SELECT m FROM Meting m WHERE m.idMeting= :id");
 		q.setParameter("id", idMeting);
 		List<Meting> metingen = q.getResultList();
