@@ -15,6 +15,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Base64;
 import android.view.Display;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -31,11 +32,15 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.provider.MediaStore;
+import android.widget.TextView;
+
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 
 import vibrationspotter.Custom_views.ProjectView;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
-    private static final int SELECTED_PIC = 1;
+    private static final int SELECTED_PIC = 1111;
 
     ScrollView svProjectview;
     ConstraintLayout clHomePage;
@@ -44,6 +49,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     int width;
     int height;
+
+    Bitmap bitmap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -133,21 +140,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         switch (requestCode) {
             case SELECTED_PIC:
-                if (resultCode == RESULT_OK) {
+                if (resultCode == RESULT_OK && data != null && data.getData() != null) {
                     Uri uri = data.getData();
-                    String[] projection = {MediaStore.Images.Media.DATA};
-
-                    Cursor cursor = getContentResolver().query(uri, projection, null, null, null);
-                    cursor.moveToFirst();
-
-                    int columnIndex = cursor.getColumnIndex(projection[0]);
-                    String filepath = cursor.getString(columnIndex);
-                    cursor.close();
-
-                    Bitmap bitmap = BitmapFactory.decodeFile(filepath);
-                    Drawable drawable = new BitmapDrawable(bitmap);
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-                        imageView.setBackground(drawable);
+                    try {
+                        bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(),uri);
+                    } catch (IOException e) {
+                        e.printStackTrace();
                     }
                 }
                 break;
@@ -201,10 +199,21 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             startActivity(naar_registreren);
 
         } else if (id == R.id.nav_share) {
-            Intent intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-            startActivityForResult(intent, SELECTED_PIC);
+            Intent intent = new Intent();
+            intent.setType("image/*");
+            intent.setAction(Intent.ACTION_PICK);
+            startActivityForResult(Intent.createChooser(intent, "Select Image"), SELECTED_PIC);
 
-            //Wat je hier schrijft wordt uitgevoerd waneer de share knop ingeduwd wordt (doet voorlopig nog niets :p)
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+            byte[] imageBytes = baos.toByteArray();
+            final String imageString = Base64.encodeToString(imageBytes, Base64.DEFAULT);
+
+            AlertDialog.Builder settings = new AlertDialog.Builder(this);
+            settings.setMessage(imageString)
+                    .setNegativeButton("close",null)
+                    .create()
+                    .show();
 
         } else if (id == R.id.nav_send) {
 
