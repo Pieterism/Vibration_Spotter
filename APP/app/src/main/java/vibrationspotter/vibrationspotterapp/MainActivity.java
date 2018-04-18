@@ -41,8 +41,10 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
 
 import android.util.Log;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -299,6 +301,21 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     .setNegativeButton("close",null)
                     .create()
                     .show();
+
+            StringRequest request = new StringRequest(Request.Method.POST,
+                    getString(R.string.url) + "Foto",
+                    new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            Toast.makeText(MainActivity.this, "Upload succes!", Toast.LENGTH_SHORT).show();
+                        }
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            Toast.makeText(MainActivity.this,"Upload ail :(", Toast.LENGTH_SHORT).show();
+                        }
+                    });
 
         } else if (id == R.id.nav_send) {
 
