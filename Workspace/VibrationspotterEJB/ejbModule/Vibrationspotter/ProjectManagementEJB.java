@@ -220,9 +220,9 @@ public class ProjectManagementEJB implements ProjectManagementEJBLocal {
 	public String FindAllProjectsForApp(String ingegevenstring) {
 		
 		Gson gson = new Gson();
-		Type type = new TypeToken<Map<String,String>>(){}.getType();
+		Type type = new TypeToken<List<Map<String,String>>>(){}.getType();
 		
-		Map<String,String> inloggegevens = gson.fromJson(ingegevenstring, type);
+		List<Map<String,String>> inloggegevens = gson.fromJson(ingegevenstring, type);
 		
 
 		//Query q = em.createQuery("SELECT p FROM Project p ORDER BY p.idProject ASC");
