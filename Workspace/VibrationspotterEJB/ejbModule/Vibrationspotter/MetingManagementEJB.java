@@ -151,4 +151,13 @@ public class MetingManagementEJB implements MetingManagementEJBLocal{
 		em.remove(met);
 	}
 	
+	public byte[] zoekFoto(int idMeting){
+		Query q = em.createQuery("SELECT m FROM Meting m WHERE m.idMeting= :id");
+		q.setParameter("id", idMeting);
+		List<Meting> metingen = q.getResultList();
+		Meting m=metingen.get(0);
+		return m.getFoto();
+		
+	}
+	
 }

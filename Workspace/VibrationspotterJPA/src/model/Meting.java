@@ -33,8 +33,9 @@ public class Meting implements Serializable {
 	@Column(name = "tijdstip", nullable = false)
 	private String tijdstip;
 
+	@Lob
 	@Column(name = "foto", nullable = false)
-	private String foto;
+	private byte[] foto;
 
 	@Lob
 	@Column(name = "resultaten", nullable = false) // NOG VERWIJDEREN
@@ -118,11 +119,11 @@ public class Meting implements Serializable {
 		this.idProject = idProject;
 	}
 
-	public String getFoto() {
+	public byte[] getFoto() {
 		return foto;
 	}
 
-	public void setFoto(String foto) {
+	public void setFoto(byte[] foto) {
 		this.foto = foto;
 	}
 

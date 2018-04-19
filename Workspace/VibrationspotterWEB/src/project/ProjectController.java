@@ -129,5 +129,14 @@ public class ProjectController implements Serializable {
 		return emailadres;
 
 	}
+	
+	public Project zoekProject(){
+		HttpSession session = SessionUtils.getSession();
+		int id = (int) session.getAttribute(("idProject"));
+		Project p=projectejb.findProjectById(id);
+		return p;
+		
+
+	}
 
 }

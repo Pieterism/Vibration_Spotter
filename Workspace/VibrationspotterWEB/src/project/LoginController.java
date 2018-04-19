@@ -55,6 +55,7 @@ private LoginManagementEJBLocal loginEJB;
 		 session.setAttribute("idPersoon", user.getIdPersoon());
 		 session.setAttribute("admin", user.isAdmin());
 		 session.setAttribute("idProject", 0);
+		 session.setAttribute("idMeting", 0);
 		 
 		 session.setAttribute("type", user.getType());
 		 
