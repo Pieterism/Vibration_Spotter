@@ -211,13 +211,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     JSONArray jsonArray = new JSONArray();
                     jsonArray.put(jsonObject);
 
-                    JSONArray j2 = new JSONArray();
-                    j2.put(666);
-
-
                     JsonArrayRequest request = new JsonArrayRequest(Request.Method.POST,
                             getString(R.string.url) + "Foto",
-                            j2,
+                            jsonArray,
                             new Response.Listener<JSONArray>() {
                                 @Override
                                 public void onResponse(JSONArray response) {
@@ -352,7 +348,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             SharedPreferences.Editor editor = settings.edit();
 
             editor.clear();
-            editor.commit();
+            editor.apply();
+
+            recreate();
 
         } else if (id == R.id.nav_share) {
             Intent intent = new Intent(Intent.ACTION_PICK);
