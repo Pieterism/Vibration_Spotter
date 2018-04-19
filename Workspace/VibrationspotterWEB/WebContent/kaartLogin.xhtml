@@ -16,9 +16,21 @@
      </div>
      
     <h:button id="tologin" image="loginbutton.png" outcome="login.xhtml" />
+     <h:form>
+        
+		<h:panelGrid columns ="3" cellpadding = "10" cellspacing = "1" styleClass="panel" >
+			<h:outputText value="ID" />
+			<h:inputText required ="true" id="id" value="#{kaartController.id}" requiredMessage="gelieve een ID in te geven"></h:inputText>
+			<h:commandButton value = "zoeken" action="#{kaartController.controle()}"></h:commandButton>
+		 </h:panelGrid>
+	</h:form>
+	
    <input id="pac-input" class="controls" type="text" placeholder="Search Box"/>
     <div id="map"></div>
     <div id="legend"><h3>Legende</h3></div>
+    
+    
+
     <script>
 	var b=0;
 	var k=0;
@@ -108,9 +120,10 @@
         var marker = new google.maps.Marker({
             position: {lat: #{point.latitude}, lng: #{point.longtitude}},
             map: map,
-            title: '#{point.titel}',
+            title: '#{point.idProject}',
             animation: google.maps.Animation.DROP,
             icon: controle('#{point.type}')
+            
           
           });
         

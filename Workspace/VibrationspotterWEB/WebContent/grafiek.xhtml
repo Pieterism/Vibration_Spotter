@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+      
+<h:head>
+<title>Welcome Page!</title>
+ <link rel = "stylesheet" href ="stijl/stijl.css"></link>
+ 
+ <script type="text/javascript">
+function exportChart1() {
+    //export image
+    $('#output1').empty().append(PF('g1').exportAsImage());
+ 
+    //show the dialog
+    PF('dlg1').show();
+}
+</script>
+ <script type="text/javascript">
+function exportChart2() {
+    //export image
+    $('#output2').empty().append(PF('g2').exportAsImage());
+ 
+    //show the dialog
+    PF('dlg2').show();
+}
+</script>
+</h:head>
+
+<h:body>
+
+<div class="header">
+	<h1><b>resultaten van meting</b></h1>
+</div>
+
+
+<div style="margin-top: 50px">
+	<p:chart type="line" model="#{chartView.grafiek1}" style="height:300px;" responsive="true" widgetVar="g1"/>
+	<p:commandButton type="button" value="als afbeelding weergeven" icon="ui-icon-extlink" onclick="exportChart1()"/>
+	
+	<p:dialog widgetVar="dlg1" showEffect="fade" modal="true" header="versnelling in functie van tijd" resizable="false">
+    	<p:outputPanel id="output1" layout="block" style="width:1500px;height:300px"/>
+	</p:dialog>
+</div>
+
+
+<div style="margin-top: 50px">
+	<p:chart type="line" model="#{chartView.grafiek2}" style="height:300px;" responsive="true" widgetVar="g2"/>
+	<p:commandButton type="button" value="als afbeelding weergeven" icon="ui-icon-extlink" onclick="exportChart2()"/>
+	
+	<p:dialog widgetVar="dlg2" showEffect="fade" modal="true" header="amplitude in functie van frequentie" resizable="false">
+    	<p:outputPanel id="output2" layout="block" style="width:1500px;height:300px"/>
+	</p:dialog>
+</div>
+ 
+</h:body> 
+</html>

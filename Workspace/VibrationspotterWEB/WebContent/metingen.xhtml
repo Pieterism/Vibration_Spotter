@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      >
+      
+<h:head>
+  <title>
+    <ui:insert name="title">Metingen</ui:insert>
+  </title>
+  	<link rel = "stylesheet" href ="stijl/stijlmetingen.css"></link>
+  	<link rel = "stylesheet" href ="stijl/stijlkaartproject.css"></link>
+  	<meta name="viewport" content="initial-scale=1.0, user-scalable=no"/>
+    <meta charset="utf-8"/>
+
+</h:head>
+
+ <f:metadata>
+ 	<f:viewParam name="id" value="#{metingController.project.idProject}" />
+ 	<f:viewAction action="#{metingController.findMetingenByIdProject}"></f:viewAction>
+ </f:metadata>  
+ 
+
+      
+<h:body>
+<div class="header">
+       <h1><b>Metingen</b> </h1>
+</div>
+    
+<p:dataTable value="#{kaartController.zoekMetingen()}" var="met" style="margin-top:10px">
+
+       <p:column headerText="IdMeting" style="text-align:center;">
+        		<h:outputText value="#{met.idMeting}" />
+    	</p:column>
+    	
+    	<p:column headerText="Titel" style="text-align:center;">
+        		<h:outputText value="#{met.titel}" />
+    	</p:column>
+    	
+    	<p:column headerText="Tijdstip" style="text-align:center;">
+        		<h:outputText value="#{met.tijdstip}" />
+    	</p:column>
+    	
+    	<p:column headerText="Opmerking" style="text-align:center;">
+        		<h:outputText value="#{met.opmerking}" />
+    	</p:column>
+    	
+    	<p:column headerText="Foto" style="text-align:center;">
+        		 <h:graphicImage value="/Leerkracht/metingen/image?id=#{met.idMeting}" style="width:32px;height:18px"/>
+    	</p:column>
+    	
+    	<p:column headerText="grafiek" style="text-align:center">
+    	  <h:form>
+        	<h:commandLink action="#{kaartController.toonGrafiek(met)}" class="subAnchor" value="toon grafiek"/>
+        </h:form>
+        </p:column>
+        
+
+    </p:dataTable>
+
+</h:body>
+</html>

@@ -9,6 +9,7 @@ import java.lang.reflect.Type;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.temporal.Temporal;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.EnumMap;
 import java.util.List;
@@ -246,6 +247,20 @@ public class ProjectManagementEJB implements ProjectManagementEJBLocal {
 		}
 		return projecten.get(0).isGoedgekeurd();
 		
+	}
+	
+	public List<Project> findGoedgekeurdeProjecten() {
+		Query q = em.createQuery("SELECT p FROM Project p ORDER BY p.idProject ASC");
+		List<Project> projecten = q.getResultList();
+		List<Project> goedeprojecten =  new ArrayList<Project>();
+		for(Project p:projecten){
+			if(p.isGoedgekeurd()==true){
+				goedeprojecten.add(p);
+			}
+			
+			
+		}
+		return goedeprojecten;
 	}
 
 }
