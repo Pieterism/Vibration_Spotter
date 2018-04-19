@@ -12,7 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import Vibrationspotter.MetingManagementEJBLocal;
 
-@WebServlet("/image/*")
+@WebServlet("/metingen/image/*")
 public class ImageServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
