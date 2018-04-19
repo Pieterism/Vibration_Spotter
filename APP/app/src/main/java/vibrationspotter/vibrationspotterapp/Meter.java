@@ -2,6 +2,7 @@ package vibrationspotter.vibrationspotterapp;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -24,6 +25,7 @@ import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
+import com.google.android.gms.common.api.CommonStatusCodes;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
@@ -152,30 +154,14 @@ public class Meter extends Activity implements SensorEventListener,OnChartValueS
                     }
                     jArray.put(jObject);
 
-                    final String REQUEST_TAG = "Metingen";
-                    JsonArrayRequest strReq = new JsonArrayRequest(Request.Method.POST,
-
-                            getString(R.string.url) + "Metingen",
-                            jArray,
-                            new Response.Listener<JSONArray>() {
-                                @Override
-                                public void onResponse(JSONArray response) {
-                                    Log.d("Metingen", response.toString());
-                                    Gson gson = new Gson();
-
-
-                                }
-                            },
-                            new Response.ErrorListener() {
-                                @Override
-                                public void onErrorResponse(VolleyError error) {
-                                    Log.d("Metingen", "Error: " + error.toString() + ", " + error.getMessage());
-                                }
-                            }
-                    ) {
-                    };
-
-                    VolleyClass.getInstance(getApplicationContext()).addToRequestQueue(strReq, "Metingen");
+                    Intent gelukt = new Intent();
+                    gelukt.putExtra("jArray", jArray.toString());
+                    setResult(CommonStatusCodes.SUCCESS);
+                    finish();
+                } else {
+                    Intent mislukt = new Intent();
+                    setResult(CommonStatusCodes.SIGN_IN_REQUIRED);
+                    finish();
                 }
             }
         });

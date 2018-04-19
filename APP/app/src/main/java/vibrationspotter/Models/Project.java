@@ -18,14 +18,14 @@ public class Project {
 
     private String QR;
 
-    private Date timestamp;
+    private String timestamp;
 
     private String beschrijving;
 
     public Project() {
     }
 
-    public Project(int idProject, String titel, String type, float latitude, float longtitude, boolean goedgekeurd, String QR, Date timestamp, String beschrijving) {
+    public Project(int idProject, String titel, String type, float latitude, float longtitude, boolean goedgekeurd, String QR, String timestamp, String beschrijving) {
         this.idProject = idProject;
         this.titel = titel;
         this.type = type;
@@ -35,5 +35,41 @@ public class Project {
         this.QR = QR;
         this.timestamp = timestamp;
         this.beschrijving = beschrijving;
+    }
+
+    public int getIdProject() {
+        return idProject;
+    }
+
+    public String getTitel() {
+        return titel;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public float getLatitude() {
+        return latitude;
+    }
+
+    public float getLongtitude() {
+        return longtitude;
+    }
+
+    public boolean isGoedgekeurd() {
+        return goedgekeurd;
+    }
+
+    public String getQR() {
+        return QR;
+    }
+
+    public String getTimestamp() {
+        return timestamp;
+    }
+
+    public String getBeschrijving() {
+        return beschrijving;
     }
 }

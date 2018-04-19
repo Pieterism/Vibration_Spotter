@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import vibrationspotter.Models.Project;
 import vibrationspotter.vibrationspotterapp.R;
 
 
@@ -18,21 +19,23 @@ public class ProjectView extends ConstraintLayout {
     ImageView projectAfbeelding;
     TextView titel;
     ImageView openProject;
+    Project project;
 
-    public ProjectView(Context context, int i) {
+    public ProjectView(Context context, Project p) {
         super(context);
-        init(context, i);
+        this.project = p;
+        init(context);
     }
 
     public ProjectView(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
-    private void init(Context context, int i){
+    private void init(Context context){
 
         rootView = inflate(context, R.layout.projectview,this);
         titel = rootView.findViewById(R.id.project_titel);
-        titel.setText("TEST " + i);
+        titel.setText(project.getTitel());
         projectAfbeelding = findViewById(R.id.project_logo);
         openProject = findViewById(R.id.project_button);
 
@@ -42,5 +45,7 @@ public class ProjectView extends ConstraintLayout {
         this.titel.setText(titel);
     }
 
-
+    public Project getProject() {
+        return project;
+    }
 }

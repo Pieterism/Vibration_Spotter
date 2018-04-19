@@ -44,6 +44,7 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import android.util.Log;
 import android.widget.Toast;
@@ -54,10 +55,13 @@ import org.json.JSONObject;
 
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.lang.reflect.Type;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import vibrationspotter.Custom_views.ProjectView;
+import vibrationspotter.Models.Project;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private static final int SELECTED_PIC = 1111;
@@ -79,6 +83,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     View nav_header_main;
 
     Gson gson;
+
+    List<Project> projecten;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -136,6 +142,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         settings = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         Map<String,?> sharedPreferences = settings.getAll();
+
+        projecten.clear();
 
         String naam;
         if(sharedPreferences.containsKey("email")) naam = sharedPreferences.get("email").toString();
@@ -273,14 +281,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 final JSONArray jArray = new JSONArray();
                 jArray.put(jsonObject);
 
-                JsonArrayRequest inloggenRequest = new JsonArrayRequest(Request.Method.POST,
+                JsonArrayRequest projectRequest = new JsonArrayRequest(Request.Method.POST,
                         getString(R.string.url) + "Projecten",
                         jArray,
                         new Response.Listener<JSONArray>() {
                             @Override
                             public void onResponse(JSONArray response) {
                                 Log.d("Projecten", "GELUKT!");
-                                System.out.println(response.toString());
+
+                                Type type = new TypeToken<List<Project>>(){}.getType();
+                                projecten = gson.fromJson(response.toString(), type);
+
                             }
                         },
                         new Response.ErrorListener() {
@@ -290,15 +301,24 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                             }
                         }
                 );
-                VolleyClass.getInstance(getApplicationContext()).addToRequestQueue(inloggenRequest, "Inloggen");
+                VolleyClass.getInstance(getApplicationContext()).addToRequestQueue(projectRequest, "Inloggen");
             }
 
             //EINDE DEEL PJ
 
 
 
-            for(int i=1; i<=5; i++) {
-                ProjectView projectView = new ProjectView(this, i);
+            for(final Project p: projecten){
+                ProjectView projectView = new ProjectView(this, p);
+                projectView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        String pString = gson.toJson(p);
+                        Intent naar_project = new Intent(getApplicationContext(),ProjectActivity.class);
+                        naar_project.putExtra("project",pString);
+                        startActivity(naar_project);
+                    }
+                });
                 llprojecten.addView(projectView, lp);
             }
 
