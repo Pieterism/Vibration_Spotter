@@ -49,6 +49,8 @@ public class Meter extends Activity implements SensorEventListener,OnChartValueS
     ArrayList<Entry> zWaarden;
     int entryNummer;
 
+    Button bsave;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -122,6 +124,58 @@ public class Meter extends Activity implements SensorEventListener,OnChartValueS
                 
             }
         });
+
+        bSave.findViewById(R.id.bSave);
+        bSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+                SharedPreferences.Editor editor = settings.edit();
+
+                String email = settings.getString("email", null);
+
+                if (email != null) {
+                    System.out.println("email: " + email);
+                    System.out.println(jArray.toString());
+
+                    //DEEL PJ
+                    JSONObject jObject = new JSONObject();
+
+                    try {
+                        jObject.put("email",email);
+                        jObject.put("titel","titel");           //titel moet nog ingevuld worden in APP
+                        // jObject.put("idProject", idProject);               //Kiezen bij welk project hoort
+                        //  jObject.put("tijdstip","titel");                   //
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    jArray.put(jObject);
+
+                    final String REQUEST_TAG = "Metingen";
+                    JsonArrayRequest strReq = new JsonArrayRequest(Request.Method.POST,
+
+                            getString(R.string.url) + "Metingen",
+                            jArray,
+                            new Response.Listener<JSONArray>() {
+                                @Override
+                                public void onResponse(JSONArray response) {
+                                    Log.d("Metingen", response.toString());
+
+                                }
+                            },
+                            new Response.ErrorListener() {
+                                @Override
+                                public void onErrorResponse(VolleyError error) {
+                                    Log.d("Metingen", "Error: " + error.toString() + ", " + error.getMessage());
+                                }
+                            }
+                    ) {
+                    };
+
+                    VolleyClass.getInstance(getApplicationContext()).addToRequestQueue(strReq, "Metingen");
+                }
+            }
+        });
     }
 
     @Override
@@ -174,54 +228,7 @@ public class Meter extends Activity implements SensorEventListener,OnChartValueS
     @Override
     protected void onStop() {
         super.onStop();
-        SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        SharedPreferences.Editor editor = settings.edit();
 
-        String email = settings.getString("email", null);
-
-
-        if (email != null) {
-            System.out.println("email: " + email);
-            System.out.println(jArray.toString());
-
-            //DEEL PJ
-            JSONObject jObject = new JSONObject();
-
-
-        try {
-            jObject.put("email",email);
-            jObject.put("titel","titel");           //titel moet nog ingevuld worden in APP
-           // jObject.put("idProject", idProject);               //Kiezen bij welk project hoort
-          //  jObject.put("tijdstip","titel");                   //
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        jArray.put(jObject);
-
-            final String REQUEST_TAG = "Metingen";
-            JsonArrayRequest strReq = new JsonArrayRequest(Request.Method.POST,
-
-                    getString(R.string.url) + "Metingen",
-                    jArray,
-                    new Response.Listener<JSONArray>() {
-                        @Override
-                        public void onResponse(JSONArray response) {
-                            Log.d("Metingen", response.toString());
-
-
-                        }
-                    },
-                    new Response.ErrorListener() {
-                        @Override
-                        public void onErrorResponse(VolleyError error) {
-                            Log.d("Metingen", "Error: " + error.toString() + ", " + error.getMessage());
-                        }
-                    }
-            ) {
-            };
-
-            VolleyClass.getInstance(getApplicationContext()).addToRequestQueue(strReq, "Metingen");
-        }
     }
     @Override
     public void onValueSelected(Entry e, Highlight h) {
