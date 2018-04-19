@@ -31,7 +31,7 @@
 </div>
 	<h:button id="terug" value="terug naar projecten" outcome="projecten.xhtml"/>
     
-<p:dataTable value="#{sorterMeting.metingen}" var="met" style="margin-top:10px">
+<p:dataTable value="#{metingController.metingen}" var="met" style="margin-top:10px">
 
        <p:column headerText="IdMeting" style="text-align:center;">
         		<h:outputText value="#{met.idMeting}" />
@@ -50,7 +50,7 @@
     	</p:column>
     	
     	<p:column headerText="Foto" style="text-align:center;">
-        		 <h:graphicImage value="/metingen/image?id=#{met.idMeting}" style="width:32px;height:18px"/>
+        		 <h:graphicImage value="/Leerkracht/metingen/image?id=#{met.idMeting}" style="width:32px;height:18px"/>
     	</p:column>
     	
     	<p:column headerText="grafiek" style="text-align:center">
