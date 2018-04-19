@@ -52,6 +52,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -180,26 +181,33 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 if (resultCode == RESULT_OK && data != null && data.getData() != null) {
                     Uri uri = data.getData();
                     try {
-                        final InputStream baos = getContentResolver().openInputStream(uri);
-                        bitmap = BitmapFactory.decodeStream(baos);
+                        InputStream is = getContentResolver().openInputStream(uri);
+                        bitmap = BitmapFactory.decodeStream(is);
                         imageView.setImageBitmap(bitmap);
                         imageView.setRotation(0);
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
 
-                    /*StringRequest request = new StringRequest(Request.Method.POST,
+                    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                    bitmap.compress(Bitmap.CompressFormat.JPEG, 75, baos);
+                    byte[] imageBytes = baos.toByteArray();
+                    final String imageString = Base64.encodeToString(imageBytes, Base64.DEFAULT);
+
+
+
+                    StringRequest request = new StringRequest(Request.Method.POST,
                             getString(R.string.url) + "Foto",
                             new Response.Listener<String>() {
                                 @Override
                                 public void onResponse(String response) {
-                                    Toast.makeText(MainActivity.this, "Upload succes!", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(MainActivity.this, "Joepie!!!", Toast.LENGTH_LONG).show();
                                 }
                             },
                             new Response.ErrorListener() {
                                 @Override
                                 public void onErrorResponse(VolleyError error) {
-                                    Toast.makeText(MainActivity.this, "Upload ail :(", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(MainActivity.this, ":( \n Mislukt", Toast.LENGTH_LONG).show();
                                 }
                             }) {
                         @Override
@@ -208,7 +216,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                             parameters.put("image",imageString);
                             return parameters;
                         }
-                    };*/
+                    };
+                    VolleyClass.getInstance(this).addToRequestQueue(request,"IMAGE");
                 }
                 break;
             default:
@@ -316,7 +325,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             startActivity(naar_meter);
 
         } else if (id == R.id.nav_login) {
-            Intent naar_login = new Intent(MainActivity.this, LoginSelector.class);
+            Intent naar_login = new Intent(MainActivity.this, Splash.class);
             startActivity((naar_login));
 
         } else if (id == R.id.nav_logout) {
