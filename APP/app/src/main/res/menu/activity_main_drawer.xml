@@ -7,27 +7,32 @@
         <item
             android:id="@+id/nav_home"
             android:icon="@drawable/ic_home_black_24dp"
-            android:title="HOME"/>
+            android:title="HOME" />
         <item
             android:id="@+id/nav_projecten"
             android:icon="@drawable/ic_folder_black_24dp"
-            android:title="Projecten" />
+            android:title="Projects" />
         <item
             android:id="@+id/nav_meter"
             android:icon="@drawable/ic_vibration_black_24dp"
             android:title="Vibratiemeter Testen" />
+
+        <item
+            android:id="@+id/nav_newproject"
+            android:icon="@drawable/ic_person_black_24dp"
+            android:title="Project Aanmaken" />
+
+        <!--MOET NOG VERWIJDERD WORDEN -->
         <item
             android:id="@+id/nav_login"
             android:icon="@drawable/ic_person_black_24dp"
             android:title="Inloggen" />
+
         <item
             android:id="@+id/nav_logout"
             android:icon="@drawable/ic_perm_identity_black_24dp"
             android:title="Uitloggen"/>
-        <item
-            android:id="@+id/nav_registreren"
-            android:icon="@drawable/ic_person_add_black_24dp"
-            android:title="Registreren" />
+
     </group>
 
     <item android:title="Communicate">
