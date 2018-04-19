@@ -30,7 +30,8 @@ private static final long serialVersionUID = 1L;
 		System.out.println(jsonarray);
 		
 		String test = projectEJB.FindAllProjectsForApp(jsonarray);
-		return "[{\"Gelukt?:\": YEZZZ!!!}]";
+		//System.out.println("test " + test);
+		return test;
 	}
 
 }
