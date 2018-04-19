@@ -93,17 +93,17 @@ public class GebruikerLogin extends AppCompatActivity{
                                     SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
                                     SharedPreferences.Editor editor = settings.edit();
 
-                         if(!response.toString().contains("Verkeerd")){
-                          editor.putString("email", email);
-                          editor.putString("type", "gebruiker");
-                          editor.apply();
-                          Log.d("MyApp",email);
-                          //Sessie is aangemaakt
-                    }
-                    else{
-                        Log.d("MyApp", "verkeerd wachtwoord of gebruikersnaam");
-                    }
-                                }
+                                    if(!response.toString().contains("Verkeerd")){
+                                        editor.putString("email", email);
+                                        editor.putString("type", "gebruiker");
+                                        editor.apply();
+                                        Log.d("MyApp",email);
+                                        //Sessie is aangemaakt
+                                     }
+                                        else{
+                                            Log.d("MyApp", "verkeerd wachtwoord of gebruikersnaam");
+                                        }
+                                            }
                             },
                             new Response.ErrorListener() {
                                 @Override

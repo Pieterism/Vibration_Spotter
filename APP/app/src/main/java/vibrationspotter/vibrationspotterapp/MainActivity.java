@@ -194,13 +194,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     byte[] imageBytes = baos.toByteArray();
                     final String imageString = Base64.encodeToString(imageBytes, Base64.DEFAULT);
 
+                    Map<String,String> imageMap = new HashMap<>();
+                    imageMap.put("image",imageString);
 
+                    JSONObject jsonObject = new JSONObject(imageMap);
+                    JSONArray jsonArray = new JSONArray();
+                    jsonArray.put(jsonObject);
 
-                    StringRequest request = new StringRequest(Request.Method.POST,
+                    JSONArray j2 = new JSONArray();
+                    
+
+                    JsonArrayRequest request = new JsonArrayRequest(Request.Method.POST,
                             getString(R.string.url) + "Foto",
-                            new Response.Listener<String>() {
+                            jsonArray,
+                            new Response.Listener<JSONArray>() {
                                 @Override
-                                public void onResponse(String response) {
+                                public void onResponse(JSONArray response) {
                                     Toast.makeText(MainActivity.this, "Joepie!!!", Toast.LENGTH_LONG).show();
                                 }
                             },
@@ -209,14 +218,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                 public void onErrorResponse(VolleyError error) {
                                     Toast.makeText(MainActivity.this, ":( \n Mislukt", Toast.LENGTH_LONG).show();
                                 }
-                            }) {
-                        @Override
-                        protected Map<String, String> getParams () throws AuthFailureError {
-                            Map<String,String> parameters = new HashMap<>();
-                            parameters.put("image",imageString);
-                            return parameters;
-                        }
-                    };
+
+                    });
                     VolleyClass.getInstance(this).addToRequestQueue(request,"IMAGE");
                 }
                 break;
