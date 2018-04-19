@@ -229,6 +229,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
+
         int id = item.getItemId();
 
         if (id == R.id.nav_home) {
@@ -241,8 +245,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             llprojecten.removeAllViews();
 
-            svProjectview.setVisibility(View.VISIBLE);
             clHomePage.setVisibility(View.INVISIBLE);
+            svProjectview.setVisibility(View.VISIBLE);
 
             //Deel PJ:
       /*      SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
@@ -349,8 +353,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
+
         return true;
     }
 }

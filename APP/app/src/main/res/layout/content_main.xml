@@ -60,7 +60,6 @@
         android:id="@+id/svprojectview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="520dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -68,7 +67,9 @@
             android:id="@+id/llprojecten"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" />
+            android:orientation="vertical">
+
+        </LinearLayout>
 
     </ScrollView>
 
