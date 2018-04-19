@@ -31,7 +31,7 @@
 
 	</div>
 <h:form>
-	<p:dataTable value="#{sorterProject.projecten}" var="pro" style="margin-top:10px" widgetVar="carsTable">
+	<p:dataTable value="#{projectManagementEJB.findAllProjecten()}" var="pro" style="margin-top:10px" widgetVar="carsTable">
 			
 		<p:column headerText="IdProject" style="text-align:center;width:100px;" sortBy="#{pro.idProject}" filterBy="#{pro.idProject}" >
         	<h:outputText value="#{pro.idProject}" />
@@ -64,6 +64,14 @@
 				onclick="return confirm('wilt u zeker dit project wissen?')"
 				action="#{projectController.wissen(pro)}">
 			</h:commandButton>
+    	</p:column>
+    	
+    		<p:column headerText="project goedkeuren" style="text-align:center">
+        	<h:selectOneMenu value = "#{pro.goedgekeurd}">
+   				<f:selectItem itemValue = "false" itemLabel = "weigeren" /> 
+   				<f:selectItem itemValue = "true" itemLabel = "aanvaarden" />
+   				<f:ajax execute="@this" listener="#{projectController.update(pro)}" render="input" />
+		 </h:selectOneMenu> 
     	</p:column>
  	
 	</p:dataTable>
