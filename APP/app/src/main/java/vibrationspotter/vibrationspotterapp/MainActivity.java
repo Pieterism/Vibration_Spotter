@@ -67,11 +67,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     ImageView imageView;
     Button bRotateR;
     Button bRotateL;
+    TextView textName;
 
     int width;
     int height;
 
     Bitmap bitmap;
+
+    SharedPreferences settings;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,13 +82,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        /*
-        Display display = getWindowManager().getDefaultDisplay();
-        Point size = new Point();
-        display.getSize(size);
-        width = size.x;
-        height = size.y;
-        */
+
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -129,6 +126,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 imageView.setRotation(-90);
             }
         });
+
+        textName = findViewById(R.id.textName);
+
+        settings = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        Map<String,?> sharedPreferences = settings.getAll();
 
     }
 
@@ -202,11 +204,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     jsonArray.put(jsonObject);
 
                     JSONArray j2 = new JSONArray();
-                    
+                    j2.put(666);
+
 
                     JsonArrayRequest request = new JsonArrayRequest(Request.Method.POST,
                             getString(R.string.url) + "Foto",
-                            jsonArray,
+                            j2,
                             new Response.Listener<JSONArray>() {
                                 @Override
                                 public void onResponse(JSONArray response) {
@@ -342,10 +345,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             editor.clear();
             editor.commit();
-
-        } else if (id == R.id.nav_registreren) {
-            Intent naar_registreren = new Intent(MainActivity.this, Registreren.class);
-            startActivity(naar_registreren);
 
         } else if (id == R.id.nav_share) {
             Intent intent = new Intent(Intent.ACTION_PICK);
