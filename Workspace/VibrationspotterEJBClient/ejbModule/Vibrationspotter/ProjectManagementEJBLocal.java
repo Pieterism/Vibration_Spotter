@@ -28,5 +28,7 @@ public interface ProjectManagementEJBLocal {
 	boolean checkQR(String qrString) throws IOException;
 
 	public void update(Project pro);
+	
+	public boolean checkGoedgekeurd(int idProject);
 
 }
