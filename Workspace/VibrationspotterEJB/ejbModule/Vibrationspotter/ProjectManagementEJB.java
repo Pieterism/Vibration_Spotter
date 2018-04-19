@@ -9,6 +9,7 @@ import java.lang.reflect.Type;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.temporal.Temporal;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.EnumMap;
 import java.util.List;
@@ -37,6 +38,7 @@ import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 
+import model.Persoon;
 import model.Project;
 
 @Named
@@ -51,6 +53,9 @@ public class ProjectManagementEJB implements ProjectManagementEJBLocal {
 
 	@EJB
 	private MetingManagementEJBLocal metingejb;
+	
+	@EJB
+	private PersonManagementEJBLocal persoonejb;
 
 	@Override
 	public Project findProject(String titel) {
@@ -224,13 +229,34 @@ public class ProjectManagementEJB implements ProjectManagementEJBLocal {
 		
 		List<Map<String,String>> inloggegevens = gson.fromJson(ingegevenstring, type);
 		
+		Persoon persoon = persoonejb.findPersoonByEmail(inloggegevens.get(0).get("email"));
+		int idPersoon = persoon.getIdPersoon();
+		
+		Query q = em.createQuery("SELECT p FROM Project p Where p.idPersoon = :idPersoon", Persoon.class);
+		q.setParameter("idPersoon", persoon);
+		List<Project> projecten = q.getResultList();
+		
 
+		 String projectenJson = gson.toJson(projecten);
+
+		 return projectenJson;
+
+		
+		
+	/*	List<Project> goedeprojecten = new ArrayList<Project>();
+		for(int i=0; i<projecten.size(); i++){
+			if(inloggegevens.get("email"),projecten.get(i).getIdPersoon())
+		}
+*/
+		//Query q = em.createQuery("SELECT id FROM Meting m WHERE m.titel = :titel");
+		
+		
 		//Query q = em.createQuery("SELECT p FROM Project p ORDER BY p.idProject ASC");
 		//List<Project> projecten = q.getResultList();
 		
 			
 
-		return inloggegevens.toString();
+	//	return inloggegevens.toString();
 	}
 	
 	public void update(Project p){
