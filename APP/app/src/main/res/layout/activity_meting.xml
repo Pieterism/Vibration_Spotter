@@ -9,39 +9,47 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
         android:gravity="center"
-        >
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:weightSum="1"
-            android:layout_marginTop="10dp"
-            >
+            android:layout_marginTop="15dp"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
 
-            <ImageButton
-                android:id="@+id/bAcceptMeting"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_weight="0.10"
-                android:src="@drawable/ic_check"
-                android:background="@color/colorPrimaryDark"
+            <Button
+                android:id="@+id/bSave"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginHorizontal="10dp"
+                android:background="@color/colorPrimary"
+                android:drawableTop="@drawable/ic_check"
+                android:fontFamily="@font/advent_pro_semibold"
+                android:paddingBottom="5dp"
+                android:paddingHorizontal="16dp"
+                android:paddingTop="5dp"
+                android:text="Accept"
+                android:textColor="@color/colorSecondary"
+                android:textStyle="bold" />
 
-                />
-            <ImageButton
+            <Button
                 android:id="@+id/bRejectMeting"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_weight="0.10"
-                android:src="@drawable/ic_close"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginHorizontal="10dp"
-                android:background="@color/colorPrimaryDark"
-                />
+                android:background="@color/colorPrimary"
+                android:drawableTop="@drawable/ic_close"
+                android:fontFamily="@font/advent_pro_semibold"
+                android:paddingBottom="5dp"
+                android:paddingHorizontal="16dp"
+                android:paddingTop="5dp"
+                android:text="REJECT"
+                android:textColor="@color/colorSecondary"
+                android:textStyle="bold" />
 
         </LinearLayout>
 
@@ -50,6 +58,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="5dp">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -58,8 +67,7 @@
                 <com.github.mikephil.charting.charts.LineChart
                     android:id="@+id/lcx"
                     android:layout_width="match_parent"
-                    android:layout_height="150dp">
-                </com.github.mikephil.charting.charts.LineChart>
+                    android:layout_height="150dp"></com.github.mikephil.charting.charts.LineChart>
 
                 <com.github.mikephil.charting.charts.LineChart
                     android:id="@+id/lcy"
@@ -74,48 +82,56 @@
         </ScrollView>
 
         <LinearLayout
-            android:weightSum="1"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center"
-            android:layout_gravity="center"
-            android:paddingHorizontal="10dp"
-            android:layout_marginBottom="3dp">
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginBottom="15dp"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
 
             <Button
                 android:id="@+id/bStart"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_margin="10dp"
-                android:layout_weight="0.15"
-                android:background="@color/colorPrimaryDark"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                android:background="@color/colorPrimary"
+                android:drawableTop="@drawable/ic_play_circle_outline_black_24dp"
                 android:fontFamily="@font/advent_pro_semibold"
-                android:text="START"
+                android:paddingBottom="5dp"
+                android:paddingHorizontal="16dp"
+                android:paddingTop="5dp"
+                android:text="Start"
                 android:textColor="@color/colorSecondary"
                 android:textStyle="bold" />
 
-            <ImageButton
-                android:layout_weight="0.15"
-                android:layout_margin="10dp"
+            <Button
                 android:id="@+id/bAddPicture"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:src="@drawable/ic_add_a_photo_black_24dp"
-                android:background="@color/colorPrimaryDark"
-                />
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                android:background="@color/colorPrimary"
+                android:drawableTop="@drawable/ic_add_a_photo_black_24dp"
+                android:fontFamily="@font/advent_pro_semibold"
+                android:paddingBottom="5dp"
+                android:paddingHorizontal="16dp"
+                android:paddingTop="5dp"
+                android:text="Add picture"
+                android:textColor="@color/colorSecondary"
+                android:textStyle="bold" />
 
             <Button
-                android:layout_weight="0.15"
                 android:id="@+id/bStop"
-                android:layout_width="50dp"
-                android:layout_margin="10dp"
-                android:layout_height="50dp"
-                android:background="@color/colorPrimaryDark"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                android:background="@color/colorPrimary"
+                android:drawableTop="@drawable/ic_stop_black_24dp"
                 android:fontFamily="@font/advent_pro_semibold"
-                android:text="STOP"
+                android:paddingBottom="5dp"
+                android:paddingHorizontal="16dp"
+                android:paddingTop="5dp"
+                android:text="Stop"
                 android:textColor="@color/colorSecondary"
-                android:textStyle="bold"/>
+                android:textStyle="bold" />
 
         </LinearLayout>
 
