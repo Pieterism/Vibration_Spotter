@@ -33,12 +33,12 @@ private MetingManagementEJBLocal metingejb;
 
 private String id;
 
-public String controle(){
-	int idProject=Integer.parseInt(getId());
+public String controle(int id){
+
 	
-	if(projectejb.checkGoedgekeurd(idProject)){
+	if(projectejb.checkGoedgekeurd(id)){
 		HttpSession session = SessionUtils.getSession();
-		session.setAttribute("idKaart", idProject);
+		session.setAttribute("idKaart", id);
 		return "metingen.xhtml";
 		
 	}

@@ -58,48 +58,19 @@ public class QR_hub extends AppCompatActivity{
             if(resultCode == CommonStatusCodes.SUCCESS){
                 if(data != null){
                     final Barcode barcode = data.getParcelableExtra(BarcodeCaptureActivity.BarcodeObject);
-                    JSONObject jObject = new JSONObject();
-                    try{
-                        jObject.put("QR_code", barcode.displayValue);
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                    JSONArray jArray = new JSONArray();
-                    jArray.put(jObject);
-                    JsonArrayRequest stringRequest = new JsonArrayRequest(Request.Method.POST,
-                            baseurl + "QR",
-                            jArray,
-                            new Response.Listener<JSONArray>() {
-                                @Override
-                                public void onResponse(JSONArray response) {
-                                    Log.d("QR", response.toString());
-                                    AlertDialog.Builder builder = new AlertDialog.Builder(QR_hub.this);
-                                    builder.setMessage(response.toString())
-                                            .setNegativeButton("Close",null)
-                                            .create()
-                                            .show();
-                                }
-                            },
-                            new Response.ErrorListener() {
-                                @Override
-                                public void onErrorResponse(VolleyError error) {
-                                    Log.d("QR","Error: " + error.toString() + ", " + error.getMessage());
-                                }
-                            }
-                    ){
-                        @Override
-                        protected Map<String,String> getParams(){
-                            Map<String,String> map = new HashMap<>();
-                            map.put("String",barcode.displayValue);
-                            return map;
-                        }
-                    };
-                    VolleyClass.getInstance(getApplicationContext()).addToRequestQueue(stringRequest, "QR");
+                    Intent doorgeven = new Intent();
+                    doorgeven.putExtra("QR-code", barcode.displayValue);
+                    setResult(CommonStatusCodes.SUCCESS);
+                    finish();
                 }
                 else textView.setText("Data == null");
             }
-            else textView.setText("Geen Succes");
+            else {
+                Intent canceled = new Intent();
+                setResult(resultCode);
+                finish();
+            }
         }
-        else textView.setText("Mislukt");
+        else textView.setText("Dit is een BUG");
     }
 }
