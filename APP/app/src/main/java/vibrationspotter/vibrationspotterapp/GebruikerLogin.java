@@ -32,18 +32,9 @@ public class GebruikerLogin extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_spotterlogin);
 
-        Button naarMeter = findViewById(R.id.naarMeterG);
-        final EditText etusername = findViewById(R.id.g_username);
-        final EditText etpassword = findViewById(R.id.g_password);
-        Button bLogin = findViewById(R.id.bglogin);
-
-        naarMeter.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(GebruikerLogin.super.getApplicationContext(),Meter.class);
-                startActivity(intent);
-            }
-        });
+        final EditText etusername = findViewById(R.id.spotterlogintext);
+        final EditText etpassword = findViewById(R.id.spotterwachtwoordtext);
+        Button bLogin = findViewById(R.id.btn_login);
 
         bLogin.setOnClickListener(new View.OnClickListener() {
             @Override

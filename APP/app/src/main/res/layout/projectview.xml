@@ -4,13 +4,13 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_height="64dp"
-    android:layout_width="match_parent"
-    android:background="@color/colorPrimary">
+    android:layout_width="match_parent">
 
     <TextView
         android:id="@+id/project_titel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
         android:text="TextView"
         android:textSize="47dp"
         android:textStyle="bold"
@@ -19,9 +19,13 @@
 
     <ImageView
         android:id="@+id/project_logo"
-        android:layout_width="64dp"
-        android:layout_height="64dp"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toStartOf="@+id/project_titel"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/logo" />
 
     <ImageView

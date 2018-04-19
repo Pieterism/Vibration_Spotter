@@ -11,19 +11,37 @@
     <android.support.constraint.ConstraintLayout
         android:id="@+id/clhome_page"
         android:layout_width="match_parent"
-        android:layout_height="506dp"
+        android:layout_height="0dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
+
+        <Button
+            android:id="@+id/bRotateL"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/ic_rotate_left_black_24dp"
+            app:layout_constraintEnd_toStartOf="@+id/vbAfbeelding"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/bRotateR"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginStart="8dp"
+            android:background="@drawable/ic_rotate_right_black_24dp"
+            app:layout_constraintStart_toEndOf="@+id/vbAfbeelding"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
             android:text="@string/hometext"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/vbAfbeelding" />
 
         <ImageView
             android:id="@+id/vbAfbeelding"
@@ -33,6 +51,7 @@
             android:layout_marginStart="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/logo" />
 
     </android.support.constraint.ConstraintLayout>
@@ -41,6 +60,7 @@
         android:id="@+id/svprojectview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginTop="520dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 

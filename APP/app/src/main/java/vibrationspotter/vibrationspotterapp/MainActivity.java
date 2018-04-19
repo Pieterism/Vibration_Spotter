@@ -64,6 +64,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     ConstraintLayout clHomePage;
     LinearLayout llprojecten;
     ImageView imageView;
+    Button bRotateR;
+    Button bRotateL;
 
     int width;
     int height;
@@ -112,6 +114,21 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         llprojecten = findViewById(R.id.llprojecten);
 
         imageView = findViewById(R.id.vbAfbeelding);
+        bRotateR = findViewById(R.id.bRotateR);
+        bRotateR.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                imageView.setRotation(90);
+            }
+        });
+        bRotateL = findViewById(R.id.bRotateL);
+        bRotateL.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                imageView.setRotation(-90);
+            }
+        });
+
     }
 
     @Override
@@ -166,6 +183,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         final InputStream baos = getContentResolver().openInputStream(uri);
                         bitmap = BitmapFactory.decodeStream(baos);
                         imageView.setImageBitmap(bitmap);
+                        imageView.setRotation(0);
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
