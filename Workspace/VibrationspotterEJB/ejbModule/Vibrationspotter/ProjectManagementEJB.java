@@ -5,6 +5,7 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Type;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.temporal.Temporal;
@@ -27,6 +28,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.EncodeHintType;
 import com.google.zxing.WriterException;
@@ -215,42 +218,19 @@ public class ProjectManagementEJB implements ProjectManagementEJBLocal {
 	}
 
 	public String FindAllProjectsForApp(String ingegevenstring) {
-		/*
-		 * Methode die de lijst van projecten met de gegevens terug doorstuurt naar de APP. 
-		 * We geven 3 argumenten mee voor ieder project.
-		 */
-		ingegevenstring = ingegevenstring.substring(1, ingegevenstring.length() - 1);
-		JSONObject json = null;
-		JSONArray jArray = new JSONArray();
+		
+		Gson gson = new Gson();
+		Type type = new TypeToken<Map<String,String>>(){}.getType();
+		
+		Map<String,String> inloggegevens = gson.fromJson(ingegevenstring, type);
+		
 
-		try {
-			json = new JSONObject(ingegevenstring);
-		} catch (JSONException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
+		//Query q = em.createQuery("SELECT p FROM Project p ORDER BY p.idProject ASC");
+		//List<Project> projecten = q.getResultList();
+		
+			
 
-		try {
-
-			Query q = em.createQuery("SELECT p FROM Project p ORDER BY p.idProject ASC");
-			List<Project> projecten = q.getResultList();
-
-			for (int i = 0; i < projecten.size(); i++) {
-				JSONObject json2 = new JSONObject();
-				json2.put("projectid", projecten.get(i).getIdProject());
-				json2.put("projecttitel", projecten.get(i).getTitel());
-				json2.put("projectbeschrijving", projecten.get(i).getBeschrijving());
-				jArray.put(json2);
-			}
-			System.out.println(jArray.toString());
-
-		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		return jArray.toString();
-
+		return inloggegevens.toString();
 	}
 	
 	public void update(Project p){

@@ -24,6 +24,7 @@ import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
+import com.google.gson.Gson;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -160,6 +161,8 @@ public class Meter extends Activity implements SensorEventListener,OnChartValueS
                                 @Override
                                 public void onResponse(JSONArray response) {
                                     Log.d("Metingen", response.toString());
+                                    Gson gson = new Gson();
+
 
                                 }
                             },

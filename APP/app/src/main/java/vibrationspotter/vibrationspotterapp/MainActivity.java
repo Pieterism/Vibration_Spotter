@@ -43,6 +43,7 @@ import com.android.volley.Response;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.google.gson.Gson;
 
 import android.util.Log;
 import android.widget.Toast;
@@ -76,6 +77,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     SharedPreferences settings;
     View nav_header_main;
+
+    Gson gson;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -200,7 +203,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     }
 
                     ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                    bitmap.compress(Bitmap.CompressFormat.JPEG, 75, baos);
+                    bitmap.compress(Bitmap.CompressFormat.JPEG, 50, baos);
                     byte[] imageBytes = baos.toByteArray();
                     final String imageString = Base64.encodeToString(imageBytes, Base64.DEFAULT);
 
@@ -259,7 +262,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             svProjectview.setVisibility(View.VISIBLE);
 
             //Deel PJ:
-      /*      SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+            SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
             SharedPreferences.Editor editor = settings.edit();
 
             String email = settings.getString("email",null);
@@ -269,7 +272,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 final JSONObject jsonObject = new JSONObject(gegevens);
                 final JSONArray jArray = new JSONArray();
                 jArray.put(jsonObject);
-                final Map<Integer,String> map = new HashMap<>();
 
                 JsonArrayRequest inloggenRequest = new JsonArrayRequest(Request.Method.POST,
                         getString(R.string.url) + "Projecten",
@@ -277,33 +279,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         new Response.Listener<JSONArray>() {
                             @Override
                             public void onResponse(JSONArray response) {
-                                String geg = response.toString();
-                                geg = geg.substring(1, geg.length() - 1);
-                                for(int i=0; i<response.length();i++) {
-                                    try {
-
-
-                                        int index1 = geg.indexOf("{");
-                                        int index2 = geg.indexOf("}");
-                                        String deel = geg.substring(index1, index2);
-                                        JSONObject jsonObject2 = new JSONObject(deel);
-                                        geg = geg.substring(index2 + 1);
-                                        map.put(i, jsonObject2.getString("projecttitel"));
-
-
-                                    } catch (JSONException e) {
-                                        e.printStackTrace();
-                                    }
-
-                                  //  ProjectView projectView = new ProjectView(this, i);
-                                  //  llprojecten.addView(projectView, lp);
-
-                                }
-
-
-
+                                Log.d("Projecten", "GELUKT!");
+                                System.out.println(response.toString());
                             }
-
                         },
                         new Response.ErrorListener() {
                             @Override
@@ -311,22 +289,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                 Log.d("Projecten","Error: " + error.toString() + ", " + error.getMessage());
                             }
                         }
-
                 );
                 VolleyClass.getInstance(getApplicationContext()).addToRequestQueue(inloggenRequest, "Inloggen");
-
-
-                for(int i=1; i<=map.size(); i++) {
-                    ProjectView projectView = new ProjectView(this, i);
-                    llprojecten.addView(projectView, lp);
-                }
-
-
             }
 
             //EINDE DEEL PJ
 
-*/
 
 
             for(int i=1; i<=5; i++) {
