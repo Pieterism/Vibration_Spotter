@@ -23,6 +23,7 @@ import java.util.Map;
 
 import android.preference.PreferenceManager;
 import android.content.SharedPreferences;
+import android.widget.Toast;
 
 public class GebruikerLogin extends AppCompatActivity{
     String email;
@@ -99,16 +100,19 @@ public class GebruikerLogin extends AppCompatActivity{
                                         editor.apply();
                                         Log.d("MyApp",email);
                                         //Sessie is aangemaakt
-                                     }
-                                        else{
+
+                                        Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+                                        startActivity(intent);
+                                    } else{
                                             Log.d("MyApp", "verkeerd wachtwoord of gebruikersnaam");
-                                        }
-                                            }
+                                    }
+                                }
                             },
                             new Response.ErrorListener() {
                                 @Override
                                 public void onErrorResponse(VolleyError error) {
                                     Log.d("QR","Error: " + error.toString() + ", " + error.getMessage());
+                                    Toast.makeText(GebruikerLogin.this, "Login mislukt", Toast.LENGTH_LONG).show();
                                 }
                             }
                     );
