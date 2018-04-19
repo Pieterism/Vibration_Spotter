@@ -31,7 +31,7 @@
 
 	</div>
 <h:form>
-	<p:dataTable value="#{sorter.projecten}" var="pro" style="margin-top:10px" widgetVar="carsTable">
+	<p:dataTable value="#{sorterProject.projecten}" var="pro" style="margin-top:10px" widgetVar="carsTable">
 			
 		<p:column headerText="IdProject" style="text-align:center;width:100px;" sortBy="#{pro.idProject}" filterBy="#{pro.idProject}" >
         	<h:outputText value="#{pro.idProject}" />

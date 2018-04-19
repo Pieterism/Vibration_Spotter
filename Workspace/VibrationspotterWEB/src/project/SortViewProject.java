@@ -14,9 +14,9 @@ import Vibrationspotter.ProjectManagementEJBLocal;
 import model.Persoon;
 import model.Project;
  
-@ManagedBean(name="sorter")
+@ManagedBean(name="sorterProject")
 @ViewScoped
-public class SortView implements Serializable {
+public class SortViewProject implements Serializable {
      
     private List<Project> projecten;
 

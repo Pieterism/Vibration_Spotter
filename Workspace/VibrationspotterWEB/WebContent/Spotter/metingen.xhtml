@@ -3,7 +3,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:f="http://java.sun.com/jsf/core">
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:o="http://omnifaces.org/ui"
+	  xmlns:of="http://omnifaces.org/functions">
       
 <h:head>
   <title>
@@ -58,10 +61,12 @@
         <f:facet name="header">
           <h:outputText value="foto"/>
         </f:facet>
-        <a href="#{met.foto}">foto tonen</a>
+       
+         <o:graphicImage value="#{met.foto}"/>
+        
       </h:column>
       
-      <h:column>
+      <h:column> 
         <f:facet name="header">
           <h:outputText value="grafiek"/>
         </f:facet>
@@ -69,7 +74,7 @@
         	<h:commandLink action="#{metingController.toonGrafiek(met)}" class="subAnchor" value="toon grafiek"/>
         </h:form>
       </h:column>
-      
+       
       <h:column>
         <f:facet name="header">
           <h:outputText value="wissen"/>

@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:f="http://java.sun.com/jsf/core">
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
       
 <h:head>
   <title>
@@ -22,65 +23,42 @@
        <h1><b>Metingen</b> </h1>
 </div>
 
-    <h:dataTable id="metinglist" value="#{metingController.metingen}" var="met" border="5" styleClass="tabel" headerClass="htabel">
+    <p:dataTable value="#{sorterMeting.metingen}" var="met" style="margin-top:10px">
 
-       <h:column>
-        <f:facet name="header">
-          <h:outputText value="IdMeting"/>
-        </f:facet>
-         <h:outputText value="#{met.idMeting}"/>
-      </h:column>
-      
-      
-      <h:column>
-        <f:facet name="header">
-          <h:outputText value="Title"/>
-        </f:facet>
-         <h:outputText value="#{met.titel}"/>
-      </h:column>
-      
-      <h:column>
-        <f:facet name="header">
-          <h:outputText value="tijdstip"/>
-        </f:facet>
-         <h:outputText value="#{met.tijdstip}"/>
-      </h:column>
-
-      <h:column>
-        <f:facet name="header">
-          <h:outputText value="opmerking"/>
-        </f:facet>
-        <h:outputText value="#{met.opmerking}"/>
-      </h:column>
-      
-
-      <h:column>
-        <f:facet name="header">
-          <h:outputText value="foto"/>
-        </f:facet>
-        <a href="#{met.foto}">foto tonen</a>
-      </h:column>
-      
-       <h:column>
-        <f:facet name="header">
-          <h:outputText value="grafiek"/>
-        </f:facet>
-         <h:form>
+       <p:column headerText="IdMeting" style="text-align:center;">
+        		<h:outputText value="#{met.idMeting}" />
+    	</p:column>
+    	
+    	<p:column headerText="Titel" style="text-align:center;">
+        		<h:outputText value="#{met.titel}" />
+    	</p:column>
+    	
+    	<p:column headerText="Tijdstip" style="text-align:center;">
+        		<h:outputText value="#{met.tijdstip}" />
+    	</p:column>
+    	
+    	<p:column headerText="Opmerking" style="text-align:center;">
+        		<h:outputText value="#{met.opmerking}" />
+    	</p:column>
+    	
+    	<p:column headerText="Foto" style="text-align:center;">
+        		 <h:graphicImage value="/image?id=#{met.idMeting}" style="width:32px;height:18px"/>
+    	</p:column>
+    	
+    	<p:column headerText="grafiek" style="text-align:center">
+    	  <h:form>
         	<h:commandLink action="#{metingController.toonGrafiek(met)}" class="subAnchor" value="toon grafiek"/>
         </h:form>
-      </h:column>
-      
-      <h:column>
-        <f:facet name="header">
-          <h:outputText value="wissen"/>
-        </f:facet>
-        <h:form>
+        </p:column>
+        
+        <p:column headerText="Meting wissen" style="text-align:center">
+    	  <h:form>
         	<h:commandButton value = "meting wissen" onclick = "return confirm('wilt u zeker deze meting wissen?')" action="#{metingController.wissen(met)}"></h:commandButton>
         </h:form>
-      </h:column>
+        </p:column>
 
-    </h:dataTable>
-    
+    </p:dataTable>
+     
     <h:button id="terug" value="terug naar projecten" outcome="projecten.xhtml"/>
 </h:body>
-</html>
+</html> 

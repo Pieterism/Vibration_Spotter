@@ -25,4 +25,6 @@ public interface MetingManagementEJBLocal {
 	public byte[] zoekDataset2(int idMeting);
 
 	public void wissenMeting(int idMeting);
+
+	public byte[] zoekFoto(int idMeting);
 }
