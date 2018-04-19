@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 import javax.servlet.http.HttpSession;
@@ -40,7 +42,8 @@ public String controle(){
 		return "metingen.xhtml";
 		
 	}
-	return null;
+	FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_INFO,"geen geldige id!",null));
+	return "kaartLogin";
 	
 	
 }

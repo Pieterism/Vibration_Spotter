@@ -18,10 +18,11 @@
     <h:button id="tologin" image="loginbutton.png" outcome="login.xhtml" />
      <h:form>
         
-		<h:panelGrid columns ="3" cellpadding = "10" cellspacing = "1" styleClass="panel" >
+		<h:panelGrid columns ="4" cellpadding = "10" cellspacing = "1" styleClass="panel" >
 			<h:outputText value="ID" />
 			<h:inputText required ="true" id="id" value="#{kaartController.id}" requiredMessage="gelieve een ID in te geven"></h:inputText>
-			<h:commandButton value = "zoeken" action="#{kaartController.controle()}"></h:commandButton>
+			<h:commandButton value = "toon metingen van project" action="#{kaartController.controle()}"></h:commandButton>
+			<h:messages  layout="table" styleClass="fail" />
 		 </h:panelGrid>
 	</h:form>
 	
@@ -116,7 +117,7 @@
         });
         
         // markers toevoegen
-        <ui:repeat value="#{projectManagementEJB.findAllProjecten()}" var="point">
+        <ui:repeat value="#{projectManagementEJB.findGoedgekeurdeProjecten()}" var="point">
         var marker = new google.maps.Marker({
             position: {lat: #{point.latitude}, lng: #{point.longtitude}},
             map: map,
