@@ -75,6 +75,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     Bitmap bitmap;
 
     SharedPreferences settings;
+    View nav_header_main;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -127,10 +128,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         });
 
-        textName = findViewById(R.id.textName);
+        nav_header_main = navigationView.getHeaderView(0);
+        textName = nav_header_main.findViewById(R.id.textName);
 
         settings = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         Map<String,?> sharedPreferences = settings.getAll();
+
+        String naam;
+        if(sharedPreferences.containsKey("email")) naam = sharedPreferences.get("email").toString();
+        else naam = "nope";
+        textName.setText(naam);
+
 
     }
 
