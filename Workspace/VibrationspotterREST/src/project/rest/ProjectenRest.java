@@ -29,9 +29,8 @@ private static final long serialVersionUID = 1L;
 		if(jsonarray == null) throw new BadRequestException();
 		System.out.println(jsonarray);
 		
-		
-		
-		return projectEJB.FindAllProjectsForApp(jsonarray);
+		String test = projectEJB.FindAllProjectsForApp(jsonarray);
+		return "[{\"Gelukt?:\": YEZZZ!!!}]";
 	}
 
 }
