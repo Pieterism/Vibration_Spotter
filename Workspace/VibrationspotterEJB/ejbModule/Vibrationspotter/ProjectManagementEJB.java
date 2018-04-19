@@ -38,6 +38,7 @@ import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 
+import DoorstuurModels.DoorstuurProject;
 import model.Persoon;
 import model.Project;
 
@@ -236,10 +237,12 @@ public class ProjectManagementEJB implements ProjectManagementEJBLocal {
 		q.setParameter("idPersoon", persoon);
 		List<Project> projecten = q.getResultList();
 		
+		List<DoorstuurProject> doorstuurProjecten = new ArrayList<>();
+		for(Project p: projecten) doorstuurProjecten.add(new DoorstuurProject(p));
+		
+		String projectenJson = gson.toJson(doorstuurProjecten);
 
-		 String projectenJson = gson.toJson(projecten);
-
-		 return projectenJson;
+		return projectenJson;
 
 		
 		
