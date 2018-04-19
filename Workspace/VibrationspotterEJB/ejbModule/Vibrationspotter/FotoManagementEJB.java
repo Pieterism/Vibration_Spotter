@@ -64,7 +64,7 @@ public class FotoManagementEJB implements FotoManagementEJBLocal {
 		
 		
 		
-		meting.setFoto(foto);
+		meting.setFoto(foto.getBytes());
 		em.persist(meting);
 	}
 

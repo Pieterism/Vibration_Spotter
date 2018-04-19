@@ -28,9 +28,11 @@ public class FotoREST implements Serializable {
 	
 	@POST
 	@Consumes({MediaType.APPLICATION_JSON})
-	public void inloggen(String gegevens){
+	public String inloggen(String gegevens){
 		//fotoEJB.doorsturenfoto(gegevens);
 		System.out.println("doorgestuurd Foto");
 		System.out.println(gegevens);
+		
+		return "[{\"Gelukt?:\": Foto!!!}]";
 		}
 }
