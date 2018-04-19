@@ -31,19 +31,11 @@ public class LeerkrachtLogin extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stemlogin);
-        Button naarMeter = findViewById(R.id.naarMeterL);
-        Button bLogin = findViewById(R.id.bglogin);
 
+        Button bLogin = findViewById(R.id.btn_login);
         final EditText etusername = findViewById(R.id.leerkrachtlogintext);
         final EditText etpassword = findViewById(R.id.leerkrachtwachtwoordtext);
 
-        naarMeter.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(LeerkrachtLogin.super.getApplicationContext(),Meter.class);
-                startActivity(intent);
-            }
-        });
 
 
         bLogin.setOnClickListener(new View.OnClickListener() {
