@@ -28,6 +28,10 @@
             android:id="@+id/nav_logout"
             android:icon="@drawable/ic_power_settings_new_black_24dp"
             android:title="Log out"/>
+        <item
+            android:id="@+id/nav_about"
+            android:icon="@drawable/ic_info_outline_black_24dp"
+            android:title="About"/>
 
 
         <!--MOET NOG VERWIJDERD WORDEN -->
@@ -43,5 +47,4 @@
             android:title="Login" />
 
     </group>
-
 </menu>
