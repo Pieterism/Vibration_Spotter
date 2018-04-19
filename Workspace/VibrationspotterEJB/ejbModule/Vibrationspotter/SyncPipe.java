@@ -4,6 +4,9 @@ import java.io.InputStream;
 import java.io.OutputStream;
 
 public class SyncPipe implements Runnable {
+	/*
+	 * klasse die helpt met io in octave, niet zelfgeschreven klasse.
+	 */
 	public SyncPipe(InputStream istrm, OutputStream ostrm) {
 		istrm_ = istrm;
 		ostrm_ = ostrm;

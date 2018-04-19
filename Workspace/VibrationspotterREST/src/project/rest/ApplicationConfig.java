@@ -15,7 +15,18 @@ import org.glassfish.jersey.server.ResourceConfig;
 public class ApplicationConfig extends Application{
 private final Set<Class<?>> classes;
 	
-	//final ResourceConfig config = new ResourceConfig().register(GensonJsonConverter.class);
+	/*Aanmaken REST: koppeling tussen Databank en Android
+	Iedere Restsklasse zorgt voor een verbinding
+	 *
+	 *
+	 *MetingenREST geeft de meting door waarna er een grafiek kan gemaakt worden bij WEB.
+	 *QRcodeREST geeft de String van de barcode door
+	 *RegistratieRest maakt een Spotter aan van de aanmaakgegevens App
+	 *InloggenRest vergelijkt passwoord en login met databank
+	 *ProjectenREST vraagt de verschillende projecten van een gebruiker op.
+	 *
+	 */	
+
 
 	public ApplicationConfig() {
 		HashSet<Class<?>> c = new HashSet<>();
@@ -23,6 +34,7 @@ private final Set<Class<?>> classes;
 		c.add(QRcodeREST.class);
 		c.add(RegistratieREST.class);
 		c.add(InloggenREST.class);
+		c.add(ProjectenRest.class);
 		classes = Collections.unmodifiableSet(c);
 	}
 	

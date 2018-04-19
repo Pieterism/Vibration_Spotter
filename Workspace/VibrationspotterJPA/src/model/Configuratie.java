@@ -13,6 +13,10 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "configuratie")
 @NamedQuery(name = "configuratie.findAll", query = "SELECT p FROM Configuratie p")
+
+/*
+ * Klasse waarbij we de Configuratiefiles bijhouden zoals keys, eventueel taal...
+ */
 public class Configuratie implements Serializable {
 
 	/**

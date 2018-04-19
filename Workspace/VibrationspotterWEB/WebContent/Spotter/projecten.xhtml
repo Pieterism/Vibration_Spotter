@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:f="http://java.sun.com/jsf/core">
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
       
 <h:head>
   <title>
@@ -30,52 +31,37 @@
 <div class="background3">
 <br/>
 <h:form>
-    <h:dataTable id="projectlist" value="#{projectController.geefProjectenweer()}" var="pro" border="5" cellpadding ="5" styleClass="tabel" headerClass="htabel">
-
-       <h:column>
-        <f:facet name="header">
-          <h:outputText value="IdProject"/>
-        </f:facet>
-         <h:outputText value="#{pro.idProject}"/>
-      </h:column>
-      
-      
-      <h:column>
-        <f:facet name="header">
-          <h:outputText value="titel"/>
-        </f:facet>
-         <h:outputText value="#{pro.titel}"/>
-      </h:column>
-      
-       <h:column>
-        <f:facet name="header">
-          <h:outputText value="type"/>
-        </f:facet>
-         <h:outputText value="#{pro.type}"/>
-      </h:column>
-      
-      <h:column>
-        <f:facet name="header">
-          <h:outputText value="beschrijving"/>
-        </f:facet>
-         <h:outputText value="#{pro.beschrijving}"/>
-      </h:column>
-      
-        <h:column>
-        <f:facet name="header">
-          <h:outputText value="metingen"/>
-        </f:facet>
-          <h:commandButton value = "bekijk metingen" action="#{projectController.gaNaarMeting(pro)}"></h:commandButton>
-              </h:column>
-      
-        <h:column>
-        <f:facet name="header">
-          <h:outputText value="wissen"/>
-        </f:facet>
-        <h:commandButton value = "project wissen" onclick = "return confirm('wilt u zeker dit project wissen?')" action="#{projectController.wissen(pro)}"></h:commandButton>
-      </h:column>
-    </h:dataTable>
-    </h:form>
+ 	<p:dataTable value="#{sorter.projecten}" var="pro" style="margin-top:10px">
+			
+		<p:column headerText="IdProject" style="text-align:center;width:100px;" sortBy="#{pro.idProject}" filterBy="#{pro.idProject}">
+        		<h:outputText value="#{pro.idProject}" />
+    	</p:column>
+    			
+    	<p:column headerText="Titel" style="text-align:center" sortBy="#{pro.titel}" filterBy="#{pro.titel}">
+        		<h:outputText value="#{pro.titel}" />
+    	</p:column>
+    			
+    		
+    	<p:column headerText="Beschrijving" style="text-align:center" filterBy="#{pro.beschrijving}">
+        	<h:outputText value="#{pro.beschrijving}" />
+    	</p:column>
+    			
+    			
+    	<p:column headerText="Metingen" style="text-align:center">
+        	<h:commandButton value="bekijk metingen"
+			action="#{projectController.gaNaarMeting(pro)}">
+			</h:commandButton>
+    	</p:column>
+    			
+    	<p:column headerText="wissen" style="text-align:center">
+        	<h:commandButton value="project wissen"
+			onclick="return confirm('wilt u zeker dit project wissen?')"
+			action="#{projectController.wissen(pro)}">
+			</h:commandButton>
+    	</p:column>
+    			
+	</p:dataTable>
+</h:form>
 </div>
 </h:body>
 </html>

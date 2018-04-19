@@ -14,7 +14,16 @@ import javax.persistence.*;
 @Inheritance(strategy = InheritanceType.JOINED)
 @DiscriminatorColumn(discriminatorType = DiscriminatorType.STRING, name = "type", columnDefinition = "TINYINT(1)")
 
+/*Klasse Persoon heeft nog 2 afgeleide klassen, Leerkracht en Persoon
+Spotterklasse wordt aangemaakt door de APP en zullen dus de meeste  gebruikers. 
+Leerkracht kunnen zowel inloggen met APP als inloggen op Web voor administratie
+Er is ook mogelijkheid om een Persoon als admin te maken.
+Passwoorden worden gehashed en gesalted via BCrypt klasse.
+*/
+
 public class Persoon implements Serializable {
+
+	
 	private static final long serialVersionUID = 1L;
 
 	@Id
