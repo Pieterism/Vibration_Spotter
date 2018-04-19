@@ -15,14 +15,7 @@
   	<link rel = "stylesheet" href ="../stijl/stijlkaartproject.css"></link>
   	<meta name="viewport" content="initial-scale=1.0, user-scalable=no"/>
     <meta charset="utf-8"/>
-</h:head>
-
- <f:metadata>
- 	<f:viewParam name="id" value="#{metingController.project.idProject}" />
- 	<f:viewAction action="#{metingController.findMetingenByIdProject}"></f:viewAction>
- </f:metadata>  
- 
-<script>
+    <script>
 	var b=0;
 	var k=0;
       function initAutocomplete() {
@@ -127,6 +120,14 @@
 <script async = "async" defer = "defer"
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB4iQ9wgoR3FsIhTKbM8jXAMEJ4TzQwTo0&amp;libraries=places&amp;callback=initAutocomplete"> 
 </script>
+</h:head>
+
+ <f:metadata>
+ 	<f:viewParam name="id" value="#{metingController.project.idProject}" />
+ 	<f:viewAction action="#{metingController.findMetingenByIdProject}"></f:viewAction>
+ </f:metadata>  
+ 
+
       
 <h:body>
 <div class="header">
@@ -153,7 +154,7 @@
     	</p:column>
     	
     	<p:column headerText="Foto" style="text-align:center;">
-        		 <h:graphicImage value="/image?id=#{met.idMeting}" style="width:32px;height:18px"/>
+        		 <h:graphicImage value="/metingen/image?id=#{met.idMeting}" style="width:32px;height:18px"/>
     	</p:column>
     	
     	<p:column headerText="grafiek" style="text-align:center">
