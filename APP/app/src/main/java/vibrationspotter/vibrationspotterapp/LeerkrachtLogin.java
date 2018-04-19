@@ -30,13 +30,20 @@ public class LeerkrachtLogin extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_leerkrachtlogin);
+        setContentView(R.layout.activity_stemlogin);
 
         Button bLogin = findViewById(R.id.bglogin);
+        Button naarQr = findViewById(R.id.naarQR);
         final EditText etusername = findViewById(R.id.leerkrachtlogintext);
         final EditText etpassword = findViewById(R.id.leerkrachtwachtwoordtext);
 
-
+        naarQr.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent qr_intent = new Intent(LeerkrachtLogin.this, QR_hub.class);
+                startActivity(qr_intent);
+            }
+        });
 
         bLogin.setOnClickListener(new View.OnClickListener() {
             @Override
