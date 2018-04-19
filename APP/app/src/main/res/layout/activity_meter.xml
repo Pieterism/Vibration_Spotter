@@ -18,39 +18,39 @@
         app:srcCompat="@drawable/logo" />
 
     <ScrollView
-        android:id="@+id/scrollView2"
-        android:layout_width="370dp"
-        android:layout_height="450dp"
-        android:layout_marginEnd="5dp"
-        android:layout_marginStart="5dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/logo">
+    android:id="@+id/scrollView2"
+    android:layout_width="370dp"
+    android:layout_height="450dp"
+    android:layout_marginEnd="5dp"
+    android:layout_marginStart="5dp"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintHorizontal_bias="0.0"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/logo">
 
-        <LinearLayout
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <com.github.mikephil.charting.charts.LineChart
+            android:id="@+id/lcx"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="150dp">
 
-            <com.github.mikephil.charting.charts.LineChart
-                android:id="@+id/lcx"
-                android:layout_width="match_parent"
-                android:layout_height="150dp">
+        </com.github.mikephil.charting.charts.LineChart>
 
-            </com.github.mikephil.charting.charts.LineChart>
+        <com.github.mikephil.charting.charts.LineChart
+            android:id="@+id/lcy"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"></com.github.mikephil.charting.charts.LineChart>
 
-            <com.github.mikephil.charting.charts.LineChart
-                android:id="@+id/lcy"
-                android:layout_width="match_parent"
-                android:layout_height="150dp"></com.github.mikephil.charting.charts.LineChart>
-
-            <com.github.mikephil.charting.charts.LineChart
-                android:id="@+id/lcz"
-                android:layout_width="match_parent"
-                android:layout_height="150dp"></com.github.mikephil.charting.charts.LineChart>
-        </LinearLayout>
-    </ScrollView>
+        <com.github.mikephil.charting.charts.LineChart
+            android:id="@+id/lcz"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"></com.github.mikephil.charting.charts.LineChart>
+    </LinearLayout>
+</ScrollView>
 
     <Button
         android:id="@+id/bStart"
