@@ -14,18 +14,32 @@
         >
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_gravity="right"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="10dp">
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:weightSum="1"
+            android:layout_marginTop="10dp"
+            >
 
             <ImageButton
-                android:id="@+id/bSaveMeting"
+                android:id="@+id/bAcceptMeting"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:src="@drawable/ic_save_black_24dp"
+                android:layout_weight="0.10"
+                android:src="@drawable/ic_check"
+                android:background="@color/colorPrimaryDark"
+                android:layout_marginHorizontal="10dp"
+
+                />
+            <ImageButton
+                android:id="@+id/bRejectMeting"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_weight="0.10"
+                android:src="@drawable/ic_close"
+                android:layout_marginHorizontal="10dp"
                 android:background="@color/colorPrimaryDark"
                 />
 
