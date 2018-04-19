@@ -26,7 +26,6 @@ import java.util.Map;
 public class LeerkrachtLogin extends AppCompatActivity{
     String email;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
