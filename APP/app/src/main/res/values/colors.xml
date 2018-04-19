@@ -7,6 +7,7 @@
     <color name="colorSecondaryDark">#c59100</color>
     <color name="colorSecondaryLight">#fff34f</color>
     <color name="colorBackground">#FAFAFA</color>
+    <color name="colorText">#37474f</color>
     <color name="colorAccent">#c95854</color>
     <color name="background_material_light">#f0eeee</color>
 </resources>

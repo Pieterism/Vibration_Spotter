@@ -30,5 +30,7 @@ public interface ProjectManagementEJBLocal {
 	public void update(Project pro);
 	
 	public boolean checkGoedgekeurd(int idProject);
+	
+	public List<Project> findGoedgekeurdeProjecten();
 
 }

@@ -78,7 +78,7 @@
                 android:layout_marginTop="24dp"
                 android:background="@drawable/custom_button"
                 android:clickable="true"
-                android:drawableLeft="@drawable/ic_center_focus_weak_black_24dp"
+                android:drawableLeft="@drawable/ic_center_focus_weak_white_24dp"
                 android:fontFamily="@font/advent_pro_semibold"
                 android:gravity="center"
                 android:paddingLeft="50dp"
