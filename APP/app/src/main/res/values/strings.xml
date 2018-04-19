@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">VibrationspotterAPP</string>
-    <string name="url">http://192.168.1.56:8080/VibrationspotterREST/Restservice/</string>
+    <string name="url">http://10.108.0.57:8080/VibrationspotterREST/Restservice/</string>
     <string name="test">Test</string>
     <string name="hometext">Welcome to Vibrationspotter!</string>
     <string name="scan_barcode_button">Scan barcode</string>
