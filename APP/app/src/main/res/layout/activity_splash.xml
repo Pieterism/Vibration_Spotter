@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/splash"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorBackground"
-    tools:context=".Splash">
+    android:background="@color/colorBackground">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/colorBackground"
         android:orientation="vertical">
 
         <TextView
@@ -59,15 +59,14 @@
             android:textStyle="bold" />
 
 
-
         <TextView
             android:id="@+id/link_signup"
-            android:layout_marginTop="40dp"
             android:layout_width="fill_parent"
             android:layout_height="35dp"
+            android:layout_marginTop="40dp"
             android:gravity="center"
             android:text="No account yet? Create one"
-            android:textSize="16dip" />
+            android:textSize="16sp" />
     </LinearLayout>
 
-</RelativeLayout>
+</android.support.constraint.ConstraintLayout>

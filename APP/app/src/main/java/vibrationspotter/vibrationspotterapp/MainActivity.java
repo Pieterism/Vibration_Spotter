@@ -229,6 +229,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
+
         int id = item.getItemId();
 
         if (id == R.id.nav_home) {
@@ -315,7 +319,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 */
 
 
-            for(int i=1; i<=20; i++) {
+            for(int i=1; i<=5; i++) {
                 ProjectView projectView = new ProjectView(this, i);
                 llprojecten.addView(projectView, lp);
             }
@@ -349,8 +353,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
+
         return true;
     }
 }
