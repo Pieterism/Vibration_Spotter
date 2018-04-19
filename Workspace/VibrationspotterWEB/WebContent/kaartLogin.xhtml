@@ -115,18 +115,26 @@
           });
           map.fitBounds(bounds);
         });
-        
+        var i=0;
         // markers toevoegen
+        var infowindow = new google.maps.InfoWindow();
         <ui:repeat value="#{projectManagementEJB.findGoedgekeurdeProjecten()}" var="point">
-        var marker = new google.maps.Marker({
-            position: {lat: #{point.latitude}, lng: #{point.longtitude}},
-            map: map,
-            title: '#{point.idProject}',
-            animation: google.maps.Animation.DROP,
-            icon: controle('#{point.type}')
-            
-          
-          });
+        	var marker = new google.maps.Marker({
+           		position: {lat: #{point.latitude}, lng: #{point.longtitude}},
+            	map: map,
+            	title: '#{point.idProject}',
+            	animation: google.maps.Animation.DROP,
+            	icon: controle('#{point.type}')
+          	});
+        	
+
+        	 google.maps.event.addListener(marker, 'click', (function(marker, i) {
+        	        return function() {
+        	            infowindow.setContent('<p>titel: #{point.titel}</p>'+'<p>beschrijving: #{point.beschrijving}</p>'+' <h:commandButton value = "toon metingen van project #{point.idProject}" action="#{kaartController.controle(point)}"> </h:commandButton> ');
+        	            infowindow.open(map, marker);
+        	        }
+        	    })(marker, i));
+        	 i++;
         
      </ui:repeat>
      
