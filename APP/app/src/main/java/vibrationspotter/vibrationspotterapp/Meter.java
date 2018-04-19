@@ -58,6 +58,8 @@ public class Meter extends Activity implements SensorEventListener,OnChartValueS
         mAccelerometer = mSensorManager.getDefaultSensor(Sensor.TYPE_LINEAR_ACCELERATION); //trycatch?
         final Button bStart = findViewById(R.id.bStart);
         final Button bStop = findViewById(R.id.bStop);
+        final Button bPhoto = findViewById(R.id.bPhoto);
+        final Button bSave = findViewById(R.id.bSave);
         bStop.setVisibility(View.INVISIBLE);
         jArray = new JSONArray();
         lineChartX = findViewById(R.id.lcx);
@@ -111,6 +113,13 @@ public class Meter extends Activity implements SensorEventListener,OnChartValueS
                 lineChartY.invalidate();
                 lineChartZ.setData(new LineData(zData));
                 lineChartZ.invalidate();
+            }
+        });
+
+        bPhoto.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick (View v){
+                
             }
         });
     }

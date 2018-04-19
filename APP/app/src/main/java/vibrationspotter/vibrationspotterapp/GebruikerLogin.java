@@ -1,6 +1,5 @@
 package vibrationspotter.vibrationspotterapp;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
@@ -25,16 +24,13 @@ import java.util.Map;
 import android.preference.PreferenceManager;
 import android.content.SharedPreferences;
 
-
-import java.security.Key;
-
 public class GebruikerLogin extends AppCompatActivity{
     String email;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_gebruikerlogin);
+        setContentView(R.layout.activity_spotterlogin);
 
         Button naarMeter = findViewById(R.id.naarMeterG);
         final EditText etusername = findViewById(R.id.g_username);

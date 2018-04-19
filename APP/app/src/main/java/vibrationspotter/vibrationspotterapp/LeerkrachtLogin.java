@@ -1,6 +1,5 @@
 package vibrationspotter.vibrationspotterapp;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -31,7 +30,7 @@ public class LeerkrachtLogin extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_leerkrachtlogin);
+        setContentView(R.layout.activity_stemlogin);
         Button naarMeter = findViewById(R.id.naarMeterL);
         Button bLogin = findViewById(R.id.bglogin);
 

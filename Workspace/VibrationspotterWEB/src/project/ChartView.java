@@ -112,7 +112,7 @@ public class ChartView implements Serializable {
     private String dataset11Ophalen() throws UnsupportedEncodingException {
     	HttpSession session = SessionUtils.getSession();
    	  	int idmeting=(int) session.getAttribute("idMeting");
-   	  	String x1=new String(metingejb.zoekDataset1(idmeting), "UTF-8");
+   	  	String x1=new String(metingejb.zoekDataset1(idmeting));
 		return x1;
 	}
 
@@ -152,7 +152,7 @@ public class ChartView implements Serializable {
     private String dataset2Ophalen() throws UnsupportedEncodingException {
     	HttpSession session = SessionUtils.getSession();
    	  	int idmeting=(int) session.getAttribute("idMeting");
-   	  	String x2=new String(metingejb.zoekDataset2(idmeting), "UTF-8");
+   	  	String x2=new String(metingejb.zoekDataset2(idmeting));
 		return x2;
 	}
 
