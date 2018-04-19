@@ -213,10 +213,10 @@ public class OctaveManagementEJB implements OctaveManagementEJBLocal {
 			
 			//p
 			stdin.println("x1 = [tijd(:),versnellingx(:),data_filteredx(:),versnellingy(:),data_filteredy(:),versnellingz(:),data_filteredz(:)];");
-			stdin.println("csvwrite ('x1.txt', x1)");
+			stdin.println("csvwrite ('C:\\Users\\thoma\\Desktop\\files_mathlab\\x1.txt', x1)");
 
-			stdin.println("x2 = [frequentiex(:),amplitudex(:),A_datax(:),amplitudey(:),A_datay(:),amplitudez(:),A_dataz(:)];");
-			stdin.println("csvwrite ('x2.txt', x2)");
+			stdin.println("x2 = [frequentiex(:),amplitudex(:),A_datax(:),frequentiey(:),amplitudey(:),A_datay(:),frequentiez(:),amplitudez(:),A_dataz(:)];");
+			stdin.println("csvwrite ('C:\\Users\\thoma\\Desktop\\files_mathlab\\x2.txt', x2)");
 			
 			BufferedReader br = null;
 			   try {
