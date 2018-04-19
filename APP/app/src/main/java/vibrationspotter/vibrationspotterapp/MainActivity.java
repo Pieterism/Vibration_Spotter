@@ -241,8 +241,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             llprojecten.removeAllViews();
 
-            clHomePage.setVisibility(View.INVISIBLE);
             svProjectview.setVisibility(View.VISIBLE);
+            clHomePage.setVisibility(View.INVISIBLE);
 
             //Deel PJ:
       /*      SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
@@ -315,7 +315,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 */
 
 
-            for(int i=1; i<=20; i++) {
+            for(int i=1; i<=5; i++) {
                 ProjectView projectView = new ProjectView(this, i);
                 llprojecten.addView(projectView, lp);
             }

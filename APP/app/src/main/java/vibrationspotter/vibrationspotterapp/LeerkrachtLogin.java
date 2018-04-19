@@ -30,9 +30,9 @@ public class LeerkrachtLogin extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_stemlogin);
+        setContentView(R.layout.activity_leerkrachtlogin);
 
-        Button bLogin = findViewById(R.id.btn_login);
+        Button bLogin = findViewById(R.id.bglogin);
         final EditText etusername = findViewById(R.id.leerkrachtlogintext);
         final EditText etpassword = findViewById(R.id.leerkrachtwachtwoordtext);
 
