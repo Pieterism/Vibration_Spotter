@@ -15,6 +15,7 @@
   	<link rel = "stylesheet" href ="../stijl/stijlkaartproject.css"></link>
   	<meta name="viewport" content="initial-scale=1.0, user-scalable=no"/>
     <meta charset="utf-8"/>
+
 </h:head>
 
  <f:metadata>
@@ -22,7 +23,54 @@
  	<f:viewAction action="#{metingController.findMetingenByIdProject}"></f:viewAction>
  </f:metadata>  
  
-<script>
+
+      
+<h:body>
+<div class="header">
+       <h1><b>Metingen</b> </h1>
+</div>
+	<h:button id="terug" value="terug naar projecten" outcome="projecten.xhtml"/>
+    
+<p:dataTable value="#{sorterMeting.metingen}" var="met" style="margin-top:10px">
+
+       <p:column headerText="IdMeting" style="text-align:center;">
+        		<h:outputText value="#{met.idMeting}" />
+    	</p:column>
+    	
+    	<p:column headerText="Titel" style="text-align:center;">
+        		<h:outputText value="#{met.titel}" />
+    	</p:column>
+    	
+    	<p:column headerText="Tijdstip" style="text-align:center;">
+        		<h:outputText value="#{met.tijdstip}" />
+    	</p:column>
+    	
+    	<p:column headerText="Opmerking" style="text-align:center;">
+        		<h:outputText value="#{met.opmerking}" />
+    	</p:column>
+    	
+    	<p:column headerText="Foto" style="text-align:center;">
+        		 <h:graphicImage value="/metingen/image?id=#{met.idMeting}" style="width:32px;height:18px"/>
+    	</p:column>
+    	
+    	<p:column headerText="grafiek" style="text-align:center">
+    	  <h:form>
+        	<h:commandLink action="#{metingController.toonGrafiek(met)}" class="subAnchor" value="toon grafiek"/>
+        </h:form>
+        </p:column>
+        
+        <p:column headerText="Meting wissen" style="text-align:center">
+    	  <h:form>
+        	<h:commandButton value = "meting wissen" onclick = "return confirm('wilt u zeker deze meting wissen?')" action="#{metingController.wissen(met)}"></h:commandButton>
+        </h:form>
+        </p:column>
+
+    </p:dataTable>
+    
+    <input id="pac-input" class="controls" type="text" placeholder="Search Box"/>
+    <div id="map"></div>
+
+        <script>
 	var b=0;
 	var k=0;
       function initAutocomplete() {
@@ -127,53 +175,6 @@
 <script async = "async" defer = "defer"
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB4iQ9wgoR3FsIhTKbM8jXAMEJ4TzQwTo0&amp;libraries=places&amp;callback=initAutocomplete"> 
 </script>
-      
-<h:body>
-<div class="header">
-       <h1><b>Metingen</b> </h1>
-</div>
-	<h:button id="terug" value="terug naar projecten" outcome="projecten.xhtml"/>
-    
-<p:dataTable value="#{sorterMeting.metingen}" var="met" style="margin-top:10px">
-
-       <p:column headerText="IdMeting" style="text-align:center;">
-        		<h:outputText value="#{met.idMeting}" />
-    	</p:column>
-    	
-    	<p:column headerText="Titel" style="text-align:center;">
-        		<h:outputText value="#{met.titel}" />
-    	</p:column>
-    	
-    	<p:column headerText="Tijdstip" style="text-align:center;">
-        		<h:outputText value="#{met.tijdstip}" />
-    	</p:column>
-    	
-    	<p:column headerText="Opmerking" style="text-align:center;">
-        		<h:outputText value="#{met.opmerking}" />
-    	</p:column>
-    	
-    	<p:column headerText="Foto" style="text-align:center;">
-        		 <h:graphicImage value="/image?id=#{met.idMeting}" style="width:32px;height:18px"/>
-    	</p:column>
-    	
-    	<p:column headerText="grafiek" style="text-align:center">
-    	  <h:form>
-        	<h:commandLink action="#{metingController.toonGrafiek(met)}" class="subAnchor" value="toon grafiek"/>
-        </h:form>
-        </p:column>
-        
-        <p:column headerText="Meting wissen" style="text-align:center">
-    	  <h:form>
-        	<h:commandButton value = "meting wissen" onclick = "return confirm('wilt u zeker deze meting wissen?')" action="#{metingController.wissen(met)}"></h:commandButton>
-        </h:form>
-        </p:column>
-
-    </p:dataTable>
-    
-    <input id="pac-input" class="controls" type="text" placeholder="Search Box"/>
-    <div id="map"></div>
-
-    
     
 </h:body>
 </html>
