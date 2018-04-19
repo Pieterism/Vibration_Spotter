@@ -236,5 +236,16 @@ public class ProjectManagementEJB implements ProjectManagementEJBLocal {
 	public void update(Project p){
 		em.merge(p);
 	}
+	
+	public boolean checkGoedgekeurd(int idProject){
+		Query q = em.createQuery("SELECT p FROM Project p WHERE p.idProject = :id");
+		q.setParameter("id", idProject);
+		List<Project> projecten = q.getResultList();
+		if(projecten.size()!=1){
+			return false;
+		}
+		return projecten.get(0).isGoedgekeurd();
+		
+	}
 
 }

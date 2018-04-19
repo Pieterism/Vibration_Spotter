@@ -1,5 +1,6 @@
 package Vibrationspotter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -44,7 +45,7 @@ public class FotoManagementEJB implements FotoManagementEJBLocal {
 		String foto = null;
 		try {
 			 json = new JSONObject(gegevens);
-			 foto = json.getString("foto");
+			 foto = json.getString("image");
 		} catch (JSONException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -52,9 +53,16 @@ public class FotoManagementEJB implements FotoManagementEJBLocal {
 		
 		
 		
-		
-		Query q = em.createQuery("SELECT p FROM Meting  WHERE p.idMeting = : 43");
+		int idMeting = 43;
+		Query q = em.createQuery("SELECT p FROM Meting p WHERE p.idMeting = :idMeting");
+		q.setParameter("idMeting", idMeting);
 		List<Meting> metingen = q.getResultList();
+	/*	List<Meting> metingen2 = new ArrayList<Meting>();
+		for(int i=0; i<metingen2.size();i++){
+			if(metingen.get(i).getIdMeting()==43){
+				metingen2.add(metingen.get(i));
+			}
+		}*/
 		Meting meting;
 		if (metingen.size() != 1) {
 			meting = null;
