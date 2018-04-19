@@ -9,27 +9,33 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:gravity="center"
+        >
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:gravity="center_horizontal">
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+            android:layout_gravity="right"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp">
+
+            <ImageButton
+                android:id="@+id/bSaveMeting"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/ic_save_black_24dp"
+                android:background="@color/colorPrimaryDark"
+                />
+
         </LinearLayout>
 
         <ScrollView
             android:id="@+id/scrollView2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:layout_marginBottom="0dp">
+            android:layout_margin="5dp">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -54,16 +60,49 @@
         </ScrollView>
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:weightSum="1"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:gravity="center_horizontal">
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:paddingHorizontal="10dp"
+            android:layout_marginBottom="3dp">
+
             <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:id="@+id/bStart"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_margin="10dp"
+                android:layout_weight="0.15"
+                android:background="@color/colorPrimaryDark"
+                android:fontFamily="@font/advent_pro_semibold"
+                android:text="START"
+                android:textColor="@color/colorSecondary"
+                android:textStyle="bold" />
+
+            <ImageButton
+                android:layout_weight="0.15"
+                android:layout_margin="10dp"
+                android:id="@+id/bAddPicture"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/ic_add_a_photo_black_24dp"
+                android:background="@color/colorPrimaryDark"
+                />
+
             <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_weight="0.15"
+                android:id="@+id/bStop"
+                android:layout_width="50dp"
+                android:layout_margin="10dp"
+                android:layout_height="50dp"
+                android:background="@color/colorPrimaryDark"
+                android:fontFamily="@font/advent_pro_semibold"
+                android:text="STOP"
+                android:textColor="@color/colorSecondary"
+                android:textStyle="bold"/>
+
         </LinearLayout>
 
     </LinearLayout>

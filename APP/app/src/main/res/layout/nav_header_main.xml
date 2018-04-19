@@ -23,7 +23,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/aclonica"
+        android:fontFamily="@font/advent_pro_semibold"
         android:textSize="16dp"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
         android:text="VIBRATION SPOTTER"
@@ -33,6 +33,7 @@
         android:id="@+id/textName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Your name here when logged in" />
+        android:fontFamily="@font/advent_pro_semibold"
+        android:text="your name here when logged in" />
 
 </LinearLayout>

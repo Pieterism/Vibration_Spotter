@@ -63,7 +63,7 @@
                 android:layout_marginTop="24dp"
                 android:background="@drawable/custom_button"
                 android:clickable="true"
-                android:fontFamily="@font/architects_daughter"
+                android:fontFamily="@font/advent_pro_semibold"
                 android:lineSpacingExtra="12sp"
                 android:text="log in"
                 android:textColor="@color/colorBackground"
@@ -79,15 +79,13 @@
                 android:background="@drawable/custom_button"
                 android:clickable="true"
                 android:drawableLeft="@drawable/ic_center_focus_weak_black_24dp"
-                android:fontFamily="@font/architects_daughter"
+                android:fontFamily="@font/advent_pro_semibold"
                 android:gravity="center"
-                android:paddingLeft="30dp"
+                android:paddingLeft="50dp"
                 android:text="Scan QR-code"
-                android:textAlignment="center"
                 android:textColor="@color/colorBackground"
                 android:textSize="18sp"
                 android:textStyle="bold" />
-
 
         </LinearLayout>
     </ScrollView>
