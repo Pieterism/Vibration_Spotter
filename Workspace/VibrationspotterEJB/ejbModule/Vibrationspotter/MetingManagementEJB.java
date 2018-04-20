@@ -172,7 +172,10 @@ public class MetingManagementEJB implements MetingManagementEJBLocal{
 		Query q = em.createQuery("SELECT p FROM Project p WHERE p.idProject= :id");
 		q.setParameter("id", projectid);
 		List<Project> projecten = q.getResultList();
-		int idProject = projecten.get(0).getIdProject();
+		int idProject = projecten.get(0).getIdProject(); 
+															//Waarom doe je dit?
+															//Je zoekt op id om dan de id eruit te halen?
+	
 		
 		Query q2 = em.createQuery("SELECT m FROM Meting m WHERE m.idMeting = :idProject");
 		q2.setParameter("idProject", idProject);
