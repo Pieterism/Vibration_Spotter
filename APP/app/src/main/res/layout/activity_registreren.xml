@@ -5,104 +5,105 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="vibrationspotter.vibrationspotterapp.Registreren">
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
 
-    <ImageView
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="30dp"
-        android:src="@drawable/logo" />
-
-    <EditText
-        android:id="@+id/etVoornaam"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="40dp"
-        android:ems="10"
-        android:hint="First Name"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    <EditText
-        android:id="@+id/etAchternaam"
-        android:layout_width="match_parent"
-        android:layout_marginHorizontal="40dp"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Last Name"
-        android:inputType="textPersonName"
-        app:layout_constraintTop_toBottomOf="@+id/etVoornaam"
-        tools:layout_editor_absoluteX="0dp" />
+        <ImageView
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="30dp"
+            android:layout_marginTop="20dp"
+            android:src="@drawable/logo" />
 
-    <EditText
-        android:id="@+id/etGebruikersnaam"
-        android:layout_width="match_parent"
-        android:layout_marginHorizontal="40dp"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Username"
-        android:inputType="textPersonName"
-        app:layout_constraintTop_toBottomOf="@+id/etAchternaam"
-        tools:layout_editor_absoluteX="0dp" />
+        <EditText
+            android:id="@+id/etVoornaam"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="40dp"
+            android:ems="10"
+            android:hint="First Name"
+            android:inputType="textPersonName"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/etEmail"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="40dp"
-        android:layout_marginTop="3dp"
-        android:ems="10"
-        android:hint="E-mail"
-        android:inputType="textPersonName"
-        app:layout_constraintTop_toBottomOf="@+id/etGebruikersnaam"
-        tools:layout_editor_absoluteX="0dp" />
+        <EditText
+            android:id="@+id/etAchternaam"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="40dp"
+            android:ems="10"
+            android:hint="Last Name"
+            android:inputType="textPersonName"
+            app:layout_constraintTop_toBottomOf="@+id/etVoornaam"
+            tools:layout_editor_absoluteX="0dp" />
 
-    <EditText
-        android:id="@+id/etWachtwoord"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="40dp"
-        android:ems="10"
-        android:hint="Password"
-        android:inputType="textPassword"
-        app:layout_constraintTop_toBottomOf="@+id/etEmail"
-        tools:layout_editor_absoluteX="0dp" />
+        <EditText
+            android:id="@+id/etGebruikersnaam"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="40dp"
+            android:ems="10"
+            android:hint="Username"
+            android:inputType="textPersonName"
+            app:layout_constraintTop_toBottomOf="@+id/etAchternaam"
+            tools:layout_editor_absoluteX="0dp" />
 
-    <EditText
-        android:id="@+id/etWachtwoord2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="40dp"
-        android:ems="10"
-        android:hint="Repeat password"
-        android:inputType="textPassword"
-        app:layout_constraintTop_toBottomOf="@+id/etWachtwoord"
-        tools:layout_editor_absoluteX="0dp" />
+        <EditText
+            android:id="@+id/etEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="40dp"
+            android:layout_marginTop="3dp"
+            android:ems="10"
+            android:hint="E-mail"
+            android:inputType="textPersonName"
+            app:layout_constraintTop_toBottomOf="@+id/etGebruikersnaam"
+            tools:layout_editor_absoluteX="0dp" />
 
-    <Button
-        android:id="@+id/bRegistreer"
-        android:layout_width="wrap_content"
-        android:layout_height="40dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="24dp"
-        android:background="@drawable/custom_button"
-        android:clickable="true"
-        android:fontFamily="@font/advent_pro_semibold"
-        android:text="CREATE ACCOUNT"
-        android:textColor="@color/colorBackground"
-        android:textSize="18sp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etWachtwoord2" />
+        <EditText
+            android:id="@+id/etWachtwoord"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="40dp"
+            android:ems="10"
+            android:hint="Password"
+            android:inputType="textPassword"
+            app:layout_constraintTop_toBottomOf="@+id/etEmail"
+            tools:layout_editor_absoluteX="0dp" />
 
-</LinearLayout>
+        <EditText
+            android:id="@+id/etWachtwoord2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="40dp"
+            android:ems="10"
+            android:hint="Repeat password"
+            android:inputType="textPassword"
+            app:layout_constraintTop_toBottomOf="@+id/etWachtwoord"
+            tools:layout_editor_absoluteX="0dp" />
+
+        <Button
+            android:id="@+id/bRegistreer"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="24dp"
+            android:background="@drawable/custom_button"
+            android:clickable="true"
+            android:fontFamily="@font/advent_pro_semibold"
+            android:text="CREATE ACCOUNT"
+            android:textColor="@color/colorBackground"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/etWachtwoord2" />
+
+    </LinearLayout>
 </android.support.constraint.ConstraintLayout>

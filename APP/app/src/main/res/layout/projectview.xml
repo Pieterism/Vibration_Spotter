@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
@@ -12,19 +11,19 @@
         android:layout_height="match_parent"
         android:layout_marginLeft="15dp"
         android:fontFamily="@font/advent_pro_semibold"
+        android:gravity="center_vertical"
         android:text="[id].PROJECTTITEL"
         android:textColor="@color/colorText"
         android:textSize="20dp"
-        android:textStyle="bold"
-        android:gravity="center_vertical"/>
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/textAantalMetingen"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:fontFamily="@font/advent_pro_semibold"
         android:layout_marginLeft="60dp"
         android:layout_marginRight="40dp"
+        android:fontFamily="@font/advent_pro_semibold"
         android:gravity="center_vertical"
         android:text="20 metingen"
         android:textColor="@color/colorPrimaryLight"
@@ -35,7 +34,6 @@
         android:id="@+id/project_button"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@drawable/ic_chevron_right_black_24dp"
         android:layout_gravity="center|end"
-        />
+        android:src="@drawable/ic_chevron_right_black_24dp" />
 </LinearLayout>
