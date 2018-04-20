@@ -11,6 +11,8 @@ public interface ProjectManagementEJBLocal {
 
 	public Project findProjectById(int id);
 	
+	public Project findProjectByQR(String QR);
+	
 	Project findProjectByEmail(String email);
 
 	public String FindAllProjectsForApp(String ingegevenstring);
