@@ -9,7 +9,6 @@
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no"/>
     <meta charset="utf-8"/>
     <title>kaart</title>
-    
   </head>
   <body>
     <div class="header">
@@ -24,9 +23,13 @@
  		<h:commandButton styleClass="logout" image="logout.png" value = "uitloggen" action="#{loginController.logout}"/>
  		</h:form>
 	</div>
-    <input id="pac-input" class="controls" type="text" placeholder="Search Box"/>
+    	
+   <input id="pac-input" class="controls" type="text" placeholder="Search Box"/>
     <div id="map"></div>
     <div id="legend"><h3>Legende</h3></div>
+    
+    
+
     <script>
 	var b=0;
 	var k=0;
@@ -110,17 +113,26 @@
           });
           map.fitBounds(bounds);
         });
-        
+        var i=0;
         // markers toevoegen
-        <ui:repeat value="#{projectManagementEJB.findAllProjecten()}" var="point">
-        var marker = new google.maps.Marker({
-            position: {lat: #{point.latitude}, lng: #{point.longtitude}},
-            map: map,
-            title: '#{point.titel}',
-            animation: google.maps.Animation.DROP,
-            icon: controle('#{point.type}')
-          
-          });
+        var infowindow = new google.maps.InfoWindow();
+        <ui:repeat value="#{projectManagementEJB.findGoedgekeurdeProjecten()}" var="point">
+        	var marker = new google.maps.Marker({
+           		position: {lat: #{point.latitude}, lng: #{point.longtitude}},
+            	map: map,
+            	title: '#{point.idProject}',
+            	animation: google.maps.Animation.DROP,
+            	icon: controle('#{point.type}')
+          	});
+        	
+
+        	 google.maps.event.addListener(marker, 'click', (function(marker, i) {
+        	        return function() {
+        	            infowindow.setContent('<p>Id: #{point.idProject}</p>'+'<p>titel: #{point.titel}</p>'+'<p>beschrijving: #{point.beschrijving}</p>');
+        	            infowindow.open(map, marker);
+        	        }
+        	    })(marker, i));
+        	 i++;
         
      </ui:repeat>
      

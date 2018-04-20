@@ -1,5 +1,6 @@
 package project;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
@@ -31,29 +32,19 @@ private ProjectManagementEJBLocal projectejb;
 @EJB
 private MetingManagementEJBLocal metingejb;
 
-private String id;
+private int id;
 
-public String controle(int id){
+private List<Meting> metingen = new ArrayList<Meting>();
+private Project project;
 
-	
-	if(projectejb.checkGoedgekeurd(id)){
-		HttpSession session = SessionUtils.getSession();
-		session.setAttribute("idKaart", id);
-		return "metingen.xhtml";
-		
-	}
-	FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_INFO,"geen geldige id!",null));
-	return "kaartLogin";
-	
-	
-}
+
 
 public List<Meting> zoekMetingen(){
-	HttpSession session = SessionUtils.getSession();
-	int id=(int) session.getAttribute("idKaart");
-	System.out.println("ketnet"+id);
-	List<Meting> metingen = metingejb.findMetingenByIdProject(id);
-	return metingen;
+	boolean geldig=projectejb.checkGoedgekeurd(id);
+	if(geldig){
+		return metingen;
+	}
+	return null;
 
 }
 
@@ -66,16 +57,37 @@ public String toonGrafiek(Meting m) throws UnsupportedEncodingException{
 	}
 	return "grafiek.xhtml";
 }
-  
 
- 
-public String getId() {
+public void findMetingenByIdProject(){
+ 	int id=getId();
+ 	metingen=metingejb.findMetingenByIdProject(id);
+}
+
+public Project ophalenProject(){
+	boolean geldig=projectejb.checkGoedgekeurd(id);
+	if(geldig){
+		project=projectejb.findProjectById(id);
+	 	return project;
+		
+	}
+	return null;
+
+}
+
+
+
+
+public int getId() {
 	return id;
 }
 
-public void setId(String id) {
+public void setId(int id) {
 	this.id = id;
 }
+  
+
+ 
+
 
 
 

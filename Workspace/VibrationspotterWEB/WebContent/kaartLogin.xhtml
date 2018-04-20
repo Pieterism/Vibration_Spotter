@@ -3,28 +3,19 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:f="http://java.sun.com/jsf/core">
-  <head>
+  <h:head>
    <link rel = "stylesheet" href ="stijl/stijl.css"></link>
    <link rel = "stylesheet" href ="stijl/stijlkaart.css"></link>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no"/>
     <meta charset="utf-8"/>
     <title>Places Searchbox</title>
-  </head>
-  <body>
+  </h:head>
+  <h:body>
   	<div class="header">
          <h1><b>Welcome to the vibrationspotter</b></h1>
      </div>
      
     <h:button id="tologin" image="loginbutton.png" outcome="login.xhtml" />
-     <h:form>
-        
-		<h:panelGrid columns ="4" cellpadding = "10" cellspacing = "1" styleClass="panel" >
-			<h:outputText value="ID" />
-			<h:inputText required ="true" id="id" value="#{kaartController.id}" requiredMessage="gelieve een ID in te geven"></h:inputText>
-			<h:commandButton value = "toon metingen van project" action="#{kaartController.controle()}"></h:commandButton>
-			<h:messages  layout="table" styleClass="fail" />
-		 </h:panelGrid>
-	</h:form>
 	
    <input id="pac-input" class="controls" type="text" placeholder="Search Box"/>
     <div id="map"></div>
@@ -122,7 +113,7 @@
         	var marker = new google.maps.Marker({
            		position: {lat: #{point.latitude}, lng: #{point.longtitude}},
             	map: map,
-            	title: '#{point.idProject}',
+            	title: 'Titel:#{point.titel} \n Id: #{point.idProject}',
             	animation: google.maps.Animation.DROP,
             	icon: controle('#{point.type}')
           	});
@@ -130,8 +121,9 @@
 
         	 google.maps.event.addListener(marker, 'click', (function(marker, i) {
         	        return function() {
-        	            infowindow.setContent('<p>titel: #{point.titel}</p>'+'<p>beschrijving: #{point.beschrijving}</p>'+' <h:commandButton value = "toon metingen van project #{point.idProject}" action="#{kaartController.controle(point)}"> </h:commandButton> ');
+        	            infowindow.setContent('<h:commandButton value = "toon metingen van project #{point.idProject}" action="#{kaartController.controle(point)}"/>');
         	            infowindow.open(map, marker);
+        	            window.location.href="metingen.xhtml?id=#{point.idProject}";
         	        }
         	    })(marker, i));
         	 i++;
@@ -155,5 +147,5 @@
       <script async = "async" defer = "defer"
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB4iQ9wgoR3FsIhTKbM8jXAMEJ4TzQwTo0&amp;libraries=places&amp;callback=initAutocomplete"> 
       </script>
-  </body>
+  </h:body>
 </html>
