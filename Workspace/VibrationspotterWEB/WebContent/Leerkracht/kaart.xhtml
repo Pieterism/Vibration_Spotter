@@ -12,7 +12,7 @@
   </head>
   <body>
     <div class="header">
-         <h1><b>Welcome to the vibrationspotter</b><img src="logo.png" width="50" height="50"/></h1>
+         <h1><b>Welcome to the vibrationspotter</b><img src="../images/logo.png" width="50" height="50"/></h1>
      </div>
      <div class="topnav">
 		<a href="index.xhtml">Home</a>
@@ -20,7 +20,7 @@
 		<a class="active" href="kaart.xhtml">Kaart</a>
  		<a href="about.xhtml">About</a>
  		 <h:form >
- 		<h:commandButton styleClass="logout" image="logout.png" value = "uitloggen" action="#{loginController.logout}"/>
+ 		<h:commandButton styleClass="logout" image="../images/logout.png" value = "uitloggen" action="#{loginController.logout}"/>
  		</h:form>
 	</div>
     	
@@ -38,11 +38,11 @@
     	  function controle(x) {
     		  var image;
     		    if(x=='brug'){
-    		    	var image = {url: 'rood.png',scaledSize: new google.maps.Size(30, 50)};
+    		    	var image = {url: '../images/rood.png',scaledSize: new google.maps.Size(30, 50)};
     		    	b++;
     		    }
     		    else if(x=='kraan'){
-    		    	var image = {url: 'blauw.png',scaledSize: new google.maps.Size(30, 50)};
+    		    	var image = {url: '../images/blauw.png',scaledSize: new google.maps.Size(30, 50)};
     		    	k++;
     		    	
     		    }
@@ -141,10 +141,10 @@
      var div = document.createElement('div');
      var percentstem=parseFloat(k/(k+b)*100).toFixed(2);
      var percentvib=parseFloat(b/(k+b)*100).toFixed(2);
-     div.innerHTML = "STEM            :"+ '<img src='blauw.png' style="width: 10%; height: 10%"/>'+"    aantal: "+k+"    ("+percentstem+"%)";
+     div.innerHTML = "STEM            :"+ '<img src='../images/blauw.png' style="width: 10%; height: 10%"/>'+"    aantal: "+k+"    ("+percentstem+"%)";
      legend.appendChild(div);
      var div = document.createElement('div');
-     div.innerHTML = "vibrationspotter:"+ '<img src='rood.png' style="width: 10%; height: 10%"/>'+"     aantal: "+b+"    ("+percentvib+"%)";
+     div.innerHTML = "vibrationspotter:"+ '<img src='../images/rood.png' style="width: 10%; height: 10%"/>'+"     aantal: "+b+"    ("+percentvib+"%)";
      legend.appendChild(div);
      map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(legend);
       }

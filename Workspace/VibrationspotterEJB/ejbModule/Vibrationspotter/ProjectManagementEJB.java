@@ -290,5 +290,12 @@ public class ProjectManagementEJB implements ProjectManagementEJBLocal {
 		}
 		return goedeprojecten;
 	}
-
+	
+	
+	public Project findProjectByQR(String QR){
+		Query q = em.createQuery("SELECT p FROM Project p WHERE p.idProject = :QR");
+		q.setParameter("QR", QR);
+		List<Project> projecten = q.getResultList();
+		return projecten.get(0);
+	}
 }

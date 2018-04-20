@@ -74,7 +74,7 @@ public class ProjectActivity extends AppCompatActivity{
         textLocation.setText(String.valueOf(project.getLatitude()) + " LA ," + String.valueOf(project.getLongtitude()) + " LO");
         //textAantalMetingen.setText("Nog te bepalen");
 
-        imageviewProject.setImageResource(R.drawable.logo);
+//        imageviewProject.setImageResource(R.drawable.logo);
 
         bViewMetingen.setOnClickListener(new View.OnClickListener() {
             @Override
