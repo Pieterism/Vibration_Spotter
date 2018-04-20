@@ -94,7 +94,7 @@ color: red;
 }
 
 .background{
-	background-image: url("../brug.jpg");
+	background-image: url("../images/brug.jpg");
   	height: 90%;
   	
     background-position: center;
@@ -102,7 +102,7 @@ color: red;
     background-size: cover;
 }
 .background2{
-	background-image: url("../knex.png");
+	background-image: url("../images/knex.png");
 	height:1100px;
 	
 }
