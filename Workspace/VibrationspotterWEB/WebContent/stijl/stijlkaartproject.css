@@ -1,96 +1,107 @@
- 	#map {
-        height: 70%;
-        width: 1500px;
-        margin: 0 auto;
-        margin-top:5px;
-		}
-      /* Optional: Makes the sample page fill the window. */
-      html, body {
-        height: 100%;
-        margin: 4px;
-        padding: 0;
-      }
-      #description {
-        font-family: Roboto;
-        font-size: 15px;
-        font-weight: 300;
-      }
+#map {
+height: 70%;
+width: 1500px;
+margin: 0 auto;
+margin-top:5px;
+}
 
-      #infowindow-content .title {
-        font-weight: bold;
-      }
+html, body {
+height: 100%;
+margin: 4px;
+padding: 0;
+}
 
-      #infowindow-content {
-        display: none;
-      }
+#description {
+font-family: Roboto;
+font-size: 15px;
+font-weight: 300;
+}
+								
+#infowindow-content .title {
+font-weight: bold;
+}
+								
+#infowindow-content {
+display: none;
+}
+								
+#map #infowindow-content {
+display: inline;
+}
+ .pac-card {
+margin: 10px 10px 0 0;
+border-radius: 2px 0 0 2px;
+box-sizing: border-box;
+-moz-box-sizing: border-box;
+outline: none;
+box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+background-color: #fff;
+font-family: Roboto;
+}
 
-      #map #infowindow-content {
-        display: inline;
-      }
+#pac-container {
+padding-bottom: 12px;
+margin-right: 12px;
+}
 
-      .pac-card {
-        margin: 10px 10px 0 0;
-        border-radius: 2px 0 0 2px;
-        box-sizing: border-box;
-        -moz-box-sizing: border-box;
-        outline: none;
-        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
-        background-color: #fff;
-        font-family: Roboto;
-      }
+.pac-controls {
+display: inline-block;
+padding: 5px 11px;
+}
 
-      #pac-container {
-        padding-bottom: 12px;
-        margin-right: 12px;
-      }
+.pac-controls label {
+font-family: Roboto;
+font-size: 13px;
+font-weight: 300;
+}
 
-      .pac-controls {
-        display: inline-block;
-        padding: 5px 11px;
-      }
+#pac-input {
+background-color: #fff;
+font-family: Roboto;
+font-size: 15px;
+font-weight: 300;
+margin-left: 12px;
+padding: 0 11px 0 13px;
+text-overflow: ellipsis;
+width: 400px;
+}
 
-      .pac-controls label {
-        font-family: Roboto;
-        font-size: 13px;
-        font-weight: 300;
-      }
+#pac-input:focus {
+border-color: #4d90fe;
+}
 
-      #pac-input {
-        background-color: #fff;
-        font-family: Roboto;
-        font-size: 15px;
-        font-weight: 300;
-        margin-left: 12px;
-        padding: 0 11px 0 13px;
-        text-overflow: ellipsis;
-        width: 400px;
-      }
-
-      #pac-input:focus {
-        border-color: #4d90fe;
-      }
-
-      #title {
-        color: #fff;
-        background-color: #4d90fe;
-        font-size: 25px;
-        font-weight: 500;
-        padding: 6px 12px;
-      }
-      #target {
-        width: 345px;
-      }
+#title {
+color: #fff;
+background-color: #4d90fe;
+font-size: 25px;
+font-weight: 500;
+padding: 6px 12px;
+}
+#target {
+width: 345px;
+}
       
-      #legend {
-         font-family: Arial, sans-serif;
-         background: #fff;
-         padding: 10px;
-         margin: 10px;
-         border: 3px solid #000;
-      }
-      #legend h3 {
-        margin-top: 0;
-      }
-      #legend img {
-        vertical-align: middle;
-        }
+#legend {
+font-family: Arial, sans-serif;
+background: #fff;
+padding: 10px;
+margin: 10px;
+border: 3px solid #000;
+}
+#legend h3 {
+margin-top: 0;
+}
+#legend img {
+vertical-align: middle;
+}
+        
+        
+#wereld{
+margin-left: 50%;
+margin-top: 30px;
+text-align: center;
+width:50px;
+height: auto;
+}
+
+     

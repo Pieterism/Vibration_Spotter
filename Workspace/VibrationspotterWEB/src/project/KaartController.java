@@ -40,6 +40,10 @@ private Project project;
 
 
 public List<Meting> zoekMetingen(){
+	HttpSession session = SessionUtils.getSession();
+	int idproject=id;
+	session.setAttribute("idProject", idproject);
+	
 	boolean geldig=projectejb.checkGoedgekeurd(id);
 	if(geldig){
 		return metingen;
@@ -72,6 +76,12 @@ public Project ophalenProject(){
 	}
 	return null;
 
+}
+
+public void gaTerugNaarMetingen() throws IOException{
+	 HttpSession session = SessionUtils.getSession();
+	 int idProject=(int) session.getAttribute("idProject");
+	 FacesContext.getCurrentInstance().getExternalContext().redirect("metingen.xhtml?id="+idProject);
 }
 
 

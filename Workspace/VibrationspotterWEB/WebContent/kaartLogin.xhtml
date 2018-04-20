@@ -8,7 +8,7 @@
    <link rel = "stylesheet" href ="stijl/stijlkaart.css"></link>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no"/>
     <meta charset="utf-8"/>
-    <title>Places Searchbox</title>
+    <title>HomePage</title>
   </h:head>
   <h:body>
   	<div class="header">
@@ -121,8 +121,6 @@
 
         	 google.maps.event.addListener(marker, 'click', (function(marker, i) {
         	        return function() {
-        	            infowindow.setContent('<h:commandButton value = "toon metingen van project #{point.idProject}" action="#{kaartController.controle(point)}"/>');
-        	            infowindow.open(map, marker);
         	            window.location.href="metingen.xhtml?id=#{point.idProject}";
         	        }
         	    })(marker, i));

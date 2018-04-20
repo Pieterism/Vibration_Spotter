@@ -30,7 +30,7 @@
        <h1><b>Metingen</b> </h1>
 </div>
 
-<a href="kaartLogin.xhtml">toon kaart</a>
+<h:button id ="wereld" outcome="kaartLogin.xhtml" value="toon kaart"  image="images/world.png" />
 
 <p:dataTable value="#{kaartController.ophalenProject()}" var="pro" style="margin-top:10px">
 	<f:facet name="header">

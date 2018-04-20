@@ -8,6 +8,7 @@
 <h:head>
 <title>Welcome Page!</title>
  <link rel = "stylesheet" href ="stijl/stijl.css"></link>
+ <link rel = "stylesheet" href ="stijl/stijlkaartproject.css"></link>
  
  <script type="text/javascript">
 function exportChart1() {
@@ -34,8 +35,13 @@ function exportChart2() {
 <div class="header">
 	<h1><b>resultaten van meting</b></h1>
 </div>
-<a href="kaartLogin.xhtml">toon kaart</a>
 
+ <h:form>
+ <div class="TerugMetingen">
+ 	<h:commandLink action="#{kaartController.gaTerugNaarMetingen}" class="subAnchor" style="float:left" value="ga terug naar metingen"/>
+</div>
+ </h:form>
+ 
 <div style="margin-top: 50px">
 	<p:chart type="line" model="#{chartView.grafiek1}" style="height:300px;" responsive="true" widgetVar="g1"/>
 	<p:commandButton type="button" value="als afbeelding weergeven" icon="ui-icon-extlink" onclick="exportChart1()"/>

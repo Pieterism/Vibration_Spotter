@@ -73,7 +73,7 @@ private static final long serialVersionUID = 1L;
 		if(metingejb.zoekDataset1(idmeting)==null||metingejb.zoekDataset2(idmeting)==null){
 			return null;
 		}
-		return "grafiek.faces?faces-redirect=true";
+		return "grafiek";
 	}
  
  public void wissen(Meting met) throws IOException {
