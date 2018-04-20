@@ -36,7 +36,7 @@ public class DoorstuurProject {
 		this.QR = p.getQR();
 		this.timestamp = p.getTimestamp();
 		this.beschrijving = p.getBeschrijving();
-	};
+	}
 	
 	
 

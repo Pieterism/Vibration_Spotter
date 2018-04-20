@@ -16,6 +16,7 @@ import org.json.JSONObject;
 import com.google.gson.Gson;
 import com.sun.jmx.snmp.Timestamp;
 
+import DoorstuurModels.DoorstuurMeting;
 import DoorstuurModels.DoorstuurProject;
 
 import java.util.ArrayList;
@@ -177,11 +178,16 @@ public class MetingManagementEJB implements MetingManagementEJBLocal{
 		q2.setParameter("idProject", idProject);
 		List<Meting> metingen = q2.getResultList();
 		
+		List<DoorstuurMeting> doorstuurMetingen = new ArrayList<>();
+		for(Meting m : metingen){
+			doorstuurMetingen.add(new DoorstuurMeting(m));
+		}
+		
 		//List<DoorstuurProject> doorstuurProjecten = new ArrayList<>();
 		//for(Project p: projecten) doorstuurProjecten.add(new DoorstuurProject(p));
 		
 		Gson gson = new Gson();
-		String metingenJson = gson.toJson(metingen);
+		String metingenJson = gson.toJson(doorstuurMetingen);
 		
 		
 		
