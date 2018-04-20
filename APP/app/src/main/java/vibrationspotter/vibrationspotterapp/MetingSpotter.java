@@ -1,34 +1,44 @@
 package vibrationspotter.vibrationspotterapp;
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
+import android.support.annotation.Nullable;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.highlight.Highlight;
+import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
+import com.github.mikephil.charting.listener.ChartTouchListener;
+import com.github.mikephil.charting.listener.OnChartGestureListener;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
-import com.google.android.gms.common.api.CommonStatusCodes;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Map;
+import java.util.List;
 
-public class Meter extends Activity implements SensorEventListener,OnChartValueSelectedListener{
+public class MetingSpotter extends AppCompatActivity implements SensorEventListener,OnChartGestureListener {
+
+    LineChart lcTest;
+    Button bStart;
+    Button bStop;
+    TextView textResultaat;
 
     private SensorManager mSensorManager;
     private Sensor mAccelerometer;
@@ -36,33 +46,29 @@ public class Meter extends Activity implements SensorEventListener,OnChartValueS
     private double x, y, z;
     private long tijd, starttijd;
     private JSONArray jArray;
-    LineChart lineChartX;
-    LineChart lineChartY;
-    LineChart lineChartZ;
     ArrayList<String> tijdAs;
     ArrayList<Entry> xWaarden;
     ArrayList<Entry> yWaarden;
     ArrayList<Entry> zWaarden;
+    List<ILineDataSet> xyzData;
     int entryNummer;
 
-    Button bsave;
-
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_meting);
+        setContentView(R.layout.meting_test);
+
+        lcTest = findViewById(R.id.lcTest);
+        bStart = findViewById(R.id.bStart);
+        bStop = findViewById(R.id.bStop);
+        textResultaat = findViewById(R.id.textResultaat);
+
         started = false;
         mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
-        mAccelerometer = mSensorManager.getDefaultSensor(Sensor.TYPE_LINEAR_ACCELERATION); //trycatch?
-        final Button bStart = findViewById(R.id.bStart);
-        final Button bStop = findViewById(R.id.bStop);
-        final Button bPhoto = findViewById(R.id.bAddPicture);
-        final Button bSave = findViewById(R.id.bSave);
+        mAccelerometer = mSensorManager.getDefaultSensor(Sensor.TYPE_LINEAR_ACCELERATION);
+
         bStop.setVisibility(View.INVISIBLE);
         jArray = new JSONArray();
-        lineChartX = findViewById(R.id.lcTest);
-        lineChartY = findViewById(R.id.lcy);
-        lineChartZ = findViewById(R.id.lcz);
 
         tijdAs = new ArrayList<>();
         xWaarden = new ArrayList<>();
@@ -85,71 +91,54 @@ public class Meter extends Activity implements SensorEventListener,OnChartValueS
         });
 
         bStop.setOnClickListener(new View.OnClickListener() {
+            @SuppressWarnings("SuspiciousNameCombination")
             @Override
             public void onClick(View view) {
+                started = false;
                 bStop.setVisibility(View.INVISIBLE);
                 bStart.setVisibility(View.VISIBLE);
-                started = false;
 
                 LineDataSet xData = new LineDataSet(xWaarden, "x");
                 xData.setDrawCircles(false);
+                xData.setColor(Color.parseColor("#005b7f"));
                 LineDataSet yData = new LineDataSet(yWaarden, "y");
                 yData.setDrawCircles(false);
+                yData.setColor(Color.parseColor("#fdc101"));
                 LineDataSet zData = new LineDataSet(zWaarden, "z");
                 zData.setDrawCircles(false);
+                zData.setColor(Color.parseColor("#c95854"));
 
-                lineChartX.setData(new LineData(xData));
-                lineChartX.invalidate();
-                lineChartY.setData(new LineData(yData));
-                lineChartY.invalidate();
-                lineChartZ.setData(new LineData(zData));
-                lineChartZ.invalidate();
+                xyzData = new ArrayList<>();
+                xyzData.add(xData);
+                xyzData.add(yData);
+                xyzData.add(zData);
+
+                LineData data = new LineData(xyzData);
+
+
+                OnChartValueSelectedListener listener = new OnChartValueSelectedListener() {
+                    @Override
+                    public void onValueSelected(Entry e, Highlight h) {
+
+                        Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_LONG).show();
+
+                    }
+
+                    @Override
+                    public void onNothingSelected() {
+
+                    }
+                };
+                lcTest.setData(data);
+                lcTest.setOnChartValueSelectedListener(listener);
+                lcTest.invalidate();
             }
         });
 
-        bPhoto.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick (View v){
-                
-            }
-        });
-
-        bSave.findViewById(R.id.bSave);
-        bSave.setOnClickListener(new View.OnClickListener() {
+        textResultaat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-                Map<String,?> sharedPreferences = settings.getAll();
 
-                String email = sharedPreferences.get("email").toString();
-
-                if (email != null) {
-                    System.out.println("email: " + email);
-                    System.out.println(jArray.toString());
-
-                    //DEEL PJ
-                    JSONObject jObject = new JSONObject();
-
-                    try {
-                        jObject.put("email",email);
-                        jObject.put("titel","titel");           //titel moet nog ingevuld worden in APP
-                        // jObject.put("idProject", idProject);               //Kiezen bij welk project hoort
-                        //  jObject.put("tijdstip","titel");                   //
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                    jArray.put(jObject);
-
-                    Intent gelukt = new Intent();
-                    gelukt.putExtra("jArray", jArray.toString());
-                    setResult(CommonStatusCodes.SUCCESS);
-                    finish();
-                } else {
-                    Intent mislukt = new Intent();
-                    mislukt.putExtra("mislukt","mislukt");
-                    setResult(CommonStatusCodes.SIGN_IN_REQUIRED);
-                    finish();
-                }
             }
         });
     }
@@ -202,17 +191,48 @@ public class Meter extends Activity implements SensorEventListener,OnChartValueS
     }
 
     @Override
-    protected void onStop() {
-        super.onStop();
-
-    }
-    @Override
-    public void onValueSelected(Entry e, Highlight h) {
+    public void onChartGestureStart(MotionEvent me, ChartTouchListener.ChartGesture lastPerformedGesture) {
 
     }
 
     @Override
-    public void onNothingSelected() {
+    public void onChartGestureEnd(MotionEvent me, ChartTouchListener.ChartGesture lastPerformedGesture) {
+
+    }
+
+    @Override
+    public void onChartLongPressed(MotionEvent me) {
+
+        Log.d("Long", "Lang");
+
+    }
+
+    @Override
+    public void onChartDoubleTapped(MotionEvent me) {
+
+        System.out.println("Double");
+
+    }
+
+    @Override
+    public void onChartSingleTapped(MotionEvent me) {
+
+        System.out.println("TAP");
+
+    }
+
+    @Override
+    public void onChartFling(MotionEvent me1, MotionEvent me2, float velocityX, float velocityY) {
+
+    }
+
+    @Override
+    public void onChartScale(MotionEvent me, float scaleX, float scaleY) {
+
+    }
+
+    @Override
+    public void onChartTranslate(MotionEvent me, float dX, float dY) {
 
     }
 }

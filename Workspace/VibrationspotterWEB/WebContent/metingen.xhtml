@@ -19,8 +19,8 @@
 </h:head>
 
  <f:metadata>
- 	<f:viewParam name="id" value="#{metingController.project.idProject}" />
- 	<f:viewAction action="#{metingController.findMetingenByIdProject}"></f:viewAction>
+ 	<f:viewParam name="id" value="#{kaartController.id}" />
+ 	<f:viewAction action="#{kaartController.findMetingenByIdProject()}"></f:viewAction>
  </f:metadata>  
  
 
@@ -29,8 +29,34 @@
 <div class="header">
        <h1><b>Metingen</b> </h1>
 </div>
-<a href="kaartLogin.xhtml">toon kaart</a>   
-<p:dataTable value="#{kaartController.zoekMetingen()}" var="met" style="margin-top:10px">
+
+<a href="kaartLogin.xhtml">toon kaart</a>
+
+<p:dataTable value="#{kaartController.ophalenProject()}" var="pro" style="margin-top:10px">
+	<f:facet name="header">
+            Project
+    </f:facet>
+     <p:column headerText="IdProject" style="text-align:center;">
+        		<h:outputText value="#{pro.idProject}" />
+     </p:column>
+     
+    <p:column headerText="Titel" style="text-align:center">
+        	<h:outputText value="#{pro.titel}" />
+   	 </p:column>
+    			
+    		
+    <p:column headerText="Beschrijving" style="text-align:center">
+        	<h:outputText value="#{pro.beschrijving}" />
+    </p:column>
+    
+
+    	
+</p:dataTable>
+
+<p:dataTable value="#{kaartController.zoekMetingen()}" var="met" style="margin-top:50px">
+	<f:facet name="header">
+            Metingen
+    </f:facet>
 
        <p:column headerText="IdMeting" style="text-align:center;">
         		<h:outputText value="#{met.idMeting}" />
@@ -49,7 +75,7 @@
     	</p:column>
     	
     	<p:column headerText="Foto" style="text-align:center;">
-        		 <h:graphicImage value="/Leerkracht/metingen/image?id=#{met.idMeting}" style="width:32px;height:18px"/>
+        		 <h:graphicImage value="/image?id=#{met.idMeting}" style="width:32px;height:18px"/>
     	</p:column>
     	
     	<p:column headerText="grafiek" style="text-align:center">
