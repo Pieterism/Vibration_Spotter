@@ -6,6 +6,7 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -13,7 +14,7 @@ import vibrationspotter.Models.Project;
 import vibrationspotter.vibrationspotterapp.R;
 
 
-public class ProjectView extends ConstraintLayout {
+public class ProjectView extends LinearLayout {
 
     View rootView;
     TextView titel;
