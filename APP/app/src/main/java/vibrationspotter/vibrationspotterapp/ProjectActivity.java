@@ -63,7 +63,6 @@ public class ProjectActivity extends AppCompatActivity{
         textTime = findViewById(R.id.textTime);
         textLocation = findViewById(R.id.textLocation);
         textAantalMetingen = findViewById(R.id.textAantalMetingen);
-        imageviewProject = findViewById(R.id.imageviewProject);
         bViewMetingen = findViewById(R.id.bViewMetingen);
         bAddMeting = findViewById(R.id.bAddMeting);
         bqrProject = findViewById(R.id.bqrProject);
