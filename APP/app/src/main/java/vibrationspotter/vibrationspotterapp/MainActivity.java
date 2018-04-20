@@ -192,6 +192,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     .show();
 
             return true;
+        } else if (id == R.id.action_testMuyltimeting) {
+
+            Intent stertTest = new Intent(getApplicationContext(), MetingSpotter.class);
+            startActivity(stertTest);
+
+            return true;
         }
 
         return super.onOptionsItemSelected(item);
