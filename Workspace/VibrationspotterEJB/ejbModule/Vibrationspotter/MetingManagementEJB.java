@@ -16,6 +16,7 @@ import org.json.JSONObject;
 import com.google.gson.Gson;
 import com.sun.jmx.snmp.Timestamp;
 
+import DoorstuurModels.DoorstuurMeting;
 import DoorstuurModels.DoorstuurProject;
 
 import java.util.ArrayList;
@@ -171,17 +172,25 @@ public class MetingManagementEJB implements MetingManagementEJBLocal{
 		Query q = em.createQuery("SELECT p FROM Project p WHERE p.idProject= :id");
 		q.setParameter("id", projectid);
 		List<Project> projecten = q.getResultList();
-		int idProject = projecten.get(0).getIdProject();
+		int idProject = projecten.get(0).getIdProject(); 
+															//Waarom doe je dit?
+															//Je zoekt op id om dan de id eruit te halen?
+	
 		
 		Query q2 = em.createQuery("SELECT m FROM Meting m WHERE m.idMeting = :idProject");
 		q2.setParameter("idProject", idProject);
 		List<Meting> metingen = q2.getResultList();
 		
+		List<DoorstuurMeting> doorstuurMetingen = new ArrayList<>();
+		for(Meting m : metingen){
+			doorstuurMetingen.add(new DoorstuurMeting(m));
+		}
+		
 		//List<DoorstuurProject> doorstuurProjecten = new ArrayList<>();
 		//for(Project p: projecten) doorstuurProjecten.add(new DoorstuurProject(p));
 		
 		Gson gson = new Gson();
-		String metingenJson = gson.toJson(metingen);
+		String metingenJson = gson.toJson(doorstuurMetingen);
 		
 		
 		

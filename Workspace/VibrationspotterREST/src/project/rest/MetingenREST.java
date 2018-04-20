@@ -44,12 +44,7 @@ public class MetingenREST implements Serializable {
 	@Path( "AlleMetingen/{projectID}")
 	public String haalMeting (@PathParam("projectID") String id){
 		
-		
-	
-		
-		metingEJB.haalProjectMetingen(id);
-		
-		return "[{\"Gelukt?:\": " + id + "}]";
+		return metingEJB.haalProjectMetingen(id);
 	}
 	
 	
