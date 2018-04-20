@@ -115,12 +115,13 @@ public class MetingSpotter extends AppCompatActivity implements SensorEventListe
 
                 LineData data = new LineData(xyzData);
 
-
                 OnChartValueSelectedListener listener = new OnChartValueSelectedListener() {
                     @Override
                     public void onValueSelected(Entry e, Highlight h) {
 
-                        Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_SHORT).show();
+
+                        textResultaat.setText(String.valueOf(e.getY()));
 
                     }
 

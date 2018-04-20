@@ -79,7 +79,9 @@ public class ProjectActivity extends AppCompatActivity{
         bViewMetingen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getApplicationContext(),"Das voor morgen denkik...", Toast.LENGTH_LONG).show();
+                Intent openMetingenlijst = new Intent(getApplicationContext(), MetingKeuzeActivity.class);
+                openMetingenlijst.putExtra("projectID", String.valueOf(project.getIdProject()));
+                startActivity(openMetingenlijst);
             }
         });
         bAddMeting.setOnClickListener(new View.OnClickListener() {

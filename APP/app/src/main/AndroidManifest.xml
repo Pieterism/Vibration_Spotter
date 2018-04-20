@@ -55,6 +55,9 @@
         <activity
             android:name=".MetingSpotter"
             android:screenOrientation="portrait"/>
+        <activity
+            android:name=".MetingKeuzeActivity"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>
