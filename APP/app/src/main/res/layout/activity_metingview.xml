@@ -70,120 +70,193 @@
             <TableLayout
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:paddingTop="15dp">
+                android:layout_marginVertical="1dp"
+                android:paddingHorizontal="25dp"
+                android:paddingTop="15dp"
+                android:textAlignment="textStart">
 
                 <TableRow
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorPrimary"
+                    android:paddingBottom="0.5dp"
+                    android:paddingHorizontal="0.5dp"
+                    android:paddingTop="1dp">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="0.5dp"
                         android:layout_weight="1"
+                        android:background="#f0eeee"
                         android:paddingHorizontal="20dp"
-                        android:text="Version" />
+                        android:text="X"
+                        android:textColor="@color/colorPrimary"
+                        android:fontFamily="@font/advent_pro_semibold"/>
 
                     <TextView
+                        android:id="@+id/xvalue"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="0.5dp"
                         android:layout_weight="1"
+                        android:background="#f0eeee"
                         android:paddingHorizontal="20dp"
-                        android:text="Version Name" />
+                        android:text="0.256874123654789"
+                        android:textColor="@color/colorPrimary"
+                        android:fontFamily="@font/advent_pro_semibold"/>
                 </TableRow>
 
                 <TableRow
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorPrimary"
+                    android:padding="0.5dp">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="0.5dp"
                         android:layout_weight="1"
+                        android:background="#f0eeee"
                         android:paddingHorizontal="20dp"
-                        android:text="Version" />
+                        android:text="Y"
+                        android:textColor="@color/colorPrimary"
+                        android:fontFamily="@font/advent_pro_semibold"/>
 
                     <TextView
+                        android:id="@+id/yvalue"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="0.5dp"
                         android:layout_weight="1"
+                        android:background="#f0eeee"
                         android:paddingHorizontal="20dp"
-                        android:text="Version Name" />
+                        android:text=""
+                        android:textColor="@color/colorPrimary"
+                        android:fontFamily="@font/advent_pro_semibold"/>
                 </TableRow>
 
                 <TableRow
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorPrimary"
+                    android:padding="0.5dp">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="0.5dp"
                         android:layout_weight="1"
+                        android:background="#f0eeee"
                         android:paddingHorizontal="20dp"
-                        android:text="Version" />
+                        android:text="Z"
+                        android:textColor="@color/colorPrimary"
+                        android:fontFamily="@font/advent_pro_semibold"/>
 
                     <TextView
+                        android:id="@+id/zvalue"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="0.5dp"
                         android:layout_weight="1"
+                        android:background="#f0eeee"
                         android:paddingHorizontal="20dp"
-                        android:text="Version Name" />
+                        android:text=""
+                        android:textColor="@color/colorPrimary"
+                        android:fontFamily="@font/advent_pro_semibold"/>
                 </TableRow>
 
                 <TableRow
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorPrimary"
+                    android:padding="0.5dp">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="0.5dp"
                         android:layout_weight="1"
+                        android:background="#f0eeee"
                         android:paddingHorizontal="20dp"
-                        android:text="Version" />
+                        android:text="t"
+                        android:textColor="@color/colorPrimary"
+                        android:fontFamily="@font/advent_pro_semibold"/>
 
                     <TextView
+                        android:id="@+id/tvalue"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="0.5dp"
                         android:layout_weight="1"
+                        android:background="#f0eeee"
                         android:paddingHorizontal="20dp"
-                        android:text="Version Name" />
+                        android:text=""
+                        android:textColor="@color/colorPrimary"
+                        android:fontFamily="@font/advent_pro_semibold"/>
                 </TableRow>
 
                 <TableRow
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorPrimary"
+                    android:padding="0.5dp">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="0.5dp"
                         android:layout_weight="1"
+                        android:background="#f0eeee"
                         android:paddingHorizontal="20dp"
-                        android:text="Version" />
+                        android:text="f"
+                        android:textColor="@color/colorPrimary"
+                        android:fontFamily="@font/advent_pro_semibold"/>
 
                     <TextView
+                        android:id="@+id/fvalue"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="0.5dp"
                         android:layout_weight="1"
+                        android:background="#f0eeee"
                         android:paddingHorizontal="20dp"
-                        android:text="Version Name" />
+                        android:text=""
+                        android:textColor="@color/colorPrimary"
+                        android:fontFamily="@font/advent_pro_semibold"/>
                 </TableRow>
 
                 <TableRow
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorPrimary"
+                    android:paddingBottom="1dp"
+                    android:paddingHorizontal="0.5dp"
+                    android:paddingTop="0.5dp">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="0.5dp"
                         android:layout_weight="1"
+                        android:background="#f0eeee"
                         android:paddingHorizontal="20dp"
-                        android:text="Version" />
+                        android:text="A"
+                        android:textColor="@color/colorPrimary"
+                        android:fontFamily="@font/advent_pro_semibold"/>
 
                     <TextView
+                        android:id="@+id/avalue"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="0.5dp"
                         android:layout_weight="1"
+                        android:background="#f0eeee"
                         android:paddingHorizontal="20dp"
-                        android:text="Version Name" />
+                        android:text=" "
+                        android:textColor="@color/colorPrimary"
+                        android:fontFamily="@font/advent_pro_semibold"/>
                 </TableRow>
             </TableLayout>
 
