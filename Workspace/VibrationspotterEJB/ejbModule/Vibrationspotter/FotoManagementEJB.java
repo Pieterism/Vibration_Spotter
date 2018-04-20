@@ -1,6 +1,10 @@
 package Vibrationspotter;
 
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -16,6 +20,7 @@ import org.json.JSONObject;
 import model.Foto;
 import model.Meting;
 import model.Persoon;
+import sun.misc.BASE64Decoder;
 
 @Stateless
 public class FotoManagementEJB implements FotoManagementEJBLocal {
@@ -71,8 +76,17 @@ public class FotoManagementEJB implements FotoManagementEJBLocal {
 		}
 		
 		
+		//foto van base 64 omzetten naar bytes.
+		byte[] imageByte = null; 
+		BASE64Decoder decoder = new BASE64Decoder();
+		try {
+			imageByte = decoder.decodeBuffer(foto);
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		
-		meting.setFoto(foto.getBytes());
+		meting.setFoto(imageByte);
 		em.persist(meting);
 	}
 

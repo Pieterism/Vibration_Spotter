@@ -20,6 +20,8 @@ public interface MetingManagementEJBLocal {
 
 	public void ToevoegenMetingResultaten(String JSONarray);
 	
+	public String haalProjectMetingen (String id);
+	
 	public byte[] zoekDataset1(int idMeting);
 	
 	public byte[] zoekDataset2(int idMeting);

@@ -8,12 +8,17 @@ import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.ws.rs.PathParam;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.google.gson.Gson;
 import com.sun.jmx.snmp.Timestamp;
 
+import DoorstuurModels.DoorstuurProject;
+
+import java.util.ArrayList;
 import java.util.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -124,8 +129,8 @@ public class MetingManagementEJB implements MetingManagementEJBLocal{
 		meting1.setTijdstip(dateFormat.format(date));
 		meting1.setResultaten(jsonarray);
 		meting1.setIdProject(project);
-		//meting1.setDataset1(resultaten[0]);
-		//meting1.setDataset2(resultaten[1]);
+		//meting1.setDataset1(resultaten[0].getBytes());
+		//meting1.setDataset2(resultaten[1].getBytes());
 		em.persist(meting1);	
 		
 	}
@@ -160,4 +165,29 @@ public class MetingManagementEJB implements MetingManagementEJBLocal{
 		
 	}
 	
+
+	public String haalProjectMetingen (String id){
+		int projectid = Integer.parseInt(id);
+		Query q = em.createQuery("SELECT p FROM Project p WHERE p.idProject= :id");
+		q.setParameter("id", projectid);
+		List<Project> projecten = q.getResultList();
+		int idProject = projecten.get(0).getIdProject();
+		
+		Query q2 = em.createQuery("SELECT m FROM Meting m WHERE m.idMeting = :idProject");
+		q2.setParameter("idProject", idProject);
+		List<Meting> metingen = q2.getResultList();
+		
+		//List<DoorstuurProject> doorstuurProjecten = new ArrayList<>();
+		//for(Project p: projecten) doorstuurProjecten.add(new DoorstuurProject(p));
+		
+		Gson gson = new Gson();
+		String metingenJson = gson.toJson(metingen);
+		
+		
+		
+		
+		return metingenJson;
+		
+	}
+	//idProject
 }
