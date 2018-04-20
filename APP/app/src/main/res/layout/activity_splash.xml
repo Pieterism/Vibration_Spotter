@@ -9,14 +9,25 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/colorBackground"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:gravity="center_horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="50dp"
+            android:textColor="#000"
+            android:text="VIBRATION SPOTTER"
+            android:fontFamily="@font/aclonica"
+            android:textSize="30dp"/>
 
         <ImageView
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:layout_gravity="center"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="25dp"
             android:src="@drawable/logo" />
+
 
         <Button
             android:id="@+id/gebruikerslogin"
@@ -24,7 +35,7 @@
             android:layout_height="40dp"
             android:layout_gravity="center"
             android:layout_marginBottom="5dp"
-            android:layout_marginTop="100dp"
+            android:layout_marginTop="50dp"
             android:background="@drawable/custom_button"
             android:fontFamily="@font/advent_pro_semibold"
             android:text="spotter login"
