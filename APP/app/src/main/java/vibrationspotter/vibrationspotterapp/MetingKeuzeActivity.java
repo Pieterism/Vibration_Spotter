@@ -25,10 +25,10 @@ public class MetingKeuzeActivity extends AppCompatActivity {
         setContentView(R.layout.simple_scrollview);
 
         surface = findViewById(R.id.surface);
-
+        System.out.println(getIntent().getStringExtra("projectID"));
 
         JsonArrayRequest alleMetingenVoorProjectRequest = new JsonArrayRequest(
-                getString(R.string.url) + "Metingen/AlleMetingen/" + getIntent().getStringExtra("idProject"),
+                getString(R.string.url) + "Metingen/AlleMetingen/" + getIntent().getStringExtra("projectID"),
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
