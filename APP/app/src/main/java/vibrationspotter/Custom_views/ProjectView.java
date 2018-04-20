@@ -16,7 +16,6 @@ import vibrationspotter.vibrationspotterapp.R;
 public class ProjectView extends ConstraintLayout {
 
     View rootView;
-    ImageView projectAfbeelding;
     TextView titel;
     ImageView openProject;
     Project project;
@@ -36,7 +35,6 @@ public class ProjectView extends ConstraintLayout {
         rootView = inflate(context, R.layout.projectview,this);
         titel = rootView.findViewById(R.id.project_titel);
         titel.setText(project.getTitel());
-        projectAfbeelding = findViewById(R.id.project_logo);
         openProject = findViewById(R.id.project_button);
 
     }
