@@ -34,6 +34,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class Meter extends Activity implements SensorEventListener,OnChartValueSelectedListener{
 
@@ -133,9 +134,9 @@ public class Meter extends Activity implements SensorEventListener,OnChartValueS
             @Override
             public void onClick(View v) {
                 SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-                SharedPreferences.Editor editor = settings.edit();
+                Map<String,?> sharedPreferences = settings.getAll();
 
-                String email = settings.getString("email", null);
+                String email = sharedPreferences.get("email").toString();
 
                 if (email != null) {
                     System.out.println("email: " + email);
@@ -160,6 +161,7 @@ public class Meter extends Activity implements SensorEventListener,OnChartValueS
                     finish();
                 } else {
                     Intent mislukt = new Intent();
+                    mislukt.putExtra("mislukt","mislukt");
                     setResult(CommonStatusCodes.SIGN_IN_REQUIRED);
                     finish();
                 }

@@ -56,6 +56,7 @@ import org.json.JSONObject;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -142,6 +143,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         settings = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         Map<String,?> sharedPreferences = settings.getAll();
+
+        projecten = new ArrayList<>();
+        gson = new Gson();
+
 
         projecten.clear();
 
@@ -262,7 +267,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         } else if (id == R.id.nav_projecten) {
 
-            LayoutParams lp = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
+            final LayoutParams lp = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
 
             llprojecten.removeAllViews();
 
@@ -292,6 +297,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                 Type type = new TypeToken<List<Project>>(){}.getType();
                                 projecten = gson.fromJson(response.toString(), type);
 
+                                for(final Project p: projecten){
+                                    ProjectView projectView = new ProjectView(getApplicationContext(), p);
+                                    projectView.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View v) {
+                                            String pString = gson.toJson(p);
+                                            Intent naar_project = new Intent(getApplicationContext(),ProjectActivity.class);
+                                            naar_project.putExtra("project",pString);
+                                            startActivity(naar_project);
+                                        }
+                                    });
+                                    llprojecten.addView(projectView, lp);
+                                }
+
                             }
                         },
                         new Response.ErrorListener() {
@@ -305,22 +324,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
 
             //EINDE DEEL PJ
-
-
-
-            for(final Project p: projecten){
-                ProjectView projectView = new ProjectView(this, p);
-                projectView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        String pString = gson.toJson(p);
-                        Intent naar_project = new Intent(getApplicationContext(),ProjectActivity.class);
-                        naar_project.putExtra("project",pString);
-                        startActivity(naar_project);
-                    }
-                });
-                llprojecten.addView(projectView, lp);
-            }
 
         } else if (id == R.id.nav_meter) {
             Intent naar_meter = new Intent(MainActivity.this, Meter.class);
