@@ -292,11 +292,12 @@ public class ProjectManagementEJB implements ProjectManagementEJBLocal {
 	}
 	
 	
-	public Project findProjectByQR(String QR){
+	public String findProjectByQR(String QR){
 		Query q = em.createQuery("SELECT p FROM Project p WHERE p.idProject = :QR");
 		q.setParameter("QR", QR);
 		List<Project> projecten = q.getResultList();
-		return projecten.get(0);
+		
+		return "[{\"Gelukt?:\": YEZZZ!!!}]";
 	}
 	
 	public void ToevoegenProjectenAPP(String gegevens){

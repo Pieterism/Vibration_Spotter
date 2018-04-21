@@ -1,9 +1,11 @@
 package Vibrationspotter;
 
 import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.io.PrintWriter;
 
 import javax.annotation.Resource;
@@ -35,10 +37,11 @@ public class OctaveManagementEJB implements OctaveManagementEJBLocal {
 		 * Methode die Octave oproept via commandline en bewerkingen uitvoert op onze ingelezen String (data).
 		 * We returnen 2 datasets terug die dan naar de databank gestuurd kunnen worden.
 		 */  
-		
+		 byte [] by ;
+		 ByteArrayOutputStream bOutput = new ByteArrayOutputStream();
 		String s1 = null;
 		String s2 = null;
-		String[] resultaten = new String[2];
+	    String[] resultaten = new String[2];
 		try {
 	   	  	String lijnen[] = s.split("\\r?\\n");
 	   	  	StringBuilder sb1 = new StringBuilder();
@@ -61,13 +64,16 @@ public class OctaveManagementEJB implements OctaveManagementEJBLocal {
 	   	  	String xWaarde=sb2.toString();
 	   	  	String yWaarde=sb3.toString();
 	   	  	String zWaarde=sb4.toString();
-
+	   	  	
 			String[] command = { "octave-cli", };
 			Process p = Runtime.getRuntime().exec(command);
+			 SyncPipe sync =  new SyncPipe(p.getInputStream(), bOutput);
 			new Thread(new SyncPipe(p.getErrorStream(), System.err)).start();
-			new Thread(new SyncPipe(p.getInputStream(), System.out)).start();
+			//new Thread(new SyncPipe(p.getInputStream(), bOutput)).start();
+			new Thread(sync).start();
 			PrintWriter stdin = new PrintWriter(p.getOutputStream());
 			InputStreamReader stdout = new InputStreamReader(p.getInputStream());
+
 
 			// Load package
 			stdin.println("pkg load signal");
@@ -201,29 +207,29 @@ public class OctaveManagementEJB implements OctaveManagementEJBLocal {
 			stdin.println("A_data = A2(1:L/2+1); A_data(2:end-1) = 2*A_data(2:end-1);");
 
 			// 2 output files uitprinten
-			/*
-			stdin.println("x1 = [tijd(:),versnelling(:),data_filtered(:)];");
-			stdin.println("csvwrite ('x1.txt', x1)");
+			
+		//	stdin.println("x1 = [tijd(:),versnelling(:),data_filtered(:)];");
+		//	stdin.println("csvwrite ('x1.txt', x1)");
 
-			stdin.println("x2 = [frequentie(:),amplitude(:),A_data(:)];");
-			stdin.println("csvwrite ('x2.txt', x2)");
-			*/
+		//	stdin.println("x2 = [frequentie(:),amplitude(:),A_data(:)];");
+		//	stdin.println("csvwrite ('x2.txt', x2)");
+			
 			stdin.println("versnellingz=versnelling; data_filteredz=data_filtered; frequentiez=frequentie; amplitudez=amplitude; A_dataz=A_data; ");
 			
 			
 			//p
 			stdin.println("x1 = [tijd(:),versnellingx(:),data_filteredx(:),versnellingy(:),data_filteredy(:),versnellingz(:),data_filteredz(:)];");
-			stdin.println("csvwrite ('C:\\Users\\thoma\\Desktop\\files_mathlab\\x1.txt', x1)");
+		//	stdin.println("C:\\files_mathlab\\x1.txt', x1)");
 
-			stdin.println("x2 = [frequentiex(:),amplitudex(:),A_datax(:),frequentiey(:),amplitudey(:),A_datay(:),frequentiez(:),amplitudez(:),A_dataz(:)];");
-			stdin.println("csvwrite ('C:\\Users\\thoma\\Desktop\\files_mathlab\\x2.txt', x2)");
+	//		stdin.println("x2 = [frequentiex(:),amplitudex(:),A_datax(:),frequentiey(:),amplitudey(:),A_datay(:),frequentiez(:),amplitudez(:),A_dataz(:)];");
+	//		stdin.println("csvwrite ('C:\\files_mathlab\\x2.txt', x2)");
 			
-			BufferedReader br = null;
+	/*		BufferedReader br = null;
 			   try {
 
 	                String sCurrentLine;
 	                String nl=System.getProperty("line.separator");
-	                br = new BufferedReader(new FileReader("x1.txt"));
+	                br = new BufferedReader(new FileReader("C:\\files_mathlab\\x1.txt"));
 	                StringBuffer sBuffer = new StringBuffer();
 	                while ((sCurrentLine = br.readLine()) != null) {
 	                    System.out.println(sCurrentLine);
@@ -243,7 +249,7 @@ public class OctaveManagementEJB implements OctaveManagementEJBLocal {
 
 	                String sCurrentLine;
 	                String nl=System.getProperty("line.separator");
-	                br2 = new BufferedReader(new FileReader("x2.txt"));
+	                br2 = new BufferedReader(new FileReader("C:\\files_mathlab\\x2.txt"));
 	                StringBuffer sBuffer = new StringBuffer();
 	                while ((sCurrentLine = br2.readLine()) != null) {
 	                    System.out.println(sCurrentLine);
@@ -257,9 +263,26 @@ public class OctaveManagementEJB implements OctaveManagementEJBLocal {
 	            catch (IOException e) {
 	                e.printStackTrace();
 	            }
-
+*/
 			stdin.close();
+			
+		
+					ByteArrayOutputStream buffer = new ByteArrayOutputStream();
 
+					int nRead;
+					byte[] data = new byte[16384];
+
+					while ((nRead = sync.getInputStream().read(data, 0, data.length)) != -1) {
+					  buffer.write(data, 0, nRead);
+					}
+
+					buffer.flush();
+
+					
+
+			 by = buffer.toByteArray();
+			 s1 = new String(by);
+			
 			int returnCode = 0;
 			try {
 				returnCode = p.waitFor();
