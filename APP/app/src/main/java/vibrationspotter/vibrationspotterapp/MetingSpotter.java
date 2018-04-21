@@ -122,7 +122,7 @@ public class MetingSpotter extends AppCompatActivity implements SensorEventListe
                         System.out.println(h.toString());
                         System.out.println(e.toString());
 
-                        textResultaat.setText(String.valueOf((int) e.getX()));
+                        textResultaat.setText(String.valueOf((int) e.getX())); //xCoordinaat
                     }
 
                     @Override

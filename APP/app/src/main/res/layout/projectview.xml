@@ -21,7 +21,7 @@
         android:id="@+id/textAantalMetingen"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toStartOf="@id/bViewMetingen"
+        android:layout_toStartOf="@id/bViewProject"
         android:layout_alignTop="@+id/project_titel"
         android:layout_alignBottom="@+id/project_titel"
         android:fontFamily="@font/advent_pro_semibold"
@@ -32,7 +32,7 @@
         android:textStyle="bold" />
 
     <Button
-        android:id="@+id/bViewMetingen"
+        android:id="@+id/bViewProject"
         android:layout_width="50dp"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/project_titel"
