@@ -40,5 +40,9 @@ public interface ProjectManagementEJBLocal {
 	public void verwijderProjectViaApp (String gegevens);
 	
 	public List<Project> findMijnProjecten(int idPersoon);
+	
+	public String HaalprojectviaApp(String gegevens);
+	
+	public int haalMetingenSizeProject(int id);
 
 }

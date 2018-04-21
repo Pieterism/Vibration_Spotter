@@ -60,8 +60,7 @@ private static final long serialVersionUID = 1L;
 	@GET
 	@Path( "Size/{projectID}")
 	public String haalProjectensize (@PathParam("projectID") String id){
-		int size = persoonEJB.haalProjectenSizeVanPersoon(Integer.parseInt(id));
-		
+		int size = projectEJB.haalMetingenSizeProject(Integer.parseInt(id));
 		return "[{\"size\": " + size + "}]";
 	}
 /*

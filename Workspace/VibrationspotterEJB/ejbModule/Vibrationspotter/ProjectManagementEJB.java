@@ -76,6 +76,7 @@ public class ProjectManagementEJB implements ProjectManagementEJBLocal {
 		return projecten.get(0);
 	}
 	
+	
 	public Project findProjectByEmail(String email) {
 		Query q = em.createQuery("SELECT p FROM Project p WHERE p.idProject = :email");
 		q.setParameter("email", email);
@@ -119,24 +120,7 @@ public class ProjectManagementEJB implements ProjectManagementEJBLocal {
 	}
 	
 
-	/*
-	 * public List<Project> findProjectenBijPesoon(int id){ Query q = em.
-	 * createQuery("SELECT p FROM Project p WHERE idPersoon = id AND  = ORDER BY p.idProject ASC"
-	 * ); return null; }
-	 */
 
-	/*
-	 * public List<Project> findProjectById(int idProject) { Query q =
-	 * em.createQuery("SELECT p FROM Project p WHERE p.idProject = :idProject");
-	 * q.setParameter("idProject", idProject); List<Project> projecten =
-	 * q.getResultList(); return projecten; }
-	 */
-
-	/*
-	 * public List<Project> findAllUserProjecten() { Query q =
-	 * em.createQuery("SELECT p FROM Project p WHERE ORDER BY p.idProject ASC");
-	 * List<Project> projecten = q.getResultList(); return projecten; }
-	 */
 
 	@Override
 	public boolean checkQR(String ingegevenstring) throws IOException {
@@ -231,7 +215,7 @@ public class ProjectManagementEJB implements ProjectManagementEJBLocal {
 		}
 		System.out.println("\n\nYou have successfully created QR Code.");
 	}
-
+	
 	public String FindAllProjectsForApp(String ingegevenstring) {
 		
 		Gson gson = new Gson();
@@ -365,6 +349,42 @@ public class ProjectManagementEJB implements ProjectManagementEJBLocal {
 		Project project = findProjectById(idProject);
 		em.remove(project);
 		
+	}
+	
+	public int haalMetingenSizeProject(int id){
+		Query q = em.createQuery("SELECT p FROM Project p WHERE p.idProject = :id");
+		q.setParameter("id", id);
+		int size = q.getResultList().size();
+		
+		return size;
+	}
+	
+	public String HaalprojectviaApp(String gegevens){
+		gegevens = gegevens.substring(1, gegevens.length() - 1);
+		JSONObject json = null;		
+		String QR = null;
+		
+		Gson gson = new Gson();
+		Type type = new TypeToken<List<Map<String,String>>>(){}.getType();
+		
+		try {
+			json = new JSONObject(gegevens);
+			QR =json.getString("QR");
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	Project p = findProjectByQR(QR);
+	
+	List<Project> doorstuurProjecten = new ArrayList<>();
+	doorstuurProjecten.add(p);
+	
+	String projectenJson = gson.toJson(doorstuurProjecten);
+
+	return projectenJson;
+	
+	
 	}
 
 
