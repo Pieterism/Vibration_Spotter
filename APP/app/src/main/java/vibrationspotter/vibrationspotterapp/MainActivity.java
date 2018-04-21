@@ -300,7 +300,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                     });
                                     llprojecten.addView(projectView, lp);
                                 }
-
                             }
                         },
                         new Response.ErrorListener() {

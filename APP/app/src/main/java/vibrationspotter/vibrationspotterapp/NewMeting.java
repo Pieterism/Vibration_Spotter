@@ -6,6 +6,8 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -13,9 +15,12 @@ import com.google.android.gms.common.api.CommonStatusCodes;
 
 public class NewMeting extends AppCompatActivity {
 
-    Button bTest;
-    TextView tv1;
-    TextView tv2;
+    Button bSave;
+    EditText metingTitel;
+    EditText metingDescription;
+    ImageView ivImage;
+    Button bRotate;
+
     private static final int METINGEN = 28;
 
     @Override
@@ -23,17 +28,20 @@ public class NewMeting extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test);
 
-        bTest = findViewById(R.id.bTest);
-        tv1 = findViewById(R.id.tv1Test);
-        tv2 = findViewById(R.id.tv2Test);
+        metingTitel = findViewById(R.id.metingTitle);
+        metingDescription = findViewById(R.id.metingDescription);
+        ivImage = findViewById(R.id.ivImage);
+        //bRotate = findViewById(R.id.bRotate);
+        bSave = findViewById(R.id.bSave);
 
-        bTest.setOnClickListener(new View.OnClickListener() {
+        ivImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent naar_meting = new Intent(getApplicationContext(), Meter.class);
-                startActivityForResult(naar_meting, METINGEN);
+
             }
         });
+
+
     }
 
     @Override
