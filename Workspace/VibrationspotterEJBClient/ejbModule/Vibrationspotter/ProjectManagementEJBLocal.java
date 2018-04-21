@@ -36,5 +36,9 @@ public interface ProjectManagementEJBLocal {
 	public List<Project> findGoedgekeurdeProjecten();
 	
 	public void ToevoegenProjectenAPP(String gegevens);
+	
+	public void verwijderProjectViaApp (String gegevens);
+	
+	public List<Project> findMijnProjecten(int idPersoon);
 
 }

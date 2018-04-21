@@ -38,11 +38,19 @@ private static final long serialVersionUID = 1L;
 	
 	@POST
 	@Path("ToevoegenProjecten")
-	public void VoegProjectToe (String jsonarray){
+	public String VoegProjectToe (String jsonarray){
 		projectEJB.ToevoegenProjectenAPP(jsonarray);
 		System.out.println("projectaangemaakt");
 		
-		
+		 return "[{\"Projectaanmaken\": Gelukt!!!}]";
+	}
+	
+	@POST
+	@Path("VerwijderenProjecten")
+	public String VerwijderProjectViaAPP (String jsonarray){
+		projectEJB.verwijderProjectViaApp(jsonarray);
+	
+		 return "[{\"Projectverwijderen\": Gelukt!!!}]";
 	}
 
 }

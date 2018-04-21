@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -9,53 +8,83 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:gravity="center">
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
 
         <EditText
-            android:id="@+id/etProjectTitel"
+            android:id="@+id/metingTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="40dp"
-            android:ems="10"
+            android:layout_marginHorizontal="25dp"
+            android:layout_marginVertical="10dp"
+            android:fontFamily="@font/advent_pro_semibold"
+            android:gravity="center"
             android:hint="Meting Title"
-            android:inputType="textPersonName"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:textSize="25dp" />
 
         <EditText
-            android:id="@+id/etProjectDescription"
+            android:id="@+id/metingDescription"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="40dp"
-            android:ems="10"
-            android:hint="Beschrijving"
-            android:inputType="textPersonName"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:layout_marginBottom="10dp"
+            android:layout_marginHorizontal="25dp"
+            android:fontFamily="@font/advent_pro_semibold"
+            android:gravity="center"
+            android:hint="Opmerkingen"
+            android:textSize="12dp" />
 
+        <ImageView
+            android:id="@+id/bAddPicture"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_marginTop="20dp"
+            android:padding="75dp"
+            android:src="@drawable/ic_add_a_photo_black_24dp" />
 
+        <LinearLayout
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
 
+            <ImageButton
+                android:id="@+id/bRotateL"
+                android:layout_width="60dp"
+                android:layout_height="50dp"
+                android:background="@null"
+                android:src="@drawable/ic_rotate_left_black_24dp" />
 
-        <!-- Ook GPS locatie moet nog gefixt worden bij indrukken van deze knop-->
+            <ImageButton
+                android:id="@+id/bCenter"
+                android:layout_width="60dp"
+                android:layout_height="50dp"
+                android:background="@null"
+                android:src="@drawable/ic_filter_center_focus_black_24dp"
+
+                />
+
+            <ImageButton
+                android:id="@+id/bRotateR"
+                android:layout_width="60dp"
+                android:layout_height="50dp"
+                android:background="@null"
+                android:src="@drawable/ic_rotate_right_black_24dp" />
+
+        </LinearLayout>
+
         <Button
-            android:id="@+id/bAddMeting"
+            android:id="@+id/bAddProject"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="25dp"
             android:layout_marginTop="25dp"
             android:background="@color/colorPrimary"
-            android:drawableLeft="@drawable/ic_add_box_black_24dp"
+            android:drawableLeft="@drawable/ic_find_in_page_black_24dp"
             android:fontFamily="@font/advent_pro_semibold"
-            android:paddingBottom="3dp"
             android:paddingHorizontal="50dp"
-            android:paddingTop="3dp"
-            android:text="Add new meting"
+            android:text="View Meting "
             android:textColor="@color/colorSecondary"
             android:textStyle="bold" />
-
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>
 

@@ -14,9 +14,17 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.google.android.gms.common.api.CommonStatusCodes;
 import com.google.gson.Gson;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.util.HashMap;
 import java.util.Map;
 
 import vibrationspotter.Models.Project;
@@ -75,6 +83,7 @@ public class ProjectActivity extends AppCompatActivity{
         //textAantalMetingen.setText("Nog te bepalen");
 
 //        imageviewProject.setImageResource(R.drawable.logo);
+        final Intent naar_mainactivity = new Intent(this, MainActivity.class);
 
         bViewMetingen.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -101,7 +110,35 @@ public class ProjectActivity extends AppCompatActivity{
         bDeleteProject.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getApplicationContext(), "Tis nogmaar juust gemaakt, je moet da nog nie verwijderen.", Toast.LENGTH_LONG).show();
+                Map<String, String> inloggegevens = new HashMap<>();
+                String idProject = "" +  project.getIdProject();
+                inloggegevens.put("idProject", idProject );
+                final JSONObject jsonObject = new JSONObject(inloggegevens);
+                JSONArray jArray = new JSONArray();
+                jArray.put(jsonObject);
+
+                JsonArrayRequest inloggenRequest = new JsonArrayRequest(Request.Method.POST,
+                        getString(R.string.url) + "Projecten/VerwijderenProjecten",
+                        jArray,
+                        new Response.Listener<JSONArray>() {
+                            @Override
+                            public void onResponse(JSONArray response) {
+                                Log.d("Verwijderen", response.toString());
+                                startActivity((naar_mainactivity));
+                            }
+                        },
+
+                        new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                Log.d("Verwijderen", "Error: " + error.toString() + ", " + error.getMessage());
+                            }
+                        }
+                );
+                VolleyClass.getInstance(getApplicationContext()).addToRequestQueue(inloggenRequest, "Verwijderen");
+
+
+
             }
         });
 
