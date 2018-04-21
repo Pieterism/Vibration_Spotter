@@ -304,7 +304,7 @@ public class ProjectManagementEJB implements ProjectManagementEJBLocal {
 		JSONObject json = null;
 
 		String titel = null;
-		String type = null;
+		String type = "Vibrationspotter";
 		String latitude = null; 
 		String longtitude = null;
 		String QR = null;
@@ -314,7 +314,6 @@ public class ProjectManagementEJB implements ProjectManagementEJBLocal {
 		try {
 			json = new JSONObject(gegevens);
 			 titel = json.getString("titel");
-			 type = json.getString("type");
 			 latitude = json.getString("latitude");
 			 longtitude = json.getString("longtitude");
 			 beschrijving = json.getString("beschrijving");
