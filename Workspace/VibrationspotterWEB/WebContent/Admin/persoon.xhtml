@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      >
+      
+<h:head>
+  <title>
+    <ui:insert name="title">Metingen</ui:insert>
+  </title>
+  	<link rel = "stylesheet" href ="../stijl/stijlmetingen.css"></link>
+  	<link rel = "stylesheet" href ="../stijl/stijlkaartproject.css"></link>
+
+
+</h:head>
+ 
+<h:body>
+<div class="header">
+       <h1><b>persoonsgegevens</b> </h1>
+</div>
+<a href="projecten.xhtml">terug naar projecten</a>    
+<p:dataTable value="#{userController.ophalenPersoon()}" var="per" style="margin-top:10px">
+	<f:facet name="header">
+            Persoon
+    </f:facet>
+     <p:column headerText="IdPersoon" style="text-align:center;">
+        		<h:outputText value="#{per.idPersoon}" />
+     </p:column>
+     
+     <p:column headerText="Type" style="text-align:center;">
+        		<h:outputText value="#{per.type}" />
+     </p:column>
+     
+     <p:column headerText="Emailadres" style="text-align:center;">
+        		<h:outputText value="#{per.emailadres}" />
+     </p:column>
+     
+     <p:column headerText="Voornaam" style="text-align:center;">
+        		<h:outputText value="#{per.voornaam}" />
+     </p:column>
+     
+     <p:column headerText="Achternaam" style="text-align:center;">
+        		<h:outputText value="#{per.achternaam}" />
+     </p:column>
+     
+   
+</p:dataTable>
+   
+</h:body>
+</html>

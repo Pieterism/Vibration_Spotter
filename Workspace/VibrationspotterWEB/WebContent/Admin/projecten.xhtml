@@ -54,7 +54,7 @@
     	</p:column>
     			
     	<p:column headerText="emailadres" style="text-align:center" sortBy="#{projectController.zoekEmailadres(pro)}" filterBy="#{projectController.zoekEmailadres(pro)}">
-        	<h:outputText value="#{projectController.zoekEmailadres(pro)}" />
+        	<h:commandLink action="#{userController.toonGegevens(pro)}" class="subAnchor" value="#{projectController.zoekEmailadres(pro)}"/>
     	</p:column>
     			
     	<p:column headerText="Metingen" style="text-align:center">
