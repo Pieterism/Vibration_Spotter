@@ -43,7 +43,7 @@ public class NewMeting extends AppCompatActivity {
         metingTitel = findViewById(R.id.metingTitle);
         metingDescription = findViewById(R.id.metingDescription);
         ivImage = findViewById(R.id.ivImage);
-        //bRotate = findViewById(R.id.bRotate);
+        bRotate = findViewById(R.id.bRotate);
         bSave = findViewById(R.id.bSave);
 
         ivImage.setOnClickListener(new View.OnClickListener() {
@@ -55,14 +55,26 @@ public class NewMeting extends AppCompatActivity {
             }
         });
 
+        bRotate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ivImage.setRotation(ivImage.getRotation()+45);
+            }
+        });
 
+        bSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if(data.getData() != null && resultCode == CommonStatusCodes.SUCCESS){
+        if(data.getData() != null){
             switch (requestCode){
                 case METINGEN:
                     System.out.println("Case:Meting");
@@ -87,7 +99,7 @@ public class NewMeting extends AppCompatActivity {
             }
 
         } else {
-
+            System.out.println("Hmmm");
         }
     }
 }
