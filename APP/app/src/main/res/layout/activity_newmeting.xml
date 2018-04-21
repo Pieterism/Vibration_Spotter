@@ -55,7 +55,7 @@
                 android:layout_height="50dp"
                 android:gravity="center"
                 android:background="@null"
-                android:drawableLeft="@drawable/ic_rotate_right_black_24dp"
+                android:drawableTop="@drawable/ic_rotate_right_black_24dp"
                 android:text="  Rotate Image"
                 android:src="@drawable/ic_rotate_right_black_24dp" />
 

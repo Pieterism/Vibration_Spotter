@@ -1,5 +1,6 @@
 package project;
 
+import java.io.IOException;
 import java.io.Serializable;
 
 import javax.ejb.EJB;
@@ -7,12 +8,14 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
+import javax.servlet.http.HttpSession;
 
 import Vibrationspotter.MetingManagementEJBLocal;
 import Vibrationspotter.PersonManagementEJBLocal;
 import Vibrationspotter.ProjectManagementEJBLocal;
 import model.Leerkracht;
 import model.Persoon;
+import model.Project;
 import model.Spotter;
 
 @Named
@@ -74,6 +77,21 @@ public String spotterAccountAanmaken() {
 	}
 }
 
+public void toonGegevens(Project pro) throws IOException{
+	HttpSession session = SessionUtils.getSession();
+	session.setAttribute("temp", pro.getIdPersoon().getIdPersoon());
+	System.out.println("hallo");
+	FacesContext.getCurrentInstance().getExternalContext().redirect("persoon.xhtml");
+
+}
+public Persoon ophalenPersoon(){
+	HttpSession session = SessionUtils.getSession();
+	int idPersoon=(int) session.getAttribute("temp");
+	Persoon p=persoonejb.findPersoonByid(idPersoon);
+	System.out.println(idPersoon);
+	return p;
+	
+}
 
 public Persoon getPersoon() {
 	return persoon;

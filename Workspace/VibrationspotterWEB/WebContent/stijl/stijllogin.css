@@ -94,3 +94,11 @@ margin: auto;
 	height: 100%;
     
 }
+.backgroundgent{
+	background-image: url("../images/gent.jpg");
+  	height: 90%;
+  	
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
