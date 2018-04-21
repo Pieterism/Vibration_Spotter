@@ -47,42 +47,31 @@
             android:gravity="center"
             android:orientation="horizontal">
 
-            <ImageButton
-                android:id="@+id/bRotateL"
-                android:layout_width="60dp"
-                android:layout_height="50dp"
-                android:background="@null"
-                android:src="@drawable/ic_rotate_left_black_24dp" />
 
-            <ImageButton
-                android:id="@+id/bCenter"
-                android:layout_width="60dp"
-                android:layout_height="50dp"
-                android:background="@null"
-                android:src="@drawable/ic_filter_center_focus_black_24dp"
-
-                />
-
-            <ImageButton
+            <Button
                 android:id="@+id/bRotateR"
-                android:layout_width="60dp"
+                android:layout_width="wrap_content"
+                android:paddingHorizontal="5dp"
                 android:layout_height="50dp"
+                android:gravity="center"
                 android:background="@null"
+                android:drawableLeft="@drawable/ic_rotate_right_black_24dp"
+                android:text="  Rotate Image"
                 android:src="@drawable/ic_rotate_right_black_24dp" />
 
         </LinearLayout>
 
         <Button
             android:id="@+id/bAddProject"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="25dp"
+            android:layout_marginHorizontal="30dp"
             android:layout_marginTop="25dp"
             android:background="@color/colorPrimary"
-            android:drawableLeft="@drawable/ic_find_in_page_black_24dp"
+            android:drawableLeft="@drawable/ic_save_black_24dp"
             android:fontFamily="@font/advent_pro_semibold"
-            android:paddingHorizontal="50dp"
-            android:text="View Meting "
+            android:paddingHorizontal="30dp"
+            android:text="   Save Meting "
             android:textColor="@color/colorSecondary"
             android:textStyle="bold" />
     </LinearLayout>
