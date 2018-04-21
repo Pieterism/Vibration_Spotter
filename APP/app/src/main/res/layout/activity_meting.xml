@@ -104,21 +104,6 @@
                 android:textStyle="bold" />
 
             <Button
-                android:id="@+id/bAddPicture"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="10dp"
-                android:background="@color/colorPrimary"
-                android:drawableTop="@drawable/ic_add_a_photo_black_24dp"
-                android:fontFamily="@font/advent_pro_semibold"
-                android:paddingBottom="5dp"
-                android:paddingHorizontal="16dp"
-                android:paddingTop="5dp"
-                android:text="Add picture"
-                android:textColor="@color/colorSecondary"
-                android:textStyle="bold" />
-
-            <Button
                 android:id="@+id/bStop"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
