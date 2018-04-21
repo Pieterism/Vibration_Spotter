@@ -286,7 +286,7 @@ public class ProjectManagementEJB implements ProjectManagementEJBLocal {
 	
 	
 	public Project findProjectByQR(String QR){
-		Query q = em.createQuery("SELECT p FROM Project p WHERE p.idProject = :QR");
+		Query q = em.createQuery("SELECT p FROM Project p WHERE p.QR = :QR");
 		q.setParameter("QR", QR);
 		List<Project> projecten = q.getResultList();
 		return projecten.get(0);
@@ -375,9 +375,10 @@ public class ProjectManagementEJB implements ProjectManagementEJBLocal {
 		}
 		
 	Project p = findProjectByQR(QR);
+	DoorstuurProject doorstuurp = new DoorstuurProject(p);
 	
-	List<Project> doorstuurProjecten = new ArrayList<>();
-	doorstuurProjecten.add(p);
+	List<DoorstuurProject> doorstuurProjecten = new ArrayList<>();
+	doorstuurProjecten.add(doorstuurp);
 	
 	String projectenJson = gson.toJson(doorstuurProjecten);
 
