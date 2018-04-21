@@ -28,7 +28,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.Map;
 
-public class Meter extends Activity implements SensorEventListener,OnChartValueSelectedListener{
+public class Meter extends Activity implements SensorEventListener{
 
     private SensorManager mSensorManager;
     private Sensor mAccelerometer;
@@ -45,7 +45,10 @@ public class Meter extends Activity implements SensorEventListener,OnChartValueS
     ArrayList<Entry> zWaarden;
     int entryNummer;
 
-    Button bsave;
+    Button bStart;
+    Button bStop;
+    Button bSave;
+    Button bReject;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,13 +57,13 @@ public class Meter extends Activity implements SensorEventListener,OnChartValueS
         started = false;
         mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         mAccelerometer = mSensorManager.getDefaultSensor(Sensor.TYPE_LINEAR_ACCELERATION); //trycatch?
-        final Button bStart = findViewById(R.id.bStart);
-        final Button bStop = findViewById(R.id.bStop);
-        final Button bPhoto = findViewById(R.id.bAddPicture);
-        final Button bSave = findViewById(R.id.bSave);
+        bStart = findViewById(R.id.bStart);
+        bStop = findViewById(R.id.bStop);
+        bSave = findViewById(R.id.bSave);
         bStop.setVisibility(View.INVISIBLE);
+        bReject = findViewById(R.id.bRejectMeting);
         jArray = new JSONArray();
-        lineChartX = findViewById(R.id.lcTest);
+        lineChartX = findViewById(R.id.lcx);
         lineChartY = findViewById(R.id.lcy);
         lineChartZ = findViewById(R.id.lcz);
 
@@ -74,6 +77,8 @@ public class Meter extends Activity implements SensorEventListener,OnChartValueS
             public void onClick(View view) {
                 bStart.setVisibility(View.INVISIBLE);
                 bStop.setVisibility(View.VISIBLE);
+                bSave.setVisibility(View.INVISIBLE);
+                bReject.setVisibility(View.INVISIBLE);
                 xWaarden.clear();
                 yWaarden.clear();
                 zWaarden.clear();
@@ -89,6 +94,9 @@ public class Meter extends Activity implements SensorEventListener,OnChartValueS
             public void onClick(View view) {
                 bStop.setVisibility(View.INVISIBLE);
                 bStart.setVisibility(View.VISIBLE);
+                bSave.setVisibility(View.VISIBLE);
+                bReject.setVisibility(View.VISIBLE);
+
                 started = false;
 
                 LineDataSet xData = new LineDataSet(xWaarden, "x");
@@ -107,14 +115,6 @@ public class Meter extends Activity implements SensorEventListener,OnChartValueS
             }
         });
 
-        bPhoto.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick (View v){
-                
-            }
-        });
-
-        bSave.findViewById(R.id.bSave);
         bSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -149,6 +149,23 @@ public class Meter extends Activity implements SensorEventListener,OnChartValueS
                     mislukt.putExtra("mislukt","mislukt");
                     setResult(CommonStatusCodes.SIGN_IN_REQUIRED);
                     finish();
+                }
+            }
+        });
+
+        bReject.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!started){
+                    lineChartZ.clear();
+                    lineChartY.clear();
+                    lineChartX.clear();
+
+                    xWaarden.clear();
+                    yWaarden.clear();
+                    zWaarden.clear();
+                    tijdAs.clear();
+                    entryNummer = 0;
                 }
             }
         });
@@ -206,13 +223,5 @@ public class Meter extends Activity implements SensorEventListener,OnChartValueS
         super.onStop();
 
     }
-    @Override
-    public void onValueSelected(Entry e, Highlight h) {
 
-    }
-
-    @Override
-    public void onNothingSelected() {
-
-    }
 }
