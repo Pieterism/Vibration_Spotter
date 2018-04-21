@@ -5,40 +5,102 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <LinearLayout
+        android:id="@+id/linearLayout4"
+        android:layout_width="match_parent"
+        android:layout_height="53dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/lcTest"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <Button
+            android:id="@+id/bSave"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:background="@color/colorPrimary"
+            android:drawableTop="@drawable/ic_check"
+            android:fontFamily="@font/advent_pro_semibold"
+            android:paddingBottom="5dp"
+            android:paddingHorizontal="16dp"
+            android:paddingTop="5dp"
+            android:text="Accept"
+            android:textColor="@color/colorSecondary"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/bRejectMeting"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:background="@color/colorPrimary"
+            android:drawableTop="@drawable/ic_close"
+            android:fontFamily="@font/advent_pro_semibold"
+            android:paddingBottom="5dp"
+            android:paddingHorizontal="16dp"
+            android:paddingTop="5dp"
+            android:text="REJECT"
+            android:textColor="@color/colorSecondary"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
     <com.github.mikephil.charting.charts.LineChart
         android:id="@+id/lcTest"
         android:layout_width="match_parent"
-        android:layout_height="250dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="123dp"
         android:layout_marginTop="8dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bStart" />
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout4" />
 
-    <Button
-        android:id="@+id/bStart"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/linearLayout3"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Start"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/bStop"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Stop"
+        android:layout_marginBottom="16dp"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="parent">
 
-    <TextView
-        android:id="@+id/textResultaat"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:hint="Touch the graph"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lcTest"
-        android:layout_width="match_parent" />
+        <Button
+            android:id="@+id/bStart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:background="@color/colorPrimary"
+            android:drawableTop="@drawable/ic_play_circle_outline_black_24dp"
+            android:fontFamily="@font/advent_pro_semibold"
+            android:paddingBottom="5dp"
+            android:paddingHorizontal="16dp"
+            android:paddingTop="5dp"
+            android:text="Start"
+            android:textColor="@color/colorSecondary"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/bStop"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:background="@color/colorPrimary"
+            android:drawableTop="@drawable/ic_stop_black_24dp"
+            android:fontFamily="@font/advent_pro_semibold"
+            android:paddingBottom="5dp"
+            android:paddingHorizontal="16dp"
+            android:paddingTop="5dp"
+            android:text="Stop"
+            android:textColor="@color/colorSecondary"
+            android:textStyle="bold" />
+
+    </LinearLayout>
 
 
 </android.support.constraint.ConstraintLayout>
