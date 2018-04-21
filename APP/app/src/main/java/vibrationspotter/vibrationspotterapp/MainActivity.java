@@ -295,7 +295,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(data.getStringExtra("QR_code")!=null){
+        if(data!=null){
             if(resultCode== CommonStatusCodes.SUCCESS){
                 if(requestCode==QR) {
                     String qrcode = data.getStringExtra("QR_code");

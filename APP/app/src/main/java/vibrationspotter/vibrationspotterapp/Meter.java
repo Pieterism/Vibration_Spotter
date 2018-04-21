@@ -32,7 +32,7 @@ public class Meter extends Activity implements SensorEventListener{
 
     private SensorManager mSensorManager;
     private Sensor mAccelerometer;
-    private boolean started;
+    private boolean started, hasData;
     private double x, y, z;
     private long tijd, starttijd;
     private JSONArray jArray;
@@ -44,6 +44,7 @@ public class Meter extends Activity implements SensorEventListener{
     ArrayList<Entry> yWaarden;
     ArrayList<Entry> zWaarden;
     int entryNummer;
+    String doorzendData;
 
     Button bStart;
     Button bStop;
@@ -84,6 +85,7 @@ public class Meter extends Activity implements SensorEventListener{
                 zWaarden.clear();
                 tijdAs.clear();
                 entryNummer = 0;
+                doorzendData = "";
                 starttijd = System.currentTimeMillis();
                 started = true;
             }
@@ -98,6 +100,7 @@ public class Meter extends Activity implements SensorEventListener{
                 bReject.setVisibility(View.VISIBLE);
 
                 started = false;
+                hasData = true;
 
                 LineDataSet xData = new LineDataSet(xWaarden, "x");
                 xData.setDrawCircles(false);
@@ -112,42 +115,19 @@ public class Meter extends Activity implements SensorEventListener{
                 lineChartY.invalidate();
                 lineChartZ.setData(new LineData(zData));
                 lineChartZ.invalidate();
+
+                System.out.println(doorzendData);
             }
         });
 
         bSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-                Map<String,?> sharedPreferences = settings.getAll();
 
-                String email = sharedPreferences.get("email").toString();
-
-                if (email != null) {
-                    System.out.println("email: " + email);
-                    System.out.println(jArray.toString());
-
-                    //DEEL PJ
-                    JSONObject jObject = new JSONObject();
-
-                    try {
-                        jObject.put("email",email);
-                        jObject.put("titel","titel");           //titel moet nog ingevuld worden in APP
-                        // jObject.put("idProject", idProject);               //Kiezen bij welk project hoort
-                        //  jObject.put("tijdstip","titel");                   //
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                    jArray.put(jObject);
-
+                if (!started && hasData) {
                     Intent gelukt = new Intent();
-                    gelukt.putExtra("jArray", jArray.toString());
+                    gelukt.putExtra("data", doorzendData);
                     setResult(CommonStatusCodes.SUCCESS);
-                    finish();
-                } else {
-                    Intent mislukt = new Intent();
-                    mislukt.putExtra("mislukt","mislukt");
-                    setResult(CommonStatusCodes.SIGN_IN_REQUIRED);
                     finish();
                 }
             }
@@ -166,6 +146,7 @@ public class Meter extends Activity implements SensorEventListener{
                     zWaarden.clear();
                     tijdAs.clear();
                     entryNummer = 0;
+                    doorzendData = "";
                 }
             }
         });
@@ -188,17 +169,8 @@ public class Meter extends Activity implements SensorEventListener{
 
             entryNummer++;
 
-            JSONObject jObject = new JSONObject();
-            try {
-                jObject.put("x", x);
-                jObject.put("y", y);
-                jObject.put("z", z);
-                jObject.put("tijd", tijd);
+            doorzendData = doorzendData.concat(String.valueOf(tijd) + "," + String.valueOf(x) + "," + String.valueOf(y) + "," + String.valueOf(z));
 
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-            jArray.put(jObject);
         }
     }
 

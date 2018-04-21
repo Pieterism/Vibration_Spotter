@@ -30,6 +30,7 @@ public class MetingActivity extends AppCompatActivity {
     LineChart lcf;
     LineChart lct;
     TextView xvalue, yvalue, zvalue, tvalue, fvalue, avalue;
+    byte[] tData, fData;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -39,6 +40,10 @@ public class MetingActivity extends AppCompatActivity {
         gson = new Gson();
         settings = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         sharedPreferences = settings.getAll();
+
+        metingstring = sharedPreferences.get("meting").toString();
+
+        meting = gson.fromJson(metingstring, Meting.class);
 
         textTitel = findViewById(R.id.textTitel);
         bDelete = findViewById(R.id.bDeleteMeting);
@@ -53,7 +58,8 @@ public class MetingActivity extends AppCompatActivity {
 
         textTitel.setText(meting.getTitel());
 
-        //byte[] verwerken om linecharts te verwerken
+        tData = meting.getDataset1();
 
+        fData = meting.getDataset2();
     }
 }
