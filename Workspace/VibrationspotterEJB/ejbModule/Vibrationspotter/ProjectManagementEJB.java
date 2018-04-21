@@ -352,10 +352,9 @@ public class ProjectManagementEJB implements ProjectManagementEJBLocal {
 	}
 	
 	public int haalMetingenSizeProject(int id){
-		Query q = em.createQuery("SELECT p FROM Project p WHERE p.idProject = :id");
+		Query q = em.createQuery("SELECT p FROM Project p WHERE p.idMeting = :id");
 		q.setParameter("id", id);
-		int size = q.getResultList().size();
-		
+		int size = q.getResultList().size();	
 		return size;
 	}
 	

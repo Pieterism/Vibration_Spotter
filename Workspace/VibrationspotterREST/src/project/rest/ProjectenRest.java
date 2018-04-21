@@ -29,6 +29,9 @@ private static final long serialVersionUID = 1L;
 	@EJB
 	private PersonManagementEJBLocal persoonEJB;
 	
+	@EJB
+	private MetingManagementEJBLocal metingEJB;
+	
 	@POST
 	@Consumes({MediaType.APPLICATION_JSON})
 	public String postTest(String jsonarray){
@@ -60,8 +63,18 @@ private static final long serialVersionUID = 1L;
 	@GET
 	@Path( "Size/{projectID}")
 	public String haalProjectensize (@PathParam("projectID") String id){
-		int size = projectEJB.haalMetingenSizeProject(Integer.parseInt(id));
+		//int size = projectEJB.haalMetingenSizeProject(Integer.parseInt(id));
+		int size = metingEJB.findMetingenByIdProject(Integer.parseInt(id)).size();
 		return "[{\"size\": " + size + "}]";
+	}
+	
+	
+	@POST
+	@Path("ProjectViaQR")
+	public String haalprojectviaQR (String jsonarray){
+	String project =projectEJB.HaalprojectviaApp(jsonarray);
+	
+		 return project;
 	}
 /*
  * @GET
