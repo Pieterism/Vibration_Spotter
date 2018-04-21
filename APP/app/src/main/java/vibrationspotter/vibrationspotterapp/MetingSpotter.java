@@ -33,7 +33,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MetingSpotter extends AppCompatActivity implements SensorEventListener,OnChartGestureListener {
+public class MetingSpotter extends AppCompatActivity implements SensorEventListener {
 
     LineChart lcTest;
     Button bStart;
@@ -119,9 +119,10 @@ public class MetingSpotter extends AppCompatActivity implements SensorEventListe
                     @Override
                     public void onValueSelected(Entry e, Highlight h) {
 
-                        Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_SHORT).show();
+                        System.out.println(h.toString());
+                        System.out.println(e.toString());
 
-                        textResultaat.setText(String.valueOf(e.getY()));
+                        textResultaat.setText(String.valueOf((int) e.getX()));
 
                     }
 
@@ -189,51 +190,5 @@ public class MetingSpotter extends AppCompatActivity implements SensorEventListe
     protected void onPause(){
         super.onPause();
         mSensorManager.unregisterListener(this, mAccelerometer);
-    }
-
-    @Override
-    public void onChartGestureStart(MotionEvent me, ChartTouchListener.ChartGesture lastPerformedGesture) {
-
-    }
-
-    @Override
-    public void onChartGestureEnd(MotionEvent me, ChartTouchListener.ChartGesture lastPerformedGesture) {
-
-    }
-
-    @Override
-    public void onChartLongPressed(MotionEvent me) {
-
-        Log.d("Long", "Lang");
-
-    }
-
-    @Override
-    public void onChartDoubleTapped(MotionEvent me) {
-
-        System.out.println("Double");
-
-    }
-
-    @Override
-    public void onChartSingleTapped(MotionEvent me) {
-
-        System.out.println("TAP");
-
-    }
-
-    @Override
-    public void onChartFling(MotionEvent me1, MotionEvent me2, float velocityX, float velocityY) {
-
-    }
-
-    @Override
-    public void onChartScale(MotionEvent me, float scaleX, float scaleY) {
-
-    }
-
-    @Override
-    public void onChartTranslate(MotionEvent me, float dX, float dY) {
-
     }
 }

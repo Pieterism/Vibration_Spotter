@@ -11,7 +11,7 @@ public interface ProjectManagementEJBLocal {
 
 	public Project findProjectById(int id);
 	
-	public String findProjectByQR(String QR);
+	public Project findProjectByQR(String QR);
 	
 	Project findProjectByEmail(String email);
 
@@ -34,5 +34,7 @@ public interface ProjectManagementEJBLocal {
 	public boolean checkGoedgekeurd(int idProject);
 	
 	public List<Project> findGoedgekeurdeProjecten();
+	
+	public void ToevoegenProjectenAPP(String gegevens);
 
 }

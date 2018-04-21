@@ -1,0 +1,82 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<h:head>
+	<title><ui:insert name="title">Projecten</ui:insert></title>
+	<link rel="stylesheet" href="../stijl/stijl.css"></link>
+	<link rel="stylesheet" href="../stijl/stijlmetingen.css"></link>
+</h:head>
+
+
+<h:body>
+	<div class="header">
+		<h1>
+			<b>Projecten</b>
+		</h1>
+	</div>
+	<div class="topnav">
+		<a href="index.xhtml">Home</a> <a class="active"
+			href="projecten.xhtml">Projecten</a> <a href="#contact">Contact</a> <a
+			href="about.xhtml">About</a>
+	</div>
+	<h:form>
+		<h:dataTable id="projectlist"
+			value="#{projectManagementEJB.findAllProjecten()}" var="pro"
+			border="5" cellpadding="5" styleClass="tabel" headerClass="htabel">
+
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="IdProject" />
+				</f:facet>
+				<h:outputText value="#{pro.idProject}" />
+			</h:column>
+
+
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="titel" />
+				</f:facet>
+				<h:outputText value="#{pro.titel}" />
+			</h:column>
+
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="type" />
+				</f:facet>
+				<h:outputText value="#{pro.type}" />
+			</h:column>
+
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="beschrijving" />
+				</f:facet>
+				<h:outputText value="#{pro.beschrijving}" />
+			</h:column>
+
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="metingen" />
+				</f:facet>
+				<h:button value="bekijk metingen"
+					outcome="metingen.faces?id=#{pro.idProject}" />
+			</h:column>
+
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="wissen" />
+				</f:facet>
+				<h:commandButton value="Project Aanvaarden"
+					action="#{projectController.aanvaardProject(pro)}"></h:commandButton>
+				<h:outputText value="            " />
+				<h:commandButton value="Project Afkeuren"
+					action="#{projectController.keurProjectAf(pro)}"></h:commandButton>
+
+			</h:column>
+		</h:dataTable>
+	</h:form>
+</h:body>
+</html>

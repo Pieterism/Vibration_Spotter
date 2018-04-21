@@ -36,11 +36,13 @@ private static final long serialVersionUID = 1L;
 		return test;
 	}
 	
-	@GET
-	@Path("QR/{qr_code}")
-	public String projectViaQR(@PathParam("qr_code") String qr_code){			//"[{\"Gelukt?:\": YEZZZ!!!}]"
-		String resultaat = projectEJB.findProjectByQR(qr_code);
-		return "[{\"Gelukt?:\": YEZZZ!!!}]";
+	@POST
+	@Path("ToevoegenProjecten")
+	public void VoegProjectToe (String jsonarray){
+		projectEJB.ToevoegenProjectenAPP(jsonarray);
+		System.out.println("projectaangemaakt");
+		
+		
 	}
 
 }
