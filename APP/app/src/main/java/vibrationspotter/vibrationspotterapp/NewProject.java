@@ -54,9 +54,10 @@ public class NewProject extends AppCompatActivity {
                 projectgegevens.put("titel", titel);
                 projectgegevens.put("beschrijving", beschrijving);
 
-                LocationManager lm = (LocationManager) getSystemService(getApplicationContext().LOCATION_SERVICE);
+
                 int rc = ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION);
                 if (rc == PackageManager.PERMISSION_GRANTED) {
+                    LocationManager lm = (LocationManager) getSystemService(getApplicationContext().LOCATION_SERVICE);
                     Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
                      longitude = location.getLongitude();
                      latitude = location.getLatitude();
@@ -73,7 +74,7 @@ public class NewProject extends AppCompatActivity {
                 jArray.put(jsonObject);
 
                 JsonArrayRequest inloggenRequest = new JsonArrayRequest(Request.Method.POST,
-                        getString(R.string.url) + "ToevoegenProjecten",
+                        getString(R.string.url) + "Projecten/ToevoegenProjecten",
                         jArray,
                         new Response.Listener<JSONArray>() {
                             @Override

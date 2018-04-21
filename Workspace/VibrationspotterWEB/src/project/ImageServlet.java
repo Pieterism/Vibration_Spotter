@@ -1,6 +1,7 @@
 package project;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import Vibrationspotter.MetingManagementEJBLocal;
+import model.Meting;
 
 @WebServlet("/image/*")
 public class ImageServlet extends HttpServlet {
@@ -22,8 +24,19 @@ public class ImageServlet extends HttpServlet {
 	
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    	int id = (int) Long.parseLong(request.getParameter("id"));
-        response.getOutputStream().write(metingejb.zoekFoto(id));
+    	HttpSession session = request.getSession();
+    	int idProject=(int) session.getAttribute("idProject");
+    	int idMeting = (int) Long.parseLong(request.getParameter("id")); //URL
+    	Meting m=metingejb.findMetingById(idMeting);
+    	if(m==null){
+    		response.getOutputStream().write(null);
+    	}
+    	else if(idProject==m.getIdProject().getIdProject()){
+    		response.getOutputStream().write(metingejb.zoekFoto(idMeting));
+    		
+    	}
+
+    	
     }
 
 

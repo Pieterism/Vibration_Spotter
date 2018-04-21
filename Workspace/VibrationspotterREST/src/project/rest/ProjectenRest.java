@@ -38,11 +38,11 @@ private static final long serialVersionUID = 1L;
 	
 	@POST
 	@Path("ToevoegenProjecten")
-	public void VoegProjectToe (String jsonarray){
+	public String VoegProjectToe (String jsonarray){
 		projectEJB.ToevoegenProjectenAPP(jsonarray);
 		System.out.println("projectaangemaakt");
 		
-		
+		 return "[{\"Projectaanmaken\": Gelukt!!!}]";
 	}
 
 }

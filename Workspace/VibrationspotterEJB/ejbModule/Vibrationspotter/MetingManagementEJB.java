@@ -172,12 +172,12 @@ public class MetingManagementEJB implements MetingManagementEJBLocal{
 		Query q = em.createQuery("SELECT p FROM Project p WHERE p.idProject= :id");
 		q.setParameter("id", projectid);
 		List<Project> projecten = q.getResultList();
-		int idProject = projecten.get(0).getIdProject(); 
+		Project idProject = projecten.get(0);
 															//Waarom doe je dit?
 															//Je zoekt op id om dan de id eruit te halen?
 	
 		
-		Query q2 = em.createQuery("SELECT m FROM Meting m WHERE m.idMeting = :idProject");
+		Query q2 = em.createQuery("SELECT m FROM Meting m WHERE m.idProject = :idProject");
 		q2.setParameter("idProject", idProject);
 		List<Meting> metingen = q2.getResultList();
 		
@@ -196,6 +196,14 @@ public class MetingManagementEJB implements MetingManagementEJBLocal{
 		
 		
 		return metingenJson;
+		
+	}
+	
+	public Meting findMetingById(int id){
+		Query q = em.createQuery("SELECT m FROM Meting m WHERE m.idMeting = :id");
+		q.setParameter("id", id);
+		List<Meting> metingen = q.getResultList();
+		return metingen.get(0);
 		
 	}
 	//idProject

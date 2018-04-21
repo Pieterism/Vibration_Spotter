@@ -74,10 +74,6 @@
         		<h:outputText value="#{met.opmerking}" />
     	</p:column>
     	
-    	<p:column headerText="Foto" style="text-align:center;">
-        		 <h:graphicImage value="/image?id=#{met.idMeting}" style="width:32px;height:18px"/>
-    	</p:column>
-    	
     	<p:column headerText="grafiek" style="text-align:center">
     	  <h:form>
         	<h:commandLink action="#{kaartController.toonGrafiek(met)}" class="subAnchor" value="toon grafiek"/>
