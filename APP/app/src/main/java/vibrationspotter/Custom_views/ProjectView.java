@@ -42,7 +42,6 @@ public class ProjectView extends LinearLayout {
     Gson gson;
 
 
-
     public ProjectView(Context context, Project p) {
         super(context);
         this.project = p;
@@ -54,6 +53,8 @@ public class ProjectView extends LinearLayout {
     }
 
     private void init(Context context){
+
+        gson = new Gson();
 
         rootView = inflate(context, R.layout.projectview,this);
         titel = rootView.findViewById(R.id.project_titel);
@@ -67,7 +68,6 @@ public class ProjectView extends LinearLayout {
                     @Override
                     public void onResponse(JSONArray response) {
                         Log.d("OphalenProjectensize", response.toString());
-
 
                         Type type = new TypeToken<List<Map<String,String>>>(){}.getType();
                         List<Map<String,String>>  sizes = gson.fromJson(response.toString(), type);
@@ -85,12 +85,7 @@ public class ProjectView extends LinearLayout {
                     }
                 }
         );
-
         VolleyClass.getInstance(context).addToRequestQueue(projectensizeRequest, "MetingKeuzeActivity");
-//        textAantalMetingen.setText(("" + aantalmetingen));
-
-
-
     }
 
     public void setTitel(String titel){
