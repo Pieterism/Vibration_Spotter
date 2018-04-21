@@ -79,8 +79,6 @@ public class NewMeting extends AppCompatActivity {
 
                     Meting doorzendmeting = new Meting(metingTitel.getText().toString(), metingDescription.getText().toString(), imageString, meetdata);
 
-                    System.out.println(doorzendmeting.toString());
-
 
                 } else {
                     Toast.makeText(getApplicationContext(), "Please select an image", Toast.LENGTH_LONG).show();

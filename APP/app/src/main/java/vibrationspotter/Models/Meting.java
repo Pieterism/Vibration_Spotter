@@ -68,7 +68,7 @@ public class Meting {
         string = string.concat(",");
         string = string.concat(tijdstip);
         string = string.concat(",");
-        string = string.concat(foto);
+      //  string = string.concat(foto);
         string = string.concat(",");
         string = string.concat(opmerking);
 

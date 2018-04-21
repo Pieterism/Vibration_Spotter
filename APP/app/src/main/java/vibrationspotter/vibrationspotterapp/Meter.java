@@ -123,7 +123,7 @@ public class Meter extends Activity implements SensorEventListener{
         bSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                System.out.println(doorzendData);
                 if (!started && hasData) {
                     Intent gelukt = new Intent();
                     gelukt.putExtra("data", doorzendData);
