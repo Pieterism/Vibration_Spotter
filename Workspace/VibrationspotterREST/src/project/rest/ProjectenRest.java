@@ -7,8 +7,10 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 import javax.ws.rs.BadRequestException;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.core.MediaType;
 
 import Vibrationspotter.MetingManagementEJBLocal;
@@ -32,6 +34,13 @@ private static final long serialVersionUID = 1L;
 		String test = projectEJB.FindAllProjectsForApp(jsonarray);
 		//System.out.println("test " + test);
 		return test;
+	}
+	
+	@GET
+	@Path("QR/{qr_code}")
+	public String projectViaQR(@PathParam("qr_code") String qr_code){			//"[{\"Gelukt?:\": YEZZZ!!!}]"
+		String resultaat = projectEJB.findProjectByQR(qr_code);
+		return "[{\"Gelukt?:\": YEZZZ!!!}]";
 	}
 
 }
