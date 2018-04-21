@@ -17,22 +17,23 @@ public class Meting {
 
     private byte[] dataset2;
 
-    public Meting(int idMeting, String titel, String tijdstip, byte[] foto, String opmerking, byte[] dataset1, byte[] dataset2) {
+    public Meting(int idMeting, String titel, String tijdstip, String foto, String opmerking, byte[] dataset1, byte[] dataset2) {
         this.idMeting = idMeting;
         this.titel = titel;
         this.tijdstip = tijdstip;
+        this.foto = foto;
         this.opmerking = opmerking;
         this.dataset1 = dataset1;
         this.dataset2 = dataset2;
-        this.foto = Base64.encodeToString(foto, Base64.DEFAULT);
-
-
     }
 
     public Meting(String s, String s1, String imageString, byte[] meetdata) {
         this.idMeting = 666;
         this.titel = s;
-
+        this.tijdstip = "placeholder";
+        this.foto = imageString;
+        this.opmerking = s1;
+        this.dataset1 = meetdata;
     }
 
     public int getIdMeting() {

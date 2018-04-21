@@ -78,6 +78,10 @@ public class NewMeting extends AppCompatActivity {
                     final String imageString = Base64.encodeToString(imageBytes, Base64.DEFAULT);
 
                     Meting doorzendmeting = new Meting(metingTitel.getText().toString(), metingDescription.getText().toString(), imageString, meetdata);
+
+                    System.out.println(doorzendmeting.toString());
+
+
                 } else {
                     Toast.makeText(getApplicationContext(), "Please select an image", Toast.LENGTH_LONG).show();
                 }
