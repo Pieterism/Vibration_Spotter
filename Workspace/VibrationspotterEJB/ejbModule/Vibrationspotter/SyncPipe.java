@@ -25,8 +25,4 @@ public class SyncPipe implements Runnable {
 
 	private final OutputStream ostrm_;
 	private final InputStream istrm_;
-	
-	 public InputStream getInputStream(){
-	        return istrm_;
-	    };
 }
