@@ -124,10 +124,12 @@ public class Meter extends Activity implements SensorEventListener{
             @Override
             public void onClick(View v) {
 
+
+
                 if (!started && hasData) {
                     Intent gelukt = new Intent();
                     gelukt.putExtra("data", doorzendData);
-                    setResult(CommonStatusCodes.SUCCESS);
+                    setResult(CommonStatusCodes.SUCCESS, gelukt);
                     finish();
                 }
             }
