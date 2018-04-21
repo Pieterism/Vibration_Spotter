@@ -59,7 +59,7 @@ public class QR_hub extends AppCompatActivity{
                 if(data != null){
                     final Barcode barcode = data.getParcelableExtra(BarcodeCaptureActivity.BarcodeObject);
                     Intent doorgeven = new Intent();
-                    doorgeven.putExtra("QR-code", barcode.displayValue);
+                    doorgeven.putExtra("QR_code", barcode.displayValue);
                     setResult(CommonStatusCodes.SUCCESS);
                     finish();
                 }

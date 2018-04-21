@@ -154,7 +154,6 @@ public class ProjectActivity extends AppCompatActivity{
 
                     break;
                 case QR:
-
                     break;
                 default: Toast.makeText(getApplicationContext(), "Hoe kan er nu een andere requestcode toekomen?", Toast.LENGTH_LONG).show();
             }

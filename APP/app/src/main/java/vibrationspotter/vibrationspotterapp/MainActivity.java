@@ -43,6 +43,7 @@ import com.android.volley.Response;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.google.android.gms.common.api.CommonStatusCodes;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -66,6 +67,7 @@ import vibrationspotter.Models.Project;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
+    private static final int QR = 555;
     ScrollView svProjectview;
     ConstraintLayout clHomePage;
     LinearLayout llprojecten;
@@ -100,7 +102,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             @Override
             public void onClick(View view) {
                 Intent qr_intent = new Intent(MainActivity.this, QR_hub.class);
-                startActivity(qr_intent);
+                startActivityForResult(qr_intent,QR );
             }
         });
 
@@ -287,5 +289,53 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
 
         return true;
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(data!=null){
+            if(resultCode== CommonStatusCodes.SUCCESS){
+                if(requestCode==QR) {
+                    String qrcode = data.getStringExtra("QR_code");
+
+                    Map<String, String> QRgegevens = new HashMap<>();
+                    QRgegevens.put("titel", qrcode);
+
+                    final JSONObject jsonObject = new JSONObject(QRgegevens);
+                    JSONArray jArray = new JSONArray();
+                    jArray.put(jsonObject);
+
+                    JsonArrayRequest QRprojectrequest = new JsonArrayRequest(Request.Method.POST,
+                            getString(R.string.url) + "Projecten/ProjectViaQR",
+                            jArray,
+                            new Response.Listener<JSONArray>() {
+                                @Override
+                                public void onResponse(JSONArray response) {
+                                    Log.d("ProjectViaQR", response.toString());
+                                }
+                            },
+
+                            new Response.ErrorListener() {
+                                @Override
+                                public void onErrorResponse(VolleyError error) {
+                                    Log.d("ProjectViaQR", "Error: " + error.toString() + ", " + error.getMessage());
+                                }
+                            }
+                    );
+                    VolleyClass.getInstance(getApplicationContext()).addToRequestQueue(QRprojectrequest, "QR_Request");
+
+                    //   LocationManager lm = (LocationManager)getSystemService(getApplicationContext().LOCATION_SERVICE);
+
+
+                }
+            }
+
+
+
+        }
+        else{
+
+        }
     }
 }
