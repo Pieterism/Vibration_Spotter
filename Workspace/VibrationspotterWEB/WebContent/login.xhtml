@@ -11,7 +11,7 @@
 <div class="header">
        <h1><b>aanmelden bij de vibration spotter</b><img src="images/logo.png" width="50" height="50"/> </h1>
 </div>
-<div class="background3">
+<div class="backgroundgent">
 <br/>
 	<h:form>
         <div class="paragraph">
@@ -25,14 +25,15 @@
 		<h:commandButton value = "aanmelden" action="#{loginController.submit}"></h:commandButton>
 		<br></br><br></br>
 		<h:messages  layout="table" styleClass="fail" />
+			<div id="registreer">
+				<a href="createaccount.xhtml">Nog geen account? Registreer nu.</a>
+			<br></br>
+			</div>
+			<h:button class ="wereld1" outcome="kaartLogin.xhtml" value="toon kaart"  image="images/world.png" />
 		</div>
 	</h:form>
 	
-	<div id="registreer">
-	<a href="createaccount.xhtml">Nog geen account? Registreer nu.</a>
-	<br></br>
-	</div>
-<h:button id ="wereld" outcome="kaartLogin.xhtml" value="toon kaart"  image="images/world.png" />
+
 </div>
 	
 </h:body>
