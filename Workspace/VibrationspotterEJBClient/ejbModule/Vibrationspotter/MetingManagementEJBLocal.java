@@ -29,4 +29,8 @@ public interface MetingManagementEJBLocal {
 	public void wissenMeting(int idMeting);
 
 	public byte[] zoekFoto(int idMeting);
+	
+	public Meting findMetingById(int id);
+
+
 }

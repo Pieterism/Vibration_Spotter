@@ -198,5 +198,13 @@ public class MetingManagementEJB implements MetingManagementEJBLocal{
 		return metingenJson;
 		
 	}
+	
+	public Meting findMetingById(int id){
+		Query q = em.createQuery("SELECT m FROM Meting m WHERE m.idMeting = :id");
+		q.setParameter("id", id);
+		List<Meting> metingen = q.getResultList();
+		return metingen.get(0);
+		
+	}
 	//idProject
 }
