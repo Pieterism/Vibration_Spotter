@@ -1,38 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:padding="10dp">
-
+    >
     <TextView
         android:id="@+id/textIdMeting"
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_marginLeft="15dp"
-        android:fontFamily="@font/advent_pro_semibold"
-        android:gravity="center_vertical"
-        android:text="METING [id]"
-        android:textColor="@color/colorText"
+        android:layout_height="wrap_content"
         android:textSize="20dp"
-        android:textStyle="bold" />
+        android:text="METING [id]"
+        android:fontFamily="@font/advent_pro_semibold"
+        android:paddingLeft="10dp"
+        android:textStyle="bold"
+        android:textColor="@color/colorText"/>
 
     <TextView
         android:id="@+id/textDatum"
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_marginHorizontal="50dp"
-        android:layout_marginRight="15dp"
-        android:fontFamily="@font/advent_pro_semibold"
-        android:gravity="center_vertical"
-        android:text="dd//mm//yy uu:mm"
+        android:layout_height="wrap_content"
+        android:layout_toStartOf="@id/bViewMetingen"
+        android:layout_alignTop="@+id/textIdMeting"
+        android:layout_alignBottom="@+id/textIdMeting"
+        android:gravity="center"
+        android:textSize="10sp"
+        android:paddingLeft="5dp"
         android:textColor="@color/colorPrimaryLight"
-        android:textSize="10dp"
-        android:textStyle="bold" />
+        android:text="dd//mm//yy uu:mm"
+        />
 
-    <ImageView
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_gravity="center|end"
-        android:src="@drawable/ic_chevron_right_black_24dp" />
-</LinearLayout>
+    <Button
+        android:id="@+id/bViewMetingen"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/textIdMeting"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/textIdMeting"
+        android:background="@null"
+        android:drawableRight="@drawable/ic_chevron_right_black_24dp" />
+
+</RelativeLayout>

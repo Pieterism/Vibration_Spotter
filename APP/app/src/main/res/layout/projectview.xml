@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
@@ -8,7 +8,7 @@
     <TextView
         android:id="@+id/project_titel"
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="15dp"
         android:fontFamily="@font/advent_pro_semibold"
         android:gravity="center_vertical"
@@ -16,13 +16,14 @@
         android:textColor="@color/colorText"
         android:textSize="20dp"
         android:textStyle="bold" />
-
+.
     <TextView
         android:id="@+id/textAantalMetingen"
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_marginLeft="60dp"
-        android:layout_marginRight="40dp"
+        android:layout_height="wrap_content"
+        android:layout_toStartOf="@id/bViewMetingen"
+        android:layout_alignTop="@+id/project_titel"
+        android:layout_alignBottom="@+id/project_titel"
         android:fontFamily="@font/advent_pro_semibold"
         android:gravity="center_vertical"
         android:text="20 metingen"
@@ -30,10 +31,14 @@
         android:textSize="10dp"
         android:textStyle="bold" />
 
-    <ImageView
-        android:id="@+id/project_button"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="center|end"
-        android:src="@drawable/ic_chevron_right_black_24dp" />
-</LinearLayout>
+    <Button
+        android:id="@+id/bViewMetingen"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/project_titel"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/project_titel"
+        android:background="@null"
+        android:drawableRight="@drawable/ic_chevron_right_black_24dp" />
+
+</RelativeLayout>
