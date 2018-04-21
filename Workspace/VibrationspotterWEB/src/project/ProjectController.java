@@ -34,46 +34,23 @@ public class ProjectController implements Serializable {
 	private Project project = new Project();
 
 	public String submit() {
-      HttpSession session = SessionUtils.getSession();
-	  int id = (int)session.getAttribute(("idPersoon"));
-	  Persoon	user = personejb.findPersoonByid(id);
-	  project.setIdPersoon(user);
-	  String typePersoon=(String) session.getAttribute("typePersoon");
-	  if(typePersoon.equals("Spotter")){
-		  project.setType("Vibrationspotter");
-	  }
-	  else if(typePersoon.equals("Leerkracht")){
-		  project.setType("STEM");
-		  
-	  }
-	  projectejb.addProject(project);
-	  FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_INFO, "Uw project is aangemaakt", "Uw project is aangemaakt"));
+		HttpSession session = SessionUtils.getSession();
+		int id = (int)session.getAttribute(("idPersoon"));
+		Persoon	user = personejb.findPersoonByid(id);
+		project.setIdPersoon(user);
+		String typePersoon=(String) session.getAttribute("typePersoon");
+		if(typePersoon.equals("Spotter")){
+			project.setType("Vibrationspotter");
+		}
+		else if(typePersoon.equals("Leerkracht")){
+			project.setType("STEM"); 
+		}
+		projectejb.addProject(project);
+		FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_INFO, "Uw project is aangemaakt", "Uw project is aangemaakt"));
 
 		return "index.xhtml";
 	 }
 	
-	public String submitSpotter() {
-	    HttpSession session = SessionUtils.getSession();
-		int id = (int)session.getAttribute(("idPersoon"));
-		Persoon	user = personejb.findPersoonByid(id);
-		project.setIdPersoon(user);
-		project.setType("brug");
-		projectejb.addProject(project);
-		FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_INFO, "Uw project is aangemaakt", "Uw project is aangemaakt"));
-
-			return "index.xhtml";
-		}
-	public String submitStem() {
-		HttpSession session = SessionUtils.getSession();
-	    int id = (int)session.getAttribute(("idPersoon"));
-		Persoon	user = personejb.findPersoonByid(id);
-		project.setIdPersoon(user);
-		project.setType("kraan");
-		projectejb.addProject(project);
-		FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_INFO, "Uw project is aangemaakt", "Uw project is aangemaakt"));
-
-		return "index.xhtml";
-			}
 
 	public String wissen(Project pro) {
 		System.out.println(pro.getIdProject());
@@ -88,14 +65,6 @@ public class ProjectController implements Serializable {
 		FacesContext.getCurrentInstance().getExternalContext().redirect("metingen.xhtml?id="+idproject);
 	}
 
-	public Project getProject() {
-		return project;
-	}
-
-	public void setProject(Project project) {
-		this.project = project;
-	}
-
 	public void aanvaardProject(Project pro) {
 		pro.setGoedgekeurd(true);
 	}
@@ -105,7 +74,6 @@ public class ProjectController implements Serializable {
 	}
 	
 	public List<Project> geefProjectenweer(){
-		Persoon gebruiker;
 		HttpSession session = SessionUtils.getSession();
 		int id = (int) session.getAttribute(("idPersoon"));
 		List<Project> projecten = projectejb.findAllProjecten();
@@ -154,6 +122,14 @@ public class ProjectController implements Serializable {
 		
 		return projecten;
 		
+	}
+	
+	public Project getProject() {
+		return project;
+	}
+
+	public void setProject(Project project) {
+		this.project = project;
 	}
 
 }
