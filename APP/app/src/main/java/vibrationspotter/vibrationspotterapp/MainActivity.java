@@ -63,6 +63,7 @@ import java.util.List;
 import java.util.Map;
 
 import vibrationspotter.Custom_views.ProjectView;
+import vibrationspotter.Models.Meting;
 import vibrationspotter.Models.Project;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -313,6 +314,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                 @Override
                                 public void onResponse(JSONArray response) {
                                     Log.d("ProjectViaQR", response.toString());
+
+
+                                    Type type = new TypeToken<List<Project>>(){}.getType();
+                                    Project p = gson.fromJson(response.toString(), type);
+                                    String project = gson.toJson(p);
+                                    Intent naar_project = new Intent(getApplicationContext(),ProjectActivity.class);
+                                    naar_project.putExtra("meting", project);
+                                    startActivity(naar_project);
                                 }
                             },
 
@@ -320,10 +329,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                 @Override
                                 public void onErrorResponse(VolleyError error) {
                                     Log.d("ProjectViaQR", "Error: " + error.toString() + ", " + error.getMessage());
+
+
                                 }
                             }
                     );
+
+
                     VolleyClass.getInstance(getApplicationContext()).addToRequestQueue(QRprojectrequest, "QR_Request");
+
+
+
+
 
                     //   LocationManager lm = (LocationManager)getSystemService(getApplicationContext().LOCATION_SERVICE);
 
