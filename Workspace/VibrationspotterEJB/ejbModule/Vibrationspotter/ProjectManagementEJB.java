@@ -109,6 +109,15 @@ public class ProjectManagementEJB implements ProjectManagementEJBLocal {
 		List<Project> projecten = q.getResultList();
 		return projecten;
 	}
+	
+	public List<Project> findMijnProjecten(int idPersoon) {
+		Persoon p = persoonejb.findPersoonByid(idPersoon);
+		Query q = em.createQuery("SELECT p FROM Project p WHERE p.idPersoon = :idPersoon");
+		q.setParameter("idPersoon", p);
+		List<Project> projecten = q.getResultList();
+		return projecten;
+	}
+	
 
 	/*
 	 * public List<Project> findProjectenBijPesoon(int id){ Query q = em.
@@ -339,4 +348,6 @@ public class ProjectManagementEJB implements ProjectManagementEJBLocal {
 		em.persist(project);
 		
 	}
+
+
 }
