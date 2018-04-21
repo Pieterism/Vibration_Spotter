@@ -71,7 +71,7 @@ public class ProjectView extends LinearLayout {
 
                         Type type = new TypeToken<List<Map<String,String>>>(){}.getType();
                         List<Map<String,String>>  sizes = gson.fromJson(response.toString(), type);
-                        tvaantalMetingen.setText(sizes.get(0).get("size"));
+                        tvaantalMetingen.setText("Metingen in project:" + sizes.get(0).get("size"));
 
 
                       //  aantalmetingen = sizes.get(0);

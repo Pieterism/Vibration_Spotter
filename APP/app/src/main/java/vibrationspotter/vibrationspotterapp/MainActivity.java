@@ -65,7 +65,6 @@ import vibrationspotter.Custom_views.ProjectView;
 import vibrationspotter.Models.Project;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
-    private static final int SELECTED_PIC = 1111;
 
     ScrollView svProjectview;
     ConstraintLayout clHomePage;
@@ -187,60 +186,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-
-        super.onActivityResult(requestCode, resultCode, data);
-
-        switch (requestCode) {
-            case SELECTED_PIC:
-                if (resultCode == RESULT_OK && data != null && data.getData() != null) {
-                    Uri uri = data.getData();
-                    try {
-                        InputStream is = getContentResolver().openInputStream(uri);
-                        bitmap = BitmapFactory.decodeStream(is);
-                        imageView.setImageBitmap(bitmap);
-                        imageView.setRotation(0);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-
-                    ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                    bitmap.compress(Bitmap.CompressFormat.JPEG, 50, baos);
-                    byte[] imageBytes = baos.toByteArray();
-                    final String imageString = Base64.encodeToString(imageBytes, Base64.DEFAULT);
-
-                    Map<String,String> imageMap = new HashMap<>();
-                    imageMap.put("image",imageString);
-
-                    JSONObject jsonObject = new JSONObject(imageMap);
-                    JSONArray jsonArray = new JSONArray();
-                    jsonArray.put(jsonObject);
-
-                    JsonArrayRequest request = new JsonArrayRequest(Request.Method.POST,
-                            getString(R.string.url) + "Foto",
-                            jsonArray,
-                            new Response.Listener<JSONArray>() {
-                                @Override
-                                public void onResponse(JSONArray response) {
-                                    Toast.makeText(MainActivity.this, "Joepie!!!", Toast.LENGTH_LONG).show();
-                                }
-                            },
-                            new Response.ErrorListener() {
-                                @Override
-                                public void onErrorResponse(VolleyError error) {
-                                    Toast.makeText(MainActivity.this, ":( \n Mislukt", Toast.LENGTH_LONG).show();
-                                }
-
-                    });
-                    VolleyClass.getInstance(this).addToRequestQueue(request,"IMAGE");
-                }
-                break;
-            default:
-                break;
-        }
-    }
-
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
@@ -333,9 +278,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             recreate();
 
         } else if (id == R.id.nav_about) {
-            Intent intent = new Intent(Intent.ACTION_PICK);
-            intent.setType("image/*");
-            startActivityForResult(intent, SELECTED_PIC);
 
         }
 
