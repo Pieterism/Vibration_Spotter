@@ -67,6 +67,8 @@ margin: auto;
 	height: 500px;
 	padding: 25px;
 	text-align: center;
+	opacity: 0.95;
+    filter: alpha(opacity=95);
 	
 }
 
