@@ -97,7 +97,7 @@ public class NewMeting extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if(data.getData() != null){
+        if(data != null){
             switch (requestCode){
                 case METINGEN:
                     String doorzendData = data.getStringExtra("data");

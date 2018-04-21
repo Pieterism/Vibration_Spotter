@@ -59,4 +59,21 @@ public class Meting {
     public byte[] getDataset2() {
         return dataset2;
     }
+
+    @Override
+    public String toString() {
+        String string = String.valueOf(idMeting);
+        string = string.concat(",");
+        string = string.concat(titel);
+        string = string.concat(",");
+        string = string.concat(tijdstip);
+        string = string.concat(",");
+        string = string.concat(foto);
+        string = string.concat(",");
+        string = string.concat(opmerking);
+
+        System.out.println(dataset1);
+
+        return string;
+    }
 }
