@@ -58,17 +58,15 @@ public class QR_hub extends AppCompatActivity{
             if(resultCode == CommonStatusCodes.SUCCESS){
                 if(data != null){
                     final Barcode barcode = data.getParcelableExtra(BarcodeCaptureActivity.BarcodeObject);
-                    Intent doorgeven = new Intent();
+                    Intent doorgeven = getIntent();
                     doorgeven.putExtra("QR_code", barcode.displayValue);
-                    setResult(CommonStatusCodes.SUCCESS);
+                    setResult(CommonStatusCodes.SUCCESS, doorgeven);
                     finish();
                 }
                 else textView.setText("Data == null");
             }
             else {
-                Intent canceled = new Intent();
-                setResult(resultCode);
-                finish();
+                textView.setText("Dit is de fout");
             }
         }
         else textView.setText("Dit is een BUG");

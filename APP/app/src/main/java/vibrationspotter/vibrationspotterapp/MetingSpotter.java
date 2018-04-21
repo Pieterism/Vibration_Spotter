@@ -9,12 +9,9 @@ import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.Entry;
@@ -22,13 +19,9 @@ import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
-import com.github.mikephil.charting.listener.ChartTouchListener;
-import com.github.mikephil.charting.listener.OnChartGestureListener;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 
 import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,11 +45,12 @@ public class MetingSpotter extends AppCompatActivity implements SensorEventListe
     ArrayList<Entry> zWaarden;
     List<ILineDataSet> xyzData;
     int entryNummer;
+    String doorzendData;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.meting_test);
+        setContentView(R.layout.meting_multimeting);
 
         lcTest = findViewById(R.id.lcTest);
         bStart = findViewById(R.id.bStart);
@@ -85,6 +79,7 @@ public class MetingSpotter extends AppCompatActivity implements SensorEventListe
                 zWaarden.clear();
                 tijdAs.clear();
                 entryNummer = 0;
+                doorzendData = "";
                 starttijd = System.currentTimeMillis();
                 started = true;
             }
@@ -97,6 +92,13 @@ public class MetingSpotter extends AppCompatActivity implements SensorEventListe
                 started = false;
                 bStop.setVisibility(View.INVISIBLE);
                 bStart.setVisibility(View.VISIBLE);
+
+                System.out.println(doorzendData);
+                System.out.println(doorzendData.length());
+                System.out.println(entryNummer);
+
+                //1,0.4810875654220581,0.3203921318054199,0.09214735031127937,0.6360962390899658
+
 
                 LineDataSet xData = new LineDataSet(xWaarden, "x");
                 xData.setDrawCircles(false);
@@ -129,7 +131,6 @@ public class MetingSpotter extends AppCompatActivity implements SensorEventListe
                                 System.out.println(temp.getY());
                             }
                         }
-
                     }
 
                     @Override
@@ -166,19 +167,9 @@ public class MetingSpotter extends AppCompatActivity implements SensorEventListe
 
             tijdAs.add(entryNummer,String.valueOf(tijd));
 
+            doorzendData = doorzendData.concat(String.valueOf(tijd) + "," + String.valueOf(x) + "," + String.valueOf(y) + "," + String.valueOf(z));
+
             entryNummer++;
-
-            JSONObject jObject = new JSONObject();
-            try {
-                jObject.put("x", x);
-                jObject.put("y", y);
-                jObject.put("z", z);
-                jObject.put("tijd", tijd);
-
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-            jArray.put(jObject);
         }
     }
 

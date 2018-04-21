@@ -1,5 +1,7 @@
 package vibrationspotter.Models;
 
+import android.util.Base64;
+
 public class Meting {
     private int idMeting;
 
@@ -7,7 +9,7 @@ public class Meting {
 
     private String tijdstip;
 
-    private byte[] foto;
+    private String foto;
 
     private String opmerking;
 
@@ -19,10 +21,18 @@ public class Meting {
         this.idMeting = idMeting;
         this.titel = titel;
         this.tijdstip = tijdstip;
-        this.foto = foto;
         this.opmerking = opmerking;
         this.dataset1 = dataset1;
         this.dataset2 = dataset2;
+        this.foto = Base64.encodeToString(foto, Base64.DEFAULT);
+
+
+    }
+
+    public Meting(String s, String s1, String imageString, byte[] meetdata) {
+        this.idMeting = 666;
+        this.titel = s;
+
     }
 
     public int getIdMeting() {
@@ -35,10 +45,6 @@ public class Meting {
 
     public String getTijdstip() {
         return tijdstip;
-    }
-
-    public byte[] getFoto() {
-        return foto;
     }
 
     public String getOpmerking() {

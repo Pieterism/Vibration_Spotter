@@ -21,6 +21,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
+import vibrationspotter.Models.Meting;
+
 public class NewMeting extends AppCompatActivity {
 
     private static final int SELECTED_PIC = 1111;
@@ -33,6 +35,9 @@ public class NewMeting extends AppCompatActivity {
     Button bRotate;
 
     Bitmap bitmap;
+    boolean hasImage;
+
+    byte[] meetdata;
 
 
     @Override
@@ -45,6 +50,7 @@ public class NewMeting extends AppCompatActivity {
         ivImage = findViewById(R.id.ivImage);
         bRotate = findViewById(R.id.bRotate);
         bSave = findViewById(R.id.bSave);
+        hasImage = false;
 
         ivImage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,9 +71,22 @@ public class NewMeting extends AppCompatActivity {
         bSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(hasImage) {
+                    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                    bitmap.compress(Bitmap.CompressFormat.JPEG, 50, baos);
+                    byte[] imageBytes = baos.toByteArray();
+                    final String imageString = Base64.encodeToString(imageBytes, Base64.DEFAULT);
+
+                    Meting doorzendmeting = new Meting(metingTitel.getText().toString(), metingDescription.getText().toString(), imageString, meetdata);
+                } else {
+                    Toast.makeText(getApplicationContext(), "Please select an image", Toast.LENGTH_LONG).show();
+                }
 
             }
         });
+
+        Intent eerst_meting_maken = new Intent(getApplicationContext(),Meter.class);
+        startActivityForResult(eerst_meting_maken, METINGEN);
     }
 
     @Override
@@ -77,7 +96,8 @@ public class NewMeting extends AppCompatActivity {
         if(data.getData() != null){
             switch (requestCode){
                 case METINGEN:
-                    System.out.println("Case:Meting");
+                    String doorzendData = data.getStringExtra("data");
+                    meetdata = doorzendData.getBytes();
                     break;
                 case SELECTED_PIC:
                     Uri uri = data.getData();
@@ -88,10 +108,7 @@ public class NewMeting extends AppCompatActivity {
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-                    /* ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                    bitmap.compress(Bitmap.CompressFormat.JPEG, 50, baos);
-                    byte[] imageBytes = baos.toByteArray();
-                    final String imageString = Base64.encodeToString(imageBytes, Base64.DEFAULT); */
+                    hasImage = true;
                     break;
                 default:
                     Toast.makeText(getApplicationContext(), "REQUESTCODE_BUG", Toast.LENGTH_LONG).show();
