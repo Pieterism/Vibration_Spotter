@@ -15,13 +15,17 @@ public interface PersonManagementEJBLocal {
 
 	void addPersoon(Persoon p);
 	
-	public Persoon findPersoonByEmail(String emailadres);
+	Persoon findPersoonByEmail(String emailadres);
 
 	Persoon findPersoonByid(int id);
 	
-	public Spotter findSpotterByGebruiksnaam(String gebruikersnaam);
+	Spotter findSpotterByGebruiksnaam(String gebruikersnaam);
 
 	String zoekEmailadres(int idPersoon);
+	
+	int haalProjectenSizeVanPersoon(int id);
+	
+	
 
 		
 

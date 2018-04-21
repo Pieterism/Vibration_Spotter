@@ -14,6 +14,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.core.MediaType;
 
 import Vibrationspotter.MetingManagementEJBLocal;
+import Vibrationspotter.PersonManagementEJBLocal;
 import Vibrationspotter.ProjectManagementEJBLocal;
 
 @Named
@@ -24,6 +25,9 @@ private static final long serialVersionUID = 1L;
 	
 	@EJB
 	private ProjectManagementEJBLocal projectEJB;
+	
+	@EJB
+	private PersonManagementEJBLocal persoonEJB;
 	
 	@POST
 	@Consumes({MediaType.APPLICATION_JSON})
@@ -52,5 +56,21 @@ private static final long serialVersionUID = 1L;
 	
 		 return "[{\"Projectverwijderen\": Gelukt!!!}]";
 	}
+	
+	@GET
+	@Path( "Size/{projectID}")
+	public String haalProjectensize (@PathParam("projectID") String id){
+		int size = persoonEJB.haalProjectenSizeVanPersoon(Integer.parseInt(id));
+		
+		return "[{\"size\": " + size + "}]";
+	}
+/*
+ * @GET
+	@Path( "AlleMetingen/{projectID}")
+	public String haalMeting (@PathParam("projectID") String id){
+		
+		return metingEJB.haalProjectMetingen(id);
+	}
 
+ */
 }
