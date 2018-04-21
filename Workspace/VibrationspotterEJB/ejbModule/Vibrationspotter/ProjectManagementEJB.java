@@ -309,7 +309,8 @@ public class ProjectManagementEJB implements ProjectManagementEJBLocal {
 		String longtitude = null;
 		String QR = null;
 		String beschrijving = null;
-		String idPersoon = null;
+	//	String idPersoon = null;
+		String email = null;
 		
 		try {
 			json = new JSONObject(gegevens);
@@ -317,14 +318,15 @@ public class ProjectManagementEJB implements ProjectManagementEJBLocal {
 			 latitude = json.getString("latitude");
 			 longtitude = json.getString("longtitude");
 			 beschrijving = json.getString("beschrijving");
-			 idPersoon = json.getString("idPersoon");
+			 email = json.getString("email");
 			
 		} catch (JSONException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
+		Persoon persoon = persoonejb.findPersoonByEmail(email);
 
-		Persoon persoon = persoonejb.findPersoonByid(Integer.parseInt(idPersoon));
+	//	Persoon persoon = persoonejb.findPersoonByid(Integer.parseInt(idPersoon));
 		
 		Project project = new Project();
 		project.setTitel(titel);
