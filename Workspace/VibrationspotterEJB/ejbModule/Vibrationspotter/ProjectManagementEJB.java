@@ -331,8 +331,8 @@ public class ProjectManagementEJB implements ProjectManagementEJBLocal {
 		Project project = new Project();
 		project.setTitel(titel);
 		project.setBeschrijving(beschrijving);
-		project.setLatitude(Integer.parseInt(latitude));
-		project.setLongtitude(Integer.parseInt(longtitude));
+		project.setLatitude((int)Double.parseDouble(latitude));
+		project.setLongtitude((int)Double.parseDouble(longtitude));
 		project.setIdPersoon(persoon);
 		
 		em.persist(project);
