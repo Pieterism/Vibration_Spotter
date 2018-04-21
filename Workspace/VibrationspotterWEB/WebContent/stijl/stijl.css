@@ -41,16 +41,7 @@ color: red;
 }
 
 
-.paragraph{
-	background-color: #f1f1f1;
-	margin-left: 20px;
-	margin-top: 20px;
-	border-style: solid;
-	width: 400px;
-	height: 400px;
-	padding: 25px;
-	
-}
+
 
 .knop{
 	background-color: white;
@@ -111,7 +102,7 @@ color: red;
 	height: 100%;
     
 }
-.paragraphvib{
+.paragraph{
 	background-color: #f1f1f1;
 	margin-left: 20px;
 	margin-top: 10px;
@@ -120,22 +111,26 @@ color: red;
 	height: 400px;
 	padding: 25px;
 	display:inline-block;
-	
+	opacity: 0.95;
+    filter: alpha(opacity=95);
+
+}
+
+.paragraphcenter{
+	background-color: #f1f1f1;
+	margin:0 auto;
+	margin-top: 20px;
+	border-style: solid;
+	width: 400px;
+	height: 500px;
+	padding: 25px;
+	text-align: center;
+	opacity: 0.95;
+    filter: alpha(opacity=95);
 	
 }
 
-.paragraphstem{
-	background-color: #f1f1f1;
-	margin-left: 20px;
-	border-style: solid;
-	margin-top:5px;
-	width: 400px;
-	height: 400px;
-	padding: 25px;
-	display:inline-block;
-	vertical-align: top;
-	
-}
+
 
 
 
