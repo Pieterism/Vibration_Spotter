@@ -123,7 +123,6 @@ public class MetingSpotter extends AppCompatActivity implements SensorEventListe
                         System.out.println(e.toString());
 
                         textResultaat.setText(String.valueOf((int) e.getX()));
-
                     }
 
                     @Override
