@@ -298,4 +298,43 @@ public class ProjectManagementEJB implements ProjectManagementEJBLocal {
 		List<Project> projecten = q.getResultList();
 		return projecten.get(0);
 	}
+	
+	public void ToevoegenProjectenAPP(String gegevens){
+		gegevens = gegevens.substring(1, gegevens.length() - 1);
+		JSONObject json = null;
+
+		String titel = null;
+		String type = null;
+		String latitude = null; 
+		String longtitude = null;
+		String QR = null;
+		String beschrijving = null;
+		String idPersoon = null;
+		
+		try {
+			json = new JSONObject(gegevens);
+			 titel = json.getString("titel");
+			 type = json.getString("type");
+			 latitude = json.getString("latitude");
+			 longtitude = json.getString("longtitude");
+			 beschrijving = json.getString("beschrijving");
+			 idPersoon = json.getString("idPersoon");
+			
+		} catch (JSONException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+
+		Persoon persoon = persoonejb.findPersoonByid(Integer.parseInt(idPersoon));
+		
+		Project project = new Project();
+		project.setTitel(titel);
+		project.setBeschrijving(beschrijving);
+		project.setLatitude(Integer.parseInt(latitude));
+		project.setLongtitude(Integer.parseInt(longtitude));
+		project.setIdPersoon(persoon);
+		
+		em.persist(project);
+		
+	}
 }

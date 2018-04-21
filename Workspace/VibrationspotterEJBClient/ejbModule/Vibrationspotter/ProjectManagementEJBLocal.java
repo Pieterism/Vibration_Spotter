@@ -34,5 +34,7 @@ public interface ProjectManagementEJBLocal {
 	public boolean checkGoedgekeurd(int idProject);
 	
 	public List<Project> findGoedgekeurdeProjecten();
+	
+	public void ToevoegenProjectenAPP(String gegevens);
 
 }
