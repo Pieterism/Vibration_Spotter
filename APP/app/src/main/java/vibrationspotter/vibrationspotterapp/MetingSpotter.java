@@ -123,6 +123,13 @@ public class MetingSpotter extends AppCompatActivity implements SensorEventListe
                         System.out.println(e.toString());
 
                         textResultaat.setText(String.valueOf((int) e.getX())); //xCoordinaat
+
+                        for (Entry temp : xWaarden){
+                            if (temp.getX() == e.getX()){
+                                System.out.println(temp.getY());
+                            }
+                        }
+
                     }
 
                     @Override

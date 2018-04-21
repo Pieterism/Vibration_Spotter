@@ -16,7 +16,7 @@
         android:textColor="@color/colorText"
         android:textSize="20dp"
         android:textStyle="bold" />
-.
+
     <TextView
         android:id="@+id/textAantalMetingen"
         android:layout_width="wrap_content"
