@@ -44,5 +44,13 @@ private static final long serialVersionUID = 1L;
 		
 		 return "[{\"Projectaanmaken\": Gelukt!!!}]";
 	}
+	
+	@POST
+	@Path("VerwijderenProjecten")
+	public String VerwijderProjectViaAPP (String jsonarray){
+		projectEJB.verwijderProjectViaApp(jsonarray);
+	
+		 return "[{\"Projectverwijderen\": Gelukt!!!}]";
+	}
 
 }

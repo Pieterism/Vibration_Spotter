@@ -348,6 +348,24 @@ public class ProjectManagementEJB implements ProjectManagementEJBLocal {
 		em.persist(project);
 		
 	}
+	
+	public void verwijderProjectViaApp(String gegevens){
+		gegevens = gegevens.substring(1, gegevens.length() - 1);
+		JSONObject json = null;
+		
+		int idProject = 0;
+		try {
+			json = new JSONObject(gegevens);
+			idProject = Integer.parseInt(json.getString("idProject"));
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		Project project = findProjectById(idProject);
+		em.remove(project);
+		
+	}
 
 
 }
