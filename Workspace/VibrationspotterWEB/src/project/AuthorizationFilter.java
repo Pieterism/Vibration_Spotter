@@ -57,19 +57,13 @@ public class AuthorizationFilter implements Filter {
 	    	
 	    	//gewone gebruiker die attribute heeft
 	    	
-	    	else if((reqURI.indexOf("/Leerkracht")>0)){
-	    		if((boolean) (((HttpServletRequest) request).getSession().getAttribute("type")).equals("Leerkracht")){
-	    			toegang = true;
-	    		}
-	    		else{
-	    			toegang = false;
-	    		}
-	    		
-	    	}
 	    	
 	    	else if((reqURI.indexOf("/Spotter")>0)){
-	    		if((boolean) (((HttpServletRequest) request).getSession().getAttribute("type")).equals("Spotter")){
+	    		if((boolean) (((HttpServletRequest) request).getSession().getAttribute("typePersoon")).equals("Spotter")){
 	    			toegang = true;
+	    		}
+	    		else if((boolean) (((HttpServletRequest) request).getSession().getAttribute("typePersoon")).equals("Leerkracht")){
+	    			toegang=true;
 	    		}
 	    		else{
 	    			toegang = false;
