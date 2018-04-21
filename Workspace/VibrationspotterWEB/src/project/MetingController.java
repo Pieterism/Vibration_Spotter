@@ -120,5 +120,13 @@ public void setMetingen(List<Meting> metingen) {
 	this.metingen = metingen;
 }
 
+public String toonFoto(Meting m){
+	HttpSession session = SessionUtils.getSession();
+	int idmeting=m.getIdMeting();
+	session.setAttribute("idMeting", idmeting);
+	return "foto.xhtml";
+	
+}
+
 
 }

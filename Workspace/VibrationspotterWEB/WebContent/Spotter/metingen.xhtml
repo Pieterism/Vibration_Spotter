@@ -50,7 +50,9 @@
     	</p:column>
     	
     	<p:column headerText="Foto" style="text-align:center;">
-        		 <h:graphicImage value="/image?id=#{met.idMeting}" style="width:32px;height:18px"/>
+         <h:form>
+        	<h:commandLink action="#{metingController.toonFoto(met)}" class="subAnchor" value="toon foto"/>
+        </h:form>
     	</p:column>
     	
     	<p:column headerText="grafiek" style="text-align:center">

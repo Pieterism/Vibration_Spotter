@@ -25,16 +25,10 @@ public class ImageServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     	HttpSession session = request.getSession();
-    	int idProject=(int) session.getAttribute("idProject");
-    	int idMeting = (int) Long.parseLong(request.getParameter("id")); //URL
-    	Meting m=metingejb.findMetingById(idMeting);
-    	if(m==null){
-    		response.getOutputStream().write(null);
-    	}
-    	else if(idProject==m.getIdProject().getIdProject()){
+    	int idMeting=(int) session.getAttribute("idMeting");
+
     		response.getOutputStream().write(metingejb.zoekFoto(idMeting));
     		
-    	}
 
     	
     }
