@@ -200,64 +200,19 @@ public class OctaveManagementEJB implements OctaveManagementEJBLocal {
 			stdin.println("A2_data = fft(data_filtered); A2 = abs(A2_data/L);");
 			stdin.println("A_data = A2(1:L/2+1); A_data(2:end-1) = 2*A_data(2:end-1);");
 
-			// 2 output files uitprinten
-			/*
-			stdin.println("x1 = [tijd(:),versnelling(:),data_filtered(:)];");
-			stdin.println("csvwrite ('x1.txt', x1)");
 
-			stdin.println("x2 = [frequentie(:),amplitude(:),A_data(:)];");
-			stdin.println("csvwrite ('x2.txt', x2)");
-			*/
 			stdin.println("versnellingz=versnelling; data_filteredz=data_filtered; frequentiez=frequentie; amplitudez=amplitude; A_dataz=A_data; ");
 			
 			
-			//p
-			stdin.println("x1 = [tijd(:),versnellingx(:),data_filteredx(:),versnellingy(:),data_filteredy(:),versnellingz(:),data_filteredz(:)];");
-			stdin.println("csvwrite ('C:\\Users\\thoma\\Desktop\\files_mathlab\\x1.txt', x1)");
-
-			stdin.println("x2 = [frequentiex(:),amplitudex(:),A_datax(:),frequentiey(:),amplitudey(:),A_datay(:),frequentiez(:),amplitudez(:),A_dataz(:)];");
-			stdin.println("csvwrite ('C:\\Users\\thoma\\Desktop\\files_mathlab\\x2.txt', x2)");
+			// grootheden in datasets steken
 			
-			BufferedReader br = null;
-			   try {
+			//tijd in functie van versnelling
+			stdin.println("x1 = [tijd(:),versnellingx(:),data_filteredx(:),versnellingy(:),data_filteredy(:),versnellingz(:),data_filteredz(:)];");
 
-	                String sCurrentLine;
-	                String nl=System.getProperty("line.separator");
-	                br = new BufferedReader(new FileReader("x1.txt"));
-	                StringBuffer sBuffer = new StringBuffer();
-	                while ((sCurrentLine = br.readLine()) != null) {
-	                    System.out.println(sCurrentLine);
-	                    sBuffer.append(sCurrentLine);
-	                    sBuffer.append(nl);
-	                }
-	                s1=sBuffer.toString();
-
-	            } 
-
-	            catch (IOException e) {
-	                e.printStackTrace();
-	            }
-			   
-			   BufferedReader br2 = null;
-			   try {
-
-	                String sCurrentLine;
-	                String nl=System.getProperty("line.separator");
-	                br2 = new BufferedReader(new FileReader("x2.txt"));
-	                StringBuffer sBuffer = new StringBuffer();
-	                while ((sCurrentLine = br2.readLine()) != null) {
-	                    System.out.println(sCurrentLine);
-	                    sBuffer.append(sCurrentLine);
-	                    sBuffer.append(nl);
-	                }
-	                s2=sBuffer.toString();
-
-	            } 
-
-	            catch (IOException e) {
-	                e.printStackTrace();
-	            }
-
+			//frequentie in functie van amplitude
+			stdin.println("x2 = [frequentiex(:),amplitudex(:),A_datax(:),frequentiey(:),amplitudey(:),A_datay(:),frequentiez(:),amplitudez(:),A_dataz(:)];");
+			
+			
 			stdin.close();
 
 			int returnCode = 0;

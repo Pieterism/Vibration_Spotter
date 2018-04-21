@@ -23,9 +23,7 @@
 </div>
 <a href="projecten.xhtml">terug naar projecten</a>    
 <p:dataTable value="#{userController.ophalenPersoon()}" var="per" style="margin-top:10px">
-	<f:facet name="header">
-            Persoon
-    </f:facet>
+    
      <p:column headerText="IdPersoon" style="text-align:center;">
         		<h:outputText value="#{per.idPersoon}" />
      </p:column>

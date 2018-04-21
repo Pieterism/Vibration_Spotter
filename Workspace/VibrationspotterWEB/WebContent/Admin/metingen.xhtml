@@ -5,7 +5,7 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:p="http://primefaces.org/ui"
-      >
+      xmlns:fn="http://java.sun.com/jsp/jstl/functions">
       
 <h:head>
   <title>
@@ -64,6 +64,10 @@
         	<h:commandButton value = "meting wissen" onclick = "return confirm('wilt u zeker deze meting wissen?')" action="#{metingController.wissen(met)}"></h:commandButton>
         </h:form>
         </p:column>
+        
+     <f:facet name="footer">
+        totaal: #{ fn:length(metingController.metingen)} metingen
+    </f:facet>
 
     </p:dataTable>
     
