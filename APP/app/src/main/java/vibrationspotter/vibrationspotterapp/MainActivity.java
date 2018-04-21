@@ -356,6 +356,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         }
 
+        else if (id == R.id.nav_newproject) {
+            Intent naar_newproject = new Intent(MainActivity.this, NewProject.class);
+            startActivity((naar_newproject));
+        }
+
         return true;
     }
 }
