@@ -87,7 +87,7 @@ public class ProjectActivity extends AppCompatActivity{
         bAddMeting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent naar_meter = new Intent(getApplicationContext(),Meter.class);
+                Intent naar_meter = new Intent(getApplicationContext(),NewMeting.class);
                 startActivityForResult(naar_meter, METING);
             }
         });
