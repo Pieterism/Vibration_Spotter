@@ -295,13 +295,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(data!=null){
+        if(data.getStringExtra("QR_code")!=null){
             if(resultCode== CommonStatusCodes.SUCCESS){
                 if(requestCode==QR) {
                     String qrcode = data.getStringExtra("QR_code");
 
                     Map<String, String> QRgegevens = new HashMap<>();
-                    QRgegevens.put("titel", qrcode);
+                    QRgegevens.put("QR", qrcode);
 
                     final JSONObject jsonObject = new JSONObject(QRgegevens);
                     JSONArray jArray = new JSONArray();
@@ -352,7 +352,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         }
         else{
-
+            System.out.println("data null");
         }
     }
 }

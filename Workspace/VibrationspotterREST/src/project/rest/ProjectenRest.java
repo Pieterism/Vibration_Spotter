@@ -74,6 +74,8 @@ private static final long serialVersionUID = 1L;
 	public String haalprojectviaQR (String jsonarray){
 	String project =projectEJB.HaalprojectviaApp(jsonarray);
 	
+	System.out.println("project is gehaald via QR");
+	
 		 return project;
 	}
 /*
