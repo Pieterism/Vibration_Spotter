@@ -1,6 +1,7 @@
 package Vibrationspotter;
 
 import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -38,6 +39,10 @@ public class OctaveManagementEJB implements OctaveManagementEJBLocal {
 		
 		String s1 = null;
 		String s2 = null;
+		
+		byte [] by ;
+		ByteArrayOutputStream bOutput = new ByteArrayOutputStream();
+		
 		String[] resultaten = new String[2];
 		try {
 	   	  	String lijnen[] = s.split("\\r?\\n");
@@ -64,8 +69,10 @@ public class OctaveManagementEJB implements OctaveManagementEJBLocal {
 
 			String[] command = { "octave-cli", };
 			Process p = Runtime.getRuntime().exec(command);
+			SyncPipe sync =  new SyncPipe(p.getInputStream(), bOutput);
 			new Thread(new SyncPipe(p.getErrorStream(), System.err)).start();
-			new Thread(new SyncPipe(p.getInputStream(), System.out)).start();
+			//new Thread(new SyncPipe(p.getInputStream(), bOutput)).start();
+			new Thread(sync).start();
 			PrintWriter stdin = new PrintWriter(p.getOutputStream());
 			InputStreamReader stdout = new InputStreamReader(p.getInputStream());
 
@@ -214,6 +221,20 @@ public class OctaveManagementEJB implements OctaveManagementEJBLocal {
 			
 			
 			stdin.close();
+			
+			ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+
+			int nRead;
+			byte[] data = new byte[16384];
+
+			while ((nRead = sync.getInputStream().read(data, 0, data.length)) != -1) {
+			  buffer.write(data, 0, nRead);
+			}
+
+			buffer.flush();
+
+			by = buffer.toByteArray();
+			s1 = new String(by);
 
 			int returnCode = 0;
 			try {

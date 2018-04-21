@@ -7,6 +7,8 @@ public class SyncPipe implements Runnable {
 	/*
 	 * klasse die helpt met io in octave, niet zelfgeschreven klasse.
 	 */
+	private final OutputStream ostrm_;
+	private final InputStream istrm_;
 	public SyncPipe(InputStream istrm, OutputStream ostrm) {
 		istrm_ = istrm;
 		ostrm_ = ostrm;
@@ -22,7 +24,9 @@ public class SyncPipe implements Runnable {
 			e.printStackTrace();
 		}
 	}
+	public InputStream getInputStream(){
+		return istrm_;
+	}
 
-	private final OutputStream ostrm_;
-	private final InputStream istrm_;
+
 }
