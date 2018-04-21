@@ -38,6 +38,14 @@ public class ProjectController implements Serializable {
 	  int id = (int)session.getAttribute(("idPersoon"));
 	  Persoon	user = personejb.findPersoonByid(id);
 	  project.setIdPersoon(user);
+	  String typePersoon=(String) session.getAttribute("typePersoon");
+	  if(typePersoon.equals("Spotter")){
+		  project.setType("Vibrationspotter");
+	  }
+	  else if(typePersoon.equals("Leerkracht")){
+		  project.setType("STEM");
+		  
+	  }
 	  projectejb.addProject(project);
 	  FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_INFO, "Uw project is aangemaakt", "Uw project is aangemaakt"));
 

@@ -28,22 +28,4 @@ public class QrServlet extends HttpServlet {
     }
 
 
-
-
-
-
-
-
-
-
-    
-    
-/*
-	private int getId() {
-		HttpSession session = SessionUtils.getSession();
-		int id=(int) session.getAttribute("idMeting");
-		return id;
-	}
-	*/
-
 } 

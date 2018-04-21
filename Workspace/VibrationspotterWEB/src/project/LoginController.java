@@ -57,7 +57,7 @@ private LoginManagementEJBLocal loginEJB;
 		 session.setAttribute("idProject", 0);
 		 session.setAttribute("idMeting", 0);
 		 
-		 session.setAttribute("type", user.getType());
+		 session.setAttribute("typePersoon", user.getType());
 		 
 		 
 		 if((boolean) session.getAttribute("admin")){
@@ -65,13 +65,13 @@ private LoginManagementEJBLocal loginEJB;
 			 return "/Admin/index.xhtml?faces-redirect=true";			//als admin, redirect naar admin
 		 }
 		 
-		 else if(((String)session.getAttribute("type")).equals("Leerkracht")){
+		 else if(((String)session.getAttribute("typePersoon")).equals("Leerkracht")){
 			 
-			 return "/Leerkracht/index.xhtml?faces-redirect=true";    //als leerkracht, redirect naar leerkracht
+			 return "/Spotter/index.xhtml?faces-redirect=true";    //als leerkracht, redirect naar leerkracht
 			 
 		 }
 		 
-		 else if(((String)session.getAttribute("type")).equals("Spotter")){
+		 else if(((String)session.getAttribute("typePersoon")).equals("Spotter")){
 			 
 			 return "/Spotter/index.xhtml?faces-redirect=true";       //als spotter, redirect naar spotter
 			 

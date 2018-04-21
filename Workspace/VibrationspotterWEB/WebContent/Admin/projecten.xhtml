@@ -48,6 +48,10 @@
     	<p:column headerText="Beschrijving" style="text-align:center" filterBy="#{pro.beschrijving}">
         	<h:outputText value="#{pro.beschrijving}" />
     	</p:column>
+    	
+    	<p:column headerText="QR-code" style="text-align:center">
+        	<h:graphicImage value="/qr?id=#{pro.QR}" style="width:32px;height:18px"/>
+    	</p:column>
     			
     	<p:column headerText="emailadres" style="text-align:center" sortBy="#{projectController.zoekEmailadres(pro)}" filterBy="#{projectController.zoekEmailadres(pro)}">
         	<h:outputText value="#{projectController.zoekEmailadres(pro)}" />
