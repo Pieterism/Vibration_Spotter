@@ -71,8 +71,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     ConstraintLayout clHomePage;
     LinearLayout llprojecten;
     ImageView imageView;
-    Button bRotateR;
-    Button bRotateL;
     TextView textName;
 
     int width;
@@ -123,20 +121,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         llprojecten = findViewById(R.id.llprojecten);
 
         imageView = findViewById(R.id.vbAfbeelding);
-        bRotateR = findViewById(R.id.bRotateR);
-        bRotateR.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                imageView.setRotation(90);
-            }
-        });
-        bRotateL = findViewById(R.id.bRotateL);
-        bRotateL.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                imageView.setRotation(-90);
-            }
-        });
 
         nav_header_main = navigationView.getHeaderView(0);
         textName = nav_header_main.findViewById(R.id.textName);
