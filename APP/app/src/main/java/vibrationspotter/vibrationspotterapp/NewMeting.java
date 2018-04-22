@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.common.api.CommonStatusCodes;
+import com.google.gson.Gson;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -38,7 +39,9 @@ public class NewMeting extends AppCompatActivity {
     boolean hasImage;
 
     byte[] meetdata;
+    String doorzendData;
 
+    Gson gson;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -51,6 +54,7 @@ public class NewMeting extends AppCompatActivity {
         bRotate = findViewById(R.id.bRotate);
         bSave = findViewById(R.id.bSave);
         hasImage = false;
+        gson = new Gson();
 
         ivImage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,6 +83,7 @@ public class NewMeting extends AppCompatActivity {
 
                     Meting doorzendmeting = new Meting(metingTitel.getText().toString(), metingDescription.getText().toString(), imageString, meetdata);
 
+                    String doorZEndString = gson.toJson(doorzendmeting);
 
                 } else {
                     Toast.makeText(getApplicationContext(), "Please select an image", Toast.LENGTH_LONG).show();
@@ -98,7 +103,7 @@ public class NewMeting extends AppCompatActivity {
         if(data != null){
             switch (requestCode){
                 case METINGEN:
-                    String doorzendData = data.getStringExtra("data");
+                    doorzendData = data.getStringExtra("data");
                     meetdata = doorzendData.getBytes();
                     break;
                 case SELECTED_PIC:

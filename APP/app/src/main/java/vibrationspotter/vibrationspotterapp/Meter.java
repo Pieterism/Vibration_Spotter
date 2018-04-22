@@ -171,8 +171,7 @@ public class Meter extends Activity implements SensorEventListener{
 
             entryNummer++;
 
-            doorzendData = doorzendData.concat(String.valueOf(tijd) + "," + String.valueOf(x) + "," + String.valueOf(y) + "," + String.valueOf(z));
-
+            doorzendData = doorzendData.concat(String.valueOf(tijd) + "," + String.valueOf(x) + "," + String.valueOf(y) + "," + String.valueOf(z) + "\n");
         }
     }
 
