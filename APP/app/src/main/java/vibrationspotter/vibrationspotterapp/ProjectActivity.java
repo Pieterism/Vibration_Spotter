@@ -75,7 +75,25 @@ public class ProjectActivity extends AppCompatActivity{
         bDeleteProject = findViewById(R.id.bDeleteProject);
 
         textTitel.setText(project.getTitel());
-        textGebruikersnaam.setText(sharedPreferences.get("email").toString());
+
+        JsonArrayRequest persoonRequest = new JsonArrayRequest(
+                getString(R.string.url) + "Persoon/" + String.valueOf(project.getIdProject()),
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        System.out.println("Joepie");
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(getApplicationContext(), "Error",Toast.LENGTH_LONG).show();
+                    }
+                }
+        );
+
+        VolleyClass.getInstance(getApplicationContext()).addToRequestQueue(persoonRequest, "persoonRequest");
+
         textLocation.setText(String.valueOf(project.getLatitude()) + " LA ," + String.valueOf(project.getLongtitude()) + " LO");
         //textAantalMetingen.setText("Nog te bepalen");
 
