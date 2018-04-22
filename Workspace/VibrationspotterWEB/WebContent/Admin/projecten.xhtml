@@ -20,17 +20,21 @@
 			<b>Projecten</b><img src="../images/logo.png" width="50" height="50" />
 		</h1>
 	</div>
+	
 	<div class="topnav">
-		<a href="index.xhtml">Home</a> <a class="active"
-			href="projecten.xhtml">Projecten</a> <a href="kaart.xhtml">Kaart</a>
-		<a href="about.xhtml">About</a> <a href="createaccount.xhtml">Create
-			account</a>
+		<a href="index.xhtml">Home</a>
+		<a class="active" href="projecten.xhtml">Projecten</a>
+		<a href="kaart.xhtml">Kaart</a>
+		<a href="createaccount.xhtml">Create account</a>
+		<a href="about.xhtml">About</a>
 		<h:form>
 			<h:commandButton styleClass="logout" image="../images/logout.png"
 				value="uitloggen" action="#{loginController.logout}" />
 		</h:form>
 
 	</div>
+<div class="background3">
+<br/>
 <h:form>
 	<p:dataTable value="#{projectManagementEJB.findAllProjecten()}" var="pro" style="margin-top:10px" >
 	
@@ -87,6 +91,7 @@
  	
 	</p:dataTable>
 </h:form>
+</div>
 
 </h:body>
 </html>

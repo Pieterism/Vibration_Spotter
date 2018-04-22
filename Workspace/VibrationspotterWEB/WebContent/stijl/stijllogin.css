@@ -10,14 +10,14 @@ body {
 }
 
 .panel{
-margin: 0 auto;
-margin-top: 50px;
+	margin: 0 auto;
+	margin-top: 50px;
 }
 
 
 .fail{
-color: red;
-margin: auto;
+	color: red;
+	margin: auto;
 }
 
 .topnav {
@@ -25,7 +25,7 @@ margin: auto;
     overflow: hidden;
 }
 
-/* Style the links inside the navigation bar */
+
 .topnav a {
     float: left;
     color: #f2f2f2;
@@ -35,28 +35,24 @@ margin: auto;
     font-size: 17px;
 }
 
-/* Change the color of links on hover */
 .topnav a:hover {
     background-color: #ddd;
     color: black;
 }
 
-/* Add a color to the active/current link */
 .topnav a.active {
     background-color: #4CAF50;
     color: white;
 }
 .panel{
-margin: 0 auto;
-margin-top: 50px;
+	margin: 0 auto;
+	margin-top: 50px;
 }
-
 
 .fail{
-color: red;
-margin: auto;
+	color: red;
+	margin: auto;
 }
-
 
 .paragraph{
 	background-color: #f1f1f1;
@@ -99,7 +95,6 @@ margin: auto;
 .backgroundgent{
 	background-image: url("../images/gent.jpg");
   	height: 90%;
-  	
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
