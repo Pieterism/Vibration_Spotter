@@ -32,9 +32,7 @@ public class Meting {
     }
 
     public Meting(String s, String s1, String imageString, byte[] meetdata) {
-        this.idMeting = 666;
         this.titel = s;
-        this.tijdstip = "placeholder";
         this.foto = imageString;
         this.opmerking = s1;
         this.dataset1 = meetdata;
