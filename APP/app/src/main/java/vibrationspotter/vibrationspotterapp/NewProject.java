@@ -1,7 +1,6 @@
 package vibrationspotter.vibrationspotterapp;
 
 import android.Manifest;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Location;
@@ -9,6 +8,7 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -21,6 +21,11 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -30,9 +35,12 @@ import java.util.Map;
 
 
 public class NewProject extends AppCompatActivity {
+
+    private FusedLocationProviderClient mfusedLocationProviderclient;
+    LatLng locatie;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
 
 
         super.onCreate(savedInstanceState);
@@ -68,30 +76,31 @@ public class NewProject extends AppCompatActivity {
                         public void onLocationChanged(Location location) {
 
                             // Called when a new location is found by the network location provider.
-                            Toast.makeText(getBaseContext(), "location is:"+location, Toast.LENGTH_LONG).show();
+                            Toast.makeText(getBaseContext(), "location is:" + location, Toast.LENGTH_LONG).show();
                         }
 
-                        public void onStatusChanged(String provider, int status, Bundle extras) {}
+                        public void onStatusChanged(String provider, int status, Bundle extras) {
+                        }
 
-                        public void onProviderEnabled(String provider) {}
+                        public void onProviderEnabled(String provider) {
+                        }
 
-                        public void onProviderDisabled(String provider) {}
+                        public void onProviderDisabled(String provider) {
+                        }
                     };
 
 
-
-
-                       lm.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
-                       Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-                       longitude = location.getLongitude();
-                        latitude = location.getLatitude();
+                    lm.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
+                    Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+                    longitude = location.getLongitude();
+                    latitude = location.getLatitude();
                 } else {
                     requestGPSPermission();
                 }
 
                 projectgegevens.put("longtitude", String.valueOf(longitude));
                 projectgegevens.put("latitude", String.valueOf(latitude));
-                projectgegevens.put("email", settings.getString("email",null));
+                projectgegevens.put("email", settings.getString("email", null));
 
                 final JSONObject jsonObject = new JSONObject(projectgegevens);
                 JSONArray jArray = new JSONArray();
@@ -108,20 +117,21 @@ public class NewProject extends AppCompatActivity {
                         },
 
                         new Response.ErrorListener() {
-                             @Override
-                             public void onErrorResponse(VolleyError error) {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
                                 Log.d("ToevoegenProjecten", "Error: " + error.toString() + ", " + error.getMessage());
-                    }
-                }
+                            }
+                        }
                 );
                 VolleyClass.getInstance(getApplicationContext()).addToRequestQueue(inloggenRequest, "Inloggen");
 
-             //   LocationManager lm = (LocationManager)getSystemService(getApplicationContext().LOCATION_SERVICE);
+                //   LocationManager lm = (LocationManager)getSystemService(getApplicationContext().LOCATION_SERVICE);
 
 
             }
         });
     }
+
     private void requestGPSPermission() {
         Log.w("GPS Locatie", "GPS permission is not granted. Requesting permission");
 
@@ -133,5 +143,33 @@ public class NewProject extends AppCompatActivity {
         }
     }
 
+    private LatLng getDeviceLocation(){
+        mfusedLocationProviderclient = LocationServices.getFusedLocationProviderClient(this);
+        try{
+                final Task location = mfusedLocationProviderclient.getLastLocation();
+                location.addOnCompleteListener(new OnCompleteListener() {
+                    @Override
+                    public void onComplete(@NonNull Task task) {
+                        if(task.isSuccessful()){
+                            Location currentLocation = (Location) task.getResult();
+
+                            locatie = new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude());
+
+                            //geven lat & long
+                            // DEZE MOETEN DOORGEGEVEN WORDEN EN STELLEN LOCATIE VOOR NORMAAL GEZIEN
+                            currentLocation.getLatitude();
+                            currentLocation.getLongitude();
+                        }else{
+                            Toast.makeText(NewProject.this, "Unable to get location", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+
+
+        }catch(SecurityException e){
+
+        }
+        return locatie;
+    }
 
 }
