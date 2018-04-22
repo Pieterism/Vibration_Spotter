@@ -214,10 +214,10 @@ public class OctaveManagementEJB implements OctaveManagementEJBLocal {
 			// grootheden in datasets steken
 			
 			//tijd in functie van versnelling
-			stdin.println("x1 = [tijd(:),versnellingx(:),data_filteredx(:),versnellingy(:),data_filteredy(:),versnellingz(:),data_filteredz(:)];");
+			stdin.println("x1 = [tijd(:),data_filteredx(:),data_filteredy(:),data_filteredz(:)];");
 
 			//frequentie in functie van amplitude
-			stdin.println("x2 = [frequentiex(:),amplitudex(:),A_datax(:),frequentiey(:),amplitudey(:),A_datay(:),frequentiez(:),amplitudez(:),A_dataz(:)];");
+			stdin.println("x2 = [frequentiex(:),A_datax(:),A_datay(:),A_dataz(:)];");
 			
 			
 			stdin.close();

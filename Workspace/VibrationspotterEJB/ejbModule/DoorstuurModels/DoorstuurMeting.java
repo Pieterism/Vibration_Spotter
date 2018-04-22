@@ -1,5 +1,7 @@
 package DoorstuurModels;
 
+import com.sun.org.apache.xml.internal.security.utils.Base64;
+
 import model.Meting;
 
 public class DoorstuurMeting {
@@ -14,9 +16,9 @@ public class DoorstuurMeting {
 
 	private String opmerking;
 
-	private byte[] dataset1;
+	private String dataset1;
 
-	private byte[] dataset2;
+	private String dataset2;
 
 	public DoorstuurMeting(){}
 	
@@ -26,7 +28,7 @@ public class DoorstuurMeting {
 		this.tijdstip = m.getTijdstip();
 		this.foto = m.getFoto();
 		this.opmerking = m.getOpmerking();
-		this.dataset1 = m.getDataset1();
-		this.dataset2 = m.getDataset2();
+		this.dataset1 = Base64.encode(m.getDataset1());
+		this.dataset2 = Base64.encode(m.getDataset2());
 	}
 }

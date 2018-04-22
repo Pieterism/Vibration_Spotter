@@ -31,7 +31,7 @@ public class MetingSpotter extends AppCompatActivity implements SensorEventListe
     LineChart lcTest;
     Button bStart;
     Button bStop;
-    TextView textResultaat;
+    TextView tvX, tvY, tvZ, tvT;
 
     private SensorManager mSensorManager;
     private Sensor mAccelerometer;
@@ -55,7 +55,11 @@ public class MetingSpotter extends AppCompatActivity implements SensorEventListe
         lcTest = findViewById(R.id.lcTest);
         bStart = findViewById(R.id.bStart);
         bStop = findViewById(R.id.bStop);
-        //  textResultaat = findViewById(R.id.textResultaat);
+
+        tvT = findViewById(R.id.tvT);
+        tvX = findViewById(R.id.tvX);
+        tvY = findViewById(R.id.tvY);
+        tvZ = findViewById(R.id.tvZ);
 
         started = false;
         mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
@@ -97,9 +101,6 @@ public class MetingSpotter extends AppCompatActivity implements SensorEventListe
                 System.out.println(doorzendData.length());
                 System.out.println(entryNummer);
 
-                //1,0.4810875654220581,0.3203921318054199,0.09214735031127937,0.6360962390899658
-
-
                 LineDataSet xData = new LineDataSet(xWaarden, "x");
                 xData.setDrawCircles(false);
                 xData.setColor(Color.parseColor("#005b7f"));
@@ -125,24 +126,21 @@ public class MetingSpotter extends AppCompatActivity implements SensorEventListe
                     @Override
                     public void onValueSelected(Entry e, Highlight h) {
 
-                        System.out.println(h.toString());
-                        System.out.println(e.toString());
-
-                        textResultaat.setText(String.valueOf((int) e.getX())); //xCoordinaat
+                        tvT.setText("T: " + String.valueOf(e.getX()));
 
                         for (Entry temp : xWaarden) {
                             if (temp.getX() == e.getX()) {
-                                System.out.println(temp.getY());
+                                tvX.setText("X: " + String.valueOf(temp.getY()));
                             }
                         }
                         for (Entry temp : yWaarden) {
                             if (temp.getX() == e.getX()) {
-                                System.out.println(temp.getY());
+                                tvY.setText("Y: " + String.valueOf(temp.getY()));
                             }
                         }
                         for (Entry temp : zWaarden) {
                             if (temp.getX() == e.getX()) {
-                                System.out.println(temp.getY());
+                                tvZ.setText("Z: " + String.valueOf(temp.getY()));
                             }
                         }
                     }

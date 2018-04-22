@@ -17,11 +17,11 @@ public class Meting {
 
     private String opmerking;
 
-    private byte[] dataset1;
+    private String dataset1;
 
-    private byte[] dataset2;
+    private String dataset2;
 
-    public Meting(int idMeting, String titel, String tijdstip, String foto, String opmerking, byte[] dataset1, byte[] dataset2) {
+    public Meting(int idMeting, String titel, String tijdstip, String foto, String opmerking, String dataset1, String dataset2) {
         this.idMeting = idMeting;
         this.titel = titel;
         this.tijdstip = tijdstip;
@@ -31,7 +31,7 @@ public class Meting {
         this.dataset2 = dataset2;
     }
 
-    public Meting(String s, String s1, String imageString, byte[] meetdata) {
+    public Meting(String s, String s1, String imageString, String meetdata) {
         this.titel = s;
         this.foto = imageString;
         this.opmerking = s1;
@@ -54,11 +54,11 @@ public class Meting {
         return opmerking;
     }
 
-    public byte[] getDataset1() {
+    public String getDataset1() {
         return dataset1;
     }
 
-    public byte[] getDataset2() {
+    public String getDataset2() {
         return dataset2;
     }
 
