@@ -128,15 +128,10 @@ public class MetingSpotter extends AppCompatActivity implements SensorEventListe
                         System.out.println(h.toString());
                         System.out.println(e.toString());
 
-<<<<<<< HEAD
                         textResultaat.setText(String.valueOf((int) e.getX())); //xCoordinaat
 
                         for (Entry temp : xWaarden) {
                             if (temp.getX() == e.getX()) {
-=======
-                        for (Entry temp : xWaarden){
-                            if (temp.getX() == e.getX()){
->>>>>>> 5a1999ce6e25508c39ee8c0ca570d03d36821614
                                 System.out.println(temp.getY());
                             }
                         }
@@ -157,6 +152,7 @@ public class MetingSpotter extends AppCompatActivity implements SensorEventListe
 
                     }
                 };
+
                 lcTest.setData(data);
                 lcTest.setOnChartValueSelectedListener(listener);
                 lcTest.invalidate();
