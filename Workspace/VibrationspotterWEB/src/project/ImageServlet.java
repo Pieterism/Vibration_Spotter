@@ -27,7 +27,7 @@ public class ImageServlet extends HttpServlet {
     	HttpSession session = request.getSession();
     	int idMeting=(int) session.getAttribute("idMeting");
 
-    		response.getOutputStream().write(metingejb.zoekFoto(idMeting));
+    	response.getOutputStream().write(metingejb.zoekFoto(idMeting));
     		
 
     	

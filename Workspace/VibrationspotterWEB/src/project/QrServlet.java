@@ -11,7 +11,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import Vibrationspotter.MetingManagementEJBLocal;
+import Vibrationspotter.ProjectManagementEJBLocal;
 import Vibrationspotter.QrManagementEJBLocal;
+import model.Project;
 
 @WebServlet("/qr/*")
 public class QrServlet extends HttpServlet {
@@ -21,9 +23,16 @@ public class QrServlet extends HttpServlet {
 	@EJB
 	private QrManagementEJBLocal qrejb;
 	
+	@EJB
+	private ProjectManagementEJBLocal projectejb;
+	
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    	String text = (String) request.getParameter("id");
+    	HttpSession session = request.getSession();
+    	int idProject=(int) session.getAttribute("idProject");
+    	String text;
+    	Project p=projectejb.findProjectById(idProject);
+    	text=p.getQR();
         response.getOutputStream().write(qrejb.getQRCodeImage(text, 500, 500));
     }
 

@@ -68,7 +68,6 @@ public class ProjectActivity extends AppCompatActivity{
 
         textTitel = findViewById(R.id.textTitel);
         textGebruikersnaam = findViewById(R.id.textGebruikersnaam);
-        textTime = findViewById(R.id.textTime);
         textLocation = findViewById(R.id.textLocation);
         textAantalMetingen = findViewById(R.id.textAantalMetingen);
         bViewMetingen = findViewById(R.id.bViewMetingen);

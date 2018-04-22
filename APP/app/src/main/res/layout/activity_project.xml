@@ -123,18 +123,6 @@
                 android:textColor="@color/colorText" />
 
             <TextView
-                android:id="@+id/textTime"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="50dp"
-                android:layout_marginVertical="4dp"
-                android:drawableLeft="@drawable/ic_access_time_black_24dp"
-                android:fontFamily="@font/advent_pro_semibold"
-                android:gravity="center_vertical"
-                android:text="Tijd  Datum"
-                android:textColor="@color/colorText" />
-
-            <TextView
                 android:id="@+id/textLocation"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

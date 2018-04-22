@@ -44,6 +44,7 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.google.android.gms.common.api.CommonStatusCodes;
+import com.google.android.gms.maps.MapView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -282,6 +283,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         } else if (id == R.id.nav_about) {
 
+        }
+        else if (id == R.id.nav_map) {
+            Intent naar_map = new Intent(MainActivity.this, MapView.class);
+            startActivity((naar_map));
         }
 
         else if (id == R.id.nav_newproject) {

@@ -15,6 +15,7 @@ import javax.servlet.http.HttpSession;
 import Vibrationspotter.MetingManagementEJBLocal;
 import Vibrationspotter.PersonManagementEJBLocal;
 import Vibrationspotter.ProjectManagementEJBLocal;
+import model.Meting;
 import model.Persoon;
 import model.Project;
 
@@ -130,6 +131,14 @@ public class ProjectController implements Serializable {
 
 	public void setProject(Project project) {
 		this.project = project;
+	}
+	public String toonQr(Project p){
+		System.out.println("hallo");
+		HttpSession session = SessionUtils.getSession();
+		int idproject=p.getIdProject();
+		session.setAttribute("idProject", idproject);
+		return "qr.xhtml";
+		
 	}
 
 }

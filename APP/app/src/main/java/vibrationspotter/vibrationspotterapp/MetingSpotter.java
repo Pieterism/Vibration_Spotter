@@ -103,12 +103,16 @@ public class MetingSpotter extends AppCompatActivity implements SensorEventListe
                 LineDataSet xData = new LineDataSet(xWaarden, "x");
                 xData.setDrawCircles(false);
                 xData.setColor(Color.parseColor("#005b7f"));
+                xData.setDrawHorizontalHighlightIndicator(false);
                 LineDataSet yData = new LineDataSet(yWaarden, "y");
                 yData.setDrawCircles(false);
                 yData.setColor(Color.parseColor("#fdc101"));
+                yData.setDrawHorizontalHighlightIndicator(false);
                 LineDataSet zData = new LineDataSet(zWaarden, "z");
                 zData.setDrawCircles(false);
                 zData.setColor(Color.parseColor("#c95854"));
+                zData.setDrawHorizontalHighlightIndicator(false);
+
 
                 xyzData = new ArrayList<>();
                 xyzData.add(xData);
