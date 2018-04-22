@@ -136,6 +136,7 @@ public class MetingManagementEJB implements MetingManagementEJBLocal{
 		meting1.setResultaten(leesBareData);
 		meting1.setIdProject(project);
 		meting1.setFoto(imageByte);
+		meting1.setOpmerking(doorstuurmeting.get(0).get("opmerking"));
 		
 		em.persist(meting1);	
 		
