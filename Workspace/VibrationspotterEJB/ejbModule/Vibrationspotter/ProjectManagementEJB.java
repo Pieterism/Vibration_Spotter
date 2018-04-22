@@ -375,10 +375,11 @@ public class ProjectManagementEJB implements ProjectManagementEJBLocal {
 		}
 		
 	Project p = findProjectByQR(QR);
-	DoorstuurProject doorstuurp = new DoorstuurProject(p);
+	//System.out.println(p.getTimestamp());
+	//DoorstuurProject doorstuurp = new DoorstuurProject(p);
 	
 	List<DoorstuurProject> doorstuurProjecten = new ArrayList<>();
-	doorstuurProjecten.add(doorstuurp);
+	doorstuurProjecten.add(new DoorstuurProject(p));
 	
 	String projectenJson = gson.toJson(doorstuurProjecten);
 
