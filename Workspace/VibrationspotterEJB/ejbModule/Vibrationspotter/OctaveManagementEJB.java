@@ -93,8 +93,8 @@ public class OctaveManagementEJB implements OctaveManagementEJBLocal {
 			stdin.println("t_resampled = t_resampled - t_resampled(1); ");
 
 			// tijd en versnelling bijhouden
-			stdin.println("tijd=t_resampled");
-			stdin.println("versnelling=data_resampled");
+			stdin.println("tijd=t_resampled;");
+			stdin.println("versnelling=data_resampled;");
 
 			// Stap2
 			stdin.println("L = length(data_resampled);");
@@ -103,8 +103,8 @@ public class OctaveManagementEJB implements OctaveManagementEJBLocal {
 			stdin.println("A_data = A2(1:L/2+1); A_data(2:end-1) = 2*A_data(2:end-1);");
 
 			// frequentie en amplitude bijhouden
-			stdin.println("frequentie=f");
-			stdin.println("amplitude=A_data");
+			stdin.println("frequentie=f;");
+			stdin.println("amplitude=A_data;");
 
 			// Stap3
 			stdin.println("f1 = 1/Fs*2; f2 = 4/Fs*2;");
@@ -139,8 +139,8 @@ public class OctaveManagementEJB implements OctaveManagementEJBLocal {
 			stdin.println("t_resampled = t_resampled - t_resampled(1); ");
 
 			// tijd en versnelling bijhouden
-			stdin.println("tijd=t_resampled");
-			stdin.println("versnelling=data_resampled");
+			stdin.println("tijd=t_resampled;");
+			stdin.println("versnelling=data_resampled;");
 
 			// Stap2
 			stdin.println("L = length(data_resampled);");
@@ -149,8 +149,8 @@ public class OctaveManagementEJB implements OctaveManagementEJBLocal {
 			stdin.println("A_data = A2(1:L/2+1); A_data(2:end-1) = 2*A_data(2:end-1);");
 
 			// frequentie en amplitude bijhouden
-			stdin.println("frequentie=f");
-			stdin.println("amplitude=A_data");
+			stdin.println("frequentie=f;");
+			stdin.println("amplitude=A_data;");
 
 			// Stap3
 			stdin.println("f1 = 1/Fs*2; f2 = 4/Fs*2;");
@@ -186,8 +186,8 @@ public class OctaveManagementEJB implements OctaveManagementEJBLocal {
 			stdin.println("t_resampled = t_resampled - t_resampled(1); ");
 
 			// tijd en versnelling bijhouden
-			stdin.println("tijd=t_resampled");
-			stdin.println("versnelling=data_resampled");
+			stdin.println("tijd=t_resampled;");
+			stdin.println("versnelling=data_resampled;");
 
 			// Stap2
 			stdin.println("L = length(data_resampled);");
@@ -196,8 +196,8 @@ public class OctaveManagementEJB implements OctaveManagementEJBLocal {
 			stdin.println("A_data = A2(1:L/2+1); A_data(2:end-1) = 2*A_data(2:end-1);");
 
 			// frequentie en amplitude bijhouden
-			stdin.println("frequentie=f");
-			stdin.println("amplitude=A_data");
+			stdin.println("frequentie=f;");
+			stdin.println("amplitude=A_data;");
 
 			// Stap3
 			stdin.println("f1 = 1/Fs*2; f2 = 4/Fs*2;");
