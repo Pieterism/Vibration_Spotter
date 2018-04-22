@@ -14,14 +14,11 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-<<<<<<< HEAD
-=======
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.google.android.gms.common.api.CommonStatusCodes;
->>>>>>> 5a1999ce6e25508c39ee8c0ca570d03d36821614
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
@@ -77,11 +74,8 @@ public class NewMeting extends AppCompatActivity {
         bRotate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-<<<<<<< HEAD
-                ivImage.setRotation(ivImage.getRotation() + 45);
-=======
+
                 ivImage.setRotation(ivImage.getRotation()+90);
->>>>>>> 5a1999ce6e25508c39ee8c0ca570d03d36821614
             }
         });
 
