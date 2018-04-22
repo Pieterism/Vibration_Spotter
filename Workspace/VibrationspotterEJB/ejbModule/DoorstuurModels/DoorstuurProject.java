@@ -4,6 +4,11 @@ import java.util.Date;
 
 import model.Project;
 
+/*-----
+Versimpelde versie van de in de databank aanwezige Project-klasse
+Hoofddoel: gebruik van Gson te vergemakkelijken
+-----*/
+
 public class DoorstuurProject {
 	
 	private int idProject;

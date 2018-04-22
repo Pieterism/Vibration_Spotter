@@ -6,6 +6,12 @@ import com.sun.org.apache.xml.internal.security.utils.Base64;
 
 import model.Meting;
 
+
+/*-----
+Versimpelde versie van de in de databank aanwezige Meting-klasse
+Hoofddoel: gebruik van Gson te vergemakkelijken
+-----*/
+
 public class DoorstuurMeting {
 
 	private int idMeting;
