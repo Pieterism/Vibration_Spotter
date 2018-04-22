@@ -67,6 +67,13 @@ public class ProjectManagementEJB implements ProjectManagementEJBLocal {
 			System.out.println("Meerdere dezelfde titels!");
 		return p.get(0);
 	}
+	
+	public Persoon findPersonByIdProject(int idProject) {
+		Query q = em.createQuery("SELECT p FROM Project p WHERE p.idProject = :id");
+		q.setParameter("id", idProject);
+		List<Project> projecten = q.getResultList();
+		return projecten.get(0).getIdPersoon();
+	}
 
 	@Override
 	public Project findProjectById(int id) {

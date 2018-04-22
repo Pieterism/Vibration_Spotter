@@ -3,6 +3,7 @@ package Vibrationspotter;
 import java.io.IOException;
 import java.util.List;
 
+import model.Persoon;
 import model.Project;
 
 public interface ProjectManagementEJBLocal {
@@ -44,5 +45,7 @@ public interface ProjectManagementEJBLocal {
 	public String HaalprojectviaApp(String gegevens);
 	
 	public int haalMetingenSizeProject(int id);
+	
+	public Persoon findPersonByIdProject(int idProject);
 
 }
