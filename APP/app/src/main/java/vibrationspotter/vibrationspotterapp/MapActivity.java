@@ -9,10 +9,13 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
+import android.util.Log;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+
+import static vibrationspotter.vibrationspotterapp.R.layout.activity_map;
 
 public class MapActivity extends AppCompatActivity implements OnMapReadyCallback {
 
@@ -77,6 +80,5 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             }
         }
     }
-
 
 }
