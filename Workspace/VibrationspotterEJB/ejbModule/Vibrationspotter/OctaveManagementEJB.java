@@ -236,6 +236,9 @@ public class OctaveManagementEJB implements OctaveManagementEJBLocal {
 			by = buffer.toByteArray();
 			s1 = new String(by);
 
+			int index = s1.lastIndexOf("x1 =");
+			s1.substring(index);
+			
 			int returnCode = 0;
 			try {
 				returnCode = p.waitFor();
