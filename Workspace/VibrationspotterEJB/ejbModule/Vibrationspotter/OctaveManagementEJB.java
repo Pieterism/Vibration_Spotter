@@ -234,12 +234,12 @@ public class OctaveManagementEJB implements OctaveManagementEJBLocal {
 			buffer.flush();*/
 			
 			
-			
-			
+		
+			by = sync.getBuffer();
 			
 
 			//by = buffer.toByteArray();
-			//s1 = new String(by);
+			s1 = new String(by);
 
 			//int index = s1.lastIndexOf("x1 =");
 			//s1.substring(index);
