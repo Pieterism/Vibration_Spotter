@@ -65,6 +65,12 @@
 			</h:commandButton>
     	</p:column>
     	
+    	 <p:column headerText="Goedgekeurd" style="text-align:center">
+        	<h:outputText value="#{projectController.checkGoedkeuring(pro)}" />
+    	</p:column>
+    	
+    	
+    	
      <f:facet name="footer">
         totaal: #{ fn:length(projectController.geefProjectenweer())} projecten
     </f:facet>
