@@ -20,7 +20,6 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
-import com.google.android.gms.location.FusedLocationProviderClient;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -30,13 +29,6 @@ import java.util.Map;
 
 
 public class NewProject extends AppCompatActivity {
-
-    private FusedLocationProviderClient mfusedLocationProviderclient;
-    private boolean mLocationPermissionGranted = false;
-    private static final int LOCATION_PERMISSION_REQUEST_CODE = 1234;
-    private static final String FINE_LOCATION = Manifest.permission.ACCESS_FINE_LOCATION;
-    private static final String COARSE_LOCATION = Manifest.permission.ACCESS_COARSE_LOCATION;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
