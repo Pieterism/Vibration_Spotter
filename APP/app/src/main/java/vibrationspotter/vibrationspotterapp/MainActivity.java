@@ -320,12 +320,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                 public void onResponse(JSONArray response) {
                                     Log.d("ProjectViaQR", response.toString());
 
+                                    ArrayList<Project> projecten;
+
 
                                     Type type = new TypeToken<List<Project>>(){}.getType();
-                                    Project p = gson.fromJson(response.toString(), type);
-                                    String project = gson.toJson(p);
+                                    projecten = gson.fromJson(response.toString(), type);
+
+                                   // projecten.get(0)
+                                //    Project p = gson.fromJson(response.toString(), type);
+                                    String project = gson.toJson(projecten.get(0));
                                     Intent naar_project = new Intent(getApplicationContext(),ProjectActivity.class);
-                                    naar_project.putExtra("meting", project);
+                                    naar_project.putExtra("project", project);
                                     startActivity(naar_project);
                                 }
                             },
