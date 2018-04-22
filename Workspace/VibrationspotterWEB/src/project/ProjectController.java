@@ -132,12 +132,20 @@ public class ProjectController implements Serializable {
 	public void setProject(Project project) {
 		this.project = project;
 	}
+	
 	public String toonQr(Project p){
 		System.out.println("hallo");
 		HttpSession session = SessionUtils.getSession();
 		int idproject=p.getIdProject();
 		session.setAttribute("idProject", idproject);
-		return "qr.xhtml";
+		return "qr.xhtml";	
+	}
+	
+	public String checkGoedkeuring(Project p){
+		if(p.isGoedgekeurd()==true){
+			return "Ja";
+		}
+		return "Nee";
 		
 	}
 

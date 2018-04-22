@@ -20,11 +20,14 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.google.android.gms.common.api.CommonStatusCodes;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.lang.reflect.Type;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import vibrationspotter.Models.Project;
@@ -37,6 +40,7 @@ public class ProjectActivity extends AppCompatActivity{
     Gson gson;
     SharedPreferences settings;
     Map<String,?> sharedPreferences;
+    Type type;
     private static final int METING = 555;
     private static final int QR = 777;
 
@@ -44,7 +48,6 @@ public class ProjectActivity extends AppCompatActivity{
     TextView textGebruikersnaam;
     TextView textLocation;
     TextView textAantalMetingen;
-    ImageView imageviewProject;
     Button bViewMetingen;
     Button bAddMeting;
     Button bqrProject;
@@ -59,6 +62,7 @@ public class ProjectActivity extends AppCompatActivity{
         settings = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         sharedPreferences = settings.getAll();
 
+        type = new TypeToken<List<Map<String,String>>>(){}.getType();
         projectString = getIntent().getStringExtra("project");
         project = gson.fromJson(projectString, Project.class);
 
@@ -81,7 +85,8 @@ public class ProjectActivity extends AppCompatActivity{
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        System.out.println(response.toString());
+                        List<Map<String,String>> responseData = gson.fromJson(response.toString(),type);
+                        textGebruikersnaam.setText(responseData.get(0).get("gebruikersnaam"));
                     }
                 },
                 new Response.ErrorListener() {
@@ -95,9 +100,30 @@ public class ProjectActivity extends AppCompatActivity{
         VolleyClass.getInstance(getApplicationContext()).addToRequestQueue(persoonRequest, "persoonRequest");
 
         textLocation.setText(String.valueOf(project.getLatitude()) + " LA ," + String.valueOf(project.getLongtitude()) + " LO");
-        //textAantalMetingen.setText("Nog te bepalen");
+        JsonArrayRequest projectensizeRequest =  new JsonArrayRequest(
+                getString(R.string.url) + "Projecten/Size/" + project.getIdProject(),
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        Log.d("OphalenProjectensize", response.toString());
 
-//        imageviewProject.setImageResource(R.drawable.logo);
+                        Type type = new TypeToken<List<Map<String,String>>>(){}.getType();
+                        List<Map<String,String>>  sizes = gson.fromJson(response.toString(), type);
+                        textAantalMetingen.setText("Metingen in project:" + sizes.get(0).get("size"));
+
+
+                        //  aantalmetingen = sizes.get(0);
+                    }
+                },
+
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.d("OphalenProjectensize", "Error: " + error.toString() + ", " + error.getMessage());
+                    }
+                }
+        );
+        VolleyClass.getInstance(getApplicationContext()).addToRequestQueue(projectensizeRequest, "MetingKeuzeActivity");
         final Intent naar_mainactivity = new Intent(this, MainActivity.class);
 
         bViewMetingen.setOnClickListener(new View.OnClickListener() {
