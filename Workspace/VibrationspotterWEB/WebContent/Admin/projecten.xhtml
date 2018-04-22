@@ -20,17 +20,21 @@
 			<b>Projecten</b><img src="../images/logo.png" width="50" height="50" />
 		</h1>
 	</div>
+	
 	<div class="topnav">
-		<a href="index.xhtml">Home</a> <a class="active"
-			href="projecten.xhtml">Projecten</a> <a href="kaart.xhtml">Kaart</a>
-		<a href="about.xhtml">About</a> <a href="createaccount.xhtml">Create
-			account</a>
+		<a href="index.xhtml">Home</a>
+		<a class="active" href="projecten.xhtml">Projecten</a>
+		<a href="kaart.xhtml">Kaart</a>
+		<a href="createaccount.xhtml">Create account</a>
+		<a href="about.xhtml">About</a>
 		<h:form>
 			<h:commandButton styleClass="logout" image="../images/logout.png"
 				value="uitloggen" action="#{loginController.logout}" />
 		</h:form>
 
 	</div>
+<div class="background3">
+<br/>
 <h:form>
 	<p:dataTable value="#{projectManagementEJB.findAllProjecten()}" var="pro" style="margin-top:10px" >
 	
@@ -49,16 +53,17 @@
     	<p:column headerText="Beschrijving" style="text-align:center" filterBy="#{pro.beschrijving}">
         	<h:outputText value="#{pro.beschrijving}" />
     	</p:column>
+    			
+    	<p:column headerText="emailadres" style="text-align:center" sortBy="#{projectController.zoekEmailadres(pro)}" filterBy="#{projectController.zoekEmailadres(pro)}">
+        	<h:commandLink action="#{userController.toonGegevens(pro)}" class="subAnchor" value="#{projectController.zoekEmailadres(pro)}"/>
+    	</p:column>
     	
     	<p:column headerText="QR-code" style="text-align:center">
         
         	<h:commandButton action="#{projectController.toonQr(pro)}" class="subAnchor" value="toon QR" image="../images/qr.png" style="width: 50px; height:50px;"/>
         
     	</p:column>
-    			
-    	<p:column headerText="emailadres" style="text-align:center" sortBy="#{projectController.zoekEmailadres(pro)}" filterBy="#{projectController.zoekEmailadres(pro)}">
-        	<h:commandLink action="#{userController.toonGegevens(pro)}" class="subAnchor" value="#{projectController.zoekEmailadres(pro)}"/>
-    	</p:column>
+    	
     			
     	<p:column headerText="Metingen" style="text-align:center">
         	<h:commandButton value="bekijk metingen"
@@ -87,6 +92,7 @@
  	
 	</p:dataTable>
 </h:form>
+</div>
 
 </h:body>
 </html>

@@ -13,6 +13,7 @@
   </title>
   	<link rel = "stylesheet" href ="../stijl/stijlmetingen.css"></link>
   	<link rel = "stylesheet" href ="../stijl/stijlkaartproject.css"></link>
+  	<link rel="stylesheet" href="../stijl/stijl.css"></link>
 
 
 </h:head>
@@ -21,6 +22,9 @@
 <div class="header">
        <h1><b>persoonsgegevens</b> </h1>
 </div>
+<div class="background3">
+<br/>
+
 <a href="projecten.xhtml">terug naar projecten</a>
     
 <p:dataTable value="#{userController.ophalenPersoon()}" var="per" style="margin-top:10px">
@@ -105,6 +109,7 @@
     </f:facet>
 </p:dataTable>
 </h:form>
+</div>
    
 </h:body>
 </html>

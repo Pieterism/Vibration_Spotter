@@ -37,11 +37,8 @@ body {
 }
 
 .fail{
-color: red;
+	color: red;
 }
-
-
-
 
 .knop{
 	background-color: white;
@@ -87,7 +84,6 @@ color: red;
 .background{
 	background-image: url("../images/brug.jpg");
   	height: 90%;
-  	
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -129,8 +125,3 @@ color: red;
     filter: alpha(opacity=95);
 	
 }
-
-
-
-
-

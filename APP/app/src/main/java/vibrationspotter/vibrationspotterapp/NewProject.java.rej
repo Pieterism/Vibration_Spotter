@@ -1,0 +1,35 @@
+diff a/APP/app/src/main/java/vibrationspotter/vibrationspotterapp/NewProject.java b/APP/app/src/main/java/vibrationspotter/vibrationspotterapp/NewProject.java	(rejected hunks)
+@@ -141,33 +141,4 @@
+         }
+     }
+ 
+-    private LatLng getDeviceLocation(){
+-        mfusedLocationProviderclient = LocationServices.getFusedLocationProviderClient(this);
+-        try{
+-                final Task location = mfusedLocationProviderclient.getLastLocation();
+-                location.addOnCompleteListener(new OnCompleteListener() {
+-                    @Override
+-                    public void onComplete(@NonNull Task task) {
+-                        if(task.isSuccessful()){
+-                            Location currentLocation = (Location) task.getResult();
+-
+-                            locatie = new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude());
+-
+-                            //geven lat & long
+-                            // DEZE MOETEN DOORGEGEVEN WORDEN EN STELLEN LOCATIE VOOR NORMAAL GEZIEN
+-                            currentLocation.getLatitude();
+-                            currentLocation.getLongitude();
+-                        }else{
+-                            Toast.makeText(NewProject.this, "Unable to get location", Toast.LENGTH_SHORT).show();
+-                        }
+-                    }
+-                });
+-
+-
+-        }catch(SecurityException e){
+-
+-        }
+-        return locatie;
+-    }
+-
+ }

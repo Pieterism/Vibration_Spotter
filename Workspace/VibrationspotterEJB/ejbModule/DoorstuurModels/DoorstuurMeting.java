@@ -1,5 +1,7 @@
 package DoorstuurModels;
 
+import org.w3c.dom.Element;
+
 import com.sun.org.apache.xml.internal.security.utils.Base64;
 
 import model.Meting;
@@ -30,5 +32,9 @@ public class DoorstuurMeting {
 		this.opmerking = m.getOpmerking();
 		this.dataset1 = Base64.encode(m.getDataset1());
 		this.dataset2 = Base64.encode(m.getDataset2());
+	}
+
+	public String getDataSet1() {
+		return dataset1;
 	}
 }
