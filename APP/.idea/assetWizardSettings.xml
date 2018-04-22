@@ -16,11 +16,26 @@
                             <entry key="launcher">
                               <value>
                                 <PersistentState>
+                                  <option name="children">
+                                    <map>
+                                      <entry key="foregroundImage">
+                                        <value>
+                                          <PersistentState>
+                                            <option name="values">
+                                              <map>
+                                                <entry key="scalingPercent" value="50" />
+                                              </map>
+                                            </option>
+                                          </PersistentState>
+                                        </value>
+                                      </entry>
+                                    </map>
+                                  </option>
                                   <option name="values">
                                     <map>
                                       <entry key="backgroundAssetType" value="COLOR" />
-                                      <entry key="backgroundColor" value="005b7f" />
-                                      <entry key="foregroundImage" value="C:\Users\Pieter Vanderhaegen\Desktop\Untitled.png" />
+                                      <entry key="backgroundColor" value="f0eeee" />
+                                      <entry key="foregroundImage" value="D:\Google Drive\School\2017-2018\Project\GIT repository\APP\app\src\main\res\drawable\logo.png" />
                                     </map>
                                   </option>
                                 </PersistentState>
