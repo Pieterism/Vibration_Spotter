@@ -91,7 +91,7 @@ public class NewMeting extends AppCompatActivity {
 
                     meetString = Base64.encodeToString(meetdata, Base64.DEFAULT);
 
-                    Meting doorzendmeting = new Meting(metingTitel.getText().toString(), metingDescription.getText().toString(), imageString, meetString);
+                    Meting doorzendmeting = new Meting(666, metingTitel.getText().toString(), "filler", imageString, metingDescription.getText().toString(),  meetString, "filler");
 
                     JSONArray jArray = doorzendmeting.toJArray();
 
