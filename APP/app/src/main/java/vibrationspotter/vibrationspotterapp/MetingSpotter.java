@@ -131,6 +131,15 @@ public class MetingSpotter extends AppCompatActivity implements SensorEventListe
                                 System.out.println(temp.getY());
                             }
                         }
+                        for (Entry temp : yWaarden){
+                            if (temp.getX() == e.getX()){
+                                System.out.println(temp.getY());
+                            }
+                        }for (Entry temp : zWaarden){
+                            if (temp.getX() == e.getX()){
+                                System.out.println(temp.getY());
+                            }
+                        }
                     }
 
                     @Override
