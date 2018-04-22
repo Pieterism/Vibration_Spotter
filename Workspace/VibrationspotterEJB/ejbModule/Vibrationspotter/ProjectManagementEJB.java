@@ -68,11 +68,23 @@ public class ProjectManagementEJB implements ProjectManagementEJBLocal {
 		return p.get(0);
 	}
 	
-	public Persoon findPersonByIdProject(int idProject) {
+	public String findPersonByIdProject(int idProject) {
 		Query q = em.createQuery("SELECT p FROM Project p WHERE p.idProject = :id");
 		q.setParameter("id", idProject);
 		List<Project> projecten = q.getResultList();
-		return projecten.get(0).getIdPersoon();
+		Persoon p = projecten.get(0).getIdPersoon();
+		
+		JSONObject jObj = new JSONObject();
+		JSONArray jArray = new JSONArray();
+		
+		try {
+			jObj.put("gebruikersnaam", p.getEmailadres());
+			jArray.put(jObj);
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		return jArray.toString();
+		
 	}
 
 	@Override

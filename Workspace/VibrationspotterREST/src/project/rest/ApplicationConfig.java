@@ -36,6 +36,7 @@ private final Set<Class<?>> classes;
 		c.add(InloggenREST.class);
 		c.add(ProjectenRest.class);
 		c.add(FotoREST.class);
+		c.add(PersoonREST.class);
 		classes = Collections.unmodifiableSet(c);
 	}
 	

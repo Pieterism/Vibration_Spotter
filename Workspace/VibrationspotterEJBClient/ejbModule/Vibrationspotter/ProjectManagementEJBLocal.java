@@ -46,6 +46,6 @@ public interface ProjectManagementEJBLocal {
 	
 	public int haalMetingenSizeProject(int id);
 	
-	public Persoon findPersonByIdProject(int idProject);
+	public String findPersonByIdProject(int idProject);
 
 }

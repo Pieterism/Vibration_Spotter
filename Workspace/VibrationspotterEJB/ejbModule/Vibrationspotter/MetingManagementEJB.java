@@ -26,6 +26,7 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 
 import model.Meting;
+import model.Persoon;
 import model.Project;
 import model.Spotter;
 
@@ -89,6 +90,61 @@ public class MetingManagementEJB implements MetingManagementEJBLocal{
 		}
 		
 	}
+	
+
+	public void ToevoegenMetingResultaten2(String gegevens){
+		gegevens = gegevens.substring(1, gegevens.length() - 1);
+		JSONObject json = null;
+
+		String titel = null;
+		String tijdstip = null;
+		String resultaten = null; // mag weg
+		String opmerking = null;
+		String foto = null;
+		String idMeting = null;
+		String projectId = "7";
+		Project project = projectEJB.findProjectById(Integer.parseInt(projectId));
+		//dataset1
+		//dataset2
+		
+		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		Date date = new Date();
+		
+		
+	
+		
+		
+
+		
+		try {
+			json = new JSONObject(gegevens);
+			
+			//idMeting = json.getString("idMeting");
+			titel = json.getString("titel");
+			opmerking = json.getString("opmerking");
+			resultaten = json.getString("dataset1");
+			foto = json.getString("foto");
+			
+		} catch (JSONException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+		
+		
+		
+		Meting meting1 = new Meting();
+		meting1.setTitel(titel);
+		meting1.setTijdstip(dateFormat.format(date));
+		meting1.setResultaten("bla");
+		meting1.setIdProject(project);
+		meting1.setOpmerking(opmerking);
+		//meting1.setDataset1(resultaten[0].getBytes());
+		//meting1.setDataset2(resultaten[1].getBytes());
+		em.persist(meting1);	
+		
+	}
+	
 	
 	public void ToevoegenMetingResultaten(String jsonarray){
 		/*
@@ -207,4 +263,8 @@ public class MetingManagementEJB implements MetingManagementEJBLocal{
 		
 	}
 	//idProject
+
+
+
+
 }

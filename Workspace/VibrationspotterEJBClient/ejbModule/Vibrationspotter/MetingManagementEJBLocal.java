@@ -31,6 +31,8 @@ public interface MetingManagementEJBLocal {
 	public byte[] zoekFoto(int idMeting);
 	
 	public Meting findMetingById(int id);
+	
+	public void ToevoegenMetingResultaten2(String gegevens);
 
 
 }
