@@ -33,7 +33,7 @@ public class QrServlet extends HttpServlet {
     	String text;
     	Project p=projectejb.findProjectById(idProject);
     	text=p.getQR();
-        response.getOutputStream().write(qrejb.getQRCodeImage(text, 500, 500));
+        response.getOutputStream().write(qrejb.getQRCodeImage(text, 1000, 1000));
     }
 
 
