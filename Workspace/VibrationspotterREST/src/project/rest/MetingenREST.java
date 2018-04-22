@@ -36,6 +36,8 @@ public class MetingenREST implements Serializable {
 		if(jsonarray == null) throw new BadRequestException();
 		System.out.println("metingen verwerken");
 		
+		System.out.println(id);
+		
 	//	metingEJB.ToevoegenMetingResultaten(jsonarray);
 		metingEJB.ToevoegenMetingResultaten2(jsonarray,id);
 		return "[{\"Gelukt?:\": YEZZZ!!!}]";
