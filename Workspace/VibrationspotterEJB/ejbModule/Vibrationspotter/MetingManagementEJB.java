@@ -99,7 +99,7 @@ public class MetingManagementEJB implements MetingManagementEJBLocal{
 	}
 	
 
-	public void ToevoegenMetingResultaten2(String gegevens){
+	public void ToevoegenMetingResultaten2(String gegevens, String id){
 		
 		Gson gson = new Gson();
 		Type type = new TypeToken<List<Map<String,String>>>(){}.getType();
@@ -117,11 +117,20 @@ public class MetingManagementEJB implements MetingManagementEJBLocal{
 		
 		
 		
+		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		Date date = new Date();
+		System.out.println(dateFormat.format(date));			//loggen huidige datum
+		
+		Project project = projectEJB.findProjectById(Integer.parseInt(id));
 		
 		
+		Meting meting1 = new Meting();
+		meting1.setTitel(doorstuurmeting.get(0).get("titel"));
+		meting1.setTijdstip(dateFormat.format(date));
+		meting1.setResultaten(leesBareData);
+		meting1.setIdProject(project);
 		
-		
-		
+		em.persist(meting1);	
 		
 		
 		

@@ -32,7 +32,7 @@ public interface MetingManagementEJBLocal {
 	
 	public Meting findMetingById(int id);
 	
-	public void ToevoegenMetingResultaten2(String gegevens);
+	public void ToevoegenMetingResultaten2(String gegevens, String id);
 
 
 }
