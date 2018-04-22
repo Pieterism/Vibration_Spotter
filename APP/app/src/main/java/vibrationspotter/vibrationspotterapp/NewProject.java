@@ -68,6 +68,7 @@ public class NewProject extends AppCompatActivity {
 
                 int rc = ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION);
                 if (rc == PackageManager.PERMISSION_GRANTED) {
+                    /*
                     LocationManager lm = (LocationManager) getSystemService(getApplicationContext().LOCATION_SERVICE);
 
 
@@ -95,11 +96,13 @@ public class NewProject extends AppCompatActivity {
                     longitude = location.getLongitude();
                     latitude = location.getLatitude();
                 } else {
-                    requestGPSPermission();
+                    requestGPSPermission();*/
                 }
 
-                projectgegevens.put("longtitude", String.valueOf(longitude));
-                projectgegevens.put("latitude", String.valueOf(latitude));
+                LatLng loc = getDeviceLocation();
+
+                projectgegevens.put("longtitude", String.valueOf(loc.longitude));
+                projectgegevens.put("latitude", String.valueOf(loc.latitude));
                 projectgegevens.put("email", settings.getString("email", null));
 
                 final JSONObject jsonObject = new JSONObject(projectgegevens);
@@ -154,20 +157,13 @@ public class NewProject extends AppCompatActivity {
                             Location currentLocation = (Location) task.getResult();
 
                             locatie = new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude());
-
-                            //geven lat & long
-                            // DEZE MOETEN DOORGEGEVEN WORDEN EN STELLEN LOCATIE VOOR NORMAAL GEZIEN
-                            currentLocation.getLatitude();
-                            currentLocation.getLongitude();
                         }else{
                             Toast.makeText(NewProject.this, "Unable to get location", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
-
-
         }catch(SecurityException e){
-
+            System.out.println(e);
         }
         return locatie;
     }

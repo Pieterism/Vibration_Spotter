@@ -15,6 +15,8 @@ import org.json.JSONObject;
 
 import com.google.gson.Gson;
 import com.sun.jmx.snmp.Timestamp;
+import com.sun.org.apache.xml.internal.security.exceptions.Base64DecodingException;
+import com.sun.org.apache.xml.internal.security.utils.Base64;
 
 import DoorstuurModels.DoorstuurMeting;
 import DoorstuurModels.DoorstuurProject;
@@ -95,66 +97,29 @@ public class MetingManagementEJB implements MetingManagementEJBLocal{
 	
 
 	public void ToevoegenMetingResultaten2(String gegevens){
-		gegevens = gegevens.substring(1, gegevens.length() - 1);
-		JSONObject json = null;
-
-		String titel = null;
-		String tijdstip = null;
-		String resultaten = null; // mag weg
-		String opmerking = null;
-		String foto = null;
-		String idMeting = null;
-		String projectId = "7";
-		Project project = projectEJB.findProjectById(Integer.parseInt(projectId));
-		//dataset1
-		//dataset2
 		
-		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		Date date = new Date();
+		Gson gson = new Gson();
+		DoorstuurMeting doorstuurmeting = gson.fromJson(gegevens, DoorstuurMeting.class);
 		
-		
-	
-		
-		
-
-		
+		//text,descripotion,imagestring,meetstring
+		String leesBareData = null;
 		try {
-			json = new JSONObject(gegevens);
-			
-			//idMeting = json.getString("idMeting");
-			titel = json.getString("titel");
-			opmerking = json.getString("opmerking");
-			resultaten = json.getString("dataset1");
-			foto = json.getString("foto");
-			
-		} catch (JSONException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
+			leesBareData = new String(Base64.decode(doorstuurmeting.getDataSet1()));
+		} catch (Base64DecodingException e) {
+			e.printStackTrace();
 		}
-		
-		
-		//foto van base 64 omzetten naar bytes.
-		byte[] imageByte = null; 
-		BASE64Decoder decoder = new BASE64Decoder();
-		try {
-			imageByte = decoder.decodeBuffer(foto);
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
+		System.out.println(leesBareData);
 		
 		
 		
-		Meting meting1 = new Meting();
-		meting1.setTitel(titel);
-		meting1.setTijdstip(dateFormat.format(date));
-		meting1.setResultaten("bla");
-		meting1.setFoto(imageByte);
-		meting1.setIdProject(project);
-		meting1.setOpmerking(opmerking);
-		//meting1.setDataset1(resultaten[0].getBytes());
-		//meting1.setDataset2(resultaten[1].getBytes());
-		em.persist(meting1);	
+		
+		
+		
+		
+		
+		
+		
+		
 		
 	}
 	
