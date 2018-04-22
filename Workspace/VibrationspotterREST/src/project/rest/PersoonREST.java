@@ -27,7 +27,7 @@ public class PersoonREST implements Serializable{
 		
 		projectEJB.findPersonByIdProject(Integer.parseInt(idProject));
 	
-		return "[{\"idOntvangen\": Gelukt!!!}]";
+		return projectEJB.findPersonByIdProject(Integer.parseInt(idProject));
 	}
 
 

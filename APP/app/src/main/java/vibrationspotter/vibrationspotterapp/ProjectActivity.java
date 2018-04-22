@@ -81,7 +81,7 @@ public class ProjectActivity extends AppCompatActivity{
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        System.out.println("Joepie");
+                        System.out.println(response.toString());
                     }
                 },
                 new Response.ErrorListener() {
