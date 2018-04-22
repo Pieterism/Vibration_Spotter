@@ -88,6 +88,7 @@ public class Meting {
                     .put("tijdstip", this.tijdstip)
                     .put("opmerking", this.opmerking)
                     .put("dataset1", this.dataset1)
+                    .put("foto", this.foto)
                     .put("dataset2", this.dataset2);
             jArray.put(jObject);
         } catch (JSONException e) {
