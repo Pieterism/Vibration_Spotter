@@ -13,9 +13,11 @@ import android.widget.Toast;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 
@@ -27,6 +29,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     private static final String COARSE_LOCATION = Manifest.permission.ACCESS_COARSE_LOCATION;
     private boolean mLocationPermissionGranted = false;
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1234;
+    private static final float DEFAULT_ZOOM = 15f;
     private GoogleMap mMap;
     private FusedLocationProviderClient mfusedLocationProviderclient;
     @Override
@@ -59,6 +62,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                     public void onComplete(@NonNull Task task) {
                         if(task.isSuccessful()){
                             Location currentLocation = (Location) task.getResult();
+                            moveCamera(new LatLng(currentLocation.getLatitude(),currentLocation.getLongitude()), DEFAULT_ZOOM);
                         }else{
                             Toast.makeText(MapActivity.this, "Unable to get location", Toast.LENGTH_SHORT).show();
                         }
@@ -69,6 +73,10 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         }catch(SecurityException e){
 
         }
+    }
+
+    private void moveCamera(LatLng latLng, float zoom ){
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng,zoom));
     }
 
     private void getLocationPermission() {
