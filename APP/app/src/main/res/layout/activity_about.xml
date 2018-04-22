@@ -13,7 +13,7 @@
         android:layout_marginBottom="8dp"
         android:gravity="center"
         android:orientation="vertical"
-        android:paddingTop="50dp"
+        android:paddingTop="5dp"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -78,7 +78,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="3dp"
             android:orientation="horizontal"
-            android:paddingBottom="25dp">
+            android:paddingBottom="40dp">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -93,6 +93,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="15dp"
                 android:layout_marginVertical="3dp"
+                android:paddingBottom="15dp"
                 android:text="Pieter-Jan Vanhaverbeke \nPieter Vanderhaegen"
                 android:textSize="12dp" />
         </LinearLayout>

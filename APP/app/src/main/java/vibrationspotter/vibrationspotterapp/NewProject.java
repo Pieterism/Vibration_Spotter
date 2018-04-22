@@ -8,7 +8,6 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -22,10 +21,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.google.android.gms.location.FusedLocationProviderClient;
-import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -37,12 +32,14 @@ import java.util.Map;
 public class NewProject extends AppCompatActivity {
 
     private FusedLocationProviderClient mfusedLocationProviderclient;
-    LatLng locatie;
+    private boolean mLocationPermissionGranted = false;
+    private static final int LOCATION_PERMISSION_REQUEST_CODE = 1234;
+    private static final String FINE_LOCATION = Manifest.permission.ACCESS_FINE_LOCATION;
+    private static final String COARSE_LOCATION = Manifest.permission.ACCESS_COARSE_LOCATION;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_newproject);
         final EditText etProjectTitel = findViewById(R.id.etProjectTitel);
@@ -74,6 +71,7 @@ public class NewProject extends AppCompatActivity {
                     LocationListener locationListener = new LocationListener() {
 
                         public void onLocationChanged(Location location) {
+
 
                             // Called when a new location is found by the network location provider.
                             Toast.makeText(getBaseContext(), "location is:" + location, Toast.LENGTH_LONG).show();
@@ -141,35 +139,6 @@ public class NewProject extends AppCompatActivity {
                 Manifest.permission.ACCESS_FINE_LOCATION)) {
             ActivityCompat.requestPermissions(this, permissions, 3);
         }
-    }
-
-    private LatLng getDeviceLocation(){
-        mfusedLocationProviderclient = LocationServices.getFusedLocationProviderClient(this);
-        try{
-                final Task location = mfusedLocationProviderclient.getLastLocation();
-                location.addOnCompleteListener(new OnCompleteListener() {
-                    @Override
-                    public void onComplete(@NonNull Task task) {
-                        if(task.isSuccessful()){
-                            Location currentLocation = (Location) task.getResult();
-
-                            locatie = new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude());
-
-                            //geven lat & long
-                            // DEZE MOETEN DOORGEGEVEN WORDEN EN STELLEN LOCATIE VOOR NORMAAL GEZIEN
-                            currentLocation.getLatitude();
-                            currentLocation.getLongitude();
-                        }else{
-                            Toast.makeText(NewProject.this, "Unable to get location", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
-
-
-        }catch(SecurityException e){
-
-        }
-        return locatie;
     }
 
 }
