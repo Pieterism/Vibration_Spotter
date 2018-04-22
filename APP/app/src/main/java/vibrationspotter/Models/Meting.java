@@ -88,7 +88,6 @@ public class Meting {
             jObject.put("idMeting", this.idMeting)
                     .put("titel", this.titel)
                     .put("tijdstip", this.tijdstip)
-                    .put("foto", this.foto)
                     .put("opmerking", this.opmerking)
                     .put("dataset1", this.dataset1)
                     .put("dataset2", this.dataset2);
