@@ -14,7 +14,7 @@ public class DoorstuurMeting {
 
 	private String tijdstip;
 
-	private byte[] foto;
+	private String foto;
 
 	private String opmerking;
 
@@ -28,7 +28,7 @@ public class DoorstuurMeting {
 		this.idMeting = m.getIdMeting();
 		this.titel = m.getTitel();
 		this.tijdstip = m.getTijdstip();
-		this.foto = m.getFoto();
+		this.foto = Base64.encode(m.getFoto());
 		this.opmerking = m.getOpmerking();
 		this.dataset1 = Base64.encode(m.getDataset1());
 		this.dataset2 = Base64.encode(m.getDataset2());
