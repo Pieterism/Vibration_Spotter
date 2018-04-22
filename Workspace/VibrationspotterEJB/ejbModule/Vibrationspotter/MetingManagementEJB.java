@@ -101,6 +101,7 @@ public class MetingManagementEJB implements MetingManagementEJBLocal{
 
 	public void ToevoegenMetingResultaten2(String gegevens, String id){
 		
+		byte [] imageByte = null;
 		Gson gson = new Gson();
 		Type type = new TypeToken<List<Map<String,String>>>(){}.getType();
 		List<Map<String,String>> doorstuurmeting = gson.fromJson(gegevens, type);
@@ -109,6 +110,7 @@ public class MetingManagementEJB implements MetingManagementEJBLocal{
 		String leesBareData = null;
 		try {
 			leesBareData = new String(Base64.decode(doorstuurmeting.get(0).get("dataset1")));
+			imageByte =  Base64.decode((doorstuurmeting.get(0).get("foto")));
 		} catch (Base64DecodingException e) {
 			e.printStackTrace();
 		}
@@ -124,11 +126,16 @@ public class MetingManagementEJB implements MetingManagementEJBLocal{
 		Project project = projectEJB.findProjectById(Integer.parseInt(id));
 		
 		
+	
+		
+		
+		
 		Meting meting1 = new Meting();
 		meting1.setTitel(doorstuurmeting.get(0).get("titel"));
 		meting1.setTijdstip(dateFormat.format(date));
 		meting1.setResultaten(leesBareData);
 		meting1.setIdProject(project);
+		meting1.setFoto(imageByte);
 		
 		em.persist(meting1);	
 		
