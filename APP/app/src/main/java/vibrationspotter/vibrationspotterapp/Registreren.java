@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -83,16 +84,8 @@ public class Registreren extends AppCompatActivity {
                                     public void onResponse(JSONArray response) {
                                         Log.d("Registreren", response.toString());
                                         if(response.toString().equals("[{\"Registratie\":\"Gelukt!!!\"}]")){
-                                            AlertDialog.Builder geregistreerd = new AlertDialog.Builder(Registreren.this);
-                                            geregistreerd.setMessage("Uw registratie is gelukt.")
-                                                    .setNegativeButton("close", new DialogInterface.OnClickListener() {
-                                                        @Override
-                                                        public void onClick(DialogInterface dialog, int which) {
-                                                            finish();
-                                                        }
-                                                    })
-                                                    .create()
-                                                    .show();
+                                            Toast.makeText(getApplicationContext(), "Uw registratie is voltooid, gelieve in te loggen.", Toast.LENGTH_LONG).show();
+                                            finish();
                                         }
                                     }
                                 },
