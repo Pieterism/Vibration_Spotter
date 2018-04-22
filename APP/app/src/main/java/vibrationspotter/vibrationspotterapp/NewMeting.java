@@ -75,7 +75,7 @@ public class NewMeting extends AppCompatActivity {
         bRotate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ivImage.setRotation(ivImage.getRotation()+45);
+                ivImage.setRotation(ivImage.getRotation()+90);
             }
         });
 
@@ -109,6 +109,8 @@ public class NewMeting extends AppCompatActivity {
                                 }
                             }
                     );
+
+                    VolleyClass.getInstance(getApplicationContext()).addToRequestQueue(newMetingrequest, "newMeting");
 
                 } else {
                     Toast.makeText(getApplicationContext(), "Please select an image", Toast.LENGTH_LONG).show();
