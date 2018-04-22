@@ -25,6 +25,11 @@ import java.util.List;
 import vibrationspotter.Custom_views.MetingView;
 import vibrationspotter.Models.Meting;
 
+/*-----
+Deze activity maakt dynamisch objecten MetingView aan, 1 per meting van het project in de databank en plaatst ze in een scrollview
+Wanneer de gebruiker op een MetingView drukt wort hij doorverwezen naar de MetingActivity
+-----*/
+
 public class MetingKeuzeActivity extends AppCompatActivity {
 
     LinearLayout surface;

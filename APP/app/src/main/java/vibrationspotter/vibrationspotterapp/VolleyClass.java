@@ -10,6 +10,11 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.Volley;
 
+/*-----
+Klasse die het werken met Volley vergemakkelijkt:
+Beheert de requestQueue en gebruikt getInstance om ze toegankelijk te maken buiten de klasse
+-----*/
+
 public class VolleyClass {
     private static VolleyClass volleyInstance;
     private RequestQueue vRequestQueue;

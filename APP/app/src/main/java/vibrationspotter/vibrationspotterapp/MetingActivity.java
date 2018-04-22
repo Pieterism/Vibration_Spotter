@@ -28,6 +28,11 @@ import java.util.Map;
 
 import vibrationspotter.Models.Meting;
 
+/*-----
+Klasse die geprogrammeerde logica achter de activity_metingview.xml bevat
+Deze klasse vertoont de data van een door de gebruiker gekozen meting
+-----*/
+
 public class MetingActivity extends AppCompatActivity {
 
     String metingstring;
@@ -178,7 +183,7 @@ public class MetingActivity extends AppCompatActivity {
         /*-----
         Verwerking van de FrequentieData: Zelfde werkwijze als bij versnellingsdata
         -----*/
-/*
+
         xWaarden.clear();
         yWaarden.clear();
         zWaarden.clear();
@@ -252,6 +257,5 @@ public class MetingActivity extends AppCompatActivity {
         lcf.setData(dataF);
         lcf.setOnChartValueSelectedListener(ocvslF);
         lcf.invalidate();
-*/
     }
 }

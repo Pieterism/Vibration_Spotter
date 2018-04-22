@@ -8,6 +8,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+/*-----
+Activity die de gebruiker laat kiezen hoe hij wil inloggen. Of Registreren.
+-----*/
+
 public class Splash extends AppCompatActivity {
 
     @Override

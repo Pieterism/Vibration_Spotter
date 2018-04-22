@@ -32,6 +32,12 @@ import java.util.Map;
 
 import vibrationspotter.Models.Project;
 
+/*-----
+Klasse die geprogrammeerde logica achter de activity_project.xml bevat
+Deze klasse vertoont de data van een door de gebruiker gekozen project
+Geeft de optie om de Metingen te bekijken, eentje toe te voegen, de QR van het project op te vragen
+-----*/
+
 public class ProjectActivity extends AppCompatActivity{
 
     String projectString;

@@ -27,6 +27,11 @@ import java.util.Map;
 
 import vibrationspotter.QR_Utilities.BarcodeCaptureActivity;
 
+/*-----
+Een tussenklasse om debuggen te vermakkelijken en de mogelijkheid te bieden om de camera later op
+andere manieren te gebruiken dan voor QR-codes te scannen
+-----*/
+
 public class QR_hub extends AppCompatActivity{
     private TextView textView;
     private String baseurl;

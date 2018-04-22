@@ -26,6 +26,12 @@ import org.json.JSONArray;
 import java.util.ArrayList;
 import java.util.List;
 
+/*-----
+Klasse die geprogrammeerde logica achter de activity_multiMeting.xml bevat
+Deze plaatst de 3 krafiek als preview in 1 chart.
+Hier kunnen de waarden afgelezen worden door op de chart te drukken
+-----*/
+
 public class MetingSpotter extends AppCompatActivity implements SensorEventListener {
 
     LineChart lcTest;

@@ -22,6 +22,11 @@ import org.json.JSONArray;
 
 import java.util.ArrayList;
 
+/*-----
+Klasse die geprogrammeerde logica achter de activity_meting.xml bevat
+1 van de 2 activities waar trillingen kunnen gemeten worden
+-----*/
+
 public class Meter extends Activity implements SensorEventListener {
 
     private SensorManager mSensorManager;
@@ -67,6 +72,8 @@ public class Meter extends Activity implements SensorEventListener {
         yWaarden = new ArrayList<>();
         zWaarden = new ArrayList<>();
 
+        //startknop die de meting start en vooraf alle variabelen reset
+
         bStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -84,6 +91,8 @@ public class Meter extends Activity implements SensorEventListener {
                 started = true;
             }
         });
+
+        //stopknop die de meting stopzet en de gemeten waarden plot naar de grafieken
 
         bStop.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -119,6 +128,8 @@ public class Meter extends Activity implements SensorEventListener {
             }
         });
 
+        //Saveknop die de activity laat weten dat de gebruiker de data goedkeurt
+
         bSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -133,6 +144,8 @@ public class Meter extends Activity implements SensorEventListener {
                 }
             }
         });
+
+        //cleart de data wanneer de gebruiker niet tevreden is met het resultaat
 
         bReject.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -152,6 +165,9 @@ public class Meter extends Activity implements SensorEventListener {
             }
         });
     }
+
+    //Telkens de accelerometers een verandering meten wordt deze methode opgeroepen
+    //Data wordt verzameld in 2 formaten: de een voor de preview en de ander om door te sturen
 
     @Override
     public void onSensorChanged(SensorEvent event) {

@@ -3,7 +3,6 @@ package vibrationspotter.vibrationspotterapp;
 import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.constraint.ConstraintLayout;
@@ -19,7 +18,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup.LayoutParams;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
@@ -45,8 +43,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import vibrationspotter.Custom_views.ProjectView;
 import vibrationspotter.Models.Project;
+
+/*-----
+De activity die als eerste wordt opgestart
+-----*/
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -110,6 +111,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         projecten.clear();
 
+        /*-----
+        Controleren of er vorige keer al ingelogd was
+        -----*/
         String naam;
         if (sharedPreferences.containsKey("email"))
             naam = sharedPreferences.get("email").toString();
@@ -196,7 +200,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             startActivity((naar_login));
 
         } else if (id == R.id.nav_logout) {
-            //Sessie van APP
             SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
             SharedPreferences.Editor editor = settings.edit();
 
@@ -204,8 +207,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             editor.apply();
 
             recreate();
-
-        } else if (id == R.id.nav_about) {
 
         } else if (id == R.id.nav_map) {
             Intent naar_map = new Intent(MainActivity.this, MapActivity.class);
@@ -217,6 +218,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         return true;
     }
+
+    /*-----
+    Verijdelde switch die bepaalt of de vorige activity al dan niet geslaagd is en bepaalt
+    welke die vorige activity was
+    -----*/
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -282,6 +288,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             System.out.println("data null");
         }
     }
+
+    /*-----
+    Controleert of de Google-services in orde zijn
+    -----*/
 
     public boolean isServicesOK() {
         Log.d(TAG, "isServicesOK: checking google services version");

@@ -30,6 +30,11 @@ import java.lang.reflect.Method;
 
 import vibrationspotter.Models.Meting;
 
+/*-----
+Klasse die toelaat om een nieuwe meting aan te maken
+Verwijst eerst door naar de Meter-klasse en krijgt meetdata terug
+-----*/
+
 public class NewMeting extends AppCompatActivity {
 
     private static final int SELECTED_PIC = 1111;

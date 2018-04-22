@@ -25,6 +25,10 @@ import android.preference.PreferenceManager;
 import android.content.SharedPreferences;
 import android.widget.Toast;
 
+/*-----
+Klasse die geprogrammeerde logica achter de activity_spotterlogin bevat
+-----*/
+
 public class GebruikerLogin extends AppCompatActivity{
     String email;
 
@@ -59,6 +63,10 @@ public class GebruikerLogin extends AppCompatActivity{
                     final JSONObject jsonObject = new JSONObject(inloggegevens);
                     JSONArray jArray = new JSONArray();
                     jArray.put(jsonObject);
+
+                    /*-----
+                    Jwt-token nog niet geïmplementeerd
+                    -----*/
 
                     //Testing JWT:
                     // We need a signing key, so we'll create one just for this example. Usually

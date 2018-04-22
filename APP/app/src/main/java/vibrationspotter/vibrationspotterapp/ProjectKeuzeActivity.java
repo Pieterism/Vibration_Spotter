@@ -30,6 +30,11 @@ import java.util.Map;
 import vibrationspotter.Custom_views.ProjectView;
 import vibrationspotter.Models.Project;
 
+/*-----
+Deze activity maakt dynamisch objecten ProjectView aan, 1 per project van de persoon in de databank en plaatst ze in een scrollview
+Wanneer de gebruiker op een ProjectView drukt wort hij doorverwezen naar de ProjectActivity
+-----*/
+
 public class ProjectKeuzeActivity extends AppCompatActivity {
 
     LinearLayout surface;
