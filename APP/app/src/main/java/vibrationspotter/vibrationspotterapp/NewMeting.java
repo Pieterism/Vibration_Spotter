@@ -46,6 +46,7 @@ public class NewMeting extends AppCompatActivity {
 
     byte[] meetdata;
     String doorzendData;
+    String meetString;
 
     Gson gson;
 
@@ -88,7 +89,9 @@ public class NewMeting extends AppCompatActivity {
                     byte[] imageBytes = baos.toByteArray();
                     final String imageString = Base64.encodeToString(imageBytes, Base64.DEFAULT);
 
-                    Meting doorzendmeting = new Meting(metingTitel.getText().toString(), metingDescription.getText().toString(), imageString, meetdata);
+                    meetString = Base64.encodeToString(meetdata, Base64.DEFAULT);
+
+                    Meting doorzendmeting = new Meting(metingTitel.getText().toString(), metingDescription.getText().toString(), imageString, meetString);
 
                     JSONArray jArray = doorzendmeting.toJArray();
 

@@ -30,7 +30,7 @@ public class MetingActivity extends AppCompatActivity {
     LineChart lcf;
     LineChart lct;
     TextView xvalue, yvalue, zvalue, tvalue, fvalue, avalue;
-    byte[] tData, fData;
+    String tData, fData;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

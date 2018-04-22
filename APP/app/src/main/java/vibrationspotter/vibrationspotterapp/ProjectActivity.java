@@ -144,8 +144,7 @@ public class ProjectActivity extends AppCompatActivity{
         bqrProject.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent naar_QR = new Intent(getApplicationContext(), QR_hub.class);
-                startActivityForResult(naar_QR, QR);
+                Toast.makeText(ProjectActivity.this, "Feature soon to be added!", Toast.LENGTH_LONG).show();
             }
         });
         bDeleteProject.setOnClickListener(new View.OnClickListener() {
