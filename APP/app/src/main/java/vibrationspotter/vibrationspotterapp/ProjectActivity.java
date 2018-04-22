@@ -138,6 +138,7 @@ public class ProjectActivity extends AppCompatActivity{
             @Override
             public void onClick(View v) {
                 Intent naar_meter = new Intent(getApplicationContext(),NewMeting.class);
+                naar_meter.putExtra("idProject", project.getIdProject());
                 startActivityForResult(naar_meter, METING);
             }
         });

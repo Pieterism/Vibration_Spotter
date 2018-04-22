@@ -69,7 +69,7 @@ public class OctaveManagementEJB implements OctaveManagementEJBLocal {
 
 			String[] command = { "octave-cli", };
 			Process p = Runtime.getRuntime().exec(command);
-			SyncPipe sync =  new SyncPipe(p.getInputStream(), bOutput);
+			SyncPipe sync =  new SyncPipe(p.getInputStream(), System.out);
 			new Thread(new SyncPipe(p.getErrorStream(), System.err)).start();
 			//new Thread(new SyncPipe(p.getInputStream(), bOutput)).start();
 			new Thread(sync).start();
@@ -149,8 +149,8 @@ public class OctaveManagementEJB implements OctaveManagementEJBLocal {
 			stdin.println("A_data = A2(1:L/2+1); A_data(2:end-1) = 2*A_data(2:end-1);");
 
 			// frequentie en amplitude bijhouden
-			stdin.println("frequentie=f");
-			stdin.println("amplitude=A_data");
+			stdin.println("frequentie=f;");
+			stdin.println("amplitude=A_data;");
 
 			// Stap3
 			stdin.println("f1 = 1/Fs*2; f2 = 4/Fs*2;");
@@ -176,18 +176,18 @@ public class OctaveManagementEJB implements OctaveManagementEJBLocal {
 			stdin.println("t = ["+tijd+"];");
 			stdin.println("a = -1; b = 1;");
 			stdin.println("t = t + (a + (b-a).*rand(1,length(t))).*1e-3;");
-			stdin.println("f1 = 2; f2 = 8; % two frequencies within the signal");
+			stdin.println("f1 = 2; f2 = 8; % two frequencies within the signal;");
 			stdin.println("data = ["+zWaarde+"];");
 
 			// Stap1
-			stdin.println("Fs = 100.; % desired (fixed) sample rate");
+			stdin.println("Fs = 100.; % desired (fixed) sample rate;");
 			stdin.println("t_resampled = t(1):1/Fs:t(end);");
 			stdin.println("data_resampled = interp1(t, data, t_resampled, 'spline');");
 			stdin.println("t_resampled = t_resampled - t_resampled(1); ");
 
 			// tijd en versnelling bijhouden
-			stdin.println("tijd=t_resampled");
-			stdin.println("versnelling=data_resampled");
+			stdin.println("tijd=t_resampled;");
+			stdin.println("versnelling=data_resampled;");
 
 			// Stap2
 			stdin.println("L = length(data_resampled);");
@@ -196,8 +196,8 @@ public class OctaveManagementEJB implements OctaveManagementEJBLocal {
 			stdin.println("A_data = A2(1:L/2+1); A_data(2:end-1) = 2*A_data(2:end-1);");
 
 			// frequentie en amplitude bijhouden
-			stdin.println("frequentie=f");
-			stdin.println("amplitude=A_data");
+			stdin.println("frequentie=f;");
+			stdin.println("amplitude=A_data;");
 
 			// Stap3
 			stdin.println("f1 = 1/Fs*2; f2 = 4/Fs*2;");
@@ -222,7 +222,7 @@ public class OctaveManagementEJB implements OctaveManagementEJBLocal {
 			
 			stdin.close();
 			
-			ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+	/*		ByteArrayOutputStream buffer = new ByteArrayOutputStream();
 
 			int nRead;
 			byte[] data = new byte[16384];
@@ -231,11 +231,19 @@ public class OctaveManagementEJB implements OctaveManagementEJBLocal {
 			  buffer.write(data, 0, nRead);
 			}
 
-			buffer.flush();
+			buffer.flush();*/
+			
+			
+		
+			by = sync.getBuffer();
+			
 
-			by = buffer.toByteArray();
+			//by = buffer.toByteArray();
 			s1 = new String(by);
 
+			//int index = s1.lastIndexOf("x1 =");
+			//s1.substring(index);
+			
 			int returnCode = 0;
 			try {
 				returnCode = p.waitFor();

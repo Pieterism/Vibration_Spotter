@@ -14,6 +14,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.sun.jmx.snmp.Timestamp;
 import com.sun.org.apache.xml.internal.security.exceptions.Base64DecodingException;
 import com.sun.org.apache.xml.internal.security.utils.Base64;
@@ -24,9 +25,11 @@ import DoorstuurModels.DoorstuurProject;
 import java.util.ArrayList;
 import java.util.Date;
 import java.io.IOException;
+import java.lang.reflect.Type;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.Map;
 
 import model.Meting;
 import model.Persoon;
@@ -96,15 +99,18 @@ public class MetingManagementEJB implements MetingManagementEJBLocal{
 	}
 	
 
-	public void ToevoegenMetingResultaten2(String gegevens){
+	public void ToevoegenMetingResultaten2(String gegevens, String id){
 		
+		byte [] imageByte = null;
 		Gson gson = new Gson();
-		DoorstuurMeting doorstuurmeting = gson.fromJson(gegevens, DoorstuurMeting.class);
+		Type type = new TypeToken<List<Map<String,String>>>(){}.getType();
+		List<Map<String,String>> doorstuurmeting = gson.fromJson(gegevens, type);
 		
 		//text,descripotion,imagestring,meetstring
 		String leesBareData = null;
 		try {
-			leesBareData = new String(Base64.decode(doorstuurmeting.getDataSet1()));
+			leesBareData = new String(Base64.decode(doorstuurmeting.get(0).get("dataset1")));
+			imageByte =  Base64.decode((doorstuurmeting.get(0).get("foto")));
 		} catch (Base64DecodingException e) {
 			e.printStackTrace();
 		}
@@ -113,11 +119,26 @@ public class MetingManagementEJB implements MetingManagementEJBLocal{
 		
 		
 		
+		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		Date date = new Date();
+		System.out.println(dateFormat.format(date));			//loggen huidige datum
+		
+		Project project = projectEJB.findProjectById(Integer.parseInt(id));
+		
+		String [] verwerkteresultaten = octaveEJB.createdata(leesBareData);	
+	
 		
 		
 		
+		Meting meting1 = new Meting();
+		meting1.setTitel(doorstuurmeting.get(0).get("titel"));
+		meting1.setTijdstip(dateFormat.format(date));
+		meting1.setResultaten(verwerkteresultaten[0]);
+		meting1.setIdProject(project);
+		meting1.setFoto(imageByte);
+		meting1.setOpmerking(doorstuurmeting.get(0).get("opmerking"));
 		
-		
+		em.persist(meting1);	
 		
 		
 		

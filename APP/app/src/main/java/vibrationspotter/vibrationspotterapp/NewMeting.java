@@ -47,6 +47,7 @@ public class NewMeting extends AppCompatActivity {
     byte[] meetdata;
     String doorzendData;
     String meetString;
+    int idProject;
 
     Gson gson;
 
@@ -62,6 +63,7 @@ public class NewMeting extends AppCompatActivity {
         bSave = findViewById(R.id.bSave);
         hasImage = false;
         gson = new Gson();
+        idProject = getIntent().getIntExtra("idProject", 666);
 
         ivImage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,12 +93,12 @@ public class NewMeting extends AppCompatActivity {
 
                     meetString = Base64.encodeToString(meetdata, Base64.DEFAULT);
 
-                    Meting doorzendmeting = new Meting(metingTitel.getText().toString(), metingDescription.getText().toString(), imageString, meetString);
+                    Meting doorzendmeting = new Meting(666, metingTitel.getText().toString(), "filler", imageString, metingDescription.getText().toString(),  meetString, "filler");
 
                     JSONArray jArray = doorzendmeting.toJArray();
 
                     JsonArrayRequest newMetingrequest = new JsonArrayRequest(Request.Method.POST,
-                            getString(R.string.url) + "Metingen",
+                            getString(R.string.url) + "Metingen/" + idProject,
                             jArray,
                             new Response.Listener<JSONArray>() {
                                 @Override

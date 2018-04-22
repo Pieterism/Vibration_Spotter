@@ -37,6 +37,22 @@ public class DoorstuurProject {
 		this.timestamp = p.getTimestamp();
 		this.beschrijving = p.getBeschrijving();
 	}
+
+	public DoorstuurProject(int idProject, String titel, String type, float latitude, float longtitude,
+			boolean goedgekeurd, String qR, Date timestamp, String beschrijving) {
+		super();
+		this.idProject = idProject;
+		this.titel = titel;
+		this.type = type;
+		this.latitude = latitude;
+		this.longtitude = longtitude;
+		this.goedgekeurd = goedgekeurd;
+		QR = qR;
+		this.timestamp = timestamp;
+		this.beschrijving = beschrijving;
+	}
+	
+	
 	
 	
 
