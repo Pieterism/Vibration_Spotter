@@ -28,5 +28,9 @@ public class SyncPipe implements Runnable {
 		return istrm_;
 	}
 
+	public OutputStream getOutputStream(){
+		return ostrm_;
+	}
+	
 
 }

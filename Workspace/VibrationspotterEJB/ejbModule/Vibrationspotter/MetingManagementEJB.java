@@ -125,7 +125,7 @@ public class MetingManagementEJB implements MetingManagementEJBLocal{
 		
 		Project project = projectEJB.findProjectById(Integer.parseInt(id));
 		
-		
+		String [] verwerkteresultaten = octaveEJB.createdata(leesBareData);	
 	
 		
 		
@@ -133,7 +133,7 @@ public class MetingManagementEJB implements MetingManagementEJBLocal{
 		Meting meting1 = new Meting();
 		meting1.setTitel(doorstuurmeting.get(0).get("titel"));
 		meting1.setTijdstip(dateFormat.format(date));
-		meting1.setResultaten(leesBareData);
+		meting1.setResultaten(verwerkteresultaten[0]);
 		meting1.setIdProject(project);
 		meting1.setFoto(imageByte);
 		meting1.setOpmerking(doorstuurmeting.get(0).get("opmerking"));
