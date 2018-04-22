@@ -14,6 +14,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.sun.jmx.snmp.Timestamp;
 import com.sun.org.apache.xml.internal.security.exceptions.Base64DecodingException;
 import com.sun.org.apache.xml.internal.security.utils.Base64;
@@ -24,9 +25,11 @@ import DoorstuurModels.DoorstuurProject;
 import java.util.ArrayList;
 import java.util.Date;
 import java.io.IOException;
+import java.lang.reflect.Type;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.Map;
 
 import model.Meting;
 import model.Persoon;
@@ -99,12 +102,13 @@ public class MetingManagementEJB implements MetingManagementEJBLocal{
 	public void ToevoegenMetingResultaten2(String gegevens){
 		
 		Gson gson = new Gson();
-		DoorstuurMeting doorstuurmeting = gson.fromJson(gegevens, DoorstuurMeting.class);
+		Type type = new TypeToken<List<Map<String,String>>>(){}.getType();
+		List<Map<String,String>> doorstuurmeting = gson.fromJson(gegevens, type);
 		
 		//text,descripotion,imagestring,meetstring
 		String leesBareData = null;
 		try {
-			leesBareData = new String(Base64.decode(doorstuurmeting.getDataSet1()));
+			leesBareData = new String(Base64.decode(doorstuurmeting.get(0).get("dataset1")));
 		} catch (Base64DecodingException e) {
 			e.printStackTrace();
 		}
