@@ -33,6 +33,19 @@ public class DoorstuurMeting {
 		this.dataset1 = Base64.encode(m.getDataset1());
 		this.dataset2 = Base64.encode(m.getDataset2());
 	}
+	
+
+	public DoorstuurMeting(int idMeting, String titel, String tijdstip, String foto, String opmerking, String dataset1,
+			String dataset2) {
+		super();
+		this.idMeting = idMeting;
+		this.titel = titel;
+		this.tijdstip = tijdstip;
+		this.foto = foto;
+		this.opmerking = opmerking;
+		this.dataset1 = dataset1;
+		this.dataset2 = dataset2;
+	}
 
 	public String getDataSet1() {
 		return dataset1;
