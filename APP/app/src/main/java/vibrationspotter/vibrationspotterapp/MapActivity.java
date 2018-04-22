@@ -13,6 +13,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.WindowManager;
@@ -22,6 +23,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -33,13 +38,19 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.io.IOException;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import vibrationspotter.Models.Meting;
+import vibrationspotter.Models.Project;
 
 
 public class MapActivity extends AppCompatActivity implements OnMapReadyCallback {
@@ -56,6 +67,10 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     private GoogleMap mMap;
     private EditText mSearchtext;
     private ImageView mGps;
+    ArrayList<Project> projecten;
+    Gson gson;
+    SharedPreferences settings;
+    Map<String, ?> sharedPreferences;
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
@@ -90,6 +105,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         mSearchtext = (EditText) findViewById(R.id.input_search);
         mGps = (ImageView) findViewById(R.id.ic_gps);
 
+        addAllMetingenMarkers();
         getLocationPermission();
     }
 
@@ -141,11 +157,52 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         }
     }
 
-    private void addAllMetingenMarkers(){
-      //HIER MOET IK EEN PROJECT KRIJGEN WAARVAN IK LAT EN LONG NADIEN KAN OPVRAGEN
+    private void addAllMetingenMarkers() {
+        //HIER MOET IK EEN PROJECT KRIJGEN WAARVAN IK LAT EN LONG NADIEN KAN OPVRAGEN
+        gson = new Gson();
 
+        settings = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        sharedPreferences = settings.getAll();
 
+        String email = settings.getString("email", null);
+        if (email != null) {
+            Map<String, String> gegevens = new HashMap<>();
+            gegevens.put("email", email);
+            final JSONObject jsonObject = new JSONObject(gegevens);
+            final JSONArray jArray = new JSONArray();
+            jArray.put(jsonObject);
+
+            JsonArrayRequest projectRequest = new JsonArrayRequest(Request.Method.POST,
+                    getString(R.string.url) + "Projecten",
+                    jArray,
+                    new Response.Listener<JSONArray>() {
+                        @Override
+                        public void onResponse(JSONArray response) {
+                            Log.d("Projecten", "GELUKT!");
+
+                            Type type = new TypeToken<List<Project>>() {
+                            }.getType();
+                            projecten = gson.fromJson(response.toString(), type);
+
+                            for (final Project p : projecten) {
+                                LatLng coord = new LatLng(p.getLatitude(), p.getLongtitude());
+                                MarkerOptions options = new MarkerOptions().position(coord).title(p.getTitel());
+                                mMap.addMarker(options);
+                            }
+
+                        }
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            Log.d("Projecten", "Error: " + error.toString() + ", " + error.getMessage());
+                        }
+                    }
+            );
+            VolleyClass.getInstance(getApplicationContext()).addToRequestQueue(projectRequest, "Inloggen");
+        }
     }
+
 
     //Laatst gekende locatie van gsm opvragen
     private void getDeviceLocation() {
