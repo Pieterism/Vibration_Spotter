@@ -1,6 +1,10 @@
 package vibrationspotter.Models;
 
-import java.util.Date;
+/*-----
+Versimpelde representatie van de Project-klasse en gelijk aan de DoorstuurProject-klasse op de server
+hoofddoel: communicatie met behulp van Gson te vergemakkelijken
+-----*/
+
 
 public class Project {
 

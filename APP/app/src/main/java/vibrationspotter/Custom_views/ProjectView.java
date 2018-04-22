@@ -1,17 +1,12 @@
 package vibrationspotter.Custom_views;
 
 import android.content.Context;
-import android.support.constraint.ConstraintLayout;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
@@ -19,20 +14,19 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import org.json.JSONArray;
-import org.json.JSONObject;
 
 import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import vibrationspotter.Models.Meting;
 import vibrationspotter.Models.Project;
 import vibrationspotter.vibrationspotterapp.R;
 import vibrationspotter.vibrationspotterapp.VolleyClass;
 
-
+/*-----
+View die als data een project bevat en de layou projectview.xml heeft
+Het aantal metingen wordt per Projectview opgevraagd
+-----*/
 public class ProjectView extends LinearLayout {
 
     View rootView;

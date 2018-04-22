@@ -86,36 +86,40 @@ public class NewMeting extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (hasImage) {
-                    ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                    bitmap.compress(Bitmap.CompressFormat.JPEG, 50, baos);
-                    byte[] imageBytes = baos.toByteArray();
-                    final String imageString = Base64.encodeToString(imageBytes, Base64.DEFAULT);
+                    if(!metingTitel.getText().toString().equals("")) {
+                        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                        bitmap.compress(Bitmap.CompressFormat.JPEG, 50, baos);
+                        byte[] imageBytes = baos.toByteArray();
+                        final String imageString = Base64.encodeToString(imageBytes, Base64.DEFAULT);
 
-                    meetString = Base64.encodeToString(meetdata, Base64.DEFAULT);
+                        meetString = Base64.encodeToString(meetdata, Base64.DEFAULT);
 
-                    Meting doorzendmeting = new Meting(666, metingTitel.getText().toString(), "filler", imageString, metingDescription.getText().toString(),  meetString, "filler");
+                        Meting doorzendmeting = new Meting(666, metingTitel.getText().toString(), "filler", imageString, metingDescription.getText().toString(), meetString, "filler");
 
-                    JSONArray jArray = doorzendmeting.toJArray();
+                        JSONArray jArray = doorzendmeting.toJArray();
 
-                    JsonArrayRequest newMetingrequest = new JsonArrayRequest(Request.Method.POST,
-                            getString(R.string.url) + "Metingen/" + idProject,
-                            jArray,
-                            new Response.Listener<JSONArray>() {
-                                @Override
-                                public void onResponse(JSONArray response) {
-                                    System.out.println(response.toString());
+                        JsonArrayRequest newMetingrequest = new JsonArrayRequest(Request.Method.POST,
+                                getString(R.string.url) + "Metingen/" + idProject,
+                                jArray,
+                                new Response.Listener<JSONArray>() {
+                                    @Override
+                                    public void onResponse(JSONArray response) {
+                                        System.out.println(response.toString());
 
+                                    }
+                                },
+                                new Response.ErrorListener() {
+                                    @Override
+                                    public void onErrorResponse(VolleyError error) {
+                                        Toast.makeText(NewMeting.this, "Error", Toast.LENGTH_SHORT).show();
+                                    }
                                 }
-                            },
-                            new Response.ErrorListener() {
-                                @Override
-                                public void onErrorResponse(VolleyError error) {
-                                    Toast.makeText(NewMeting.this, "Error", Toast.LENGTH_SHORT).show();
-                                }
-                            }
-                    );
+                        );
 
-                    VolleyClass.getInstance(getApplicationContext()).addToRequestQueue(newMetingrequest, "newMeting");
+                        VolleyClass.getInstance(getApplicationContext()).addToRequestQueue(newMetingrequest, "newMeting");
+                    } else {
+                        Toast.makeText(NewMeting.this, "Gelieve een Titel te geven aan de Meting", Toast.LENGTH_SHORT).show();
+                    }
 
                 } else {
                     Toast.makeText(getApplicationContext(), "Please select an image", Toast.LENGTH_LONG).show();

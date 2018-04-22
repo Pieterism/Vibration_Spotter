@@ -1,10 +1,13 @@
 package vibrationspotter.Models;
 
-import android.util.Base64;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+/*-----
+Versimpelde representatie van de Meting-klasse en gelijk aan de Doorstuurmeting-klasse op de server
+hoofddoel: communicatie met behulp van Gson te vergemakkelijken
+-----*/
 
 public class Meting {
     private int idMeting;

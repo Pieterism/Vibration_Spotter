@@ -41,83 +41,84 @@ public class NewProject extends AppCompatActivity {
         bAddProject.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-                SharedPreferences.Editor editor = settings.edit();
+                if(!etProjectTitel.getText().toString().equals("")) {
+                    SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+                    SharedPreferences.Editor editor = settings.edit();
 
-                String titel = etProjectTitel.getText().toString();
-                String beschrijving = etProjectDescription.getText().toString();
+                    String titel = etProjectTitel.getText().toString();
+                    String beschrijving = etProjectDescription.getText().toString();
 
-                double longitude = 0;
-                double latitude = 0;
+                    double longitude = 0;
+                    double latitude = 0;
 
-                Map<String, String> projectgegevens = new HashMap<>();
-                projectgegevens.put("titel", titel);
-                projectgegevens.put("beschrijving", beschrijving);
-
-
-                int rc = ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION);
-                if (rc == PackageManager.PERMISSION_GRANTED) {
-                    LocationManager lm = (LocationManager) getSystemService(getApplicationContext().LOCATION_SERVICE);
+                    Map<String, String> projectgegevens = new HashMap<>();
+                    projectgegevens.put("titel", titel);
+                    projectgegevens.put("beschrijving", beschrijving);
 
 
-                    LocationListener locationListener = new LocationListener() {
-
-                        public void onLocationChanged(Location location) {
-
-
-                            // Called when a new location is found by the network location provider.
-                            Toast.makeText(getBaseContext(), "location is:" + location, Toast.LENGTH_LONG).show();
-                        }
-
-                        public void onStatusChanged(String provider, int status, Bundle extras) {
-                        }
-
-                        public void onProviderEnabled(String provider) {
-                        }
-
-                        public void onProviderDisabled(String provider) {
-                        }
-                    };
+                    int rc = ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION);
+                    if (rc == PackageManager.PERMISSION_GRANTED) {
+                        LocationManager lm = (LocationManager) getSystemService(getApplicationContext().LOCATION_SERVICE);
 
 
-                    lm.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
-                    Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-                    longitude = location.getLongitude();
-                    latitude = location.getLatitude();
-                } else {
-                    requestGPSPermission();
-                }
+                        LocationListener locationListener = new LocationListener() {
 
-                projectgegevens.put("longtitude", String.valueOf(longitude));
-                projectgegevens.put("latitude", String.valueOf(latitude));
-                projectgegevens.put("email", settings.getString("email", null));
+                            public void onLocationChanged(Location location) {
 
-                final JSONObject jsonObject = new JSONObject(projectgegevens);
-                JSONArray jArray = new JSONArray();
-                jArray.put(jsonObject);
 
-                JsonArrayRequest inloggenRequest = new JsonArrayRequest(Request.Method.POST,
-                        getString(R.string.url) + "Projecten/ToevoegenProjecten",
-                        jArray,
-                        new Response.Listener<JSONArray>() {
-                            @Override
-                            public void onResponse(JSONArray response) {
-                                Log.d("ToevoegenProjecten", response.toString());
+                                // Called when a new location is found by the network location provider.
+                                Toast.makeText(getBaseContext(), "location is:" + location, Toast.LENGTH_LONG).show();
                             }
-                        },
 
-                        new Response.ErrorListener() {
-                            @Override
-                            public void onErrorResponse(VolleyError error) {
-                                Log.d("ToevoegenProjecten", "Error: " + error.toString() + ", " + error.getMessage());
+                            public void onStatusChanged(String provider, int status, Bundle extras) {
                             }
-                        }
-                );
-                VolleyClass.getInstance(getApplicationContext()).addToRequestQueue(inloggenRequest, "Inloggen");
 
-                //   LocationManager lm = (LocationManager)getSystemService(getApplicationContext().LOCATION_SERVICE);
+                            public void onProviderEnabled(String provider) {
+                            }
+
+                            public void onProviderDisabled(String provider) {
+                            }
+                        };
 
 
+                        lm.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
+                        Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+                        longitude = location.getLongitude();
+                        latitude = location.getLatitude();
+                    } else {
+                        requestGPSPermission();
+                    }
+
+                    projectgegevens.put("longtitude", String.valueOf(longitude));
+                    projectgegevens.put("latitude", String.valueOf(latitude));
+                    projectgegevens.put("email", settings.getString("email", null));
+
+                    final JSONObject jsonObject = new JSONObject(projectgegevens);
+                    JSONArray jArray = new JSONArray();
+                    jArray.put(jsonObject);
+
+                    JsonArrayRequest inloggenRequest = new JsonArrayRequest(Request.Method.POST,
+                            getString(R.string.url) + "Projecten/ToevoegenProjecten",
+                            jArray,
+                            new Response.Listener<JSONArray>() {
+                                @Override
+                                public void onResponse(JSONArray response) {
+                                    Log.d("ToevoegenProjecten", response.toString());
+                                }
+                            },
+
+                            new Response.ErrorListener() {
+                                @Override
+                                public void onErrorResponse(VolleyError error) {
+                                    Log.d("ToevoegenProjecten", "Error: " + error.toString() + ", " + error.getMessage());
+                                }
+                            }
+                    );
+                    VolleyClass.getInstance(getApplicationContext()).addToRequestQueue(inloggenRequest, "Inloggen");
+
+                    //   LocationManager lm = (LocationManager)getSystemService(getApplicationContext().LOCATION_SERVICE);
+
+                } else Toast.makeText(getApplicationContext(), "Gelieve een Titel op te geven", Toast.LENGTH_LONG).show();
             }
         });
     }

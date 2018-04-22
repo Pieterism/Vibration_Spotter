@@ -1,12 +1,17 @@
 package vibrationspotter.Custom_views;
 
 import android.content.Context;
+import android.util.AttributeSet;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import vibrationspotter.Models.Meting;
 import vibrationspotter.vibrationspotterapp.R;
+
+/*-----
+View die als data een Meting bevat en de layout listrow.xml heeft
+----*/
 
 public class MetingView extends LinearLayout {
 
@@ -21,6 +26,8 @@ public class MetingView extends LinearLayout {
         init(context);
 
     }
+
+    public MetingView(Context context, AttributeSet attrs){super(context,attrs);}
 
     public void init(Context context) {
         rootView = inflate(context, R.layout.listrow, this);
