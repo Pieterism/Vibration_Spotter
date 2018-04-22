@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -108,6 +109,11 @@ public class Meter extends Activity implements SensorEventListener{
                 yData.setDrawCircles(false);
                 LineDataSet zData = new LineDataSet(zWaarden, "z");
                 zData.setDrawCircles(false);
+
+                xData.setDrawHorizontalHighlightIndicator(false);
+                yData.setDrawHorizontalHighlightIndicator(false);
+                zData.setDrawHorizontalHighlightIndicator(false);
+                xData.setHighLightColor(Color.BLACK);
 
                 lineChartX.setData(new LineData(xData));
                 lineChartX.invalidate();
