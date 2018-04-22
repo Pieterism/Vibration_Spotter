@@ -42,7 +42,6 @@ public class ProjectActivity extends AppCompatActivity{
 
     TextView textTitel;
     TextView textGebruikersnaam;
-    TextView textTime;
     TextView textLocation;
     TextView textAantalMetingen;
     ImageView imageviewProject;
@@ -77,7 +76,6 @@ public class ProjectActivity extends AppCompatActivity{
 
         textTitel.setText(project.getTitel());
         textGebruikersnaam.setText(sharedPreferences.get("email").toString());
-        textTime.setText(project.getTimestamp());
         textLocation.setText(String.valueOf(project.getLatitude()) + " LA ," + String.valueOf(project.getLongtitude()) + " LO");
         //textAantalMetingen.setText("Nog te bepalen");
 

@@ -31,11 +31,11 @@ public class MetingenREST implements Serializable {
 	
 	@POST
 	@Consumes({MediaType.APPLICATION_JSON})
-	public String postTest(String jsonarray){
+	public String newMeting(String jsonarray){
 		if(jsonarray == null) throw new BadRequestException();
 		System.out.println(jsonarray);
 		
-		metingEJB.ToevoegenMetingResultaten(jsonarray);
+		//metingEJB.ToevoegenMetingResultaten(jsonarray);
 		
 		return "[{\"Gelukt?:\": YEZZZ!!!}]";
 	}

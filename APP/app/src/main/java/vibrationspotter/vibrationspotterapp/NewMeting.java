@@ -14,11 +14,22 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+<<<<<<< HEAD
+=======
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.google.android.gms.common.api.CommonStatusCodes;
+>>>>>>> 5a1999ce6e25508c39ee8c0ca570d03d36821614
 import com.google.gson.Gson;
+
+import org.json.JSONArray;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.reflect.Method;
 
 import vibrationspotter.Models.Meting;
 
@@ -66,7 +77,11 @@ public class NewMeting extends AppCompatActivity {
         bRotate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+<<<<<<< HEAD
                 ivImage.setRotation(ivImage.getRotation() + 45);
+=======
+                ivImage.setRotation(ivImage.getRotation()+90);
+>>>>>>> 5a1999ce6e25508c39ee8c0ca570d03d36821614
             }
         });
 
@@ -81,7 +96,27 @@ public class NewMeting extends AppCompatActivity {
 
                     Meting doorzendmeting = new Meting(metingTitel.getText().toString(), metingDescription.getText().toString(), imageString, meetdata);
 
-                    String doorZEndString = gson.toJson(doorzendmeting);
+                    JSONArray jArray = doorzendmeting.toJArray();
+
+                    JsonArrayRequest newMetingrequest = new JsonArrayRequest(Request.Method.POST,
+                            getString(R.string.url) + "Metingen",
+                            jArray,
+                            new Response.Listener<JSONArray>() {
+                                @Override
+                                public void onResponse(JSONArray response) {
+                                    System.out.println(response.toString());
+
+                                }
+                            },
+                            new Response.ErrorListener() {
+                                @Override
+                                public void onErrorResponse(VolleyError error) {
+                                    Toast.makeText(NewMeting.this, "Error", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                    );
+
+                    VolleyClass.getInstance(getApplicationContext()).addToRequestQueue(newMetingrequest, "newMeting");
 
                 } else {
                     Toast.makeText(getApplicationContext(), "Please select an image", Toast.LENGTH_LONG).show();
