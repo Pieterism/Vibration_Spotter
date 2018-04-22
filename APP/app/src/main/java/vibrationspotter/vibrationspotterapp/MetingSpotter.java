@@ -55,7 +55,7 @@ public class MetingSpotter extends AppCompatActivity implements SensorEventListe
         lcTest = findViewById(R.id.lcTest);
         bStart = findViewById(R.id.bStart);
         bStop = findViewById(R.id.bStop);
-        textResultaat = findViewById(R.id.textResultaat);
+      //  textResultaat = findViewById(R.id.textResultaat);
 
         started = false;
         mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
