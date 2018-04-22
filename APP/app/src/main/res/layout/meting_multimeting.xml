@@ -5,6 +5,46 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <TextView
+        android:id="@+id/tvY"
+        android:layout_width="90dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="24dp"
+        android:background="#fdc101"
+        app:layout_constraintStart_toEndOf="@+id/tvX"
+        app:layout_constraintTop_toBottomOf="@+id/tvT" />
+
+    <TextView
+        android:id="@+id/tvZ"
+        android:layout_width="90dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="24dp"
+        android:background="#c95854"
+        app:layout_constraintStart_toEndOf="@+id/tvY"
+        app:layout_constraintTop_toBottomOf="@+id/tvT" />
+
+    <TextView
+        android:id="@+id/tvX"
+        android:layout_width="90dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
+        android:background="#005b7f"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvT" />
+
+    <TextView
+        android:id="@+id/tvT"
+        android:layout_width="130dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
+        android:hint="Touch graph for info"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lcTest" />
+
     <LinearLayout
         android:id="@+id/linearLayout4"
         android:layout_width="match_parent"
@@ -53,11 +93,11 @@
     <com.github.mikephil.charting.charts.LineChart
         android:id="@+id/lcTest"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginBottom="123dp"
+        android:layout_height="200dp"
         android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout4" />
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout4" >
+
+    </com.github.mikephil.charting.charts.LineChart>
 
     <LinearLayout
         android:id="@+id/linearLayout3"
