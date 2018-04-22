@@ -148,5 +148,13 @@ public class ProjectController implements Serializable {
 		return "Nee";
 		
 	}
+	public List<Project> findProjectsByIdPerson(){
+		HttpSession session = SessionUtils.getSession();
+		int idPersoon=(int) session.getAttribute("temp");
+		List<Project>projecten=projectejb.findMijnProjecten(idPersoon);
+		return projecten;
+		
+	}
+
 
 }

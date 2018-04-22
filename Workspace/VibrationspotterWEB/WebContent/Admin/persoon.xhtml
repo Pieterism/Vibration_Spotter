@@ -5,7 +5,7 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:p="http://primefaces.org/ui"
-      >
+      xmlns:fn="http://java.sun.com/jsp/jstl/functions">
       
 <h:head>
   <title>
@@ -21,7 +21,8 @@
 <div class="header">
        <h1><b>persoonsgegevens</b> </h1>
 </div>
-<a href="projecten.xhtml">terug naar projecten</a>    
+<a href="projecten.xhtml">terug naar projecten</a>
+    
 <p:dataTable value="#{userController.ophalenPersoon()}" var="per" style="margin-top:10px">
     
      <p:column headerText="IdPersoon" style="text-align:center;">
@@ -44,8 +45,66 @@
         		<h:outputText value="#{per.achternaam}" />
      </p:column>
      
-   
 </p:dataTable>
+
+<h:form>
+	<p:dataTable value="#{projectController.findProjectsByIdPerson()}" var="pro" style="margin-top:40px">
+	     <f:facet name="header">
+            Projecten
+        </f:facet>
+    
+		<p:column headerText="IdProject" style="text-align:center;width:100px;" sortBy="#{pro.idProject}" filterBy="#{pro.idProject}" >
+        	<h:outputText value="#{pro.idProject}" />
+    	</p:column>
+    			
+		<p:column headerText="Titel" style="text-align:center" sortBy="#{pro.titel}" filterBy="#{pro.titel}" >
+        	<h:outputText value="#{pro.titel}" />
+    	</p:column>
+    			
+    	<p:column headerText="Type" style="text-align:center" sortBy="#{pro.type}" filterBy="#{pro.type}">
+        	<h:outputText value="#{pro.type}" />
+    	</p:column>
+    			
+    	<p:column headerText="Beschrijving" style="text-align:center" filterBy="#{pro.beschrijving}">
+        	<h:outputText value="#{pro.beschrijving}" />
+    	</p:column>
+    	
+    	<p:column headerText="QR-code" style="text-align:center">
+        
+        	<h:commandLink action="#{projectController.toonQr(pro)}" class="subAnchor" value="toon QR"/>
+        
+    	</p:column>
+    			
+    	<p:column headerText="emailadres" style="text-align:center" sortBy="#{projectController.zoekEmailadres(pro)}" filterBy="#{projectController.zoekEmailadres(pro)}">
+        	<h:commandLink action="#{userController.toonGegevens(pro)}" class="subAnchor" value="#{projectController.zoekEmailadres(pro)}"/>
+    	</p:column>
+    			
+    	<p:column headerText="Metingen" style="text-align:center">
+        	<h:commandButton value="bekijk metingen"
+			action="#{projectController.gaNaarMeting(pro)}">
+			</h:commandButton>
+    	</p:column>
+    			
+    	<p:column headerText="wissen" style="text-align:center">
+        	<h:commandButton value="project wissen"
+				onclick="return confirm('wilt u zeker dit project wissen?')"
+				action="#{projectController.wissen(pro)}">
+			</h:commandButton>
+    	</p:column>
+    	
+    	<p:column headerText="project goedkeuren" style="text-align:center">
+        	<h:selectOneMenu value = "#{pro.goedgekeurd}">
+   				<f:selectItem itemValue = "false" itemLabel = "weigeren" /> 
+   				<f:selectItem itemValue = "true" itemLabel = "aanvaarden" />
+   				<f:ajax execute="@this" listener="#{projectController.update(pro)}" render="input" />
+		 </h:selectOneMenu> 
+    	</p:column>
+    	
+    <f:facet name="footer">
+        totaal: #{ fn:length(projectController.findProjectsByIdPerson())} projecten
+    </f:facet>
+</p:dataTable>
+</h:form>
    
 </h:body>
 </html>
