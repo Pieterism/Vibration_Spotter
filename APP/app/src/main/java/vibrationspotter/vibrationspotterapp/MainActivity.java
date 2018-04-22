@@ -59,12 +59,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     ImageView imageView;
     TextView textName;
 
-    int width;
-    int height;
-
-    Bitmap bitmap;
-
     SharedPreferences settings;
+    Map<String, ?> sharedPreferences;
     View nav_header_main;
 
     Gson gson;
@@ -73,7 +69,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -99,9 +94,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        svProjectview = findViewById(R.id.svprojectview);
-        svProjectview.setVisibility(View.INVISIBLE);
-
         clHomePage = findViewById(R.id.clhome_page);
         llprojecten = findViewById(R.id.llprojecten);
 
@@ -111,18 +103,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         textName = nav_header_main.findViewById(R.id.textName);
 
         settings = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        Map<String, ?> sharedPreferences = settings.getAll();
+        sharedPreferences = settings.getAll();
 
         projecten = new ArrayList<>();
         gson = new Gson();
-
 
         projecten.clear();
 
         String naam;
         if (sharedPreferences.containsKey("email"))
             naam = sharedPreferences.get("email").toString();
-        else naam = "nope";
+        else naam = "";
         textName.setText(naam);
 
 
@@ -189,63 +180,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         } else if (id == R.id.nav_projecten) {
 
-            final LayoutParams lp = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
+            if (sharedPreferences.containsKey("email")) {
 
-            llprojecten.removeAllViews();
+                Intent activities = new Intent(getApplicationContext(), ProjectKeuzeActivity.class);
+                startActivity(activities);
 
-            clHomePage.setVisibility(View.INVISIBLE);
-            svProjectview.setVisibility(View.VISIBLE);
-
-            //Deel PJ:
-            SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-            SharedPreferences.Editor editor = settings.edit();
-
-            String email = settings.getString("email", null);
-            if (email != null) {
-                Map<String, String> gegevens = new HashMap<>();
-                gegevens.put("email", email);
-                final JSONObject jsonObject = new JSONObject(gegevens);
-                final JSONArray jArray = new JSONArray();
-                jArray.put(jsonObject);
-
-                JsonArrayRequest projectRequest = new JsonArrayRequest(Request.Method.POST,
-                        getString(R.string.url) + "Projecten",
-                        jArray,
-                        new Response.Listener<JSONArray>() {
-                            @Override
-                            public void onResponse(JSONArray response) {
-                                Log.d("Projecten", "GELUKT!");
-
-                                Type type = new TypeToken<List<Project>>() {
-                                }.getType();
-                                projecten = gson.fromJson(response.toString(), type);
-
-                                for (final Project p : projecten) {
-                                    ProjectView projectView = new ProjectView(getApplicationContext(), p);
-                                    projectView.setOnClickListener(new View.OnClickListener() {
-                                        @Override
-                                        public void onClick(View v) {
-                                            String pString = gson.toJson(p);
-                                            Intent naar_project = new Intent(getApplicationContext(), ProjectActivity.class);
-                                            naar_project.putExtra("project", pString);
-                                            startActivity(naar_project);
-                                        }
-                                    });
-                                    llprojecten.addView(projectView, lp);
-                                }
-                            }
-                        },
-                        new Response.ErrorListener() {
-                            @Override
-                            public void onErrorResponse(VolleyError error) {
-                                Log.d("Projecten", "Error: " + error.toString() + ", " + error.getMessage());
-                            }
-                        }
-                );
-                VolleyClass.getInstance(getApplicationContext()).addToRequestQueue(projectRequest, "Inloggen");
-            }
-
-            //EINDE DEEL PJ
+            } else Toast.makeText(getApplicationContext(), "Log in om je projecten te bekijken", Toast.LENGTH_LONG).show();
 
         } else if (id == R.id.nav_meter) {
             Intent naar_meter = new Intent(MainActivity.this, Meter.class);

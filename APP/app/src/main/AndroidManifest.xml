@@ -79,6 +79,9 @@
         <activity
             android:name=".MapActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".ProjectKeuzeActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>
