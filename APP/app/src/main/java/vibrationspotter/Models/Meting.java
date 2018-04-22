@@ -2,6 +2,10 @@ package vibrationspotter.Models;
 
 import android.util.Base64;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class Meting {
     private int idMeting;
 
@@ -68,12 +72,30 @@ public class Meting {
         string = string.concat(",");
         string = string.concat(tijdstip);
         string = string.concat(",");
-      //  string = string.concat(foto);
+        //string = string.concat(foto);
         string = string.concat(",");
         string = string.concat(opmerking);
 
         System.out.println(dataset1);
 
         return string;
+    }
+
+    public JSONArray toJArray() {
+        JSONArray jArray = new JSONArray();
+        JSONObject jObject = new JSONObject();
+        try {
+            jObject.put("idMeting", this.idMeting)
+                    .put("titel", this.titel)
+                    .put("tijdstip", this.tijdstip)
+                    .put("foto", this.foto)
+                    .put("opmerking", this.opmerking)
+                    .put("dataset1", this.dataset1)
+                    .put("dataset2", this.dataset2);
+            jArray.put(jObject);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return jArray;
     }
 }

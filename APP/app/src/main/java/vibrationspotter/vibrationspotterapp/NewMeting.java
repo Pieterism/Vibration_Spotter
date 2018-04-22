@@ -15,12 +15,19 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.google.android.gms.common.api.CommonStatusCodes;
 import com.google.gson.Gson;
+
+import org.json.JSONArray;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.reflect.Method;
 
 import vibrationspotter.Models.Meting;
 
@@ -83,7 +90,25 @@ public class NewMeting extends AppCompatActivity {
 
                     Meting doorzendmeting = new Meting(metingTitel.getText().toString(), metingDescription.getText().toString(), imageString, meetdata);
 
-                    String doorZEndString = gson.toJson(doorzendmeting);
+                    JSONArray jArray = doorzendmeting.toJArray();
+
+                    JsonArrayRequest newMetingrequest = new JsonArrayRequest(Request.Method.POST,
+                            getString(R.string.url) + "Metingen",
+                            jArray,
+                            new Response.Listener<JSONArray>() {
+                                @Override
+                                public void onResponse(JSONArray response) {
+                                    System.out.println(response.toString());
+
+                                }
+                            },
+                            new Response.ErrorListener() {
+                                @Override
+                                public void onErrorResponse(VolleyError error) {
+                                    Toast.makeText(NewMeting.this, "Error", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                    );
 
                 } else {
                     Toast.makeText(getApplicationContext(), "Please select an image", Toast.LENGTH_LONG).show();
