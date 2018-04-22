@@ -21,6 +21,7 @@ import DoorstuurModels.DoorstuurProject;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -29,6 +30,7 @@ import model.Meting;
 import model.Persoon;
 import model.Project;
 import model.Spotter;
+import sun.misc.BASE64Decoder;
 
 @Named
 @Stateless
@@ -131,12 +133,23 @@ public class MetingManagementEJB implements MetingManagementEJBLocal{
 		}
 		
 		
+		//foto van base 64 omzetten naar bytes.
+		byte[] imageByte = null; 
+		BASE64Decoder decoder = new BASE64Decoder();
+		try {
+			imageByte = decoder.decodeBuffer(foto);
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
 		
 		
 		Meting meting1 = new Meting();
 		meting1.setTitel(titel);
 		meting1.setTijdstip(dateFormat.format(date));
 		meting1.setResultaten("bla");
+		meting1.setFoto(imageByte);
 		meting1.setIdProject(project);
 		meting1.setOpmerking(opmerking);
 		//meting1.setDataset1(resultaten[0].getBytes());
