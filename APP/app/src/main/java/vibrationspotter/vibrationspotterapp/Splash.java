@@ -19,7 +19,7 @@ public class Splash extends AppCompatActivity {
         //textView.setTypeface(typeface);
         //PIETER FIX PLZ
 
-        TextView registreren = (TextView) findViewById(R.id.link_signup);
+        TextView registreren = findViewById(R.id.link_signup);
         Button schoolbutton = findViewById(R.id.scholenlogin);
         Button gebruikerslogin = findViewById(R.id.gebruikerslogin);
 

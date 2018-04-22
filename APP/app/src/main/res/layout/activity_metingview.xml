@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -65,202 +66,293 @@
                 android:layout_width="match_parent"
                 android:layout_height="150dp"></com.github.mikephil.charting.charts.LineChart>
 
-            <TableLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginVertical="1dp"
-                android:paddingHorizontal="25dp"
-                android:paddingTop="15dp"
-                android:textAlignment="textStart">
-
-                <TableRow
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@color/colorPrimary"
-                    android:paddingBottom="0.5dp"
-                    android:paddingHorizontal="0.5dp"
-                    android:paddingTop="1dp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginHorizontal="0.5dp"
-                        android:layout_weight="1"
-                        android:background="#f0eeee"
-                        android:fontFamily="@font/advent_pro_semibold"
-                        android:paddingHorizontal="20dp"
-                        android:text="X"
-                        android:textColor="@color/colorPrimary" />
-
-                    <TextView
-                        android:id="@+id/xvalue"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginHorizontal="0.5dp"
-                        android:layout_weight="1"
-                        android:background="#f0eeee"
-                        android:fontFamily="@font/advent_pro_semibold"
-                        android:paddingHorizontal="20dp"
-                        android:text=""
-                        android:textColor="@color/colorPrimary" />
-                </TableRow>
-
-                <TableRow
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@color/colorPrimary"
-                    android:padding="0.5dp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginHorizontal="0.5dp"
-                        android:layout_weight="1"
-                        android:background="#f0eeee"
-                        android:fontFamily="@font/advent_pro_semibold"
-                        android:paddingHorizontal="20dp"
-                        android:text="Y"
-                        android:textColor="@color/colorPrimary" />
-
-                    <TextView
-                        android:id="@+id/yvalue"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginHorizontal="0.5dp"
-                        android:layout_weight="1"
-                        android:background="#f0eeee"
-                        android:fontFamily="@font/advent_pro_semibold"
-                        android:paddingHorizontal="20dp"
-                        android:text=""
-                        android:textColor="@color/colorPrimary" />
-                </TableRow>
-
-                <TableRow
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@color/colorPrimary"
-                    android:padding="0.5dp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginHorizontal="0.5dp"
-                        android:layout_weight="1"
-                        android:background="#f0eeee"
-                        android:fontFamily="@font/advent_pro_semibold"
-                        android:paddingHorizontal="20dp"
-                        android:text="Z"
-                        android:textColor="@color/colorPrimary" />
-
-                    <TextView
-                        android:id="@+id/zvalue"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginHorizontal="0.5dp"
-                        android:layout_weight="1"
-                        android:background="#f0eeee"
-                        android:fontFamily="@font/advent_pro_semibold"
-                        android:paddingHorizontal="20dp"
-                        android:text=""
-                        android:textColor="@color/colorPrimary" />
-                </TableRow>
-
-                <TableRow
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@color/colorPrimary"
-                    android:padding="0.5dp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginHorizontal="0.5dp"
-                        android:layout_weight="1"
-                        android:background="#f0eeee"
-                        android:fontFamily="@font/advent_pro_semibold"
-                        android:paddingHorizontal="20dp"
-                        android:text="T"
-                        android:textColor="@color/colorPrimary" />
-
-                    <TextView
-                        android:id="@+id/tvalue"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginHorizontal="0.5dp"
-                        android:layout_weight="1"
-                        android:background="#f0eeee"
-                        android:fontFamily="@font/advent_pro_semibold"
-                        android:paddingHorizontal="20dp"
-                        android:text=""
-                        android:textColor="@color/colorPrimary" />
-                </TableRow>
-
-                <TableRow
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@color/colorPrimary"
-                    android:padding="0.5dp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginHorizontal="0.5dp"
-                        android:layout_weight="1"
-                        android:background="#f0eeee"
-                        android:fontFamily="@font/advent_pro_semibold"
-                        android:paddingHorizontal="20dp"
-                        android:text="F"
-                        android:textColor="@color/colorPrimary" />
-
-                    <TextView
-                        android:id="@+id/fvalue"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginHorizontal="0.5dp"
-                        android:layout_weight="1"
-                        android:background="#f0eeee"
-                        android:fontFamily="@font/advent_pro_semibold"
-                        android:paddingHorizontal="20dp"
-                        android:text=""
-                        android:textColor="@color/colorPrimary" />
-                </TableRow>
-
-                <TableRow
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@color/colorPrimary"
-                    android:paddingBottom="1dp"
-                    android:paddingHorizontal="0.5dp"
-                    android:paddingTop="0.5dp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginHorizontal="0.5dp"
-                        android:layout_weight="1"
-                        android:background="#f0eeee"
-                        android:fontFamily="@font/advent_pro_semibold"
-                        android:paddingHorizontal="20dp"
-                        android:text="A"
-                        android:textColor="@color/colorPrimary" />
-
-                    <TextView
-                        android:id="@+id/avalue"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginHorizontal="0.5dp"
-                        android:layout_weight="1"
-                        android:background="#f0eeee"
-                        android:fontFamily="@font/advent_pro_semibold"
-                        android:paddingHorizontal="20dp"
-                        android:text=" "
-                        android:textColor="@color/colorPrimary" />
-                </TableRow>
-            </TableLayout>
-
 
         </LinearLayout>
     </ScrollView>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/scrollView5">
+
+        <TableLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginVertical="1dp"
+            android:paddingHorizontal="25dp"
+            android:paddingTop="15dp"
+            android:textAlignment="textStart">
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/colorPrimary"
+                android:padding="0.5dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="0.5dp"
+                    android:layout_weight="1"
+                    android:background="#f0eeee"
+                    android:fontFamily="@font/arsenal"
+                    android:paddingHorizontal="20dp"
+                    android:text="t"
+                    android:textColor="@color/colorPrimary" />
+
+                <TextView
+                    android:id="@+id/tvalue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="0.5dp"
+                    android:layout_weight="1"
+                    android:background="#f0eeee"
+                    android:fontFamily="@font/arsenal"
+                    android:paddingHorizontal="20dp"
+                    android:text=""
+                    android:textColor="@color/colorPrimary" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/colorPrimary"
+                android:paddingBottom="0.5dp"
+                android:paddingHorizontal="0.5dp"
+                android:paddingTop="1dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="0.5dp"
+                    android:layout_weight="1"
+                    android:background="#f0eeee"
+                    android:fontFamily="@font/arsenal"
+                    android:paddingHorizontal="20dp"
+                    android:text="x"
+                    android:textColor="@color/colorPrimary" />
+
+                <TextView
+                    android:id="@+id/xvalue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="0.5dp"
+                    android:layout_weight="1"
+                    android:background="#f0eeee"
+                    android:fontFamily="@font/arsenal"
+                    android:paddingHorizontal="20dp"
+                    android:text=""
+                    android:textColor="@color/colorPrimary" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/colorPrimary"
+                android:padding="0.5dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="0.5dp"
+                    android:layout_weight="1"
+                    android:background="#f0eeee"
+                    android:fontFamily="@font/arsenal"
+                    android:paddingHorizontal="20dp"
+                    android:text="y"
+                    android:textColor="@color/colorPrimary" />
+
+                <TextView
+                    android:id="@+id/yvalue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="0.5dp"
+                    android:layout_weight="1"
+                    android:background="#f0eeee"
+                    android:fontFamily="@font/arsenal"
+                    android:paddingHorizontal="20dp"
+                    android:text=""
+                    android:textColor="@color/colorPrimary" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/colorPrimary"
+                android:padding="0.5dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="0.5dp"
+                    android:layout_weight="1"
+                    android:background="#f0eeee"
+                    android:fontFamily="@font/arsenal"
+                    android:paddingHorizontal="20dp"
+                    android:text="z"
+                    android:textColor="@color/colorPrimary" />
+
+                <TextView
+                    android:id="@+id/zvalue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="0.5dp"
+                    android:layout_weight="1"
+                    android:background="#f0eeee"
+                    android:fontFamily="@font/arsenal"
+                    android:paddingHorizontal="20dp"
+                    android:text=""
+                    android:textColor="@color/colorPrimary" />
+            </TableRow>
+
+
+
+
+
+        </TableLayout>
+
+        <TableLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginVertical="1dp"
+            android:paddingHorizontal="25dp"
+            android:paddingTop="15dp"
+            android:textAlignment="textStart">
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/colorPrimary"
+                android:padding="0.5dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="0.5dp"
+                    android:layout_weight="1"
+                    android:background="#f0eeee"
+                    android:fontFamily="@font/arsenal"
+                    android:paddingHorizontal="20dp"
+                    android:text="f"
+                    android:textColor="@color/colorPrimary" />
+
+                <TextView
+                    android:id="@+id/fvalue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="0.5dp"
+                    android:layout_weight="1"
+                    android:background="#f0eeee"
+                    android:fontFamily="@font/arsenal"
+                    android:paddingHorizontal="20dp"
+                    android:text=""
+                    android:textColor="@color/colorPrimary" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/colorPrimary"
+                android:paddingBottom="0.5dp"
+                android:paddingHorizontal="0.5dp"
+                android:paddingTop="1dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="0.5dp"
+                    android:layout_weight="1"
+                    android:background="#f0eeee"
+                    android:fontFamily="@font/arsenal"
+                    android:paddingHorizontal="20dp"
+                    android:text="x"
+                    android:textColor="@color/colorPrimary" />
+
+                <TextView
+                    android:id="@+id/axvalue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="0.5dp"
+                    android:layout_weight="1"
+                    android:background="#f0eeee"
+                    android:fontFamily="@font/arsenal"
+                    android:paddingHorizontal="20dp"
+                    android:text=""
+                    android:textColor="@color/colorPrimary" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/colorPrimary"
+                android:padding="0.5dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="0.5dp"
+                    android:layout_weight="1"
+                    android:background="#f0eeee"
+                    android:fontFamily="@font/arsenal"
+                    android:paddingHorizontal="20dp"
+                    android:text="y"
+                    android:textColor="@color/colorPrimary" />
+
+                <TextView
+                    android:id="@+id/ayvalue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="0.5dp"
+                    android:layout_weight="1"
+                    android:background="#f0eeee"
+                    android:fontFamily="@font/arsenal"
+                    android:paddingHorizontal="20dp"
+                    android:text=""
+                    android:textColor="@color/colorPrimary" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/colorPrimary"
+                android:padding="0.5dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="0.5dp"
+                    android:layout_weight="1"
+                    android:background="#f0eeee"
+                    android:fontFamily="@font/arsenal"
+                    android:paddingHorizontal="20dp"
+                    android:text="z"
+                    android:textColor="@color/colorPrimary" />
+
+                <TextView
+                    android:id="@+id/azvalue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="0.5dp"
+                    android:layout_weight="1"
+                    android:background="#f0eeee"
+                    android:fontFamily="@font/arsenal"
+                    android:paddingHorizontal="20dp"
+                    android:text=""
+                    android:textColor="@color/colorPrimary" />
+            </TableRow>
+
+
+
+
+
+        </TableLayout>
+
+
+    </LinearLayout>
 
 
 </android.support.constraint.ConstraintLayout>
