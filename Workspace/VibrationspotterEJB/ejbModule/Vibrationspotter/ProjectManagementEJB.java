@@ -171,7 +171,7 @@ public class ProjectManagementEJB implements ProjectManagementEJBLocal {
 		if (p.size() != 1)
 			System.out.println("Foutieve id");
 		else
-			p.get(0).setTimestamp(Calendar.getInstance().getTime());
+		p.get(0).setTimestamp(Calendar.getInstance().getTime());
 		uniqueID = p.get(0).getQR();
 
 		String filePath = "D:\\Google Drive\\School\\2017-2018\\Project\\Test.png";
