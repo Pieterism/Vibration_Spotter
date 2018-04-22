@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Base64;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -58,8 +59,13 @@ public class MetingActivity extends AppCompatActivity {
 
         textTitel.setText(meting.getTitel());
 
-        tData = meting.getDataset1();
+        tData = new String(Base64.decode(meting.getDataset1(), Base64.DEFAULT));
 
-        fData = meting.getDataset2();
+        fData = new String(Base64.decode(meting.getDataset2(), Base64.DEFAULT));
+
+        System.out.println(tData);
+        System.out.println(fData);
+
+
     }
 }
