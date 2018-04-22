@@ -13,7 +13,7 @@ import javax.servlet.http.HttpSession;
 
 import Vibrationspotter.MetingManagementEJBLocal;
 import model.Meting;
-
+// afbeelding van de meting weergeven op de webapp
 @WebServlet("/image/*")
 public class ImageServlet extends HttpServlet {
 

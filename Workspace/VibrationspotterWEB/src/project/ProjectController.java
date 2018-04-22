@@ -19,6 +19,8 @@ import model.Meting;
 import model.Persoon;
 import model.Project;
 
+// project aanmaken, info over project ophalen en projecten wissen
+
 @Named
 @ViewScoped
 public class ProjectController implements Serializable {

@@ -19,7 +19,6 @@ import model.Persoon;
 
 
 
-//http://localhost:8080/VibrationspotterWEB/
 @Named
 @ViewScoped
 public class LoginController implements Serializable {

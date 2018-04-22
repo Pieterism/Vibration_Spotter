@@ -22,7 +22,8 @@ import java.util.List;
 import java.util.ArrayList;
 
 
-//http://localhost:8080/VibrationspotterWEB/
+// info over meting ophalen en metingen wissen
+
 @Named
 @ViewScoped
 public class MetingController implements Serializable {

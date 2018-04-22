@@ -18,6 +18,7 @@ import model.Persoon;
 import model.Project;
 import model.Spotter;
 
+// gebruiker (leerkracht of spotter) aanmaken en info over gebruiker ophalen
 @Named
 @ViewScoped
 public class UserController implements Serializable {

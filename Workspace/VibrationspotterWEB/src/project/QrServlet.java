@@ -14,7 +14,7 @@ import Vibrationspotter.MetingManagementEJBLocal;
 import Vibrationspotter.ProjectManagementEJBLocal;
 import Vibrationspotter.QrManagementEJBLocal;
 import model.Project;
-
+//QR van het project weergeven op de webapp
 @WebServlet("/qr/*")
 public class QrServlet extends HttpServlet {
 

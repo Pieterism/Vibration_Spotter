@@ -1,7 +1,4 @@
 package project;
-
-
- 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 
@@ -20,7 +17,9 @@ import org.primefaces.model.chart.LineChartSeries;
 
 import Vibrationspotter.MetingManagementEJBLocal;
 import model.Meting;
- 
+
+//de datapunten ophalen van de databank en genereert een grafiek op de webapp
+
 @ManagedBean
 public class ChartView implements Serializable {
  
