@@ -101,7 +101,7 @@
                         android:background="#f0eeee"
                         android:fontFamily="@font/advent_pro_semibold"
                         android:paddingHorizontal="20dp"
-                        android:text="0.256874123654789"
+                        android:text=""
                         android:textColor="@color/colorPrimary" />
                 </TableRow>
 

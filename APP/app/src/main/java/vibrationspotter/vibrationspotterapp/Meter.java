@@ -3,14 +3,12 @@ package vibrationspotter.vibrationspotterapp;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Button;
 
@@ -18,18 +16,13 @@ import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
-import com.github.mikephil.charting.highlight.Highlight;
-import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 import com.google.android.gms.common.api.CommonStatusCodes;
 
 import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Map;
 
-public class Meter extends Activity implements SensorEventListener{
+public class Meter extends Activity implements SensorEventListener {
 
     private SensorManager mSensorManager;
     private Sensor mAccelerometer;
@@ -144,7 +137,7 @@ public class Meter extends Activity implements SensorEventListener{
         bReject.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!started){
+                if (!started) {
                     lineChartZ.clear();
                     lineChartY.clear();
                     lineChartX.clear();
@@ -161,19 +154,19 @@ public class Meter extends Activity implements SensorEventListener{
     }
 
     @Override
-    public void onSensorChanged(SensorEvent event){
-        if(started){
+    public void onSensorChanged(SensorEvent event) {
+        if (started) {
             x = event.values[0];
             y = event.values[1];
             z = event.values[2];
             tijd = System.currentTimeMillis() - starttijd;
             System.out.println(x + ", " + y + ", " + z + ",       " + tijd);
 
-            xWaarden.add(new Entry(tijd,Float.parseFloat(String.valueOf(x))));
-            yWaarden.add(new Entry(tijd,Float.parseFloat(String.valueOf(y))));
-            zWaarden.add(new Entry(tijd,Float.parseFloat(String.valueOf(z))));
+            xWaarden.add(new Entry(tijd, Float.parseFloat(String.valueOf(x))));
+            yWaarden.add(new Entry(tijd, Float.parseFloat(String.valueOf(y))));
+            zWaarden.add(new Entry(tijd, Float.parseFloat(String.valueOf(z))));
 
-            tijdAs.add(entryNummer,String.valueOf(tijd));
+            tijdAs.add(entryNummer, String.valueOf(tijd));
 
             entryNummer++;
 
@@ -182,17 +175,17 @@ public class Meter extends Activity implements SensorEventListener{
     }
 
     @Override
-    public void onAccuracyChanged(Sensor sensor, int accuracy){
+    public void onAccuracyChanged(Sensor sensor, int accuracy) {
     }
 
     @Override
-    protected void onResume(){
+    protected void onResume() {
         super.onResume();
         mSensorManager.registerListener(this, mAccelerometer, mSensorManager.SENSOR_DELAY_GAME);
     }
 
     @Override
-    protected void onPause(){
+    protected void onPause() {
         super.onPause();
         mSensorManager.unregisterListener(this, mAccelerometer);
     }

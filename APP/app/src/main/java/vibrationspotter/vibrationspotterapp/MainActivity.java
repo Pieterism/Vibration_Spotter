@@ -1,9 +1,9 @@
 package vibrationspotter.vibrationspotterapp;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Point;
-import android.os.Build;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.constraint.ConstraintLayout;
@@ -15,48 +15,30 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Base64;
-import android.view.Display;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
-import android.database.Cursor;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
-import android.net.Uri;
-import android.provider.MediaStore;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-
-import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
-import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.common.api.CommonStatusCodes;
-import com.google.android.gms.maps.MapView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-import android.util.Log;
-import android.widget.Toast;
-
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -64,12 +46,13 @@ import java.util.List;
 import java.util.Map;
 
 import vibrationspotter.Custom_views.ProjectView;
-import vibrationspotter.Models.Meting;
 import vibrationspotter.Models.Project;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
+    private static String TAG = "MainActivity";
     private static final int QR = 555;
+    private static final int ERROR_DIALOG_REQUEST = 9001;
     ScrollView svProjectview;
     ConstraintLayout clHomePage;
     LinearLayout llprojecten;
@@ -95,7 +78,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setContentView(R.layout.activity_main);
 
 
-
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -104,7 +86,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             @Override
             public void onClick(View view) {
                 Intent qr_intent = new Intent(MainActivity.this, QR_hub.class);
-                startActivityForResult(qr_intent,QR );
+                startActivityForResult(qr_intent, QR);
             }
         });
 
@@ -129,7 +111,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         textName = nav_header_main.findViewById(R.id.textName);
 
         settings = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        Map<String,?> sharedPreferences = settings.getAll();
+        Map<String, ?> sharedPreferences = settings.getAll();
 
         projecten = new ArrayList<>();
         gson = new Gson();
@@ -138,7 +120,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         projecten.clear();
 
         String naam;
-        if(sharedPreferences.containsKey("email")) naam = sharedPreferences.get("email").toString();
+        if (sharedPreferences.containsKey("email"))
+            naam = sharedPreferences.get("email").toString();
         else naam = "nope";
         textName.setText(naam);
 
@@ -174,7 +157,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             AlertDialog.Builder settings = new AlertDialog.Builder(this);
             settings.setMessage("Naar Settings")
-                    .setNegativeButton("close",null)
+                    .setNegativeButton("close", null)
                     .create()
                     .show();
 
@@ -217,9 +200,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
             SharedPreferences.Editor editor = settings.edit();
 
-            String email = settings.getString("email",null);
-            if(email!=null){
-                Map<String,String> gegevens = new HashMap<>();
+            String email = settings.getString("email", null);
+            if (email != null) {
+                Map<String, String> gegevens = new HashMap<>();
                 gegevens.put("email", email);
                 final JSONObject jsonObject = new JSONObject(gegevens);
                 final JSONArray jArray = new JSONArray();
@@ -233,17 +216,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                             public void onResponse(JSONArray response) {
                                 Log.d("Projecten", "GELUKT!");
 
-                                Type type = new TypeToken<List<Project>>(){}.getType();
+                                Type type = new TypeToken<List<Project>>() {
+                                }.getType();
                                 projecten = gson.fromJson(response.toString(), type);
 
-                                for(final Project p: projecten){
+                                for (final Project p : projecten) {
                                     ProjectView projectView = new ProjectView(getApplicationContext(), p);
                                     projectView.setOnClickListener(new View.OnClickListener() {
                                         @Override
                                         public void onClick(View v) {
                                             String pString = gson.toJson(p);
-                                            Intent naar_project = new Intent(getApplicationContext(),ProjectActivity.class);
-                                            naar_project.putExtra("project",pString);
+                                            Intent naar_project = new Intent(getApplicationContext(), ProjectActivity.class);
+                                            naar_project.putExtra("project", pString);
                                             startActivity(naar_project);
                                         }
                                     });
@@ -254,7 +238,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         new Response.ErrorListener() {
                             @Override
                             public void onErrorResponse(VolleyError error) {
-                                Log.d("Projecten","Error: " + error.toString() + ", " + error.getMessage());
+                                Log.d("Projecten", "Error: " + error.toString() + ", " + error.getMessage());
                             }
                         }
                 );
@@ -283,13 +267,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         } else if (id == R.id.nav_about) {
 
-        }
-        else if (id == R.id.nav_map) {
-            Intent naar_map = new Intent(MainActivity.this, MapView.class);
+        } else if (id == R.id.nav_map) {
+            Intent naar_map = new Intent(MainActivity.this, MapActivity.class);
             startActivity((naar_map));
-        }
-
-        else if (id == R.id.nav_newproject) {
+        } else if (id == R.id.nav_newproject) {
             Intent naar_newproject = new Intent(MainActivity.this, NewProject.class);
             startActivity((naar_newproject));
         }
@@ -300,9 +281,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(data!=null){
-            if(resultCode== CommonStatusCodes.SUCCESS){
-                if(requestCode==QR) {
+        if (data != null) {
+            if (resultCode == CommonStatusCodes.SUCCESS) {
+                if (requestCode == QR) {
                     String qrcode = data.getStringExtra("QR_code");
 
                     Map<String, String> QRgegevens = new HashMap<>();
@@ -323,13 +304,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                     ArrayList<Project> projecten;
 
 
-                                    Type type = new TypeToken<List<Project>>(){}.getType();
+                                    Type type = new TypeToken<List<Project>>() {
+                                    }.getType();
                                     projecten = gson.fromJson(response.toString(), type);
 
-                                   // projecten.get(0)
-                                //    Project p = gson.fromJson(response.toString(), type);
+                                    // projecten.get(0)
+                                    //    Project p = gson.fromJson(response.toString(), type);
                                     String project = gson.toJson(projecten.get(0));
-                                    Intent naar_project = new Intent(getApplicationContext(),ProjectActivity.class);
+                                    Intent naar_project = new Intent(getApplicationContext(), ProjectActivity.class);
                                     naar_project.putExtra("project", project);
                                     startActivity(naar_project);
                                 }
@@ -349,9 +331,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     VolleyClass.getInstance(getApplicationContext()).addToRequestQueue(QRprojectrequest, "QR_Request");
 
 
-
-
-
                     //   LocationManager lm = (LocationManager)getSystemService(getApplicationContext().LOCATION_SERVICE);
 
 
@@ -359,10 +338,26 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
 
 
-
-        }
-        else{
+        } else {
             System.out.println("data null");
         }
     }
+
+    public boolean isServicesOK() {
+        Log.d(TAG, "isServicesOK: checking google services version");
+        int available = GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(MainActivity.this);
+
+        if (available == ConnectionResult.SUCCESS) {
+            Log.d(TAG, "isServicesOK: Google Play Services is working");
+            return true;
+        } else if (GoogleApiAvailability.getInstance().isUserResolvableError(available)) {
+            Log.d(TAG, "isServicesOK: an error occured but we can fix it");
+            Dialog d = GoogleApiAvailability.getInstance().getErrorDialog(MainActivity.this, available, ERROR_DIALOG_REQUEST);
+            d.show();
+        } else {
+            Toast.makeText(this, "You can't make map requests", Toast.LENGTH_SHORT).show();
+        }
+        return false;
+    }
 }
+

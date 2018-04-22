@@ -55,7 +55,7 @@ public class MetingSpotter extends AppCompatActivity implements SensorEventListe
         lcTest = findViewById(R.id.lcTest);
         bStart = findViewById(R.id.bStart);
         bStop = findViewById(R.id.bStop);
-      //  textResultaat = findViewById(R.id.textResultaat);
+        //  textResultaat = findViewById(R.id.textResultaat);
 
         started = false;
         mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
@@ -130,17 +130,18 @@ public class MetingSpotter extends AppCompatActivity implements SensorEventListe
 
                         textResultaat.setText(String.valueOf((int) e.getX())); //xCoordinaat
 
-                        for (Entry temp : xWaarden){
-                            if (temp.getX() == e.getX()){
+                        for (Entry temp : xWaarden) {
+                            if (temp.getX() == e.getX()) {
                                 System.out.println(temp.getY());
                             }
                         }
-                        for (Entry temp : yWaarden){
-                            if (temp.getX() == e.getX()){
+                        for (Entry temp : yWaarden) {
+                            if (temp.getX() == e.getX()) {
                                 System.out.println(temp.getY());
                             }
-                        }for (Entry temp : zWaarden){
-                            if (temp.getX() == e.getX()){
+                        }
+                        for (Entry temp : zWaarden) {
+                            if (temp.getX() == e.getX()) {
                                 System.out.println(temp.getY());
                             }
                         }
@@ -166,19 +167,19 @@ public class MetingSpotter extends AppCompatActivity implements SensorEventListe
     }
 
     @Override
-    public void onSensorChanged(SensorEvent event){
-        if(started){
+    public void onSensorChanged(SensorEvent event) {
+        if (started) {
             x = event.values[0];
             y = event.values[1];
             z = event.values[2];
             tijd = System.currentTimeMillis() - starttijd;
             System.out.println(x + ", " + y + ", " + z + ",       " + tijd);
 
-            xWaarden.add(new Entry(tijd,Float.parseFloat(String.valueOf(x))));
-            yWaarden.add(new Entry(tijd,Float.parseFloat(String.valueOf(y))));
-            zWaarden.add(new Entry(tijd,Float.parseFloat(String.valueOf(z))));
+            xWaarden.add(new Entry(tijd, Float.parseFloat(String.valueOf(x))));
+            yWaarden.add(new Entry(tijd, Float.parseFloat(String.valueOf(y))));
+            zWaarden.add(new Entry(tijd, Float.parseFloat(String.valueOf(z))));
 
-            tijdAs.add(entryNummer,String.valueOf(tijd));
+            tijdAs.add(entryNummer, String.valueOf(tijd));
 
             doorzendData = doorzendData.concat(String.valueOf(tijd) + "," + String.valueOf(x) + "," + String.valueOf(y) + "," + String.valueOf(z) + "\n");
 
@@ -187,17 +188,17 @@ public class MetingSpotter extends AppCompatActivity implements SensorEventListe
     }
 
     @Override
-    public void onAccuracyChanged(Sensor sensor, int accuracy){
+    public void onAccuracyChanged(Sensor sensor, int accuracy) {
     }
 
     @Override
-    protected void onResume(){
+    protected void onResume() {
         super.onResume();
         mSensorManager.registerListener(this, mAccelerometer, mSensorManager.SENSOR_DELAY_GAME);
     }
 
     @Override
-    protected void onPause(){
+    protected void onPause() {
         super.onPause();
         mSensorManager.unregisterListener(this, mAccelerometer);
     }

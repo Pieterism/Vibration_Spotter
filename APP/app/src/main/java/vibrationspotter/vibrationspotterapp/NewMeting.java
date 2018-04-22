@@ -12,10 +12,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.common.api.CommonStatusCodes;
 import com.google.gson.Gson;
 
 import java.io.ByteArrayOutputStream;
@@ -68,14 +66,14 @@ public class NewMeting extends AppCompatActivity {
         bRotate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ivImage.setRotation(ivImage.getRotation()+45);
+                ivImage.setRotation(ivImage.getRotation() + 45);
             }
         });
 
         bSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(hasImage) {
+                if (hasImage) {
                     ByteArrayOutputStream baos = new ByteArrayOutputStream();
                     bitmap.compress(Bitmap.CompressFormat.JPEG, 50, baos);
                     byte[] imageBytes = baos.toByteArray();
@@ -92,7 +90,7 @@ public class NewMeting extends AppCompatActivity {
             }
         });
 
-        Intent eerst_meting_maken = new Intent(getApplicationContext(),Meter.class);
+        Intent eerst_meting_maken = new Intent(getApplicationContext(), Meter.class);
         startActivityForResult(eerst_meting_maken, METINGEN);
     }
 
@@ -100,8 +98,8 @@ public class NewMeting extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if(data != null){
-            switch (requestCode){
+        if (data != null) {
+            switch (requestCode) {
                 case METINGEN:
                     doorzendData = data.getStringExtra("data");
                     meetdata = doorzendData.getBytes();
