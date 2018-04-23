@@ -13,25 +13,27 @@ import Vibrationspotter.ProjectManagementEJBLocal;
 
 @Path("QR")
 public class QRcodeREST implements Serializable {
-
+	
 	private static final long serialVersionUID = 1L;
-
+	
 	@EJB
 	private ProjectManagementEJBLocal projectEJB;
-
+	
 	@POST
-	@Consumes({ MediaType.APPLICATION_JSON })
-	public String qr_accept(String qr) throws IOException {
+	@Consumes({MediaType.APPLICATION_JSON})
+	public String qr_accept(String qr) throws IOException{
 		String waarde;
-
-		if (projectEJB.checkQR(qr) == true) {
+		
+		if(projectEJB.checkQR(qr)==true){
 			waarde = "true";
-		} else {
+		}
+		else{
 			waarde = "false";
 		}
-
+		
+		
 		System.out.println(qr);
 		return "waarde";
 	}
-
+	
 }
