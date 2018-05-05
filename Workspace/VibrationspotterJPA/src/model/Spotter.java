@@ -18,6 +18,14 @@ import javax.persistence.NamedQuery;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
+/**
+ * This class implements a database Spotter table and the getters and setters
+ * for the database values.
+ * 
+ * @author Birgen Vermang, Thomas Bruneel, Pieter-Jan Vanhaverbeke, Pieter
+ *         Vanderhaegen
+ *
+ */
 @Entity
 @Table(name = "Spotter")
 @NamedQuery(name = "Spotter.findAll", query = "SELECT p FROM Spotter p")
@@ -25,19 +33,16 @@ import javax.persistence.Table;
 @DiscriminatorValue("Spotter")
 public class Spotter extends Persoon {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	@Column(name = "gebruikersnaam", nullable = false, unique = true)
 	private String gebruikersnaam;
 
-	public Spotter(){
+	public Spotter() {
 		super();
 	}
 
-	public Spotter(String gebruikersnaam){
+	public Spotter(String gebruikersnaam) {
 		super();
 		this.gebruikersnaam = gebruikersnaam;
 	}

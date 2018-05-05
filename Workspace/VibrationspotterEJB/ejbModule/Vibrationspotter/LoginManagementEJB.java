@@ -13,6 +13,13 @@ import javax.persistence.Query;
 
 import model.Persoon;
 
+/**
+ * Bean to handle authentication with database
+ * 
+ * @author Birgen Vermang, Thomas Bruneel, Pieter-Jan Vanhaverbeke, Pieter
+ *         Vanderhaegen
+ *
+ */
 @Stateless
 public class LoginManagementEJB implements LoginManagementEJBLocal {
 
@@ -21,12 +28,21 @@ public class LoginManagementEJB implements LoginManagementEJBLocal {
 
 	@Resource
 	private SessionContext ctx;
+
 	@EJB
 	private BCrypt bcrypt;
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * Vibrationspotter.LoginManagementEJBLocal#controleerpaswoord(java.lang.
+	 * String, java.lang.String)
+	 */
 	public boolean controleerpaswoord(String email, String pwd) {
 		/*
-		 * Methode dat Passwoord en Email van Web gekregen vergelijkt met databank.
+		 * Methode dat Passwoord en Email van Web gekregen vergelijkt met
+		 * databank.
 		 */
 		Query q = em.createQuery("SELECT p FROM Persoon p WHERE p.emailadres = :email");
 		q.setParameter("email", email);
@@ -38,9 +54,17 @@ public class LoginManagementEJB implements LoginManagementEJBLocal {
 		return false;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * Vibrationspotter.LoginManagementEJBLocal#controleerPaswoordLeerkrachtApp(
+	 * java.lang.String, java.lang.String)
+	 */
 	public boolean controleerPaswoordLeerkrachtApp(String email, String pwd) {
 		/*
-		 * Methode dat Passwoord en Email van App gekregen vergelijkt met databank (zelfde manier van APP).
+		 * Methode dat Passwoord en Email van App gekregen vergelijkt met
+		 * databank (zelfde manier van APP).
 		 */
 		Query q = em.createQuery("SELECT p FROM Persoon p WHERE p.emailadres = :email");
 		q.setParameter("email", email);

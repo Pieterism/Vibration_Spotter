@@ -12,13 +12,16 @@ import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+/**
+ * This class implements a database Meting table and the getters and setters for
+ * the database values.
+ * 
+ * @author Birgen Vermang, Thomas Bruneel, Pieter-Jan Vanhaverbeke, Pieter
+ *         Vanderhaegen
+ *
+ */
 @Entity
 @Table(name = "Meting")
-/*
- * Meting heeft gegevens met titel, opmerkingen...
- * Ook een foto toevoegen aan de meting is mogelijk.
- * Er worden ook nog 2 datasets aangemaakt voor de verwerking van de grafieken (met filter en zonder).
- */
 public class Meting implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -142,7 +145,5 @@ public class Meting implements Serializable {
 	public void setDataset2(byte[] dataset2) {
 		this.dataset2 = dataset2;
 	}
-
-
 
 }

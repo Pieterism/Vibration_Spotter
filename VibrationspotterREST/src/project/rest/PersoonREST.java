@@ -11,24 +11,31 @@ import javax.ws.rs.PathParam;
 
 import Vibrationspotter.ProjectManagementEJBLocal;
 
+/**
+ * Implementation of RESTful services for connection with Persoon database
+ * table.
+ * 
+ * @author Birgen Vermang, Thomas Bruneel, Pieter-Jan Vanhaverbeke, Pieter
+ *         Vanderhaegen
+ *
+ */
 @Named
 @ViewScoped
 @Path("Persoon")
-public class PersoonREST implements Serializable{
-	
+public class PersoonREST implements Serializable {
+
 	private static final long serialVersionUID = 1L;
 
 	@EJB
 	private ProjectManagementEJBLocal projectEJB;
-	
+
 	@GET
 	@Path("/{idProject}")
-	public String getPersoonVanProject(@PathParam("idProject")String idProject){
-		
+	public String getPersoonVanProject(@PathParam("idProject") String idProject) {
+
 		projectEJB.findPersonByIdProject(Integer.parseInt(idProject));
-	
+
 		return projectEJB.findPersonByIdProject(Integer.parseInt(idProject));
 	}
-
 
 }

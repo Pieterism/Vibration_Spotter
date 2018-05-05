@@ -1,5 +1,13 @@
 package Vibrationspotter;
 
+import java.lang.reflect.Type;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
+
 import javax.annotation.Resource;
 import javax.ejb.EJB;
 import javax.ejb.SessionContext;
@@ -8,128 +16,135 @@ import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-import javax.ws.rs.PathParam;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.sun.jmx.snmp.Timestamp;
 import com.sun.org.apache.xml.internal.security.exceptions.Base64DecodingException;
 import com.sun.org.apache.xml.internal.security.utils.Base64;
 
 import DoorstuurModels.DoorstuurMeting;
-import DoorstuurModels.DoorstuurProject;
-
-import java.util.ArrayList;
-import java.util.Date;
-import java.io.IOException;
-import java.lang.reflect.Type;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.List;
-import java.util.Map;
-
 import model.Meting;
-import model.Persoon;
 import model.Project;
 import model.Spotter;
-import sun.misc.BASE64Decoder;
 
+/**
+ * Bean to handle Meting class queries and operations on database
+ * 
+ * @author Birgen Vermang, Thomas Bruneel, Pieter-Jan Vanhaverbeke, Pieter
+ *         Vanderhaegen
+ *
+ */
 @Named
 @Stateless
-public class MetingManagementEJB implements MetingManagementEJBLocal{
+public class MetingManagementEJB implements MetingManagementEJBLocal {
 
-	@PersistenceContext(unitName="demodb")
+	@PersistenceContext(unitName = "demodb")
 	private EntityManager em;
 
 	@EJB
 	private PersonManagementEJBLocal personEJB;
-	
+
 	@EJB
 	private OctaveManagementEJBLocal octaveEJB;
-	
+
 	@EJB
 	private ProjectManagementEJBLocal projectEJB;
 
 	@Resource
 	private SessionContext ctx;
 
-	public MetingManagementEJB(){};
+	public MetingManagementEJB() {
+	};
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * Vibrationspotter.MetingManagementEJBLocal#findMeting(java.lang.String)
+	 */
 	@Override
 	public Meting findMeting(String titelMeting) {
-		//Methode zoeken van meting met bepaalde titel.
+		// Methode zoeken van meting met bepaalde titel.
 		Query q = em.createQuery("SELECT id FROM Meting m WHERE m.titel = :titel");
 		q.setParameter(1, titelMeting);
 
 		return em.find(Meting.class, titelMeting);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see Vibrationspotter.MetingManagementEJBLocal#addMeting(model.Meting)
+	 */
 	@Override
 	public void addMeting(Meting meting) {
 		em.persist(meting);
 	}
-	
-	
-	public List<Meting> findMetingenByIdProject(int idProject){
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * Vibrationspotter.MetingManagementEJBLocal#findMetingenByIdProject(int)
+	 */
+	public List<Meting> findMetingenByIdProject(int idProject) {
 		Query q = em.createQuery("SELECT m FROM Meting m WHERE m.idProject.idProject= :fname");
 		q.setParameter("fname", idProject);
 		List<Meting> metingen = q.getResultList();
 		return metingen;
 	}
-	
-	public void nieuweMeting(String jsonArray){
-		Project p = projectEJB.findProject("tom");
-		Meting m = new Meting(0,"testV1","20/03/2018",jsonArray,"opmerking",p);
-		addMeting(m);
-	}
-	
-	public void wissenMetingenByProjectid(int idProject){
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * Vibrationspotter.MetingManagementEJBLocal#wissenMetingenByProjectid(int)
+	 */
+	public void wissenMetingenByProjectid(int idProject) {
 		Query q = em.createQuery("SELECT m FROM Meting m WHERE m.idProject.idProject= :id");
 		q.setParameter("id", idProject);
 		List<Meting> metingen = q.getResultList();
-		for(Meting m:metingen){
+		for (Meting m : metingen) {
 			Meting met = em.find(Meting.class, m.getIdMeting());
 			em.remove(met);
-			
-		}
-		
-	}
-	
 
-	public void ToevoegenMetingResultaten2(String gegevens, String id){
-		
-		byte [] imageByte = null;
+		}
+
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * Vibrationspotter.MetingManagementEJBLocal#ToevoegenMetingResultaten2(java
+	 * .lang.String, java.lang.String)
+	 */
+	public void ToevoegenMetingResultaten2(String gegevens, String id) {
+
+		byte[] imageByte = null;
 		Gson gson = new Gson();
-		Type type = new TypeToken<List<Map<String,String>>>(){}.getType();
-		List<Map<String,String>> doorstuurmeting = gson.fromJson(gegevens, type);
-		
-		//text,descripotion,imagestring,meetstring
+		Type type = new TypeToken<List<Map<String, String>>>() {
+		}.getType();
+		List<Map<String, String>> doorstuurmeting = gson.fromJson(gegevens, type);
+
+		// text,descripotion,imagestring,meetstring
 		String leesBareData = null;
 		try {
 			leesBareData = new String(Base64.decode(doorstuurmeting.get(0).get("dataset1")));
-			imageByte =  Base64.decode((doorstuurmeting.get(0).get("foto")));
+			imageByte = Base64.decode((doorstuurmeting.get(0).get("foto")));
 		} catch (Base64DecodingException e) {
 			e.printStackTrace();
 		}
 		System.out.println(leesBareData);
-		
-		
-		
-		
+
 		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		Date date = new Date();
-		System.out.println(dateFormat.format(date));			//loggen huidige datum
-		
+		System.out.println(dateFormat.format(date)); // loggen huidige datum
+
 		Project project = projectEJB.findProjectById(Integer.parseInt(id));
-		
-		String [] verwerkteresultaten = octaveEJB.createdata(leesBareData);	
-	
-		
-		
-		
+
+		String[] verwerkteresultaten = octaveEJB.createdata(leesBareData);
+
 		Meting meting1 = new Meting();
 		meting1.setTitel(doorstuurmeting.get(0).get("titel"));
 		meting1.setTijdstip(dateFormat.format(date));
@@ -137,133 +152,162 @@ public class MetingManagementEJB implements MetingManagementEJBLocal{
 		meting1.setIdProject(project);
 		meting1.setFoto(imageByte);
 		meting1.setOpmerking(doorstuurmeting.get(0).get("opmerking"));
-		
-		em.persist(meting1);	
-		
-		
-		
+
+		em.persist(meting1);
+
 	}
-	
-	
-	public void ToevoegenMetingResultaten(String jsonarray){
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * Vibrationspotter.MetingManagementEJBLocal#ToevoegenMetingResultaten(java.
+	 * lang.String)
+	 */
+	public void ToevoegenMetingResultaten(String jsonarray) {
 		/*
-		 * Methode die Resultaten gekregen van APP verwerkt en dan doorstuurt naar databank.
-		 * De verwerking gebeurt in de OctaveManagementEJB klassen opgeroepen door verwerkstringdata(String data)
-		 * en CreateData(String s)
+		 * Methode die Resultaten gekregen van APP verwerkt en dan doorstuurt
+		 * naar databank. De verwerking gebeurt in de OctaveManagementEJB
+		 * klassen opgeroepen door verwerkstringdata(String data) en
+		 * CreateData(String s)
 		 */
-		
-		jsonarray = jsonarray.substring(1, jsonarray.length()-1);	
-	//	JSONObject json = null;
-		
+
+		jsonarray = jsonarray.substring(1, jsonarray.length() - 1);
+		// JSONObject json = null;
+
 		int index = jsonarray.lastIndexOf("{");
 		System.out.println(index);
-		jsonarray = jsonarray.substring(0,index-1);
-		
-		jsonarray = octaveEJB.verwerkstringdata(jsonarray);
-	
-	/*	try {
-			json = new JSONObject(jsonarray);
-		} catch (JSONException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}*/
+		jsonarray = jsonarray.substring(0, index - 1);
 
-		
+		jsonarray = octaveEJB.verwerkstringdata(jsonarray);
+
+		/*
+		 * try { json = new JSONObject(jsonarray); } catch (JSONException e1) {
+		 * // TODO Auto-generated catch block e1.printStackTrace(); }
+		 */
+
 		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		Date date = new Date();
-		System.out.println(dateFormat.format(date));			//loggen huidige datum
-        
+		System.out.println(dateFormat.format(date)); // loggen huidige datum
+
 		int idmeting;
 		Spotter spotter;
-		Project project = projectEJB.findProjectById(2); //project nog vinden via doorgestuurde jsonarray
-		
-		//Meting meting1 = new Meting(2,"titel","2015-12-12 00:00:00",meting,"foto", project);
-		String [] resultaten = octaveEJB.createdata(jsonarray);
-		
+		Project project = projectEJB.findProjectById(2); // project nog vinden
+															// via doorgestuurde
+															// jsonarray
+
+		// Meting meting1 = new Meting(2,"titel","2015-12-12
+		// 00:00:00",meting,"foto", project);
+		String[] resultaten = octaveEJB.createdata(jsonarray);
+
 		Meting meting1 = new Meting();
 		meting1.setTitel("titel");
 		meting1.setTijdstip(dateFormat.format(date));
 		meting1.setResultaten(jsonarray);
 		meting1.setIdProject(project);
-		//meting1.setDataset1(resultaten[0].getBytes());
-		//meting1.setDataset2(resultaten[1].getBytes());
-		em.persist(meting1);	
-		
+		// meting1.setDataset1(resultaten[0].getBytes());
+		// meting1.setDataset2(resultaten[1].getBytes());
+		em.persist(meting1);
+
 	}
-	
-	public byte[] zoekDataset1(int idMeting){
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see Vibrationspotter.MetingManagementEJBLocal#zoekDataset1(int)
+	 */
+	public byte[] zoekDataset1(int idMeting) {
 		Query q = em.createQuery("SELECT m FROM Meting m WHERE m.idMeting= :id");
 		q.setParameter("id", idMeting);
 		List<Meting> metingen = q.getResultList();
-		Meting m=metingen.get(0);
+		Meting m = metingen.get(0);
 		return m.getDataset1();
 	}
-	
-	public byte[] zoekDataset2(int idMeting){
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see Vibrationspotter.MetingManagementEJBLocal#zoekDataset2(int)
+	 */
+	public byte[] zoekDataset2(int idMeting) {
 		Query q = em.createQuery("SELECT m FROM Meting m WHERE m.idMeting= :id");
 		q.setParameter("id", idMeting);
 		List<Meting> metingen = q.getResultList();
-		Meting m=metingen.get(0);
+		Meting m = metingen.get(0);
 		return m.getDataset2();
 	}
-	
-	public void wissenMeting(int idMeting){
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see Vibrationspotter.MetingManagementEJBLocal#wissenMeting(int)
+	 */
+	public void wissenMeting(int idMeting) {
 		Meting met = em.find(Meting.class, idMeting);
 		em.remove(met);
 	}
-	
-	public byte[] zoekFoto(int idMeting){
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see Vibrationspotter.MetingManagementEJBLocal#zoekFoto(int)
+	 */
+	public byte[] zoekFoto(int idMeting) {
 		Query q = em.createQuery("SELECT m FROM Meting m WHERE m.idMeting= :id");
 		q.setParameter("id", idMeting);
 		List<Meting> metingen = q.getResultList();
-		Meting m=metingen.get(0);
+		Meting m = metingen.get(0);
 		return m.getFoto();
-		
-	}
-	
 
-	public String haalProjectMetingen (String id){
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * Vibrationspotter.MetingManagementEJBLocal#haalProjectMetingen(java.lang.
+	 * String)
+	 */
+	public String haalProjectMetingen(String id) {
 		int projectid = Integer.parseInt(id);
 		Query q = em.createQuery("SELECT p FROM Project p WHERE p.idProject= :id");
 		q.setParameter("id", projectid);
 		List<Project> projecten = q.getResultList();
 		Project idProject = projecten.get(0);
-															//Waarom doe je dit?
-															//Je zoekt op id om dan de id eruit te halen?
-	
-		
+		// Waarom doe je dit?
+		// Je zoekt op id om dan de id eruit te halen?
+
 		Query q2 = em.createQuery("SELECT m FROM Meting m WHERE m.idProject = :idProject");
 		q2.setParameter("idProject", idProject);
 		List<Meting> metingen = q2.getResultList();
-		
+
 		List<DoorstuurMeting> doorstuurMetingen = new ArrayList<>();
-		for(Meting m : metingen){
+		for (Meting m : metingen) {
 			doorstuurMetingen.add(new DoorstuurMeting(m));
 		}
-		
-		//List<DoorstuurProject> doorstuurProjecten = new ArrayList<>();
-		//for(Project p: projecten) doorstuurProjecten.add(new DoorstuurProject(p));
-		
+
+		// List<DoorstuurProject> doorstuurProjecten = new ArrayList<>();
+		// for(Project p: projecten) doorstuurProjecten.add(new
+		// DoorstuurProject(p));
+
 		Gson gson = new Gson();
 		String metingenJson = gson.toJson(doorstuurMetingen);
-		
-		
-		
-		
+
 		return metingenJson;
-		
+
 	}
-	
-	public Meting findMetingById(int id){
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see Vibrationspotter.MetingManagementEJBLocal#findMetingById(int)
+	 */
+	public Meting findMetingById(int id) {
 		Query q = em.createQuery("SELECT m FROM Meting m WHERE m.idMeting = :id");
 		q.setParameter("id", id);
 		List<Meting> metingen = q.getResultList();
 		return metingen.get(0);
-		
+
 	}
-	//idProject
-
-
-
 
 }

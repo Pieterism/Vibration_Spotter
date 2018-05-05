@@ -17,14 +17,19 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+/**
+ * This class implements a database Project table and the getters and setters
+ * for the database values.
+ * 
+ * @author Birgen Vermang, Thomas Bruneel, Pieter-Jan Vanhaverbeke, Pieter
+ *         Vanderhaegen
+ *
+ */
 @Entity
 @Table(name = "Project")
 @NamedQuery(name = "Project.findAll", query = "SELECT p FROM Project p")
 public class Project implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	@Id

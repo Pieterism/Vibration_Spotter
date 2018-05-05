@@ -1,21 +1,20 @@
 package model;
 
-import java.io.Serializable;
-import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
+/**
+ * This class implements a database Leerkracht table and the getters and setters
+ * for the database values.
+ * 
+ * @author Birgen Vermang, Thomas Bruneel, Pieter-Jan Vanhaverbeke, Pieter
+ *         Vanderhaegen
+ *
+ */
 @Entity
 @Table(name = "leerkracht")
 @NamedQuery(name = "leerkracht.findAll", query = "SELECT p FROM Leerkracht p")
@@ -23,9 +22,6 @@ import javax.persistence.Table;
 @DiscriminatorValue("Leerkracht")
 public class Leerkracht extends Persoon {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	@Column(name = "schoolnaam", nullable = false)

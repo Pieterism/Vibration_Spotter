@@ -157,7 +157,8 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         }
     }
 
-    private void addAllMetingenMarkers() {
+    //Markeer locaties van projecten huidige gebruiker op kaart
+    private void addAllMetingenMarkersGebruiker() {
         //HIER MOET IK EEN PROJECT KRIJGEN WAARVAN IK LAT EN LONG NADIEN KAN OPVRAGEN
         gson = new Gson();
 
@@ -203,6 +204,53 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         }
     }
 
+    //TODO
+    //Markeer locaties van alle projecten op kaart
+    private void addAllMetingenMarkers() {
+        //HIER MOET IK EEN PROJECT KRIJGEN WAARVAN IK LAT EN LONG NADIEN KAN OPVRAGEN
+        gson = new Gson();
+
+        settings = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        sharedPreferences = settings.getAll();
+
+        String email = settings.getString("email", null);
+        if (email != null) {
+            Map<String, String> gegevens = new HashMap<>();
+            gegevens.put("email", email);
+            final JSONObject jsonObject = new JSONObject(gegevens);
+            final JSONArray jArray = new JSONArray();
+            jArray.put(jsonObject);
+
+            JsonArrayRequest projectRequest = new JsonArrayRequest(Request.Method.POST,
+                    getString(R.string.url) + "Projecten",
+                    jArray,
+                    new Response.Listener<JSONArray>() {
+                        @Override
+                        public void onResponse(JSONArray response) {
+                            Log.d("Projecten", "GELUKT!");
+
+                            Type type = new TypeToken<List<Project>>() {
+                            }.getType();
+                            projecten = gson.fromJson(response.toString(), type);
+
+                            for (final Project p : projecten) {
+                                LatLng coord = new LatLng(p.getLatitude(), p.getLongtitude());
+                                MarkerOptions options = new MarkerOptions().position(coord).title(p.getTitel());
+                                mMap.addMarker(options);
+                            }
+
+                        }
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            Log.d("Projecten", "Error: " + error.toString() + ", " + error.getMessage());
+                        }
+                    }
+            );
+            VolleyClass.getInstance(getApplicationContext()).addToRequestQueue(projectRequest, "Inloggen");
+        }
+    }
 
     //Laatst gekende locatie van gsm opvragen
     private void getDeviceLocation() {

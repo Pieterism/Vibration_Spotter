@@ -42,6 +42,13 @@ import DoorstuurModels.DoorstuurProject;
 import model.Persoon;
 import model.Project;
 
+/**
+ * Bean to handle Project class queries and operations on database
+ * 
+ * @author Birgen Vermang, Thomas Bruneel, Pieter-Jan Vanhaverbeke, Pieter
+ *         Vanderhaegen
+ *
+ */
 @Named
 @Stateless
 public class ProjectManagementEJB implements ProjectManagementEJBLocal {
@@ -58,6 +65,12 @@ public class ProjectManagementEJB implements ProjectManagementEJBLocal {
 	@EJB
 	private PersonManagementEJBLocal persoonejb;
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * Vibrationspotter.ProjectManagementEJBLocal#findProject(java.lang.String)
+	 */
 	@Override
 	public Project findProject(String titel) {
 		Query q = em.createQuery("SELECT p FROM Project  WHERE p.titel = : titel");
@@ -68,6 +81,12 @@ public class ProjectManagementEJB implements ProjectManagementEJBLocal {
 		return p.get(0);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * Vibrationspotter.ProjectManagementEJBLocal#findPersonByIdProject(int)
+	 */
 	@Override
 	public String findPersonByIdProject(int idProject) {
 		Query q = em.createQuery("SELECT p FROM Project p WHERE p.idProject = :id");
@@ -88,6 +107,11 @@ public class ProjectManagementEJB implements ProjectManagementEJBLocal {
 
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see Vibrationspotter.ProjectManagementEJBLocal#findProjectById(int)
+	 */
 	@Override
 	public Project findProjectById(int id) {
 		Query q = em.createQuery("SELECT p FROM Project p WHERE p.idProject = :id");
@@ -96,6 +120,13 @@ public class ProjectManagementEJB implements ProjectManagementEJBLocal {
 		return projecten.get(0);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * Vibrationspotter.ProjectManagementEJBLocal#findProjectByEmail(java.lang.
+	 * String)
+	 */
 	@Override
 	public Project findProjectByEmail(String email) {
 		Query q = em.createQuery("SELECT p FROM Project p WHERE p.idProject = :email");
@@ -104,18 +135,34 @@ public class ProjectManagementEJB implements ProjectManagementEJBLocal {
 		return projecten.get(0);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see Vibrationspotter.ProjectManagementEJBLocal#addProject(model.Project)
+	 */
 	@Override
 	public void addProject(Project project) {
 		em.persist(project);
 
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * Vibrationspotter.ProjectManagementEJBLocal#RemoveProject(model.Project)
+	 */
 	@Override
 	public void RemoveProject(Project project) {
 		em.remove(project);
 
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see Vibrationspotter.ProjectManagementEJBLocal#wissenProject(int)
+	 */
 	@Override
 	public void wissenProject(int idProject) {
 		// eerst metingen van project wissen, vooraleer project wissen
@@ -125,6 +172,11 @@ public class ProjectManagementEJB implements ProjectManagementEJBLocal {
 
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see Vibrationspotter.ProjectManagementEJBLocal#findAllProjecten()
+	 */
 	@Override
 	public List<Project> findAllProjecten() {
 		Query q = em.createQuery("SELECT p FROM Project p ORDER BY p.idProject ASC");
@@ -132,6 +184,11 @@ public class ProjectManagementEJB implements ProjectManagementEJBLocal {
 		return projecten;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see Vibrationspotter.ProjectManagementEJBLocal#findMijnProjecten(int)
+	 */
 	@Override
 	public List<Project> findMijnProjecten(int idPersoon) {
 		Persoon p = persoonejb.findPersoonByid(idPersoon);
@@ -141,6 +198,11 @@ public class ProjectManagementEJB implements ProjectManagementEJBLocal {
 		return projecten;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see Vibrationspotter.ProjectManagementEJBLocal#checkQR(java.lang.String)
+	 */
 	@Override
 	public boolean checkQR(String ingegevenstring) throws IOException {
 
@@ -176,6 +238,11 @@ public class ProjectManagementEJB implements ProjectManagementEJBLocal {
 
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see Vibrationspotter.ProjectManagementEJBLocal#getQRCode(int)
+	 */
 	@Override
 	public void getQRCode(int id) {
 		/*
@@ -235,6 +302,13 @@ public class ProjectManagementEJB implements ProjectManagementEJBLocal {
 		System.out.println("\n\nYou have successfully created QR Code.");
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * Vibrationspotter.ProjectManagementEJBLocal#FindAllProjectsForApp(java.
+	 * lang.String)
+	 */
 	@Override
 	public String FindAllProjectsForApp(String ingegevenstring) {
 
@@ -259,26 +333,23 @@ public class ProjectManagementEJB implements ProjectManagementEJBLocal {
 
 		return projectenJson;
 
-		/*
-		 * List<Project> goedeprojecten = new ArrayList<Project>(); for(int i=0;
-		 * i<projecten.size(); i++){
-		 * if(inloggegevens.get("email"),projecten.get(i).getIdPersoon()) }
-		 */
-		// Query q = em.createQuery("SELECT id FROM Meting m WHERE m.titel =
-		// :titel");
-
-		// Query q = em.createQuery("SELECT p FROM Project p ORDER BY
-		// p.idProject ASC");
-		// List<Project> projecten = q.getResultList();
-
-		// return inloggegevens.toString();
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see Vibrationspotter.ProjectManagementEJBLocal#update(model.Project)
+	 */
 	@Override
 	public void update(Project p) {
 		em.merge(p);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see Vibrationspotter.ProjectManagementEJBLocal#checkGoedgekeurd(int)
+	 */
 	@Override
 	public boolean checkGoedgekeurd(int idProject) {
 		Query q = em.createQuery("SELECT p FROM Project p WHERE p.idProject = :id");
@@ -291,6 +362,12 @@ public class ProjectManagementEJB implements ProjectManagementEJBLocal {
 
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * Vibrationspotter.ProjectManagementEJBLocal#findGoedgekeurdeProjecten()
+	 */
 	@Override
 	public List<Project> findGoedgekeurdeProjecten() {
 		Query q = em.createQuery("SELECT p FROM Project p ORDER BY p.idProject ASC");
@@ -305,6 +382,13 @@ public class ProjectManagementEJB implements ProjectManagementEJBLocal {
 		return goedeprojecten;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * Vibrationspotter.ProjectManagementEJBLocal#findProjectByQR(java.lang.
+	 * String)
+	 */
 	@Override
 	public Project findProjectByQR(String QR) {
 		Query q = em.createQuery("SELECT p FROM Project p WHERE p.QR = :QR");
@@ -313,6 +397,13 @@ public class ProjectManagementEJB implements ProjectManagementEJBLocal {
 		return projecten.get(0);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * Vibrationspotter.ProjectManagementEJBLocal#ToevoegenProjectenAPP(java.
+	 * lang.String)
+	 */
 	@Override
 	public void ToevoegenProjectenAPP(String gegevens) {
 		gegevens = gegevens.substring(1, gegevens.length() - 1);
@@ -356,6 +447,13 @@ public class ProjectManagementEJB implements ProjectManagementEJBLocal {
 
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * Vibrationspotter.ProjectManagementEJBLocal#verwijderProjectViaApp(java.
+	 * lang.String)
+	 */
 	@Override
 	public void verwijderProjectViaApp(String gegevens) {
 		gegevens = gegevens.substring(1, gegevens.length() - 1);
@@ -375,6 +473,12 @@ public class ProjectManagementEJB implements ProjectManagementEJBLocal {
 
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * Vibrationspotter.ProjectManagementEJBLocal#haalMetingenSizeProject(int)
+	 */
 	@Override
 	public int haalMetingenSizeProject(int id) {
 		Query q = em.createQuery("SELECT p FROM Project p WHERE p.idMeting = :id");
@@ -383,6 +487,13 @@ public class ProjectManagementEJB implements ProjectManagementEJBLocal {
 		return size;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * Vibrationspotter.ProjectManagementEJBLocal#HaalprojectviaApp(java.lang.
+	 * String)
+	 */
 	@Override
 	public String HaalprojectviaApp(String gegevens) {
 		gegevens = gegevens.substring(1, gegevens.length() - 1);

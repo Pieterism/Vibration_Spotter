@@ -13,6 +13,13 @@ import javax.persistence.PersistenceContext;
 import model.Persoon;
 import model.Spotter;
 
+/**
+ * Bean to handle Person class queries and operations on database
+ * 
+ * @author Birgen Vermang, Thomas Bruneel, Pieter-Jan Vanhaverbeke, Pieter
+ *         Vanderhaegen
+ *
+ */
 @Stateless
 public class PersonManagementEJB implements PersonManagementEJBLocal {
 
@@ -23,11 +30,12 @@ public class PersonManagementEJB implements PersonManagementEJBLocal {
 	private SessionContext ctx;
 
 	/*
-	 * @Override public Persoon findPersoon(String gebruikersnaam) { Query q =
-	 * em.createQuery("SELECT p FROM Persoon  WHERE p.voornaam = : voornaam" );
-	 * q.setParameter(1, gebruikersnaam); return null; }
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * Vibrationspotter.PersonManagementEJBLocal#findPersoon(java.lang.String,
+	 * java.lang.String)
 	 */
-
 	@Override
 	public Persoon findPersoon(String voornaam, String achternaam) {
 		Query q = em.createQuery(
@@ -37,6 +45,11 @@ public class PersonManagementEJB implements PersonManagementEJBLocal {
 		return null;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see Vibrationspotter.PersonManagementEJBLocal#findPersoonByid(int)
+	 */
 	@Override
 	public Persoon findPersoonByid(int id) {
 		Query q = em.createQuery("SELECT p FROM Persoon p WHERE p.idPersoon = :id");
@@ -45,12 +58,24 @@ public class PersonManagementEJB implements PersonManagementEJBLocal {
 		return personen.get(0);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see Vibrationspotter.PersonManagementEJBLocal#addPersoon(model.Persoon)
+	 */
 	@Override
 	public void addPersoon(Persoon p) {
 		em.persist(p);
 
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * Vibrationspotter.PersonManagementEJBLocal#findPersoonByEmail(java.lang.
+	 * String)
+	 */
 	public Persoon findPersoonByEmail(String emailadres) {
 		Query q = em.createQuery("SELECT p FROM Persoon p WHERE p.emailadres = :emailadres");
 		q.setParameter("emailadres", emailadres);
@@ -63,6 +88,13 @@ public class PersonManagementEJB implements PersonManagementEJBLocal {
 		}
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * Vibrationspotter.PersonManagementEJBLocal#findSpotterByGebruiksnaam(java.
+	 * lang.String)
+	 */
 	public Spotter findSpotterByGebruiksnaam(String gebruikersnaam) {
 		Query q = em.createQuery("SELECT s FROM Spotter s WHERE s.gebruikersnaam = :gebruikersnaam");
 		q.setParameter("gebruikersnaam", gebruikersnaam);
@@ -74,20 +106,33 @@ public class PersonManagementEJB implements PersonManagementEJBLocal {
 			return s;
 		}
 	}
-	public String zoekEmailadres(int idPersoon){
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see Vibrationspotter.PersonManagementEJBLocal#zoekEmailadres(int)
+	 */
+	public String zoekEmailadres(int idPersoon) {
 		Query q = em.createQuery("SELECT p FROM Persoon p WHERE p.idPersoon = :id");
 		q.setParameter("id", idPersoon);
 		List<Persoon> personen = q.getResultList();
-		
+
 		return personen.get(0).getEmailadres();
-		
+
 	}
-	
-	public int haalProjectenSizeVanPersoon(int id){
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * Vibrationspotter.PersonManagementEJBLocal#haalProjectenSizeVanPersoon(
+	 * int)
+	 */
+	public int haalProjectenSizeVanPersoon(int id) {
 		Query q = em.createQuery("SELECT p FROM Persoon p WHERE p.idPersoon = :id");
 		q.setParameter("id", id);
 		int size = q.getResultList().size();
-		
+
 		return size;
 	}
 

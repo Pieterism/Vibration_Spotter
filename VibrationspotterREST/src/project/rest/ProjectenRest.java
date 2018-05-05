@@ -17,74 +17,82 @@ import Vibrationspotter.MetingManagementEJBLocal;
 import Vibrationspotter.PersonManagementEJBLocal;
 import Vibrationspotter.ProjectManagementEJBLocal;
 
+/**
+ * Implementation of RESTful services for connection with Project database
+ * table.
+ * 
+ * @author Birgen Vermang, Thomas Bruneel, Pieter-Jan Vanhaverbeke, Pieter
+ *         Vanderhaegen
+ *
+ */
 @Named
 @ViewScoped
 @Path("Projecten")
 public class ProjectenRest implements Serializable {
-private static final long serialVersionUID = 1L;
-	
+	private static final long serialVersionUID = 1L;
+
 	@EJB
 	private ProjectManagementEJBLocal projectEJB;
-	
+
 	@EJB
 	private PersonManagementEJBLocal persoonEJB;
-	
+
 	@EJB
 	private MetingManagementEJBLocal metingEJB;
-	
+
 	@POST
-	@Consumes({MediaType.APPLICATION_JSON})
-	public String postTest(String jsonarray){
-		if(jsonarray == null) throw new BadRequestException();
+	@Consumes({ MediaType.APPLICATION_JSON })
+	public String postTest(String jsonarray) {
+		if (jsonarray == null)
+			throw new BadRequestException();
 		System.out.println(jsonarray);
-		
+
 		String test = projectEJB.FindAllProjectsForApp(jsonarray);
-		//System.out.println("test " + test);
+		// System.out.println("test " + test);
 		return test;
 	}
-	
+
 	@POST
 	@Path("ToevoegenProjecten")
-	public String VoegProjectToe (String jsonarray){
+	public String VoegProjectToe(String jsonarray) {
 		projectEJB.ToevoegenProjectenAPP(jsonarray);
 		System.out.println("projectaangemaakt");
-		
-		 return "[{\"Projectaanmaken\": Gelukt!!!}]";
+
+		return "[{\"Projectaanmaken\": Gelukt!!!}]";
 	}
-	
+
 	@POST
 	@Path("VerwijderenProjecten")
-	public String VerwijderProjectViaAPP (String jsonarray){
+	public String VerwijderProjectViaAPP(String jsonarray) {
 		projectEJB.verwijderProjectViaApp(jsonarray);
-	
-		 return "[{\"Projectverwijderen\": Gelukt!!!}]";
+
+		return "[{\"Projectverwijderen\": Gelukt!!!}]";
 	}
-	
+
 	@GET
-	@Path( "Size/{projectID}")
-	public String haalProjectensize (@PathParam("projectID") String id){
-		//int size = projectEJB.haalMetingenSizeProject(Integer.parseInt(id));
+	@Path("Size/{projectID}")
+	public String haalProjectensize(@PathParam("projectID") String id) {
+		// int size = projectEJB.haalMetingenSizeProject(Integer.parseInt(id));
 		int size = metingEJB.findMetingenByIdProject(Integer.parseInt(id)).size();
 		return "[{\"size\": " + size + "}]";
 	}
-	
-	
+
 	@POST
 	@Path("ProjectViaQR")
-	public String haalprojectviaQR (String jsonarray){
-	String project =projectEJB.HaalprojectviaApp(jsonarray);
-	
-	System.out.println("project is gehaald via QR");
-	
-		 return project;
-	}
-/*
- * @GET
-	@Path( "AlleMetingen/{projectID}")
-	public String haalMeting (@PathParam("projectID") String id){
-		
-		return metingEJB.haalProjectMetingen(id);
-	}
+	public String haalprojectviaQR(String jsonarray) {
+		String project = projectEJB.HaalprojectviaApp(jsonarray);
 
- */
+		System.out.println("project is gehaald via QR");
+
+		return project;
+	}
+	/*
+	 * @GET
+	 * 
+	 * @Path( "AlleMetingen/{projectID}") public String haalMeting
+	 * (@PathParam("projectID") String id){
+	 * 
+	 * return metingEJB.haalProjectMetingen(id); }
+	 * 
+	 */
 }

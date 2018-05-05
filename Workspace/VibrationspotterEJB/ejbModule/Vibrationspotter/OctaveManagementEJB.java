@@ -1,8 +1,6 @@
 package Vibrationspotter;
 
-import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
@@ -15,6 +13,13 @@ import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+/**
+ * Interface to handle the octave file for data processing
+ * 
+ * @author Birgen Vermang, Thomas Bruneel, Pieter-Jan Vanhaverbeke, Pieter
+ *         Vanderhaegen
+ *
+ */
 @Named
 @Stateless
 public class OctaveManagementEJB implements OctaveManagementEJBLocal {
@@ -31,60 +36,63 @@ public class OctaveManagementEJB implements OctaveManagementEJBLocal {
 	public OctaveManagementEJB() {
 	};
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * Vibrationspotter.OctaveManagementEJBLocal#createdata(java.lang.String)
+	 */
 	public String[] createdata(String s) {
-		/*
-		 * Methode die Octave oproept via commandline en bewerkingen uitvoert op onze ingelezen String (data).
-		 * We returnen 2 datasets terug die dan naar de databank gestuurd kunnen worden.
-		 */  
-		
+
 		String s1 = null;
 		String s2 = null;
-		
-		byte [] by ;
+
+		byte[] by;
 		ByteArrayOutputStream bOutput = new ByteArrayOutputStream();
-		
+
 		String[] resultaten = new String[2];
 		try {
-	   	  	String lijnen[] = s.split("\\r?\\n");
-	   	  	StringBuilder sb1 = new StringBuilder();
-	  		StringBuilder sb2 = new StringBuilder();
-	  		StringBuilder sb3 = new StringBuilder();
-	  		StringBuilder sb4 = new StringBuilder();
-	   	  	for(int i=0;i<lijnen.length;i++){
-	   	  		String getallen[]=lijnen[i].split(",");
-	   	  		String t=getallen[0];
-	   	  		String x=getallen[1];
-	   	  		String y=getallen[2];
-	   	  		String z=getallen[3];
-	   	  		
-	   	  		sb1.append(t+" ");
-	   	  		sb2.append(x+" ");
-	   	  		sb3.append(y+" ");
-	   	  		sb4.append(z+" ");
-	   	  	}
-	   	  	String tijd=sb1.toString();
-	   	  	String xWaarde=sb2.toString();
-	   	  	String yWaarde=sb3.toString();
-	   	  	String zWaarde=sb4.toString();
+			String lijnen[] = s.split("\\r?\\n");
+			StringBuilder sb1 = new StringBuilder();
+			StringBuilder sb2 = new StringBuilder();
+			StringBuilder sb3 = new StringBuilder();
+			StringBuilder sb4 = new StringBuilder();
+			for (int i = 0; i < lijnen.length; i++) {
+				String getallen[] = lijnen[i].split(",");
+				String t = getallen[0];
+				String x = getallen[1];
+				String y = getallen[2];
+				String z = getallen[3];
+
+				sb1.append(t + " ");
+				sb2.append(x + " ");
+				sb3.append(y + " ");
+				sb4.append(z + " ");
+			}
+			String tijd = sb1.toString();
+			String xWaarde = sb2.toString();
+			String yWaarde = sb3.toString();
+			String zWaarde = sb4.toString();
 
 			String[] command = { "octave-cli", };
 			Process p = Runtime.getRuntime().exec(command);
-			SyncPipe sync =  new SyncPipe(p.getInputStream(), System.out);
+			SyncPipe sync = new SyncPipe(p.getInputStream(), System.out);
 			new Thread(new SyncPipe(p.getErrorStream(), System.err)).start();
-			//new Thread(new SyncPipe(p.getInputStream(), bOutput)).start();
+			// new Thread(new SyncPipe(p.getInputStream(), bOutput)).start();
 			new Thread(sync).start();
 			PrintWriter stdin = new PrintWriter(p.getOutputStream());
 			InputStreamReader stdout = new InputStreamReader(p.getInputStream());
 
 			// Load package
 			stdin.println("pkg load signal");
-			 //----------------------------------------x waarde----------------------------------------
+			// ----------------------------------------x
+			// waarde----------------------------------------
 			// Generate data
-			stdin.println("t = ["+tijd+"];");
+			stdin.println("t = [" + tijd + "];");
 			stdin.println("a = -1; b = 1;");
 			stdin.println("t = t + (a + (b-a).*rand(1,length(t))).*1e-3;");
 			stdin.println("f1 = 2; f2 = 8; % two frequencies within the signal");
-			stdin.println("data = ["+xWaarde+"];");
+			stdin.println("data = [" + xWaarde + "];");
 
 			// Stap1
 			stdin.println("Fs = 100.; % desired (fixed) sample rate");
@@ -116,21 +124,23 @@ public class OctaveManagementEJB implements OctaveManagementEJBLocal {
 
 			// 2 output files uitprinten
 			/*
-			stdin.println("x1 = [tijd(:),versnelling(:),data_filtered(:)];");
-			stdin.println("csvwrite ('x1.txt', x1)");
+			 * stdin.println("x1 = [tijd(:),versnelling(:),data_filtered(:)];");
+			 * stdin.println("csvwrite ('x1.txt', x1)");
+			 * 
+			 * stdin.println("x2 = [frequentie(:),amplitude(:),A_data(:)];");
+			 * stdin.println("csvwrite ('x2.txt', x2)");
+			 */
+			stdin.println(
+					"versnellingx=versnelling; data_filteredx=data_filtered; frequentiex=frequentie; amplitudex=amplitude; A_datax=A_data; ");
+			// ----------------------------------------y
+			// waarde----------------------------------------
 
-			stdin.println("x2 = [frequentie(:),amplitude(:),A_data(:)];");
-			stdin.println("csvwrite ('x2.txt', x2)");
-			*/
-			stdin.println("versnellingx=versnelling; data_filteredx=data_filtered; frequentiex=frequentie; amplitudex=amplitude; A_datax=A_data; ");
-			//----------------------------------------y waarde----------------------------------------
-			
 			// Generate data
-			stdin.println("t = ["+tijd+"];");
+			stdin.println("t = [" + tijd + "];");
 			stdin.println("a = -1; b = 1;");
 			stdin.println("t = t + (a + (b-a).*rand(1,length(t))).*1e-3;");
 			stdin.println("f1 = 2; f2 = 8; % two frequencies within the signal");
-			stdin.println("data = ["+yWaarde+"];");
+			stdin.println("data = [" + yWaarde + "];");
 
 			// Stap1
 			stdin.println("Fs = 100.; % desired (fixed) sample rate");
@@ -162,22 +172,24 @@ public class OctaveManagementEJB implements OctaveManagementEJBLocal {
 
 			// 2 output files uitprinten
 			/*
-			stdin.println("x1 = [tijd(:),versnelling(:),data_filtered(:)];");
-			stdin.println("csvwrite ('x1.txt', x1)");
+			 * stdin.println("x1 = [tijd(:),versnelling(:),data_filtered(:)];");
+			 * stdin.println("csvwrite ('x1.txt', x1)");
+			 * 
+			 * stdin.println("x2 = [frequentie(:),amplitude(:),A_data(:)];");
+			 * stdin.println("csvwrite ('x2.txt', x2)");
+			 */
+			stdin.println(
+					"versnellingy=versnelling; data_filteredy=data_filtered; frequentiey=frequentie; amplitudey=amplitude; A_datay=A_data; ");
 
-			stdin.println("x2 = [frequentie(:),amplitude(:),A_data(:)];");
-			stdin.println("csvwrite ('x2.txt', x2)");
-			*/
-			stdin.println("versnellingy=versnelling; data_filteredy=data_filtered; frequentiey=frequentie; amplitudey=amplitude; A_datay=A_data; ");
-			
-			//----------------------------------------z waarde----------------------------------------
-			
+			// ----------------------------------------z
+			// waarde----------------------------------------
+
 			// Generate data
-			stdin.println("t = ["+tijd+"];");
+			stdin.println("t = [" + tijd + "];");
 			stdin.println("a = -1; b = 1;");
 			stdin.println("t = t + (a + (b-a).*rand(1,length(t))).*1e-3;");
 			stdin.println("f1 = 2; f2 = 8; % two frequencies within the signal;");
-			stdin.println("data = ["+zWaarde+"];");
+			stdin.println("data = [" + zWaarde + "];");
 
 			// Stap1
 			stdin.println("Fs = 100.; % desired (fixed) sample rate;");
@@ -207,43 +219,38 @@ public class OctaveManagementEJB implements OctaveManagementEJBLocal {
 			stdin.println("A2_data = fft(data_filtered); A2 = abs(A2_data/L);");
 			stdin.println("A_data = A2(1:L/2+1); A_data(2:end-1) = 2*A_data(2:end-1);");
 
+			stdin.println(
+					"versnellingz=versnelling; data_filteredz=data_filtered; frequentiez=frequentie; amplitudez=amplitude; A_dataz=A_data; ");
 
-			stdin.println("versnellingz=versnelling; data_filteredz=data_filtered; frequentiez=frequentie; amplitudez=amplitude; A_dataz=A_data; ");
-			
-			
 			// grootheden in datasets steken
-			
-			//tijd in functie van versnelling
+
+			// tijd in functie van versnelling
 			stdin.println("x1 = [tijd(:),data_filteredx(:),data_filteredy(:),data_filteredz(:)];");
 
-			//frequentie in functie van amplitude
+			// frequentie in functie van amplitude
 			stdin.println("x2 = [frequentiex(:),A_datax(:),A_datay(:),A_dataz(:)];");
-			
-			
+
 			stdin.close();
-			
-	/*		ByteArrayOutputStream buffer = new ByteArrayOutputStream();
 
-			int nRead;
-			byte[] data = new byte[16384];
+			/*
+			 * ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+			 * 
+			 * int nRead; byte[] data = new byte[16384];
+			 * 
+			 * while ((nRead = sync.getInputStream().read(data, 0, data.length))
+			 * != -1) { buffer.write(data, 0, nRead); }
+			 * 
+			 * buffer.flush();
+			 */
 
-			while ((nRead = sync.getInputStream().read(data, 0, data.length)) != -1) {
-			  buffer.write(data, 0, nRead);
-			}
-
-			buffer.flush();*/
-			
-			
-		
 			by = sync.getBuffer();
-			
 
-			//by = buffer.toByteArray();
+			// by = buffer.toByteArray();
 			s1 = new String(by);
 
-			//int index = s1.lastIndexOf("x1 =");
-			//s1.substring(index);
-			
+			// int index = s1.lastIndexOf("x1 =");
+			// s1.substring(index);
+
 			int returnCode = 0;
 			try {
 				returnCode = p.waitFor();
@@ -255,34 +262,40 @@ public class OctaveManagementEJB implements OctaveManagementEJBLocal {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
-		resultaten[0]=s1;
-		resultaten[1]=s2;
-		
-		
+
+		resultaten[0] = s1;
+		resultaten[1] = s2;
+
 		return resultaten;
 
 	}
-	
-	public String verwerkstringdata(String invoer){
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * Vibrationspotter.OctaveManagementEJBLocal#verwerkstringdata(java.lang.
+	 * String)
+	 */
+	public String verwerkstringdata(String invoer) {
 		String nieuwe = "";
-		while(invoer.contains("x")){
-		//	invoer.replaceFirst(regex, replacement)	
+		while (invoer.contains("x")) {
+			// invoer.replaceFirst(regex, replacement)
 			int xx = invoer.indexOf("x");
 			int yy = invoer.indexOf("y");
 			int zz = invoer.indexOf("z");
 			int tt = invoer.indexOf("tijd");
 			int haakje = invoer.indexOf("}");
-			
-			String x = invoer.substring(xx+3, yy-2);
-			String y = invoer.substring(yy+3, zz-2);
-			String z = invoer.substring(zz+3, tt-2);
-			String t = invoer.substring(tt+6, haakje-1);
-			
-			nieuwe = nieuwe + t + "," + x +"," + y + "," + z + '\n';
-			invoer = invoer.substring(haakje+1);		
+
+			String x = invoer.substring(xx + 3, yy - 2);
+			String y = invoer.substring(yy + 3, zz - 2);
+			String z = invoer.substring(zz + 3, tt - 2);
+			String t = invoer.substring(tt + 6, haakje - 1);
+
+			nieuwe = nieuwe + t + "," + x + "," + y + "," + z + '\n';
+			invoer = invoer.substring(haakje + 1);
 		}
-		
+
 		return nieuwe;
 	}
 }
