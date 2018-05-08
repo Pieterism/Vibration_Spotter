@@ -77,7 +77,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     private GoogleMap mMap;
     private AutoCompleteTextView mSearchtext;
     private ImageView mGps;
-    protected GeoDataClient mGeoDataClient;
+    private GeoDataClient mGeoDataClient;
     private PlaceAutocompleteAdapter mPlaceAutocompleteAdapter;
 
     ArrayList<Project> projecten;
@@ -130,7 +130,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
     private void init() {
 
-        mGeoDataClient = getGeoDataClient(this, null);
+        mGeoDataClient = Places.getGeoDataClient(this, null);
 
         mPlaceAutocompleteAdapter = new PlaceAutocompleteAdapter(this, mGeoDataClient, LAT_LNG_BOUNDS, null);
 
@@ -147,14 +147,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         });
 
         mGps.setOnClickListener(new View.OnClickListener() {
-            @Override/*mGoogleApiClient = new GoogleApiClient
-                    .Builder(this)
-                    .addApi(Places.GEO_DATA_API)
-                    .addApi(Places.PLACE_DETECTION_API)
-                    .enableAutoManage(this, this)
-                    .build();
-
-            mPlaceAutocompleteAdapter = new PlaceAutocompleteAdapter(this, mGoogleApiClient, LAT_LNG_BOUNDS, null);*/
+            @Override
             public void onClick(View view) {
                 getDeviceLocation();
             }
