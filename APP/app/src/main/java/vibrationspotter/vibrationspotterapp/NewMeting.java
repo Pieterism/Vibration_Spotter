@@ -18,7 +18,6 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
-import com.google.android.gms.common.api.CommonStatusCodes;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
@@ -26,7 +25,6 @@ import org.json.JSONArray;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.lang.reflect.Method;
 
 import vibrationspotter.Models.Meting;
 
@@ -83,7 +81,7 @@ public class NewMeting extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                ivImage.setRotation(ivImage.getRotation()+90);
+                ivImage.setRotation(ivImage.getRotation() + 90);
             }
         });
 
@@ -91,7 +89,7 @@ public class NewMeting extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (hasImage) {
-                    if(!metingTitel.getText().toString().equals("")) {
+                    if (!metingTitel.getText().toString().equals("")) {
                         ByteArrayOutputStream baos = new ByteArrayOutputStream();
                         bitmap.compress(Bitmap.CompressFormat.JPEG, 50, baos);
                         byte[] imageBytes = baos.toByteArray();
@@ -99,7 +97,7 @@ public class NewMeting extends AppCompatActivity {
 
                         meetString = Base64.encodeToString(meetdata, Base64.DEFAULT);
 
-                        Meting doorzendmeting = new Meting(666, metingTitel.getText().toString(), "filler", imageString, metingDescription.getText().toString(), meetString, "filler");
+                        Meting doorzendmeting = new Meting(666, metingTitel.getText().toString(), "filler", metingDescription.getText().toString(), meetString, "filler");
 
                         JSONArray jArray = doorzendmeting.toJArray();
 
