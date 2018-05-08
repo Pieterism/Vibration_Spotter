@@ -60,6 +60,8 @@ import java.util.Map;
 
 import vibrationspotter.Models.Project;
 
+import static com.google.android.gms.location.places.Places.getGeoDataClient;
+
 
 public class MapActivity extends AppCompatActivity implements OnMapReadyCallback, GoogleApiClient.OnConnectionFailedListener {
 
@@ -127,7 +129,12 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     }
 
     private void init() {
-        
+
+        mGeoDataClient = getGeoDataClient(this, null);
+
+        mPlaceAutocompleteAdapter = new PlaceAutocompleteAdapter(this, mGeoDataClient, LAT_LNG_BOUNDS, null);
+
+        mSearchtext.setAdapter(mPlaceAutocompleteAdapter);
 
         mSearchtext.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override

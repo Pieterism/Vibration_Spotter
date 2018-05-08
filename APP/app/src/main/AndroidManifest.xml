@@ -22,7 +22,7 @@
             android:value="barcode" />
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyD_rbMOcOqqybeHeU_uTtB5VS_caCQ78do" />
+            android:value="AIzaSyAhd3p-QZhL7CpMa26BYdRETBIbMF4I75A" />
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
