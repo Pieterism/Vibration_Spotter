@@ -54,7 +54,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private static String TAG = "MainActivity";
     private static final int QR = 555;
     private static final int ERROR_DIALOG_REQUEST = 9001;
-    ScrollView svProjectview;
     ConstraintLayout clHomePage;
     LinearLayout llprojecten;
     ImageView imageView;
@@ -179,8 +178,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         int id = item.getItemId();
 
         if (id == R.id.nav_home) {
-            svProjectview.setVisibility(View.INVISIBLE);
-            clHomePage.setVisibility(View.VISIBLE);
+
+            Toast.makeText(getApplicationContext(), "HomePage", Toast.LENGTH_LONG).show();
 
         } else if (id == R.id.nav_projecten) {
 

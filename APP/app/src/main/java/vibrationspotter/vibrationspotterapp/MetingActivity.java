@@ -64,12 +64,8 @@ public class MetingActivity extends AppCompatActivity {
         setContentView(R.layout.activity_metingview);
 
         gson = new Gson();
-        settings = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        sharedPreferences = settings.getAll();
 
         metingstring = getIntent().getStringExtra("meting");
-
-        //metingstring = sharedPreferences.get("meting").toString();
 
         meting = gson.fromJson(metingstring, Meting.class);
 
