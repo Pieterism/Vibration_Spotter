@@ -11,6 +11,7 @@
   <title>
     <ui:insert name="title">Metingen</ui:insert>
   </title>
+  	<link rel = "stylesheet" href ="stijl/stijl.css"></link>
   	<link rel = "stylesheet" href ="stijl/stijlmetingen.css"></link>
   	<link rel = "stylesheet" href ="stijl/stijlkaartproject.css"></link>
   	<meta name="viewport" content="initial-scale=1.0, user-scalable=no"/>
@@ -29,40 +30,40 @@
 <div class="header">
        <h1><b>Metingen</b> </h1>
 </div>
+	<div class="background3">
+	<h:button id ="wereld" outcome="kaartLogin.xhtml" value="toon kaart"  image="images/world.png" />
 
-<h:button id ="wereld" outcome="kaartLogin.xhtml" value="toon kaart"  image="images/world.png" />
-
-<p:dataTable value="#{kaartController.ophalenProject()}" var="pro" style="margin-top:10px">
-	<f:facet name="header">
-            Project
-    </f:facet>
-     <p:column headerText="IdProject" style="text-align:center;">
+	<p:dataTable value="#{kaartController.ophalenProject()}" var="pro" style="margin-top:10px">
+		<f:facet name="header">
+            	Project
+    	</f:facet>
+     	<p:column headerText="IdProject" style="text-align:center;">
         		<h:outputText value="#{pro.idProject}" />
-     </p:column>
+    	 </p:column>
      
-     <p:column headerText="Type" style="text-align:center">
+     	<p:column headerText="Type" style="text-align:center">
         	<h:outputText value="#{pro.type}" />
-   	 </p:column>
+   	 	</p:column>
      
-    <p:column headerText="Titel" style="text-align:center">
+    	<p:column headerText="Titel" style="text-align:center">
         	<h:outputText value="#{pro.titel}" />
-   	 </p:column>
+   	 	</p:column>
     			
     		
-    <p:column headerText="Beschrijving" style="text-align:center">
+    	<p:column headerText="Beschrijving" style="text-align:center">
         	<h:outputText value="#{pro.beschrijving}" />
-    </p:column>
+    	</p:column>
     
 
     	
-</p:dataTable>
+	</p:dataTable>
 
-<p:dataTable value="#{kaartController.zoekMetingen()}" var="met" style="margin-top:50px">
-	<f:facet name="header">
+	<p:dataTable value="#{kaartController.zoekMetingen()}" var="met" style="margin-top:50px">
+		<f:facet name="header">
             Metingen
-    </f:facet>
+    	</f:facet>
 
-       <p:column headerText="IdMeting" style="text-align:center;">
+       	<p:column headerText="IdMeting" style="text-align:center;">
         		<h:outputText value="#{met.idMeting}" />
     	</p:column>
     	
@@ -86,6 +87,6 @@
         
 
     </p:dataTable>
-
+</div>
 </h:body>
 </html>
