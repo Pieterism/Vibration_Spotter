@@ -16,27 +16,23 @@ public class Meting {
 
     private String tijdstip;
 
-    private String foto;
-
     private String opmerking;
 
     private String dataset1;
 
     private String dataset2;
 
-    public Meting(int idMeting, String titel, String tijdstip, String foto, String opmerking, String dataset1, String dataset2) {
+    public Meting(int idMeting, String titel, String tijdstip, String opmerking, String dataset1, String dataset2) {
         this.idMeting = idMeting;
         this.titel = titel;
         this.tijdstip = tijdstip;
-        this.foto = foto;
         this.opmerking = opmerking;
         this.dataset1 = dataset1;
         this.dataset2 = dataset2;
     }
 
-    public Meting(String s, String s1, String imageString, String meetdata) {
+    public Meting(String s, String s1, String meetdata) {
         this.titel = s;
-        this.foto = imageString;
         this.opmerking = s1;
         this.dataset1 = meetdata;
     }
@@ -73,8 +69,6 @@ public class Meting {
         string = string.concat(",");
         string = string.concat(tijdstip);
         string = string.concat(",");
-        //string = string.concat(foto);
-        string = string.concat(",");
         string = string.concat(opmerking);
 
         System.out.println(dataset1);
@@ -91,7 +85,6 @@ public class Meting {
                     .put("tijdstip", this.tijdstip)
                     .put("opmerking", this.opmerking)
                     .put("dataset1", this.dataset1)
-                    .put("foto", this.foto)
                     .put("dataset2", this.dataset2);
             jArray.put(jObject);
         } catch (JSONException e) {
