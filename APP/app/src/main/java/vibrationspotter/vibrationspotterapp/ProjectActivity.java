@@ -35,7 +35,7 @@ import vibrationspotter.Models.Project;
 /*-----
 Klasse die geprogrammeerde logica achter de activity_project.xml bevat
 Deze klasse vertoont de data van een door de gebruiker gekozen project
-Geeft de optie om de Metingen te bekijken, eentje toe te voegen, de QR van het project op te vragen
+Geeft de optie om de Metingen te bekijken, toe te voegen, de QR van het project op te vragen,...
 -----*/
 
 public class ProjectActivity extends AppCompatActivity{
@@ -198,11 +198,13 @@ public class ProjectActivity extends AppCompatActivity{
         if(data != null && resultCode == CommonStatusCodes.SUCCESS){
             switch(requestCode){
                 case METING:
-
+                    Toast.makeText(getApplicationContext(), "Meting aangemaakt", Toast.LENGTH_LONG).show();
                     break;
                 case QR:
                     break;
-                default: Toast.makeText(getApplicationContext(), "Hoe kan er nu een andere requestcode toekomen?", Toast.LENGTH_LONG).show();
+                default:
+                    Toast.makeText(getApplicationContext(), "Hoe kan er nu een andere requestcode toekomen?", Toast.LENGTH_LONG).show();
+                    break;
             }
         } else if(data == null){
             Toast.makeText(this, "DATA == NULL ??", Toast.LENGTH_LONG).show();

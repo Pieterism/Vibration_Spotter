@@ -67,7 +67,9 @@ public class MetingActivity extends AppCompatActivity {
         settings = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         sharedPreferences = settings.getAll();
 
-        metingstring = sharedPreferences.get("meting").toString();
+        metingstring = getIntent().getStringExtra("meting");
+
+        //metingstring = sharedPreferences.get("meting").toString();
 
         meting = gson.fromJson(metingstring, Meting.class);
 
@@ -93,10 +95,14 @@ public class MetingActivity extends AppCompatActivity {
         yWaarden = new ArrayList<>();
         zWaarden = new ArrayList<>();
 
+        /*
+
         fData = new String(Base64.decode(meting.getDataset2(), Base64.DEFAULT));
 
         System.out.println(tData);
         System.out.println(fData);
+
+        */
 
         /*-----
         Verwerken van versnellingsData:
@@ -106,6 +112,8 @@ public class MetingActivity extends AppCompatActivity {
         onCharSelectedValueListener instellen zodat de gekozen waarden
         weergegeven worden in de correcte textview
         -----*/
+
+        /*
 
         xWaarden.clear();
         yWaarden.clear();
@@ -180,9 +188,13 @@ public class MetingActivity extends AppCompatActivity {
         lct.setOnChartValueSelectedListener(ocvslT);
         lct.invalidate();
 
+        */
+
         /*-----
         Verwerking van de FrequentieData: Zelfde werkwijze als bij versnellingsdata
         -----*/
+
+        /*
 
         xWaarden.clear();
         yWaarden.clear();
@@ -257,5 +269,7 @@ public class MetingActivity extends AppCompatActivity {
         lcf.setData(dataF);
         lcf.setOnChartValueSelectedListener(ocvslF);
         lcf.invalidate();
+
+        */
     }
 }

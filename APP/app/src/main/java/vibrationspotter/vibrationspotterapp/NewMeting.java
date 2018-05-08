@@ -18,6 +18,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.google.android.gms.common.api.CommonStatusCodes;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
@@ -108,13 +109,15 @@ public class NewMeting extends AppCompatActivity {
                                     @Override
                                     public void onResponse(JSONArray response) {
                                         System.out.println(response.toString());
-
+                                        Intent gelukt = new Intent();
+                                        setResult(CommonStatusCodes.SUCCESS, gelukt);
+                                        finish();
                                     }
                                 },
                                 new Response.ErrorListener() {
                                     @Override
                                     public void onErrorResponse(VolleyError error) {
-                                        Toast.makeText(NewMeting.this, "Error", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(NewMeting.this, error.toString(), Toast.LENGTH_SHORT).show();
                                     }
                                 }
                         );
