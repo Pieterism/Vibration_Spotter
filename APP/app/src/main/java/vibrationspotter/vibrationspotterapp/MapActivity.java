@@ -142,7 +142,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         MarkerInfoWindowAdapter markerInfoWindowAdapter = new MarkerInfoWindowAdapter(getApplicationContext());
         mMap.setInfoWindowAdapter(markerInfoWindowAdapter);
         MarkerOptions options = new MarkerOptions().position(new LatLng(50.8336386, 4.0188286)).title("Ninof city! ");
-        mMap.addMarker(options.icon(BitmapDescriptorFactory.fromResource(R.drawable.logo_mapmarker)));
+        mMap.addMarker(options.icon(BitmapDescriptorFactory.fromResource(R.drawable.logo_mapmarker_red)) .snippet("test"));
 
         mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
             @Override
@@ -202,7 +202,6 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         }
     }
 
-    //TODO: ENKEL LOCATIES VAN HUIDIGE GEBRUIKER WEERKRIJGEN
     //Markeer locaties van projecten huidige gebruiker op kaart
     private void addAllMetingenMarkersGebruiker() {
         //HIER MOET IK EEN PROJECT KRIJGEN WAARVAN IK LAT EN LONG NADIEN KAN OPVRAGEN
@@ -233,7 +232,8 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
                             for (final Project p : projecten) {
                                 LatLng coord = new LatLng(p.getLatitude(), p.getLongtitude());
-                                MarkerOptions options = new MarkerOptions().position(coord).title(p.getTitel());
+
+                                MarkerOptions options = new MarkerOptions().position(coord).title(p.getTitel()).snippet( String.valueOf(p.getIdProject()));
                                 mMap.addMarker(options);
                             }
 
@@ -250,9 +250,10 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         }
     }
 
+    //TODO: LOCATIES ALLE PROJECTEN WEERKRIJGEN
     //Markeer locaties van alle projecten op kaart
     private void addAllMetingenMarkers() {
-        //HIER MOET IK EEN PROJECT KRIJGEN WAARVAN IK LAT EN LONG NADIEN KAN OPVRAGEN
+
         gson = new Gson();
 
         settings = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
