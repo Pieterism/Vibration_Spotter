@@ -137,6 +137,8 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
     private void init() {
 
+        MarkerInfoWindowAdapter markerInfoWindowAdapter = new MarkerInfoWindowAdapter(getApplicationContext());
+        mMap.setInfoWindowAdapter(markerInfoWindowAdapter);
         MarkerOptions options = new MarkerOptions().position(new LatLng(50.8336386, 4.0188286)).title("Ninof city! ");
         mMap.addMarker(options .icon(BitmapDescriptorFactory.fromResource(R.drawable.logo_mapmarker)));
 
