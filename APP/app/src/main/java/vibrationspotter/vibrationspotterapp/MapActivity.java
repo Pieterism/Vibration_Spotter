@@ -2,6 +2,7 @@ package vibrationspotter.vibrationspotterapp;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Address;
@@ -135,12 +136,21 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         mapFragment.getMapAsync(MapActivity.this);
     }
 
+    //TODO: NAVIGEREN NAAR CORRECTE METING
     private void init() {
 
         MarkerInfoWindowAdapter markerInfoWindowAdapter = new MarkerInfoWindowAdapter(getApplicationContext());
         mMap.setInfoWindowAdapter(markerInfoWindowAdapter);
         MarkerOptions options = new MarkerOptions().position(new LatLng(50.8336386, 4.0188286)).title("Ninof city! ");
-        mMap.addMarker(options .icon(BitmapDescriptorFactory.fromResource(R.drawable.logo_mapmarker)));
+        mMap.addMarker(options.icon(BitmapDescriptorFactory.fromResource(R.drawable.logo_mapmarker)));
+
+        mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+            @Override
+            public void onInfoWindowClick(Marker marker) {
+                Toast.makeText(MapActivity.this, "BUTTON CLICKED: //TODO GOTO PROJECT", Toast.LENGTH_SHORT).show();
+                //TODO: NAVIGEREN NAAR CORRECTE METING
+            }
+        });
 
         mGeoDataClient = Places.getGeoDataClient(this, null);
 
@@ -192,6 +202,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         }
     }
 
+    //TODO: ENKEL LOCATIES VAN HUIDIGE GEBRUIKER WEERKRIJGEN
     //Markeer locaties van projecten huidige gebruiker op kaart
     private void addAllMetingenMarkersGebruiker() {
         //HIER MOET IK EEN PROJECT KRIJGEN WAARVAN IK LAT EN LONG NADIEN KAN OPVRAGEN
@@ -239,7 +250,6 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         }
     }
 
-    //TODO
     //Markeer locaties van alle projecten op kaart
     private void addAllMetingenMarkers() {
         //HIER MOET IK EEN PROJECT KRIJGEN WAARVAN IK LAT EN LONG NADIEN KAN OPVRAGEN
