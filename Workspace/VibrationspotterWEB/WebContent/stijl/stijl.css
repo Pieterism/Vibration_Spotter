@@ -2,6 +2,7 @@
 html, 
 body {
     height: 100%;
+    margin: 0px 1px 0px 1px;
     
 }
 .header{
@@ -123,5 +124,10 @@ body {
 	text-align: center;
 	opacity: 0.95;
     filter: alpha(opacity=95);
+	
+}
+#fb{
+	float:right;
+	margin-top:35px;
 	
 }

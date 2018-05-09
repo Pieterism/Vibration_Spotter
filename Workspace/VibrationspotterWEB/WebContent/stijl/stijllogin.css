@@ -1,7 +1,7 @@
 html, 
 body {
     height: 100%;
-    
+    margin: 0px 1px 0px 1px;
 }
 .header{
   background-color: #f1f1f1;
@@ -99,3 +99,10 @@ body {
     background-repeat: no-repeat;
     background-size: cover;
 }
+
+.wereld1{
+	margin-top: 20px;
+	text-align: center;
+	width:50px;
+	height: auto;
+}   

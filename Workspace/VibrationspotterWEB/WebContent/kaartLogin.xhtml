@@ -12,8 +12,11 @@
   </h:head>
   <h:body>
   	<div class="header">
-         <h1><b>Welcome to the vibrationspotter</b><img src="images/logo.png" width="50" height="50"/></h1>
-     </div>
+  	 	<div id="fb">
+         	<a target="_blank" href="http://www.facebook.com/iiw.gent/"><img src="https://c866088.ssl.cf3.rackcdn.com/assets/facebook40x40.png"/></a>
+      	</div>
+      	<h1><b>Welcome to the vibrationspotter</b><img src="images/logo.png" width="50" height="50"/></h1>
+    </div>
      
 	<div class="background3">
     	<h:button id="tologin" image="images/loginbutton.png" outcome="login.xhtml" />
@@ -26,19 +29,19 @@
     
     
     <script>
-	var b=0;
-	var k=0;
+	var v=0;
+	var s=0;
       function initAutocomplete() {
     	  
     	  function controle(x) {
     		  var image;
     		    if(x=='Vibrationspotter'){
     		    	var image = {url: 'images/markerrood.png',scaledSize: new google.maps.Size(30, 50)};
-    		    	b++;
+    		    	v++;
     		    }
     		    else if(x=='STEM'){
     		    	var image = {url: 'images/markerblauw.png',scaledSize: new google.maps.Size(30, 50)};
-    		    	k++;
+    		    	s++;
     		    	
     		    }
     		    return image;
@@ -349,12 +352,12 @@
      //legende toegevoegd
      var legend = document.getElementById('legend');
      var div = document.createElement('div');
-     var percentstem=parseFloat(k/(k+b)*100).toFixed(2);
-     var percentvib=parseFloat(b/(k+b)*100).toFixed(2);
-     div.innerHTML = "STEM            :"+ '<img src='images/markerblauw.png' style="width: 10%; height: 10%"/>'+"    aantal: "+k+"    ("+percentstem+"%)";
+     var percentstem=parseFloat(s/(s+v)*100).toFixed(2);
+     var percentvib=parseFloat(v/(s+v)*100).toFixed(2);
+     div.innerHTML = "STEM            :"+ '<img src='images/markerblauw.png' style="width: 10%; height: 10%"/>'+"    aantal: "+s+"    ("+percentstem+"%)";
      legend.appendChild(div);
      var div = document.createElement('div');
-     div.innerHTML = "vibrationspotter:"+ '<img src='images/markerrood.png' style="width: 10%; height: 10%"/>'+"     aantal: "+b+"    ("+percentvib+"%)";
+     div.innerHTML = "vibrationspotter:"+ '<img src='images/markerrood.png' style="width: 10%; height: 10%"/>'+"     aantal: "+v+"    ("+percentvib+"%)";
      legend.appendChild(div);
      map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(legend);
       }

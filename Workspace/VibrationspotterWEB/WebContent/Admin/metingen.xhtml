@@ -96,7 +96,9 @@
     		}
     	  
         var map = new google.maps.Map(document.getElementById('map'), {
-          center: {lat: 51.0624935, lng: 3.7066803000000164},
+          <ui:repeat value="#{projectController.zoekProject()}" var="point">
+          		center: {lat: #{point.latitude}, lng: #{point.longtitude}},
+          </ui:repeat>
           zoom: 10,
           mapTypeId: 'roadmap',
           styles:
