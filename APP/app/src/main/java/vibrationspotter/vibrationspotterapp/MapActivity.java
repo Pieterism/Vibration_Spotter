@@ -2,7 +2,6 @@ package vibrationspotter.vibrationspotterapp;
 
 import android.Manifest;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Address;
@@ -112,7 +111,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                             this, R.raw.mapstyle));
             mMap.setMyLocationEnabled(true);
             mMap.getUiSettings().setCompassEnabled(true);
-            mMap.getUiSettings().setMyLocationButtonEnabled(false);
+            mMap.getUiSettings().setMyLocationButtonEnabled(true);
 
             init();
 
@@ -142,7 +141,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         MarkerInfoWindowAdapter markerInfoWindowAdapter = new MarkerInfoWindowAdapter(getApplicationContext());
         mMap.setInfoWindowAdapter(markerInfoWindowAdapter);
         MarkerOptions options = new MarkerOptions().position(new LatLng(50.8336386, 4.0188286)).title("Ninof city! ");
-        mMap.addMarker(options.icon(BitmapDescriptorFactory.fromResource(R.drawable.logo_mapmarker_red)) .snippet("test"));
+        mMap.addMarker(options.icon(BitmapDescriptorFactory.fromResource(R.drawable.logo_mapmarker_red)).snippet("test"));
 
         mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
             @Override
@@ -233,7 +232,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                             for (final Project p : projecten) {
                                 LatLng coord = new LatLng(p.getLatitude(), p.getLongtitude());
 
-                                MarkerOptions options = new MarkerOptions().position(coord).title(p.getTitel()).snippet( String.valueOf(p.getIdProject()));
+                                MarkerOptions options = new MarkerOptions().position(coord).title(p.getTitel()).snippet(String.valueOf(p.getIdProject()));
                                 mMap.addMarker(options);
                             }
 

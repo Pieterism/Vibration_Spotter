@@ -1,13 +1,18 @@
 package vibrationspotter.vibrationspotterapp;
 
+import android.Manifest;
 import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.location.Location;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -15,9 +20,13 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
+import android.widget.AutoCompleteTextView;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
@@ -31,6 +40,19 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.common.api.CommonStatusCodes;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.location.places.GeoDataClient;
+import com.google.android.gms.location.places.Places;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
+import com.google.android.gms.maps.model.MapStyleOptions;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -51,6 +73,23 @@ De activity die als eerste wordt opgestart
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
+    private static final String FINE_LOCATION = Manifest.permission.ACCESS_FINE_LOCATION;
+    private static final String COARSE_LOCATION = Manifest.permission.ACCESS_COARSE_LOCATION;
+    private static final int LOCATION_PERMISSION_REQUEST_CODE = 1234;
+    private static final float DEFAULT_ZOOM = 13f;
+    private static final LatLngBounds LAT_LNG_BOUNDS = new LatLngBounds(new LatLng(-40, -168), new LatLng(71, 136));
+
+    private boolean mLocationPermissionGranted = false;
+    private FusedLocationProviderClient mfusedLocationProviderclient;
+    private GoogleMap mMap;
+    private AutoCompleteTextView mSearchtext;
+    private ImageView mGps;
+    private GeoDataClient mGeoDataClient;
+    private PlaceAutocompleteAdapter mPlaceAutocompleteAdapter;
+
+
+
+
     private static String TAG = "MainActivity";
     private static final int QR = 555;
     private static final int ERROR_DIALOG_REQUEST = 9001;
@@ -58,6 +97,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     LinearLayout llprojecten;
     ImageView imageView;
     TextView textName;
+    ImageButton infoButton;
 
     SharedPreferences settings;
     Map<String, ?> sharedPreferences;
@@ -67,6 +107,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     List<Project> projecten;
 
+    /*
+    * TODO: Infobutton rechtsbeneden: onclick --> aboutpage
+    * TODO: Mapfragment initMap()
+    * TODO: Imagebuttons midden: correct aantal gebruikers & projecten inzetten.
+    * */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,15 +120,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent qr_intent = new Intent(MainActivity.this, QR_hub.class);
-                startActivityForResult(qr_intent, QR);
-            }
-        });
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -121,6 +157,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
     }
+
+    //----------------------------------------------------------------------------------------------
+
+
+    //----------------------------------------------------------------------------------------------
 
     @Override
     public void onBackPressed() {
