@@ -121,6 +121,7 @@ public class ChartView implements Serializable {
 		yAxis2.setLabel("Amplitude [m/s^2/Hz]");
 		yAxis2.setMin(0);
 		yAxis2.setMax(1);
+		xAxis2.setMax(10);
 
 	}
 
