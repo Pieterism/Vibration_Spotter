@@ -125,7 +125,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         mSearchtext = (AutoCompleteTextView) findViewById(R.id.input_search);
         mGps = (ImageView) findViewById(R.id.ic_gps);
 
-        addAllMetingenMarkers();
+        addAllMetingenMarkersGebruiker();
         getLocationPermission();
     }
 
