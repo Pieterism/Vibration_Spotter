@@ -61,7 +61,7 @@
             <com.github.mikephil.charting.charts.LineChart
                 android:id="@+id/lct"
                 android:layout_width="match_parent"
-                android:layout_height="150dp"></com.github.mikephil.charting.charts.LineChart>
+                android:layout_height="225dp"></com.github.mikephil.charting.charts.LineChart>
 
             <TableLayout
                 android:layout_width="match_parent"
@@ -69,6 +69,7 @@
                 android:layout_marginVertical="1dp"
                 android:paddingHorizontal="30dp"
                 android:paddingTop="15dp"
+                android:paddingBottom="16dp"
                 android:textAlignment="textStart">
 
                 <TableRow
@@ -193,7 +194,7 @@
                 android:id="@+id/lcf"
                 android:layout_width="match_parent"
                 android:layout_marginTop="15dp"
-                android:layout_height="150dp"></com.github.mikephil.charting.charts.LineChart>
+                android:layout_height="225dp"></com.github.mikephil.charting.charts.LineChart>
 
             <TableLayout
                 android:layout_width="match_parent"
