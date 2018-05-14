@@ -63,6 +63,7 @@ public class LeerkrachtLogin extends AppCompatActivity{
                 final String username = etusername.getText().toString();
                 String password = etpassword.getText().toString();
 
+
                 if (username.equals("") || password.equals("")) {
                     AlertDialog.Builder nietIngevuld = new AlertDialog.Builder(LeerkrachtLogin.this);
                     nietIngevuld.setMessage("Niet alle velden zijn ingevuld!")

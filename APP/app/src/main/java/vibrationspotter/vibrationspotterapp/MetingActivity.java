@@ -104,15 +104,11 @@ public class MetingActivity extends AppCompatActivity {
         bDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AlertDialog alertDialog = new AlertDialog.Builder(MetingActivity.this).create();
+                AlertDialog.Builder alertDialog = new AlertDialog.Builder(MetingActivity.this);
                 alertDialog.setTitle("Alert");
-                alertDialog.setMessage("Are you sure you want to delete this meting? ");
-                alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.dismiss();
-                            }
-                        });
+                alertDialog.setMessage("Are you sure wou want to delete this project? ");
+                alertDialog.setPositiveButton("OK",null);
+                alertDialog.setNegativeButton("CANCEL",null);
                 alertDialog.show();
             }
         });

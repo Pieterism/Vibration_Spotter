@@ -193,15 +193,11 @@ public class ProjectActivity extends AppCompatActivity {
                 JSONArray jArray = new JSONArray();
                 jArray.put(jsonObject);
 
-                AlertDialog alertDialog = new AlertDialog.Builder(ProjectActivity.this).create();
+                AlertDialog.Builder alertDialog = new AlertDialog.Builder(ProjectActivity.this);
                 alertDialog.setTitle("Alert");
                 alertDialog.setMessage("Are you sure wou want to delete this project? ");
-                alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.dismiss();
-                            }
-                        });
+                alertDialog.setPositiveButton("OK",null);
+                alertDialog.setNegativeButton("CANCEL",null);
                 alertDialog.show();
 
                 JsonArrayRequest inloggenRequest = new JsonArrayRequest(Request.Method.POST,
