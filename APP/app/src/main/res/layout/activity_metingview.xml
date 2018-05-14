@@ -218,6 +218,7 @@
                         android:id="@+id/fvalue"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_weight="1"
                         android:layout_marginHorizontal="0.5dp"
                         android:background="#f0eeee"
                         android:fontFamily="@font/arsenal"
