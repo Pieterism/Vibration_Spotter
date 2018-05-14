@@ -107,7 +107,12 @@ public class MetingActivity extends AppCompatActivity {
                 AlertDialog.Builder alertDialog = new AlertDialog.Builder(MetingActivity.this);
                 alertDialog.setTitle("Alert");
                 alertDialog.setMessage("Are you sure wou want to delete this project? ");
-                alertDialog.setPositiveButton("OK",null);
+                alertDialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        //HIER DE JSONREQUEST
+                    }
+                });
                 alertDialog.setNegativeButton("CANCEL",null);
                 alertDialog.create().show();
 
