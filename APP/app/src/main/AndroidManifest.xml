@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="vibrationspotter.vibrationspotterapp">
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -25,7 +26,8 @@
             android:value="AIzaSyB4BIgPb2htRScPxjRMA7UXpWxU912WcwM" />
         <meta-data
             android:name="com.google.android.gms.version"
-            android:value="@integer/google_play_services_version" />
+            android:value="@integer/google_play_services_version"
+            tools:replace="android:value"/>
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
