@@ -251,7 +251,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         if (id == R.id.nav_home) {
 
-            Toast.makeText(getApplicationContext(), "HomePage", Toast.LENGTH_LONG).show();
+           // Toast.makeText(getApplicationContext(), "HomePage", Toast.LENGTH_LONG).show();
 
         } else if (id == R.id.nav_projecten) {
 
