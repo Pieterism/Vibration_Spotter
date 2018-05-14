@@ -390,7 +390,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
     }
 
-    public  MapActivity newInstance() {
+    public MapActivity newInstance() {
         MapActivity fragment = new MapActivity();
 
         Bundle args = new Bundle();
