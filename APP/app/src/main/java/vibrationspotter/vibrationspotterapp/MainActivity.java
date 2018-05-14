@@ -460,7 +460,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         MarkerOptions options2 = new MarkerOptions().position(new LatLng(50.8436386, 4.0288286)).title("Ninof city! ");
         mMap.addMarker(options2.icon(BitmapDescriptorFactory.fromResource(R.drawable.logo_mapmarker)).snippet("test"));
 
-
+        for (Project p:projecten){
+            Marker mark = mMap.addMarker(new MarkerOptions().position(new LatLng(p.getLatitude(),p.getLongtitude())).title(p.getTitel()).icon(BitmapDescriptorFactory.fromResource(R.drawable.logo_mapmarker)));
+            mark.setTag(new Project(p));
+        }
 
 
     }

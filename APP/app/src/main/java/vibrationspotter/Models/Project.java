@@ -41,6 +41,19 @@ public class Project {
         this.beschrijving = beschrijving;
     }
 
+    public Project(Project p) {
+        this.idProject = p.idProject;
+        this.titel = p.titel;
+        this.type = p.type;
+        this.latitude = p.latitude;
+        this.longtitude = p.longtitude;
+        this.goedgekeurd = p.goedgekeurd;
+        this.QR = p.QR;
+        this.timestamp = p.timestamp;
+        this.beschrijving = p.beschrijving;
+    }
+
+
     public int getIdProject() {
         return idProject;
     }
