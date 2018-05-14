@@ -45,6 +45,7 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MapStyleOptions;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -436,6 +437,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         MarkerInfoWindowAdapter markerInfoWindowAdapter = new MarkerInfoWindowAdapter(getApplicationContext());
         mMap.setInfoWindowAdapter(markerInfoWindowAdapter);
+
+        mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+            @Override
+            public void onInfoWindowClick(Marker marker) {
+                Project p = (Project)marker.getTag();
+
+                String project = gson.toJson(p);
+                Intent naar_project = new Intent(getApplicationContext(), ProjectActivity.class);
+                naar_project.putExtra("project", project);
+                naar_project.putExtra("viewer", true);
+                startActivity(naar_project);
+            }
+        });
+
 
         for (final Project p : projecten) {
             LatLng coord = new LatLng(p.getLatitude(), p.getLongtitude());
