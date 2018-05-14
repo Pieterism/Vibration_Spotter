@@ -154,21 +154,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-
-            AlertDialog.Builder settings = new AlertDialog.Builder(this);
-            settings.setMessage("Naar Settings")
-                    .setNegativeButton("close", null)
-                    .create()
-                    .show();
-
-            return true;
-        } else if (id == R.id.action_testMuyltimeting) {
+        if (id == R.id.action_testMuyltimeting) {
 
             Intent stertTest = new Intent(getApplicationContext(), MetingSpotter.class);
             startActivity(stertTest);
 
             return true;
+        } else if (id == R.id.action_about) {
+            Intent naarAbout = new Intent(getApplicationContext(), About.class);
+            startActivity(naarAbout);
         }
 
         return super.onOptionsItemSelected(item);
