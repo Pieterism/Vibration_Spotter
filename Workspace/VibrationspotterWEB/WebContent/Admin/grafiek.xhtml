@@ -10,12 +10,30 @@
  <link rel = "stylesheet" href ="../stijl/stijl.css"></link>
  
  <script type="text/javascript">
-function exportChart1() {
+function exportChart3() {
     //export image
-    $('#output1').empty().append(PF('g1').exportAsImage());
+    $('#output3').empty().append(PF('g3').exportAsImage());
  
     //show the dialog
-    PF('dlg1').show();
+    PF('dlg3').show();
+}
+</script>
+ <script type="text/javascript">
+function exportChart4() {
+    //export image
+    $('#output4').empty().append(PF('g4').exportAsImage());
+ 
+    //show the dialog
+    PF('dlg4').show();
+}
+</script>
+ <script type="text/javascript">
+function exportChart5() {
+    //export image
+    $('#output5').empty().append(PF('g5').exportAsImage());
+ 
+    //show the dialog
+    PF('dlg5').show();
 }
 </script>
  <script type="text/javascript">
@@ -46,7 +64,7 @@ function exportChart2() {
 	<p:commandButton type="button" value="als afbeelding weergeven" icon="ui-icon-extlink" onclick="exportChart3()"/>
 	
 	<p:dialog widgetVar="dlg3" showEffect="fade" modal="true" header="versnelling in functie van tijd" resizable="false">
-    	<p:outputPanel id="output1" layout="block" style="width:1500px;height:300px"/>
+    	<p:outputPanel id="output3" layout="block" style="width:1500px;height:300px"/>
 	</p:dialog>
 </div>
 

@@ -53,7 +53,7 @@ public class ChartView implements Serializable {
 		grafiek3.setSeriesColors("3300FF");
 		grafiek3.setTitle("versnelling in functie van tijd");
 		Axis xAxis3 = grafiek3.getAxis(AxisType.X);
-		xAxis3.setLabel("tijd [s]");
+		xAxis3.setLabel("tijd [ms]");
 		Axis yAxis3 = grafiek3.getAxis(AxisType.Y);
 		yAxis3.setLabel("versnelling [m/s^2]");
 		double[] dx=maxXbepalen();
@@ -74,7 +74,7 @@ public class ChartView implements Serializable {
 		grafiek4.setSeriesColors("FF0000");
 		grafiek4.setTitle("versnelling in functie van tijd");
 		Axis xAxis4 = grafiek4.getAxis(AxisType.X);
-		xAxis4.setLabel("tijd [s]");
+		xAxis4.setLabel("tijd [ms]");
 		Axis yAxis4 = grafiek4.getAxis(AxisType.Y);
 		yAxis4.setLabel("versnelling [m/s^2]");
 		double[] dy=maxYbepalen();
@@ -94,7 +94,7 @@ public class ChartView implements Serializable {
 		grafiek5.setSeriesColors("30a000");
 		grafiek5.setTitle("versnelling in functie van tijd");
 		Axis xAxis5 = grafiek5.getAxis(AxisType.X);
-		xAxis5.setLabel("tijd [s]");
+		xAxis5.setLabel("tijd [ms]");
 		Axis yAxis5 = grafiek5.getAxis(AxisType.Y);
 		yAxis5.setLabel("versnelling [m/s^2]");
 		double[] dz=maxZbepalen();
@@ -102,14 +102,6 @@ public class ChartView implements Serializable {
 		yAxis5.setMax(dz[1]);
 		System.out.println(dz[0]);
 		System.out.println(dz[1]);
-		
-		
-		
-		
-		
-		
-		
-		
 		
 		
 		try {
