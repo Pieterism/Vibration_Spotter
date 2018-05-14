@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -77,18 +78,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     ConstraintLayout clHomePage;
     LinearLayout llprojecten;
     ImageView imageView;
-    TextView textName;
-    ImageButton infoButton;
+    TextView textName, aantalprojecten, aantalgebruikers, textgebruikers, textprojecten;
     SharedPreferences settings;
     Map<String, ?> sharedPreferences;
     View nav_header_main;
+    FloatingActionButton fab;
 
     Gson gson;
 
     List<Project> projecten;
 
     /*
-     * TODO: Infobutton rechtsbeneden: onclick --> aboutpage
      * TODO: Mapfragment initMap()
      * TODO: Imagebuttons midden: correct aantal gebruikers & projecten inzetten.
      * */
@@ -138,6 +138,42 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         else naam = "";
         textName.setText(naam);
 
+        fab = findViewById(R.id.fab_naarQRlezer);
+
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent naarQR = new Intent(getApplicationContext(),QR_hub.class);
+                startActivity(naarQR);
+            }
+        });
+
+        aantalgebruikers = findViewById(R.id.UsersSizeText);
+        aantalgebruikers.setText("Offline");
+        aantalprojecten = findViewById(R.id.ProjectenSizeText);
+        aantalprojecten.setText("Offline");
+        textgebruikers = findViewById(R.id.text_gebruikers);
+        textgebruikers.setVisibility(View.INVISIBLE);
+        textprojecten = findViewById(R.id.text_projecten);
+        textprojecten.setVisibility(View.INVISIBLE);
+
+        JsonArrayRequest alleprojecten = new JsonArrayRequest(
+                getString(R.string.url) + "Projecten/alleProjecten",
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        System.out.println(response.toString());
+                        aantalgebruikers.setText("Test = succes");
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        System.out.println(error.toString());
+                    }
+                }
+        );
+        VolleyClass.getInstance(getApplicationContext()).addToRequestQueue(alleprojecten,"alleProjecten");
 
     }
 

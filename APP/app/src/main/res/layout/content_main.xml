@@ -85,6 +85,7 @@
                         android:textStyle="bold" />
 
                     <TextView
+                        android:id="@+id/text_projecten"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/advent_pro_semibold"
@@ -133,6 +134,7 @@
                         android:textStyle="bold" />
 
                     <TextView
+                        android:id="@+id/text_gebruikers"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/advent_pro_semibold"
