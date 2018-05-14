@@ -48,7 +48,7 @@ public class ChartView implements Serializable {
 		grafiek1.setAnimate(true);
 		grafiek1.setZoom(true);
 		grafiek1.setLegendPosition("e");
-		grafiek1.setSeriesColors("3300FF,FF0000");
+		grafiek1.setSeriesColors("3300FF,FF0000,30a000");
 		grafiek1.setTitle("versnelling in functie van tijd");
 		Axis xAxis1 = grafiek1.getAxis(AxisType.X);
 		xAxis1.setLabel("tijd [s]");
@@ -66,7 +66,7 @@ public class ChartView implements Serializable {
 		grafiek2.setAnimate(true);
 		grafiek2.setZoom(true);
 		grafiek2.setLegendPosition("e");
-		grafiek2.setSeriesColors("3300FF,FF0000");
+		grafiek2.setSeriesColors("3300FF,FF0000,30a000");
 		grafiek2.setTitle("amplitude in functie van frequentie");
 		Axis xAxis2 = grafiek2.getAxis(AxisType.X);
 		xAxis2.setLabel("frequentie [Hz]");
@@ -81,29 +81,37 @@ public class ChartView implements Serializable {
 		LineChartModel model = new LineChartModel();
 
 		LineChartSeries series1 = new LineChartSeries();
-		series1.setLabel("resampled data");
+		series1.setLabel("x");
 		series1.setSmoothLine(true);
 		series1.setShowMarker(false);
 
 		LineChartSeries series2 = new LineChartSeries();
-		series2.setLabel("filtered data");
+		series2.setLabel("y");
 		series2.setSmoothLine(true);
 		series2.setShowMarker(false);
+		
+		LineChartSeries series3 = new LineChartSeries();
+		series3.setLabel("z");
+		series3.setSmoothLine(true);
+		series3.setShowMarker(false);
 
 		String s = dataset11Ophalen();
 		String lijnen[] = s.split("\\r?\\n");
 		for (int i = 0; i < lijnen.length; i++) {
 			String getallen[] = lijnen[i].split(",");
-			double x = Double.parseDouble(getallen[0]);
-			double y1 = Double.parseDouble(getallen[1]);
-			double y2 = Double.parseDouble(getallen[2]);
-			series1.set(x, y1);
-			series2.set(x, y2);
+			double t = Double.parseDouble(getallen[0]);
+			double x = Double.parseDouble(getallen[1]);
+			double y = Double.parseDouble(getallen[2]);
+			double z = Double.parseDouble(getallen[3]);
+			series1.set(t, x);
+			series2.set(t, y);
+			series3.set(t, z);
 
 		}
 
 		model.addSeries(series1);
 		model.addSeries(series2);
+		model.addSeries(series3);
 
 		return model;
 	}
@@ -119,29 +127,37 @@ public class ChartView implements Serializable {
 		LineChartModel model = new LineChartModel();
 
 		LineChartSeries series1 = new LineChartSeries();
-		series1.setLabel("resampled data");
+		series1.setLabel("x");
 		series1.setSmoothLine(true);
 		series1.setShowMarker(false);
 
 		LineChartSeries series2 = new LineChartSeries();
-		series2.setLabel("filtered data");
+		series2.setLabel("y");
 		series2.setSmoothLine(true);
 		series2.setShowMarker(false);
+		
+		LineChartSeries series3 = new LineChartSeries();
+		series3.setLabel("z");
+		series3.setSmoothLine(true);
+		series3.setShowMarker(false);
 
 		String s = dataset2Ophalen();
 		String lijnen[] = s.split("\\r?\\n");
 		for (int i = 0; i < lijnen.length; i++) {
 			String getallen[] = lijnen[i].split(",");
-			double x = Double.parseDouble(getallen[0]);
-			double y1 = Double.parseDouble(getallen[1]);
-			double y2 = Double.parseDouble(getallen[2]);
-			series1.set(x, y1);
-			series2.set(x, y2);
+			double f = Double.parseDouble(getallen[0]);
+			double x = Double.parseDouble(getallen[1]);
+			double y = Double.parseDouble(getallen[2]);
+			double z = Double.parseDouble(getallen[3]);
+			series1.set(f, x);
+			series2.set(f, y);
+			series3.set(f, z);
 
 		}
 
 		model.addSeries(series1);
 		model.addSeries(series2);
+		model.addSeries(series3);
 
 		return model;
 	}
