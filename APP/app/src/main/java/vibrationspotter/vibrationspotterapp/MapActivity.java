@@ -155,6 +155,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             }
         });
 
+
         mGeoDataClient = Places.getGeoDataClient(this, null);
 
         mSearchtext.setOnItemClickListener(mAutocompleteClickListener);
@@ -207,7 +208,6 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
     //Markeer locaties van projecten huidige gebruiker op kaart
     public void addAllMetingenMarkersGebruiker() {
-        //HIER MOET IK EEN PROJECT KRIJGEN WAARVAN IK LAT EN LONG NADIEN KAN OPVRAGEN
         gson = new Gson();
 
         settings = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
