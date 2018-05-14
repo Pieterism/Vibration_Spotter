@@ -138,9 +138,6 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     //TODO: NAVIGEREN NAAR CORRECTE METING
     public void init() {
 
-        MarkerInfoWindowAdapter markerInfoWindowAdapter = new MarkerInfoWindowAdapter(getApplicationContext());
-        mMap.setInfoWindowAdapter(markerInfoWindowAdapter);
-
         mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
             @Override
             public void onInfoWindowClick(Marker marker) {
@@ -227,15 +224,18 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                             }.getType();
                             projecten = gson.fromJson(response.toString(), type);
 
+                            MarkerInfoWindowAdapter markerInfoWindowAdapter = new MarkerInfoWindowAdapter(getApplicationContext());
+                            mMap.setInfoWindowAdapter(markerInfoWindowAdapter);
+
                             for (final Project p : projecten) {
                                 LatLng coord = new LatLng(p.getLatitude(), p.getLongtitude());
 
                                 if (p.getType().equalsIgnoreCase("STEM")) {
                                     MarkerOptions options = new MarkerOptions().position(coord).title(p.getTitel()).snippet(String.valueOf(p.getIdProject()));
-                                    mMap.addMarker(options.icon(BitmapDescriptorFactory.fromResource(R.drawable.logo_mapmarker)));
+                                    mMap.addMarker(options.icon(BitmapDescriptorFactory.fromResource(R.drawable.logo_mapmarker))).setTag(new Project(p));
                                 } else {
                                     MarkerOptions options = new MarkerOptions().position(coord).title(p.getTitel()).snippet(String.valueOf(p.getIdProject()));
-                                    mMap.addMarker(options.icon(BitmapDescriptorFactory.fromResource(R.drawable.logo_mapmarker_red)));
+                                    mMap.addMarker(options.icon(BitmapDescriptorFactory.fromResource(R.drawable.logo_mapmarker_red))).setTag(new Project(p));
                                 }
                             }
 

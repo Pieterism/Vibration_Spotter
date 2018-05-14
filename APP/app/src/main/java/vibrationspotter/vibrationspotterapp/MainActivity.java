@@ -456,10 +456,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 MarkerOptions options = new MarkerOptions().position(coord).title(p.getTitel()).snippet(String.valueOf(p.getIdProject()));
                 mMap.addMarker(options.icon(BitmapDescriptorFactory.fromResource(R.drawable.logo_mapmarker_red))).setTag(new Project(p));
             }
-
-
         }
-
     }
 
     public void initMap() {
