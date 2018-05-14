@@ -76,7 +76,7 @@ public class NewProject extends AppCompatActivity {
 
                             public void onLocationChanged(Location location) {
                                 // Called when a new location is found by the network location provider.
-                                Toast.makeText(getBaseContext(), "location is:" + location, Toast.LENGTH_LONG).show();
+                                //Toast.makeText(getBaseContext(), "location is:" + location, Toast.LENGTH_LONG).show();
                             }
 
                             public void onStatusChanged(String provider, int status, Bundle extras) {
@@ -92,7 +92,7 @@ public class NewProject extends AppCompatActivity {
                         //lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
                         //currentLocation = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
                         //Location location = getDeviceLocation();
-                        Toast.makeText(getBaseContext(), "location is:" + currentLocation, Toast.LENGTH_LONG).show();
+                       // Toast.makeText(getBaseContext(), "location is:" + currentLocation, Toast.LENGTH_LONG).show();
                         longitude = currentLocation.getLongitude();
                         latitude = currentLocation.getLatitude();
                     } else {
