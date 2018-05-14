@@ -25,22 +25,15 @@
             android:title="View map" />
 
         <item
+            android:id="@+id/nav_login"
+            android:icon="@drawable/ic_person_black_24dp"
+            android:title="Login" />
+
+        <item
             android:id="@+id/nav_logout"
             android:icon="@drawable/ic_power_settings_new_black_24dp"
             android:title="Log out" />
 
-
-        <!--MOET NOG VERWIJDERD WORDEN -->
-
-        <!--MOET NOG VERWIJDERD WORDEN -->
-        <item
-            android:id="@+id/nav_login"
-            android:icon="@drawable/ic_person_black_24dp"
-            android:title="Login" />
-        <item
-            android:id="@+id/nav_meter"
-            android:icon="@drawable/ic_vibration_black_24dp"
-            android:title="Vibratiemeter Testen" />
 
     </group>
 </menu>
