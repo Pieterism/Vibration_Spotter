@@ -54,6 +54,7 @@ public class ChartView implements Serializable {
 		grafiek3.setTitle("versnelling in functie van tijd");
 		Axis xAxis3 = grafiek3.getAxis(AxisType.X);
 		xAxis3.setLabel("tijd [ms]");
+		xAxis3.setMin(0);
 		Axis yAxis3 = grafiek3.getAxis(AxisType.Y);
 		yAxis3.setLabel("versnelling [m/s^2]");
 		double[] dx=maxXbepalen();
@@ -75,6 +76,7 @@ public class ChartView implements Serializable {
 		grafiek4.setTitle("versnelling in functie van tijd");
 		Axis xAxis4 = grafiek4.getAxis(AxisType.X);
 		xAxis4.setLabel("tijd [ms]");
+		xAxis4.setMin(0);
 		Axis yAxis4 = grafiek4.getAxis(AxisType.Y);
 		yAxis4.setLabel("versnelling [m/s^2]");
 		double[] dy=maxYbepalen();
@@ -95,6 +97,7 @@ public class ChartView implements Serializable {
 		grafiek5.setTitle("versnelling in functie van tijd");
 		Axis xAxis5 = grafiek5.getAxis(AxisType.X);
 		xAxis5.setLabel("tijd [ms]");
+		xAxis5.setMin(0);
 		Axis yAxis5 = grafiek5.getAxis(AxisType.Y);
 		yAxis5.setLabel("versnelling [m/s^2]");
 		double[] dz=maxZbepalen();
@@ -117,10 +120,12 @@ public class ChartView implements Serializable {
 		grafiek2.setTitle("amplitude in functie van frequentie");
 		Axis xAxis2 = grafiek2.getAxis(AxisType.X);
 		xAxis2.setLabel("frequentie [Hz]");
+		xAxis2.setMin(0);
 		Axis yAxis2 = grafiek2.getAxis(AxisType.Y);
 		yAxis2.setLabel("Amplitude [m/s^2/Hz]");
 		yAxis2.setMin(0);
 		yAxis2.setMax(1);
+		xAxis2.setMin(0);
 		xAxis2.setMax(10);
 
 	}
