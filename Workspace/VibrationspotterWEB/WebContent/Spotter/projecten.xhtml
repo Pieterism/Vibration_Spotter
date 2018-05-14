@@ -33,10 +33,6 @@
 <br/>
 <h:form>
  	<p:dataTable value="#{projectController.geefProjectenweer()}" var="pro" style="margin:5px 10px 0px 10px">
-			
-		<p:column headerText="IdProject" style="text-align:center;width:100px;" sortBy="#{pro.idProject}" filterBy="#{pro.idProject}">
-        		<h:outputText value="#{pro.idProject}" />
-    	</p:column>
     			
     	<p:column headerText="Titel" style="text-align:center" sortBy="#{pro.titel}" filterBy="#{pro.titel}">
         		<h:outputText value="#{pro.titel}" />
