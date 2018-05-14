@@ -186,12 +186,13 @@ public class ProjectActivity extends AppCompatActivity{
                         }
                 );
                 VolleyClass.getInstance(getApplicationContext()).addToRequestQueue(inloggenRequest, "Verwijderen");
-
-
-
             }
         });
-
+        boolean isAuthorised = getIntent().getBooleanExtra("authorised", false);
+        if(!isAuthorised){
+            bDeleteProject.setVisibility(View.INVISIBLE);
+            bqrProject.setVisibility(View.INVISIBLE);
+        }
     }
 
     @Override
@@ -220,7 +221,30 @@ public class ProjectActivity extends AppCompatActivity{
                 default: Toast.makeText(this, "Andere Resultcode?", Toast.LENGTH_SHORT).show();
             }
         }
+        JsonArrayRequest projectensizeRequest =  new JsonArrayRequest(
+                getString(R.string.url) + "Projecten/Size/" + project.getIdProject(),
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        Log.d("OphalenProjectensize", response.toString());
 
+                        Type type = new TypeToken<List<Map<String,String>>>(){}.getType();
+                        List<Map<String,String>>  sizes = gson.fromJson(response.toString(), type);
+                        textAantalMetingen.setText("Metingen in project:" + sizes.get(0).get("size"));
+
+
+                        //  aantalmetingen = sizes.get(0);
+                    }
+                },
+
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.d("OphalenProjectensize", "Error: " + error.toString() + ", " + error.getMessage());
+                    }
+                }
+        );
+        VolleyClass.getInstance(getApplicationContext()).addToRequestQueue(projectensizeRequest, "MetingKeuzeActivity");
 
     }
 }
