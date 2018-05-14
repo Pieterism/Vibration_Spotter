@@ -121,12 +121,18 @@ public class ProjectManagementEJB implements ProjectManagementEJBLocal {
 	}
 
 	public String findGoedgekeurdeProjectenAPP(){
-		Query q = em.createQuery("SELECT p FROM Project p WHERE p.goedgekeurd = :test");
-		q.setParameter("test", 1);
-		List<Project> resultaat = q.getResultList();
+		Query q = em.createQuery("SELECT p FROM Project p");
+		List<Project> resultaat1 = q.getResultList();
+		List<Project> resultaat = new ArrayList<>();
+		for(int i=0; i<resultaat1.size();i++){
+			if(resultaat1.get(i).isGoedgekeurd()){
+				resultaat.add(resultaat1.get(i));
+			}
+		}
+		
 		List<DoorstuurProject> doorstuurResultaat = new ArrayList<>();
 		for(Project p:resultaat){
-			doorstuurResultaat.add(new Doorstuurproject(p));
+			doorstuurResultaat.add(new DoorstuurProject(p));
 		}
 		
 		Gson gson = new Gson();	
