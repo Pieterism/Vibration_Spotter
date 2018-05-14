@@ -163,7 +163,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     @Override
                     public void onResponse(JSONArray response) {
                         System.out.println(response.toString());
-                        aantalgebruikers.setText("Test = succes");
+
+                        Type type = new TypeToken<List<Project>>(){}.getType();
+                        projecten = gson.fromJson(response.toString(), type);
+
+                        aantalprojecten.setText(String.valueOf(projecten.size()));
+                        textprojecten.setVisibility(View.VISIBLE);
                     }
                 },
                 new Response.ErrorListener() {
@@ -174,6 +179,21 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 }
         );
         VolleyClass.getInstance(getApplicationContext()).addToRequestQueue(alleprojecten,"alleProjecten");
+        JsonArrayRequest getAantalGebruikers = new JsonArrayRequest(
+                getString(R.string.url) + "Persoon/aantal",
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        Toast.makeText(getApplicationContext(), response.toString(), Toast.LENGTH_LONG).show();
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_LONG).show();
+                    }
+                }
+        );
 
     }
 
