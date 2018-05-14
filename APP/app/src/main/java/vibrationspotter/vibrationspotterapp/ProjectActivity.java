@@ -59,7 +59,7 @@ public class ProjectActivity extends AppCompatActivity{
     Button bqrProject;
     Button bDeleteProject;
 
-
+    ImageView qrView;
 
 
     @Override
@@ -85,6 +85,7 @@ public class ProjectActivity extends AppCompatActivity{
         bAddMeting = findViewById(R.id.bAddMeting);
         bqrProject = findViewById(R.id.bqrProject);
         bDeleteProject = findViewById(R.id.bDeleteProject);
+        qrView = findViewById(R.id.qr_view);
 
         textTitel.setText(project.getTitel());
 
