@@ -62,4 +62,6 @@ public interface PersonManagementEJBLocal {
 	 */
 	int haalProjectenSizeVanPersoon(int id);
 
+	int getPersoonsize();
+
 }
