@@ -126,8 +126,6 @@ public class NewProject extends AppCompatActivity {
                     );
                     VolleyClass.getInstance(getApplicationContext()).addToRequestQueue(inloggenRequest, "Inloggen");
 
-                    //   LocationManager lm = (LocationManager)getSystemService(getApplicationContext().LOCATION_SERVICE);
-
                 } else Toast.makeText(getApplicationContext(), "Gelieve een Titel op te geven", Toast.LENGTH_LONG).show();
                 finish();
             }

@@ -23,8 +23,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AutoCompleteTextView;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -39,7 +37,6 @@ import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.common.api.CommonStatusCodes;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.location.places.GeoDataClient;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -48,12 +45,10 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MapStyleOptions;
-import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.gson.Gson;
-import com.google.gson.JsonArray;
 import com.google.gson.reflect.TypeToken;
 
 import org.json.JSONArray;
@@ -141,7 +136,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent naarQR = new Intent(getApplicationContext(),QR_hub.class);
+                Intent naarQR = new Intent(getApplicationContext(), QR_hub.class);
                 startActivity(naarQR);
             }
         });
@@ -155,14 +150,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         textprojecten = findViewById(R.id.text_projecten);
         textprojecten.setVisibility(View.INVISIBLE);
 
-        JsonArrayRequest alleprojecten = new JsonArrayRequest(
-                getString(R.string.url) + "Projecten/alleProjecten",
+        JsonArrayRequest alleprojecten = new JsonArrayRequest(getString(R.string.url) + "Projecten/alleProjecten",
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
                         System.out.println(response.toString());
 
-                        Type type = new TypeToken<List<Project>>(){}.getType();
+                        Type type = new TypeToken<List<Project>>() {
+                        }.getType();
                         projecten = gson.fromJson(response.toString(), type);
 
                         aantalprojecten.setText(String.valueOf(projecten.size()));
@@ -178,7 +173,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     }
                 }
         );
-        VolleyClass.getInstance(getApplicationContext()).addToRequestQueue(alleprojecten,"alleProjecten");
+        VolleyClass.getInstance(getApplicationContext()).addToRequestQueue(alleprojecten, "alleProjecten");
         JsonArrayRequest getAantalGebruikers = new JsonArrayRequest(
                 getString(R.string.url) + "Persoon/aantal",
                 new Response.Listener<JSONArray>() {
@@ -186,7 +181,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     public void onResponse(JSONArray response) {
 
                         Gson gson = new Gson();
-                        Type type = new TypeToken<List<Map<String, String>>>(){}.getType();
+                        Type type = new TypeToken<List<Map<String, String>>>() {
+                        }.getType();
 
                         List<Map<String, String>> gegevens = gson.fromJson(response.toString(), type);
 
@@ -201,7 +197,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     }
                 }
         );
-        VolleyClass.getInstance(getApplicationContext()).addToRequestQueue(getAantalGebruikers,"getaantalGebruikers");
+        VolleyClass.getInstance(getApplicationContext()).addToRequestQueue(getAantalGebruikers, "getaantalGebruikers");
     }
 
     @Override
@@ -453,17 +449,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         MarkerInfoWindowAdapter markerInfoWindowAdapter = new MarkerInfoWindowAdapter(getApplicationContext());
         mMap.setInfoWindowAdapter(markerInfoWindowAdapter);
 
-        MarkerOptions options = new MarkerOptions().position(new LatLng(50.8336386, 4.0188286)).title("Ninof city! ");
-        mMap.addMarker(options.icon(BitmapDescriptorFactory.fromResource(R.drawable.logo_mapmarker_red)).snippet("test"));
-
-        MarkerOptions options2 = new MarkerOptions().position(new LatLng(50.8436386, 4.0288286)).title("Ninof city! ");
-        mMap.addMarker(options2.icon(BitmapDescriptorFactory.fromResource(R.drawable.logo_mapmarker)).snippet("test"));
-
         for (final Project p : projecten) {
             LatLng coord = new LatLng(p.getLatitude(), p.getLongtitude());
-            MarkerOptions markerOptions = new MarkerOptions().position(coord).title(p.getTitel());
-            Marker mark = mMap.addMarker(markerOptions);
-            mark.setTag(new Project(p));
+
+            if (p.getType().equalsIgnoreCase("STEM")) {
+                MarkerOptions options = new MarkerOptions().position(coord).title(p.getTitel()).snippet(String.valueOf(p.getIdProject()));
+                mMap.addMarker(options.icon(BitmapDescriptorFactory.fromResource(R.drawable.logo_mapmarker))).setTag(new Project(p));
+            } else {
+                MarkerOptions options = new MarkerOptions().position(coord).title(p.getTitel()).snippet(String.valueOf(p.getIdProject()));
+                mMap.addMarker(options.icon(BitmapDescriptorFactory.fromResource(R.drawable.logo_mapmarker_red))).setTag(new Project(p));
+            }
+
 
         }
 

@@ -150,7 +150,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
             @Override
             public void onInfoWindowClick(Marker marker) {
-                Toast.makeText(MapActivity.this, "BUTTON CLICKED: //TODO GOTO PROJECT", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MapActivity.this, "BUTTON CLICKED", Toast.LENGTH_SHORT).show();
                 //TODO: NAVIGEREN NAAR CORRECTE METING
             }
         });
@@ -236,8 +236,13 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                             for (final Project p : projecten) {
                                 LatLng coord = new LatLng(p.getLatitude(), p.getLongtitude());
 
-                                MarkerOptions options = new MarkerOptions().position(coord).title(p.getTitel()).snippet(String.valueOf(p.getIdProject()));
-                                mMap.addMarker(options);
+                                if (p.getType().equalsIgnoreCase("STEM")) {
+                                    MarkerOptions options = new MarkerOptions().position(coord).title(p.getTitel()).snippet(String.valueOf(p.getIdProject()));
+                                    mMap.addMarker(options.icon(BitmapDescriptorFactory.fromResource(R.drawable.logo_mapmarker)));
+                                } else {
+                                    MarkerOptions options = new MarkerOptions().position(coord).title(p.getTitel()).snippet(String.valueOf(p.getIdProject()));
+                                    mMap.addMarker(options.icon(BitmapDescriptorFactory.fromResource(R.drawable.logo_mapmarker_red)));
+                                }
                             }
 
                         }
@@ -278,7 +283,8 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                         public void onResponse(JSONArray response) {
                             Log.d("Projecten", "GELUKT!");
 
-                            Type type = new TypeToken<List<Project>>(){}.getType();
+                            Type type = new TypeToken<List<Project>>() {
+                            }.getType();
                             projecten = gson.fromJson(response.toString(), type);
 
                             for (final Project p : projecten) {
