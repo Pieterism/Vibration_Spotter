@@ -23,7 +23,6 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 
@@ -53,7 +52,7 @@ public class NewProject extends AppCompatActivity implements LocationListener {
         bAddProject.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!etProjectTitel.getText().toString().equals("")) {
+                if (!etProjectTitel.getText().toString().equals("")) {
                     SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
                     SharedPreferences.Editor editor = settings.edit();
 
@@ -90,9 +89,9 @@ public class NewProject extends AppCompatActivity implements LocationListener {
                             }
                         };
 
-
-                        lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
-                        currentLocation = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+                        getDeviceLocation();
+                        //lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
+                        //currentLocation = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
                         //Location location = getDeviceLocation();
                         longitude = currentLocation.getLongitude();
                         latitude = currentLocation.getLatitude();
@@ -129,7 +128,8 @@ public class NewProject extends AppCompatActivity implements LocationListener {
 
                     //   LocationManager lm = (LocationManager)getSystemService(getApplicationContext().LOCATION_SERVICE);
 
-                } else Toast.makeText(getApplicationContext(), "Gelieve een Titel op te geven", Toast.LENGTH_LONG).show();
+                } else
+                    Toast.makeText(getApplicationContext(), "Gelieve een Titel op te geven", Toast.LENGTH_LONG).show();
             }
         });
     }

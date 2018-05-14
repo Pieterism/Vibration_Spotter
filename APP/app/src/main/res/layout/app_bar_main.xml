@@ -28,11 +28,10 @@
         android:id="@+id/fab_naarQRlezer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        app:layout_anchor="@+id/include"
-        app:layout_anchorGravity="right|bottom"
-        android:layout_margin="20dp"
+        android:layout_margin="5dp"
+        android:backgroundTint="@color/colorPrimary"
         android:src="@drawable/ic_center_focus_weak_black_24dp"
-        android:backgroundTint="@color/colorPrimaryLight"/>
+        app:layout_anchor="@+id/include"
+        app:layout_anchorGravity="right|bottom" />
 
 </android.support.design.widget.CoordinatorLayout>
