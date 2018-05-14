@@ -83,6 +83,7 @@ public class ProjectKeuzeActivity extends AppCompatActivity {
                                         String pString = gson.toJson(p);
                                         Intent naar_project = new Intent(getApplicationContext(), ProjectActivity.class);
                                         naar_project.putExtra("project", pString);
+                                        naar_project.putExtra("authorised", true);
                                         startActivity(naar_project);
                                     }
                                 });

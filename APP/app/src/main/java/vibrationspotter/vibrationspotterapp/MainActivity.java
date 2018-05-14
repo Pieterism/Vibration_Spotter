@@ -138,7 +138,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             @Override
             public void onClick(View v) {
                 Intent naarQR = new Intent(getApplicationContext(), QR_hub.class);
-                startActivity(naarQR);
+                startActivityForResult(naarQR, QR);
             }
         });
 
@@ -303,6 +303,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             if (resultCode == CommonStatusCodes.SUCCESS) {
                 if (requestCode == QR) {
                     String qrcode = data.getStringExtra("QR_code");
+                    Toast.makeText(this, qrcode + " Main", Toast.LENGTH_SHORT).show();
 
                     Map<String, String> QRgegevens = new HashMap<>();
                     QRgegevens.put("QR", qrcode);
@@ -321,16 +322,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                                     ArrayList<Project> projecten;
 
-
-                                    Type type = new TypeToken<List<Project>>() {
-                                    }.getType();
+                                    Type type = new TypeToken<List<Project>>(){}.getType();
                                     projecten = gson.fromJson(response.toString(), type);
 
-                                    // projecten.get(0)
-                                    //    Project p = gson.fromJson(response.toString(), type);
                                     String project = gson.toJson(projecten.get(0));
+                                    System.out.println(project);
                                     Intent naar_project = new Intent(getApplicationContext(), ProjectActivity.class);
                                     naar_project.putExtra("project", project);
+                                    naar_project.putExtra("authorised", false);
                                     startActivity(naar_project);
                                 }
                             },
@@ -339,23 +338,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                 @Override
                                 public void onErrorResponse(VolleyError error) {
                                     Log.d("ProjectViaQR", "Error: " + error.toString() + ", " + error.getMessage());
-
-
                                 }
                             }
                     );
-
-
                     VolleyClass.getInstance(getApplicationContext()).addToRequestQueue(QRprojectrequest, "QR_Request");
-
-
-                    //   LocationManager lm = (LocationManager)getSystemService(getApplicationContext().LOCATION_SERVICE);
-
-
                 }
             }
-
-
         } else {
             System.out.println("data null");
         }

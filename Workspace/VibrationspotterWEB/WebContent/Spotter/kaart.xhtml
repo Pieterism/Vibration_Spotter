@@ -338,7 +338,7 @@
         	var marker = new google.maps.Marker({
            		position: {lat: #{point.latitude}, lng: #{point.longtitude}},
             	map: map,
-            	title: '#{point.idProject}',
+            	title: '#{point.titel}',
             	animation: google.maps.Animation.DROP,
             	icon: controle('#{point.type}')
           	});
@@ -346,7 +346,7 @@
 
         	 google.maps.event.addListener(marker, 'click', (function(marker, i) {
         	        return function() {
-        	            infowindow.setContent('<p>Id: #{point.idProject}</p>'+'<p>titel: #{point.titel}</p>'+'<p>beschrijving: #{point.beschrijving}</p>');
+        	            infowindow.setContent('<p>titel: #{point.titel}</p>'+'<p>beschrijving: #{point.beschrijving}</p>');
         	            infowindow.open(map, marker);
         	        }
         	    })(marker, i));

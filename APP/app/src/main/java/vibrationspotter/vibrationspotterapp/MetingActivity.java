@@ -49,12 +49,15 @@ public class MetingActivity extends AppCompatActivity {
     TextView xvalue, yvalue, zvalue, tvalue, fvalue, axvalue, ayvalue, azvalue;
     String tData, fData;
 
-    int entryNummer;
-    ArrayList<String> tijdAs;
-    ArrayList<Entry> xWaarden;
-    ArrayList<Entry> yWaarden;
-    ArrayList<Entry> zWaarden;
-    List<ILineDataSet> xyzData;
+    int entryNummerT;
+    ArrayList<String> tijdAsT;
+    ArrayList<Entry> xWaardenT, yWaardenT, zWaardenT;
+    List<ILineDataSet> xyzDataT;
+
+    int entryNummerF;
+    ArrayList<String> tijdAsF;
+    ArrayList<Entry> xWaardenF, yWaardenF, zWaardenF;
+    List<ILineDataSet> xyzDataF;
 
     OnChartValueSelectedListener ocvslT, ocvslF;
 
@@ -71,34 +74,33 @@ public class MetingActivity extends AppCompatActivity {
 
         textTitel = findViewById(R.id.textTitel);
         bDelete = findViewById(R.id.bDeleteMeting);
-        lct = findViewById(R.id.lcx);
+        lct = findViewById(R.id.lct);
         lcf = findViewById(R.id.lcf);
         xvalue = findViewById(R.id.xvalue);
         yvalue = findViewById(R.id.yvalue);
         zvalue = findViewById(R.id.zvalue);
         tvalue = findViewById(R.id.tvalue);
         fvalue = findViewById(R.id.fvalue);
-/*
+
         axvalue = findViewById(R.id.axvalue);
         ayvalue = findViewById(R.id.ayvalue);
         azvalue = findViewById(R.id.azvalue);
-*/
 
         textTitel.setText(meting.getTitel());
 
-        tijdAs = new ArrayList<>();
-        xWaarden = new ArrayList<>();
-        yWaarden = new ArrayList<>();
-        zWaarden = new ArrayList<>();
+        tijdAsT = new ArrayList<>();
+        xWaardenT = new ArrayList<>();
+        yWaardenT = new ArrayList<>();
+        zWaardenT = new ArrayList<>();
 
-        /*
+        tijdAsF = new ArrayList<>();
+        xWaardenF = new ArrayList<>();
+        yWaardenF = new ArrayList<>();
+        zWaardenF = new ArrayList<>();
 
+
+        tData = new String(Base64.decode(meting.getDataset1(), Base64.DEFAULT));
         fData = new String(Base64.decode(meting.getDataset2(), Base64.DEFAULT));
-
-        System.out.println(tData);
-        System.out.println(fData);
-
-        */
 
         /*-----
         Verwerken van versnellingsData:
@@ -109,65 +111,64 @@ public class MetingActivity extends AppCompatActivity {
         weergegeven worden in de correcte textview
         -----*/
 
-        /*
+        xWaardenT.clear();
+        yWaardenT.clear();
+        zWaardenT.clear();
+        tijdAsT.clear();
+        entryNummerT = 0;
 
-        xWaarden.clear();
-        yWaarden.clear();
-        zWaarden.clear();
-        tijdAs.clear();
-        entryNummer = 0;
-
-        tData = new String(Base64.decode(meting.getDataset1(), Base64.DEFAULT));
         String[] tData_split = tData.split("\n");
 
         for(int a=0; a<tData_split.length; a++){
             String[] lijn = tData_split[a].split(",");
             if(lijn.length == 4){
-                xWaarden.add(new Entry(Float.parseFloat(lijn[0]), Float.parseFloat(lijn[1])));
-                yWaarden.add(new Entry(Float.parseFloat(lijn[0]), Float.parseFloat(lijn[2])));
-                zWaarden.add(new Entry(Float.parseFloat(lijn[0]), Float.parseFloat(lijn[3])));
+                xWaardenT.add(new Entry(Float.parseFloat(lijn[0]), Float.parseFloat(lijn[1])));
+                yWaardenT.add(new Entry(Float.parseFloat(lijn[0]), Float.parseFloat(lijn[2])));
+                zWaardenT.add(new Entry(Float.parseFloat(lijn[0]), Float.parseFloat(lijn[3])));
 
-                tijdAs.add(entryNummer, String.valueOf(Float.parseFloat(lijn[0])));
-                entryNummer++;
+                tijdAsT.add(entryNummerT, String.valueOf(Float.parseFloat(lijn[0])));
+                entryNummerT++;
             } else System.out.println("False line: " + a);
         }
 
-        LineDataSet xData = new LineDataSet(xWaarden, "x");
+        LineDataSet xData = new LineDataSet(xWaardenT, "x");
         xData.setDrawCircles(false);
         xData.setColor(Color.parseColor("#005b7f"));
         xData.setDrawHorizontalHighlightIndicator(false);
-        LineDataSet yData = new LineDataSet(yWaarden, "y");
+        LineDataSet yData = new LineDataSet(yWaardenT, "y");
         yData.setDrawCircles(false);
         yData.setColor(Color.parseColor("#fdc101"));
         yData.setDrawHorizontalHighlightIndicator(false);
-        LineDataSet zData = new LineDataSet(zWaarden, "z");
+        LineDataSet zData = new LineDataSet(zWaardenT, "z");
         zData.setDrawCircles(false);
         zData.setColor(Color.parseColor("#c95854"));
         zData.setDrawHorizontalHighlightIndicator(false);
 
-        xyzData = new ArrayList<>();
-        xyzData.add(xData);
-        xyzData.add(yData);
-        xyzData.add(zData);
+        System.out.println(xData);
 
-        LineData dataT = new LineData(xyzData);
+        xyzDataT = new ArrayList<>();
+        xyzDataT.add(xData);
+        xyzDataT.add(yData);
+        xyzDataT.add(zData);
+
+        LineData dataT = new LineData(xyzDataT);
 
         ocvslT = new OnChartValueSelectedListener() {
             @Override
             public void onValueSelected(Entry e, Highlight h) {
                 tvalue.setText(String.valueOf(e.getX()));
 
-                for (Entry temp : xWaarden) {
+                for (Entry temp : xWaardenT) {
                     if (temp.getX() == e.getX()) {
                         xvalue.setText(String.valueOf(temp.getY()));
                     }
                 }
-                for (Entry temp : yWaarden) {
+                for (Entry temp : yWaardenT) {
                     if (temp.getX() == e.getX()) {
                         yvalue.setText(String.valueOf(temp.getY()));
                     }
                 }
-                for (Entry temp : zWaarden) {
+                for (Entry temp : zWaardenT) {
                     if (temp.getX() == e.getX()) {
                         zvalue.setText(String.valueOf(temp.getY()));
                     }
@@ -184,71 +185,67 @@ public class MetingActivity extends AppCompatActivity {
         lct.setOnChartValueSelectedListener(ocvslT);
         lct.invalidate();
 
-        */
-
         /*-----
         Verwerking van de FrequentieData: Zelfde werkwijze als bij versnellingsdata
         -----*/
 
-        /*
-
-        xWaarden.clear();
-        yWaarden.clear();
-        zWaarden.clear();
-        tijdAs.clear();
-        entryNummer = 0;
+        xWaardenF.clear();
+        yWaardenF.clear();
+        zWaardenF.clear();
+        tijdAsF.clear();
+        entryNummerF = 0;
 
         fData = new String(Base64.decode(meting.getDataset2(), Base64.DEFAULT));
-        String[] fData_split = tData.split("\n");
+        String[] fData_split = fData.split("\n");
 
         for(int a=0; a<fData_split.length; a++){
             String[] lijn = fData_split[a].split(",");
             if(lijn.length == 4){
-                xWaarden.add(new Entry(Float.parseFloat(lijn[0]), Float.parseFloat(lijn[1])));
-                yWaarden.add(new Entry(Float.parseFloat(lijn[0]), Float.parseFloat(lijn[2])));
-                zWaarden.add(new Entry(Float.parseFloat(lijn[0]), Float.parseFloat(lijn[3])));
+                xWaardenF.add(new Entry(Float.parseFloat(lijn[0]), Float.parseFloat(lijn[1])));
+                yWaardenF.add(new Entry(Float.parseFloat(lijn[0]), Float.parseFloat(lijn[2])));
+                zWaardenF.add(new Entry(Float.parseFloat(lijn[0]), Float.parseFloat(lijn[3])));
 
-                tijdAs.add(entryNummer, String.valueOf(Float.parseFloat(lijn[0])));
-                entryNummer++;
+                tijdAsF.add(entryNummerF, String.valueOf(Float.parseFloat(lijn[0])));
+                entryNummerF++;
             } else System.out.println("False line: " + a);
         }
 
-        LineDataSet xDataF = new LineDataSet(xWaarden, "x");
+        LineDataSet xDataF = new LineDataSet(xWaardenF, "x");
         xDataF.setDrawCircles(false);
         xDataF.setColor(Color.parseColor("#005b7f"));
         xDataF.setDrawHorizontalHighlightIndicator(false);
-        LineDataSet yDataF = new LineDataSet(yWaarden, "y");
+        LineDataSet yDataF = new LineDataSet(yWaardenF, "y");
         yDataF.setDrawCircles(false);
         yDataF.setColor(Color.parseColor("#fdc101"));
         yDataF.setDrawHorizontalHighlightIndicator(false);
-        LineDataSet zDataF = new LineDataSet(zWaarden, "z");
+        LineDataSet zDataF = new LineDataSet(zWaardenF, "z");
         zDataF.setDrawCircles(false);
         zDataF.setColor(Color.parseColor("#c95854"));
         zDataF.setDrawHorizontalHighlightIndicator(false);
 
-        xyzData = new ArrayList<>();
-        xyzData.add(xDataF);
-        xyzData.add(yDataF);
-        xyzData.add(zDataF);
+        xyzDataF = new ArrayList<>();
+        xyzDataF.add(xDataF);
+        xyzDataF.add(yDataF);
+        xyzDataF.add(zDataF);
 
-        LineData dataF = new LineData(xyzData);
+        LineData dataF = new LineData(xyzDataF);
 
         ocvslF = new OnChartValueSelectedListener() {
             @Override
             public void onValueSelected(Entry e, Highlight h) {
                 fvalue.setText(String.valueOf(e.getX()));
 
-                for (Entry temp : xWaarden) {
+                for (Entry temp : xWaardenF) {
                     if (temp.getX() == e.getX()) {
                         axvalue.setText(String.valueOf(temp.getY()));
                     }
                 }
-                for (Entry temp : yWaarden) {
+                for (Entry temp : yWaardenF) {
                     if (temp.getX() == e.getX()) {
                         ayvalue.setText(String.valueOf(temp.getY()));
                     }
                 }
-                for (Entry temp : zWaarden) {
+                for (Entry temp : zWaardenF) {
                     if (temp.getX() == e.getX()) {
                         azvalue.setText(String.valueOf(temp.getY()));
                     }
@@ -266,6 +263,5 @@ public class MetingActivity extends AppCompatActivity {
         lcf.setOnChartValueSelectedListener(ocvslF);
         lcf.invalidate();
 
-        */
     }
 }
