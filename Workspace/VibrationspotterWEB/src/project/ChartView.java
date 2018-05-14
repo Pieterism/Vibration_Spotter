@@ -27,7 +27,9 @@ import Vibrationspotter.MetingManagementEJBLocal;
 public class ChartView implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	private LineChartModel grafiek1;
+	private LineChartModel grafiek3;
+	private LineChartModel grafiek4;
+	private LineChartModel grafiek5;
 	private LineChartModel grafiek2;
 
 	@EJB
@@ -40,23 +42,76 @@ public class ChartView implements Serializable {
 
 	private void createLineModels() {
 		try {
-			grafiek1 = initLinearModel1();
+			grafiek3 = initLinearModel3();
 		} catch (UnsupportedEncodingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		grafiek1.setAnimate(true);
-		grafiek1.setZoom(true);
-		grafiek1.setLegendPosition("e");
-		grafiek1.setSeriesColors("3300FF,FF0000,30a000");
-		grafiek1.setTitle("versnelling in functie van tijd");
-		Axis xAxis1 = grafiek1.getAxis(AxisType.X);
-		xAxis1.setLabel("tijd [s]");
-		Axis yAxis1 = grafiek1.getAxis(AxisType.Y);
-		yAxis1.setLabel("versnelling [m/s^2]");
-		yAxis1.setMin(-2);
-		yAxis1.setMax(2);
+		grafiek3.setAnimate(true);
+		grafiek3.setZoom(true);
+		grafiek3.setLegendPosition("e");
+		grafiek3.setSeriesColors("3300FF");
+		grafiek3.setTitle("versnelling in functie van tijd");
+		Axis xAxis3 = grafiek3.getAxis(AxisType.X);
+		xAxis3.setLabel("tijd [s]");
+		Axis yAxis3 = grafiek3.getAxis(AxisType.Y);
+		yAxis3.setLabel("versnelling [m/s^2]");
+		double[] dx=maxXbepalen();
+		yAxis3.setMin(dx[0]);
+		yAxis3.setMax(dx[1]);
 
+		
+		
+		try {
+			grafiek4 = initLinearModel4();
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		grafiek4.setAnimate(true);
+		grafiek4.setZoom(true);
+		grafiek4.setLegendPosition("e");
+		grafiek4.setSeriesColors("FF0000");
+		grafiek4.setTitle("versnelling in functie van tijd");
+		Axis xAxis4 = grafiek4.getAxis(AxisType.X);
+		xAxis4.setLabel("tijd [s]");
+		Axis yAxis4 = grafiek4.getAxis(AxisType.Y);
+		yAxis4.setLabel("versnelling [m/s^2]");
+		double[] dy=maxYbepalen();
+		yAxis4.setMin(dy[0]);
+		yAxis4.setMax(dy[1]);
+		
+		
+		try {
+			grafiek5 = initLinearModel5();
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		grafiek5.setAnimate(true);
+		grafiek5.setZoom(true);
+		grafiek5.setLegendPosition("e");
+		grafiek5.setSeriesColors("30a000");
+		grafiek5.setTitle("versnelling in functie van tijd");
+		Axis xAxis5 = grafiek5.getAxis(AxisType.X);
+		xAxis5.setLabel("tijd [s]");
+		Axis yAxis5 = grafiek5.getAxis(AxisType.Y);
+		yAxis5.setLabel("versnelling [m/s^2]");
+		double[] dz=maxZbepalen();
+		yAxis5.setMin(dz[0]);
+		yAxis5.setMax(dz[1]);
+		System.out.println(dz[0]);
+		System.out.println(dz[1]);
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		try {
 			grafiek2 = initLinearModel2();
 		} catch (UnsupportedEncodingException e) {
@@ -77,7 +132,7 @@ public class ChartView implements Serializable {
 
 	}
 
-	private LineChartModel initLinearModel1() throws UnsupportedEncodingException {
+	private LineChartModel initLinearModel3() throws UnsupportedEncodingException {
 		LineChartModel model = new LineChartModel();
 
 		LineChartSeries series1 = new LineChartSeries();
@@ -85,33 +140,41 @@ public class ChartView implements Serializable {
 		series1.setSmoothLine(true);
 		series1.setShowMarker(false);
 
-		LineChartSeries series2 = new LineChartSeries();
-		series2.setLabel("y");
-		series2.setSmoothLine(true);
-		series2.setShowMarker(false);
-		
-		LineChartSeries series3 = new LineChartSeries();
-		series3.setLabel("z");
-		series3.setSmoothLine(true);
-		series3.setShowMarker(false);
 
-		String s = dataset11Ophalen();
+		String s = resultatenOphalen();
 		String lijnen[] = s.split("\\r?\\n");
 		for (int i = 0; i < lijnen.length; i++) {
 			String getallen[] = lijnen[i].split(",");
 			double t = Double.parseDouble(getallen[0]);
 			double x = Double.parseDouble(getallen[1]);
-			double y = Double.parseDouble(getallen[2]);
-			double z = Double.parseDouble(getallen[3]);
 			series1.set(t, x);
-			series2.set(t, y);
-			series3.set(t, z);
 
 		}
 
 		model.addSeries(series1);
-		model.addSeries(series2);
-		model.addSeries(series3);
+
+		return model;
+	}
+	private LineChartModel initLinearModel4() throws UnsupportedEncodingException {
+		LineChartModel model = new LineChartModel();
+
+		LineChartSeries series1 = new LineChartSeries();
+		series1.setLabel("y");
+		series1.setSmoothLine(true);
+		series1.setShowMarker(false);
+
+
+		String s = resultatenOphalen();
+		String lijnen[] = s.split("\\r?\\n");
+		for (int i = 0; i < lijnen.length; i++) {
+			String getallen[] = lijnen[i].split(",");
+			double t = Double.parseDouble(getallen[0]);
+			double y = Double.parseDouble(getallen[2]);
+			series1.set(t, y);
+
+		}
+
+		model.addSeries(series1);
 
 		return model;
 	}
@@ -161,6 +224,37 @@ public class ChartView implements Serializable {
 
 		return model;
 	}
+	
+	private LineChartModel initLinearModel5() throws UnsupportedEncodingException {
+		LineChartModel model = new LineChartModel();
+
+		LineChartSeries series1 = new LineChartSeries();
+		series1.setLabel("z");
+		series1.setSmoothLine(true);
+		series1.setShowMarker(false);
+
+
+		String s = resultatenOphalen();
+		String lijnen[] = s.split("\\r?\\n");
+		for (int i = 0; i < lijnen.length; i++) {
+			String getallen[] = lijnen[i].split(",");
+			double t = Double.parseDouble(getallen[0]);
+
+			double z = Double.parseDouble(getallen[3]);
+			series1.set(t, z);
+
+		}
+
+		model.addSeries(series1);
+
+		return model;
+	}
+	private String resultatenOphalen() throws UnsupportedEncodingException {
+		HttpSession session = SessionUtils.getSession();
+		int idmeting = (int) session.getAttribute("idMeting");
+		String res= new String(metingejb.zoekDataset1(idmeting));
+		return res;
+	}
 
 	private String dataset2Ophalen() throws UnsupportedEncodingException {
 		HttpSession session = SessionUtils.getSession();
@@ -168,13 +262,107 @@ public class ChartView implements Serializable {
 		String x2 = new String(metingejb.zoekDataset2(idmeting));
 		return x2;
 	}
+	
+	private double[] maxXbepalen() {
+		double max=-1000;
+		double min=1000;
+		HttpSession session = SessionUtils.getSession();
+		int idmeting = (int) session.getAttribute("idMeting");
+		String res= new String(metingejb.zoekDataset1(idmeting));
+		String lijnen[] = res.split("\\r?\\n");
+		for (int i = 0; i < lijnen.length; i++) {
+			String getallen[] = lijnen[i].split(",");
+			double x = Double.parseDouble(getallen[1]);
+			if(x<min){
+				min=x;
+			}
+			if(x>max){
+				max=x;
+			}
 
-	public LineChartModel getGrafiek1() {
-		return grafiek1;
+		}
+		double[]array=new double[2];
+		array[0]=min;
+		array[1]=max;
+		return array;
+		
+		
+	}
+	
+	private double[] maxYbepalen() {
+		double max=-1000;
+		double min=1000;
+		HttpSession session = SessionUtils.getSession();
+		int idmeting = (int) session.getAttribute("idMeting");
+		String res= new String(metingejb.zoekDataset1(idmeting));
+		String lijnen[] = res.split("\\r?\\n");
+		for (int i = 0; i < lijnen.length; i++) {
+			String getallen[] = lijnen[i].split(",");
+			double y = Double.parseDouble(getallen[2]);
+			if(y<min){
+				min=y;
+			}
+			if(y>max){
+				max=y;
+			}
+
+		}
+		double[]array=new double[2];
+		array[0]=min;
+		array[1]=max;
+		return array;
+		
+		
+	}
+	
+	private double[] maxZbepalen() {
+		double max=-1000;
+		double min=1000;
+		HttpSession session = SessionUtils.getSession();
+		int idmeting = (int) session.getAttribute("idMeting");
+		String res= new String(metingejb.zoekDataset1(idmeting));
+		String lijnen[] = res.split("\\r?\\n");
+		for (int i = 0; i < lijnen.length; i++) {
+			String getallen[] = lijnen[i].split(",");
+			double z = Double.parseDouble(getallen[3]);
+			if(z<min){
+				min=z;
+			}
+			if(z>max){
+				max=z;
+			}
+
+		}
+		double[]array=new double[2];
+		array[0]=min;
+		array[1]=max;
+		return array;
+		
+		
 	}
 
-	public void setGrafiek1(LineChartModel grafiek1) {
-		this.grafiek1 = grafiek1;
+	public LineChartModel getGrafiek3() {
+		return grafiek3;
+	}
+
+	public void setGrafiek3(LineChartModel grafiek3) {
+		this.grafiek3 = grafiek3;
+	}
+	
+	public LineChartModel getGrafiek4() {
+		return grafiek4;
+	}
+
+	public void setGrafiek4(LineChartModel grafiek4) {
+		this.grafiek4 = grafiek4;
+	}
+
+	public LineChartModel getGrafiek5() {
+		return grafiek5;
+	}
+
+	public void setGrafiek5(LineChartModel grafiek5) {
+		this.grafiek5 = grafiek5;
 	}
 
 	public LineChartModel getGrafiek2() {

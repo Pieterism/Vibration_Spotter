@@ -42,13 +42,34 @@ function exportChart2() {
 
 
 <div style="margin-top: 50px">
-	<p:chart type="line" model="#{chartView.grafiek1}" style="height:300px;" responsive="true" widgetVar="g1"/>
-	<p:commandButton type="button" value="als afbeelding weergeven" icon="ui-icon-extlink" onclick="exportChart1()"/>
+	<p:chart type="line" model="#{chartView.grafiek3}" style="height:300px;" responsive="true" widgetVar="g3"/>
+	<p:commandButton type="button" value="als afbeelding weergeven" icon="ui-icon-extlink" onclick="exportChart3()"/>
 	
-	<p:dialog widgetVar="dlg1" showEffect="fade" modal="true" header="versnelling in functie van tijd" resizable="false">
+	<p:dialog widgetVar="dlg3" showEffect="fade" modal="true" header="versnelling in functie van tijd" resizable="false">
     	<p:outputPanel id="output1" layout="block" style="width:1500px;height:300px"/>
 	</p:dialog>
 </div>
+
+<div style="margin-top: 50px">
+	<p:chart type="line" model="#{chartView.grafiek4}" style="height:300px;" responsive="true" widgetVar="g4"/>
+	<p:commandButton type="button" value="als afbeelding weergeven" icon="ui-icon-extlink" onclick="exportChart4()"/>
+	
+	<p:dialog widgetVar="dlg4" showEffect="fade" modal="true" header="versnelling in functie van tijd" resizable="false">
+    	<p:outputPanel id="output4" layout="block" style="width:1500px;height:300px"/>
+	</p:dialog>
+</div>
+
+<div style="margin-top: 50px">
+	<p:chart type="line" model="#{chartView.grafiek5}" style="height:300px;" responsive="true" widgetVar="g5"/>
+	<p:commandButton type="button" value="als afbeelding weergeven" icon="ui-icon-extlink" onclick="exportChart5()"/>
+	
+	<p:dialog widgetVar="dlg5" showEffect="fade" modal="true" header="versnelling in functie van tijd" resizable="false">
+    	<p:outputPanel id="output5" layout="block" style="width:1500px;height:300px"/>
+	</p:dialog>
+</div>
+
+
+
 
 
 <div style="margin-top: 50px">
@@ -59,6 +80,9 @@ function exportChart2() {
     	<p:outputPanel id="output2" layout="block" style="width:1500px;height:300px"/>
 	</p:dialog>
 </div>
+
+
+
  
 </h:body> 
 </html>
