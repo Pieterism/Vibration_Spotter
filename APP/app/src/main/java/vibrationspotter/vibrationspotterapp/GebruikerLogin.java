@@ -1,13 +1,16 @@
 package vibrationspotter.vibrationspotterapp;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -20,10 +23,6 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
-
-import android.preference.PreferenceManager;
-import android.content.SharedPreferences;
-import android.widget.Toast;
 
 /*-----
 Klasse die geprogrammeerde logica achter de activity_spotterlogin bevat

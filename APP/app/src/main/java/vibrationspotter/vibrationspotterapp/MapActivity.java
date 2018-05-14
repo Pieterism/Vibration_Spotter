@@ -110,6 +110,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                     MapStyleOptions.loadRawResourceStyle(
                             this, R.raw.mapstyle));
             mMap.setMyLocationEnabled(true);
+
             mMap.getUiSettings().setCompassEnabled(true);
             mMap.getUiSettings().setMyLocationButtonEnabled(true);
 
@@ -189,7 +190,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         if (list.size() > 0) {
             Address address = list.get(0);
 
-            Toast.makeText(this, address.toString(), Toast.LENGTH_SHORT).show();
+           // Toast.makeText(this, address.toString(), Toast.LENGTH_SHORT).show();
 
             moveCamera(new LatLng(address.getLatitude(), address.getLongitude()), DEFAULT_ZOOM, address.getAddressLine(0));
             init();
@@ -229,6 +230,8 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
                             for (final Project p : projecten) {
                                 LatLng coord = new LatLng(p.getLatitude(), p.getLongtitude());
+
+
 
                                 if (p.getType().equalsIgnoreCase("STEM")) {
                                     MarkerOptions options = new MarkerOptions().position(coord).title(p.getTitel()).snippet(String.valueOf(p.getIdProject()));
@@ -313,7 +316,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                         if (task.isSuccessful()) {
                             Location currentLocation = (Location) task.getResult();
                             moveCamera(new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude()), DEFAULT_ZOOM, "");
-                            Toast.makeText(MapActivity.this, "lat: " + currentLocation.getLatitude() + ",long: " + currentLocation.getLongitude(), Toast.LENGTH_SHORT).show();
+                           // Toast.makeText(MapActivity.this, "lat: " + currentLocation.getLatitude() + ",long: " + currentLocation.getLongitude(), Toast.LENGTH_SHORT).show();
 
                         } else {
                             Toast.makeText(MapActivity.this, "Unable to get location", Toast.LENGTH_SHORT).show();
