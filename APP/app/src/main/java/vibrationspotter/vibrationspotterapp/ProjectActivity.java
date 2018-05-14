@@ -198,7 +198,8 @@ public class ProjectActivity extends AppCompatActivity {
                 alertDialog.setMessage("Are you sure wou want to delete this project? ");
                 alertDialog.setPositiveButton("OK",null);
                 alertDialog.setNegativeButton("CANCEL",null);
-                alertDialog.show();
+                alertDialog.create().show();
+
 
                 JsonArrayRequest inloggenRequest = new JsonArrayRequest(Request.Method.POST,
                         getString(R.string.url) + "Projecten/VerwijderenProjecten",

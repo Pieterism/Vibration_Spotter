@@ -109,7 +109,8 @@ public class MetingActivity extends AppCompatActivity {
                 alertDialog.setMessage("Are you sure wou want to delete this project? ");
                 alertDialog.setPositiveButton("OK",null);
                 alertDialog.setNegativeButton("CANCEL",null);
-                alertDialog.show();
+                alertDialog.create().show();
+
             }
         });
 

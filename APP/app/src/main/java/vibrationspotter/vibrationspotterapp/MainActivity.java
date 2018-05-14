@@ -194,7 +194,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_LONG).show();
+                        //Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_LONG).show();
                     }
                 }
         );
@@ -303,7 +303,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             if (resultCode == CommonStatusCodes.SUCCESS) {
                 if (requestCode == QR) {
                     String qrcode = data.getStringExtra("QR_code");
-                    Toast.makeText(this, qrcode + " Main", Toast.LENGTH_SHORT).show();
+                   // Toast.makeText(this, qrcode + " Main", Toast.LENGTH_SHORT).show();
 
                     Map<String, String> QRgegevens = new HashMap<>();
                     QRgegevens.put("QR", qrcode);
@@ -418,7 +418,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         if (task.isSuccessful()) {
                             Location currentLocation = (Location) task.getResult();
                             moveCamera(new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude()), DEFAULT_ZOOM, "");
-                            Toast.makeText(MainActivity.this, "lat: " + currentLocation.getLatitude() + ",long: " + currentLocation.getLongitude(), Toast.LENGTH_SHORT).show();
+                           // Toast.makeText(MainActivity.this, "lat: " + currentLocation.getLatitude() + ",long: " + currentLocation.getLongitude(), Toast.LENGTH_SHORT).show();
 
                         } else {
                             Toast.makeText(MainActivity.this, "Unable to get location", Toast.LENGTH_SHORT).show();
