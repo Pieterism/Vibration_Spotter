@@ -163,9 +163,10 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <ImageView
-            android:id="@+id/qr_button"
+            android:id="@+id/qr_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginVertical="5dp"
             android:layout_gravity="center"
             android:src="@drawable/logo" />
     </LinearLayout>

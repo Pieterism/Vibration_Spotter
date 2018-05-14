@@ -9,6 +9,7 @@
         android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:orientation="horizontal"
         android:weightSum="1"
         app:layout_constraintEnd_toEndOf="parent"
@@ -46,6 +47,8 @@
         android:id="@+id/scrollView5"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:fillViewport="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
@@ -68,6 +71,7 @@
                 android:paddingHorizontal="30dp"
                 android:paddingTop="15dp"
                 android:textAlignment="textStart">
+
                 <TableRow
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -198,6 +202,7 @@
                 android:paddingHorizontal="30dp"
                 android:paddingTop="15dp"
                 android:textAlignment="textStart">
+
                 <TableRow
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -218,8 +223,8 @@
                         android:id="@+id/fvalue"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
                         android:layout_marginHorizontal="0.5dp"
+                        android:layout_weight="1"
                         android:background="#f0eeee"
                         android:fontFamily="@font/arsenal"
                         android:paddingHorizontal="20dp"
