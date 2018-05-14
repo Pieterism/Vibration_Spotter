@@ -33,15 +33,15 @@
 <h:button id="terug" value="terug naar projecten" outcome="projecten.xhtml"/>   
 <p:dataTable value="#{metingController.metingen}" var="met" style="margin-top:10px">
 
-       <p:column headerText="IdMeting" style="text-align:center;">
+       <p:column headerText="IdMeting" style="text-align:center;" sortBy="#{met.idMeting}" filterBy="#{met.idMeting}">
         		<h:outputText value="#{met.idMeting}" />
     	</p:column>
     	
-    	<p:column headerText="Titel" style="text-align:center;">
+    	<p:column headerText="Titel" style="text-align:center;" sortBy="#{met.titel}" filterBy="#{met.titel}">
         		<h:outputText value="#{met.titel}" />
     	</p:column>
     	
-    	<p:column headerText="Tijdstip" style="text-align:center;">
+    	<p:column headerText="Tijdstip" style="text-align:center;"  sortBy="#{met.tijdstip}" filterBy="#{met.tijdstip}">
         		<h:outputText value="#{met.tijdstip}" />
     	</p:column>
     	
