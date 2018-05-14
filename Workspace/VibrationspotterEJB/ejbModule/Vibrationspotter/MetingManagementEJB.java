@@ -135,23 +135,25 @@ public class MetingManagementEJB implements MetingManagementEJBLocal {
 		} catch (Base64DecodingException e) {
 			e.printStackTrace();
 		}
-		System.out.println(leesBareData);
+		//System.out.println(leesBareData);
 
 		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		Date date = new Date();
-		System.out.println(dateFormat.format(date)); // loggen huidige datum
+		//System.out.println(dateFormat.format(date)); // loggen huidige datum
 
 		Project project = projectEJB.findProjectById(Integer.parseInt(id));
 
-		String[] verwerkteresultaten = octaveEJB.createdata(leesBareData);
+		//String[] verwerkteresultaten = octaveEJB.createdata(leesBareData);
 
 		Meting meting1 = new Meting();
 		meting1.setTitel(doorstuurmeting.get(0).get("titel"));
 		meting1.setTijdstip(dateFormat.format(date));
-		meting1.setResultaten(verwerkteresultaten[0]);
+		meting1.setResultaten("hello");
 		meting1.setIdProject(project);
 		meting1.setFoto(imageByte);
 		meting1.setOpmerking(doorstuurmeting.get(0).get("opmerking"));
+		meting1.setDataset1(leesBareData.getBytes());
+		meting1.setDataset2(findMetingById(1).getDataset2());
 
 		em.persist(meting1);
 

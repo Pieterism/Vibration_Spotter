@@ -34,13 +34,15 @@ public class MetingenREST implements Serializable {
 	@Consumes({MediaType.APPLICATION_JSON})
 	public String newMeting(String jsonarray, @PathParam("projectID") String id){
 		if(jsonarray == null) throw new BadRequestException();
-		System.out.println("metingen verwerken");
+		//System.out.println(jsonarray);
 		
-		System.out.println(id);
+		//System.out.println(id);
+		
 		
 	//	metingEJB.ToevoegenMetingResultaten(jsonarray);
 		metingEJB.ToevoegenMetingResultaten2(jsonarray,id);
 		return "[{\"Gelukt?:\": YEZZZ!!!}]";
+		
 	}
 	
 	@GET
