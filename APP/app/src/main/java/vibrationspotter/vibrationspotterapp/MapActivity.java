@@ -2,6 +2,7 @@ package vibrationspotter.vibrationspotterapp;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Address;
@@ -136,14 +137,18 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         mapFragment.getMapAsync(MapActivity.this);
     }
 
-    //TODO: NAVIGEREN NAAR CORRECTE METING
     public void init() {
 
         mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
             @Override
             public void onInfoWindowClick(Marker marker) {
-                Toast.makeText(MapActivity.this, "BUTTON CLICKED", Toast.LENGTH_SHORT).show();
-                //TODO: NAVIGEREN NAAR CORRECTE METING
+                Project p = (Project)marker.getTag();
+
+                String project = gson.toJson(p);
+                Intent naar_project = new Intent(getApplicationContext(), ProjectActivity.class);
+                naar_project.putExtra("project", project);
+                naar_project.putExtra("authorised", true);
+                startActivity(naar_project);
             }
         });
 

@@ -217,6 +217,10 @@ public class ProjectActivity extends AppCompatActivity {
             bDeleteProject.setVisibility(View.INVISIBLE);
             bqrProject.setVisibility(View.INVISIBLE);
         }
+        boolean isViewer = getIntent().getBooleanExtra("viewer", false);
+        if(isViewer){
+            bAddMeting.setVisibility(View.INVISIBLE);
+        }
     }
 
     @Override
