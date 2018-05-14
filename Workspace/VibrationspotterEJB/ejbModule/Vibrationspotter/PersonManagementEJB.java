@@ -44,6 +44,12 @@ public class PersonManagementEJB implements PersonManagementEJBLocal {
 		q.setParameter(2, achternaam);
 		return null;
 	}
+	
+	public int getPersoonsize() {
+		Query q = em.createQuery("SELECT p FROM Persoon");
+		int size = q.getResultList().size();
+		return size;
+	}
 
 	/*
 	 * (non-Javadoc)

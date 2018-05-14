@@ -120,6 +120,13 @@ public class ProjectManagementEJB implements ProjectManagementEJBLocal {
 		return projecten.get(0);
 	}
 
+	public String findGoedgekeurdeProjectenAPP(){
+		Query q = em.createQuery("SELECT p FROM Project p WHERE p.goedgekeurd = :test");
+		q.setParameter("test", 1);
+		int size = q.getResultList().size();
+		return ""+size;
+		
+	}
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -183,6 +190,8 @@ public class ProjectManagementEJB implements ProjectManagementEJBLocal {
 		List<Project> projecten = q.getResultList();
 		return projecten;
 	}
+	
+
 
 	/*
 	 * (non-Javadoc)

@@ -103,6 +103,11 @@ public interface ProjectManagementEJBLocal {
 	 * @return all projects who are approved
 	 */
 	public List<Project> findGoedgekeurdeProjecten();
+	
+	/**
+	 * @return all projects who are approved converted for REST-request to app
+	 */
+	public String findGoedgekeurdeProjectenAPP();
 
 	/**
 	 * @param gegevens
