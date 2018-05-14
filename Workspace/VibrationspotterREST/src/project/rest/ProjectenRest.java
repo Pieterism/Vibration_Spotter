@@ -78,6 +78,13 @@ private static final long serialVersionUID = 1L;
 	
 		 return project;
 	}
+	
+	@GET
+	@Path("alleProjecten")
+	public String goedgekeurdeProjecten(){
+		String resultaat = projectEJB.findGoedgekeurdeProjectenAPP();
+		return resultaat;
+	}
 /*
  * @GET
 	@Path( "AlleMetingen/{projectID}")
