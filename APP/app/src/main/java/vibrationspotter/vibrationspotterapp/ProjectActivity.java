@@ -3,6 +3,7 @@ package vibrationspotter.vibrationspotterapp;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
@@ -21,6 +22,10 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.google.android.gms.common.api.CommonStatusCodes;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.MultiFormatWriter;
+import com.google.zxing.WriterException;
+import com.google.zxing.common.BitMatrix;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -58,6 +63,7 @@ public class ProjectActivity extends AppCompatActivity {
     Button bAddMeting;
     Button bqrProject;
     Button bDeleteProject;
+    Bitmap bitmap;
 
     ImageView qrView;
 
@@ -89,6 +95,14 @@ public class ProjectActivity extends AppCompatActivity {
         qrView = findViewById(R.id.qr_view);
         qrView.setVisibility(View.INVISIBLE);
 
+        try {
+            Bitmap b = TextToImageEncode(project.getQR());
+            qrView.setImageBitmap(b);
+        } catch (WriterException e) {
+            e.printStackTrace();
+        }
+
+
         bqrProject.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -99,6 +113,7 @@ public class ProjectActivity extends AppCompatActivity {
                 }
             }
         });
+
 
         textTitel.setText(project.getTitel());
 
@@ -195,8 +210,6 @@ public class ProjectActivity extends AppCompatActivity {
                         }
                 );
                 VolleyClass.getInstance(getApplicationContext()).addToRequestQueue(inloggenRequest, "Verwijderen");
-
-
             }
         });
 
@@ -232,4 +245,33 @@ public class ProjectActivity extends AppCompatActivity {
 
 
     }
+
+    public Bitmap TextToImageEncode(String Value) throws WriterException {
+        BitMatrix bitMatrix;
+        try {
+            bitMatrix = new MultiFormatWriter().encode(
+                    Value,
+                    BarcodeFormat.DATA_MATRIX.QR_CODE,
+                    750, 750, null
+            );
+        } catch (IllegalArgumentException Illegalargumentexception) {
+            return null;
+        }
+        int bitMatrixWidth = bitMatrix.getWidth();
+        int bitMatrixHeight = bitMatrix.getHeight();
+        int[] pixels = new int[bitMatrixWidth * bitMatrixHeight];
+
+        for (int y = 0; y < bitMatrixHeight; y++) {
+            int offset = y * bitMatrixWidth;
+
+            for (int x = 0; x < bitMatrixWidth; x++) {
+                pixels[offset + x] = bitMatrix.get(x, y) ?
+                        getResources().getColor(R.color.colorPrimary) : getResources().getColor(R.color.background_material_light);
+            }
+        }
+        Bitmap bitmap = Bitmap.createBitmap(bitMatrixWidth, bitMatrixHeight, Bitmap.Config.ARGB_4444);
+        bitmap.setPixels(pixels, 0, 750, 0, 0, bitMatrixWidth, bitMatrixHeight);
+        return bitmap;
+    }
+
 }
