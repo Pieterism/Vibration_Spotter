@@ -91,7 +91,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        Toast.makeText(this, "Map ready", Toast.LENGTH_LONG).show();
+        //Toast.makeText(this, "Map ready", Toast.LENGTH_LONG).show();
         mMap = googleMap;
 
         if (mLocationPermissionGranted) {
@@ -119,7 +119,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     }
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
         mSearchtext = (AutoCompleteTextView) findViewById(R.id.input_search);
@@ -129,19 +129,23 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         getLocationPermission();
     }
 
-    private void initMap() {
+    public void initMap() {
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
 
         mapFragment.getMapAsync(MapActivity.this);
     }
 
     //TODO: NAVIGEREN NAAR CORRECTE METING
-    private void init() {
+    public void init() {
 
         MarkerInfoWindowAdapter markerInfoWindowAdapter = new MarkerInfoWindowAdapter(getApplicationContext());
         mMap.setInfoWindowAdapter(markerInfoWindowAdapter);
+
         MarkerOptions options = new MarkerOptions().position(new LatLng(50.8336386, 4.0188286)).title("Ninof city! ");
         mMap.addMarker(options.icon(BitmapDescriptorFactory.fromResource(R.drawable.logo_mapmarker_red)).snippet("test"));
+
+        MarkerOptions options2 = new MarkerOptions().position(new LatLng(50.8436386, 4.0288286)).title("Ninof city! ");
+        mMap.addMarker(options2.icon(BitmapDescriptorFactory.fromResource(R.drawable.logo_mapmarker)).snippet("test"));
 
         mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
             @Override
@@ -180,7 +184,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     }
 
     //locatie zoeken op kaart
-    private void geoLocate() {
+    public void geoLocate() {
         String searchString = mSearchtext.getText().toString();
         Geocoder geocoder = new Geocoder(MapActivity.this);
         List<Address> list = new ArrayList<>();
@@ -202,7 +206,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     }
 
     //Markeer locaties van projecten huidige gebruiker op kaart
-    private void addAllMetingenMarkersGebruiker() {
+    public void addAllMetingenMarkersGebruiker() {
         //HIER MOET IK EEN PROJECT KRIJGEN WAARVAN IK LAT EN LONG NADIEN KAN OPVRAGEN
         gson = new Gson();
 
@@ -251,7 +255,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
     //TODO: LOCATIES ALLE PROJECTEN WEERKRIJGEN
     //Markeer locaties van alle projecten op kaart
-    private void addAllMetingenMarkers() {
+    public void addAllMetingenMarkers() {
 
         gson = new Gson();
 
@@ -298,7 +302,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     }
 
     //Laatst gekende locatie van gsm opvragen
-    private void getDeviceLocation() {
+    public void getDeviceLocation() {
         mfusedLocationProviderclient = LocationServices.getFusedLocationProviderClient(this);
         try {
             if (mLocationPermissionGranted) {
@@ -324,7 +328,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     }
 
     //kaart verplaatsen naar andere locatie + pin erop plaatsen
-    private void moveCamera(LatLng latLng, float zoom, String title) {
+    public void moveCamera(LatLng latLng, float zoom, String title) {
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, zoom));
 
         if (!title.equals("")) {
@@ -335,7 +339,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     }
 
     //permissies aanvragen
-    private void getLocationPermission() {
+    public void getLocationPermission() {
         String[] permissions = {
                 Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION};
         if (ContextCompat.checkSelfPermission(this.getApplicationContext(), FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
@@ -373,7 +377,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     }
 
     //verbergt android keyboard
-    private void hideSoftKeyboard() {
+    public void hideSoftKeyboard() {
         View view = this.findViewById(android.R.id.content);
         if (view != null) {
             InputMethodManager imm = (InputMethodManager) this.getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -384,6 +388,15 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
 
+    }
+
+    public  MapActivity newInstance() {
+        MapActivity fragment = new MapActivity();
+
+        Bundle args = new Bundle();
+        fragment.onMapReady(mMap);
+
+        return fragment;
     }
 
     /*

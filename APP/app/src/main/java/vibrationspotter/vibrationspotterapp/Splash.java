@@ -19,10 +19,6 @@ public class Splash extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
-        //Typeface typeface = Typeface.createFromAsset(getAssets(), "fonts/aclonica.regular.ttf");
-        //textView.setTypeface(typeface);
-        //PIETER FIX PLZ
-
         TextView registreren = findViewById(R.id.link_signup);
         Button schoolbutton = findViewById(R.id.scholenlogin);
         Button gebruikerslogin = findViewById(R.id.gebruikerslogin);

@@ -2,7 +2,7 @@
     <string name="app_name">VibrationspotterAPP</string>
     <string name="url">http://192.168.1.56:8080/VibrationspotterREST/Restservice/</string>
     <string name="test">Test</string>
-    <string name="hometext">Welcome to Vibrationspotter!</string>
+    <string name="hometext"> Welcome to Vibrationspotter! </string>
     <string name="scan_barcode_button">Scan barcode</string>
     <string name="no_barcode_captured">No barcode captured</string>
     <string name="barcode_error_format">"Error reading barcode: %1$s"</string>
