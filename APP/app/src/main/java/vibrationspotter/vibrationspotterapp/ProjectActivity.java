@@ -1,12 +1,14 @@
 package vibrationspotter.vibrationspotterapp;
 
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -190,6 +192,17 @@ public class ProjectActivity extends AppCompatActivity {
                 final JSONObject jsonObject = new JSONObject(inloggegevens);
                 JSONArray jArray = new JSONArray();
                 jArray.put(jsonObject);
+
+                AlertDialog alertDialog = new AlertDialog.Builder(ProjectActivity.this).create();
+                alertDialog.setTitle("Alert");
+                alertDialog.setMessage("Are you sure wou want to delete this project? ");
+                alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        });
+                alertDialog.show();
 
                 JsonArrayRequest inloggenRequest = new JsonArrayRequest(Request.Method.POST,
                         getString(R.string.url) + "Projecten/VerwijderenProjecten",

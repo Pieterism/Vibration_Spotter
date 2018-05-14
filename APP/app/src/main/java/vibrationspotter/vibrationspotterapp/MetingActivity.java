@@ -1,11 +1,14 @@
 package vibrationspotter.vibrationspotterapp;
 
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Base64;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -36,7 +39,7 @@ public class MetingActivity extends AppCompatActivity {
 
     Gson gson;
     SharedPreferences settings;
-    Map<String,?> sharedPreferences;
+    Map<String, ?> sharedPreferences;
 
     TextView textTitel;
     Button bDelete;
@@ -98,6 +101,23 @@ public class MetingActivity extends AppCompatActivity {
         tData = new String(Base64.decode(meting.getDataset1(), Base64.DEFAULT));
         fData = new String(Base64.decode(meting.getDataset2(), Base64.DEFAULT));
 
+        bDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog alertDialog = new AlertDialog.Builder(MetingActivity.this).create();
+                alertDialog.setTitle("Alert");
+                alertDialog.setMessage("Are you sure you want to delete this meting? ");
+                alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        });
+                alertDialog.show();
+            }
+        });
+
+
         /*-----
         Verwerken van versnellingsData:
         tekstfile per regel inlezen, data-Entries maken,
@@ -115,9 +135,9 @@ public class MetingActivity extends AppCompatActivity {
 
         String[] tData_split = tData.split("\n");
 
-        for(int a=0; a<tData_split.length; a++){
+        for (int a = 0; a < tData_split.length; a++) {
             String[] lijn = tData_split[a].split(",");
-            if(lijn.length == 4){
+            if (lijn.length == 4) {
                 xWaardenT.add(new Entry(Float.parseFloat(lijn[0]), Float.parseFloat(lijn[1])));
                 yWaardenT.add(new Entry(Float.parseFloat(lijn[0]), Float.parseFloat(lijn[2])));
                 zWaardenT.add(new Entry(Float.parseFloat(lijn[0]), Float.parseFloat(lijn[3])));
@@ -194,9 +214,9 @@ public class MetingActivity extends AppCompatActivity {
         fData = new String(Base64.decode(meting.getDataset2(), Base64.DEFAULT));
         String[] fData_split = fData.split("\n");
 
-        for(int a=0; a<fData_split.length; a++){
+        for (int a = 0; a < fData_split.length; a++) {
             String[] lijn = fData_split[a].split(",");
-            if(lijn.length == 4){
+            if (lijn.length == 4) {
                 xWaardenF.add(new Entry(Float.parseFloat(lijn[0]), Float.parseFloat(lijn[1])));
                 yWaardenF.add(new Entry(Float.parseFloat(lijn[0]), Float.parseFloat(lijn[2])));
                 zWaardenF.add(new Entry(Float.parseFloat(lijn[0]), Float.parseFloat(lijn[3])));
