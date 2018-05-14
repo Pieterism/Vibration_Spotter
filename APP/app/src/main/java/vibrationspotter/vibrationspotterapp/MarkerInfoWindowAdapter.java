@@ -17,6 +17,7 @@ import vibrationspotter.Models.Project;
 public class MarkerInfoWindowAdapter implements GoogleMap.InfoWindowAdapter {
     private Context context;
 
+
     public MarkerInfoWindowAdapter(Context context) {
         this.context = context.getApplicationContext();
     }

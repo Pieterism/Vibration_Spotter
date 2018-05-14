@@ -23,7 +23,6 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 
@@ -34,16 +33,19 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-public class NewProject extends AppCompatActivity implements LocationListener {
+public class NewProject extends AppCompatActivity {
 
     private FusedLocationProviderClient mfusedLocationProviderclient;
     private boolean mLocationPermissionGranted = true;
     Location currentLocation;
+    double longitude;
+    double latitude;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        getDeviceLocation();
 
         setContentView(R.layout.activity_newproject);
         final EditText etProjectTitel = findViewById(R.id.etProjectTitel);
@@ -53,15 +55,12 @@ public class NewProject extends AppCompatActivity implements LocationListener {
         bAddProject.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!etProjectTitel.getText().toString().equals("")) {
+                if (!etProjectTitel.getText().toString().equals("")) {
                     SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
                     SharedPreferences.Editor editor = settings.edit();
 
                     String titel = etProjectTitel.getText().toString();
                     String beschrijving = etProjectDescription.getText().toString();
-
-                    double longitude = 0;
-                    double latitude = 0;
 
                     Map<String, String> projectgegevens = new HashMap<>();
                     projectgegevens.put("titel", titel);
@@ -90,10 +89,10 @@ public class NewProject extends AppCompatActivity implements LocationListener {
                             }
                         };
 
-
-                        lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
-                        currentLocation = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+                        //lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
+                        //currentLocation = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
                         //Location location = getDeviceLocation();
+                        Toast.makeText(getBaseContext(), "location is:" + currentLocation, Toast.LENGTH_LONG).show();
                         longitude = currentLocation.getLongitude();
                         latitude = currentLocation.getLatitude();
                     } else {
@@ -172,7 +171,7 @@ public class NewProject extends AppCompatActivity implements LocationListener {
         return currentLocation;
     }
 
-    @Override
+/*    @Override
     public void onLocationChanged(Location location) {
         Toast.makeText(getBaseContext(), "location is:" + location, Toast.LENGTH_LONG).show();
 
@@ -191,5 +190,5 @@ public class NewProject extends AppCompatActivity implements LocationListener {
     @Override
     public void onProviderDisabled(String s) {
 
-    }
+    }*/
 }

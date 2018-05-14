@@ -81,7 +81,7 @@ private static final long serialVersionUID = 1L;
 	
 	@GET
 	@Path("alleProjecten")
-	public String goedgekeurdeProjecten(){
+	public String goedgekeurdeProjecten(String jsonarray){
 		String resultaat = projectEJB.findGoedgekeurdeProjectenAPP();
 		return resultaat;
 	}

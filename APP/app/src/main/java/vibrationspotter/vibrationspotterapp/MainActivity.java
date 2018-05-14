@@ -387,9 +387,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private static final String FINE_LOCATION = Manifest.permission.ACCESS_FINE_LOCATION;
     private static final String COARSE_LOCATION = Manifest.permission.ACCESS_COARSE_LOCATION;
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1234;
-    private static final float DEFAULT_ZOOM = 13f;
+    private static final float DEFAULT_ZOOM = 10f;
     private static final LatLngBounds LAT_LNG_BOUNDS = new LatLngBounds(new LatLng(-40, -168), new LatLng(71, 136));
-
     private boolean mLocationPermissionGranted = false;
     private FusedLocationProviderClient mfusedLocationProviderclient;
     private GoogleMap mMap;
