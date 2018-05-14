@@ -278,14 +278,14 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                         public void onResponse(JSONArray response) {
                             Log.d("Projecten", "GELUKT!");
 
-                            Type type = new TypeToken<List<Project>>() {
-                            }.getType();
+                            Type type = new TypeToken<List<Project>>(){}.getType();
                             projecten = gson.fromJson(response.toString(), type);
 
                             for (final Project p : projecten) {
                                 LatLng coord = new LatLng(p.getLatitude(), p.getLongtitude());
                                 MarkerOptions options = new MarkerOptions().position(coord).title(p.getTitel());
-                                mMap.addMarker(options);
+                                Marker mark = mMap.addMarker(options);
+                                mark.setTag(new Project(p));
                             }
 
                         }

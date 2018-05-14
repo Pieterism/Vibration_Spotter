@@ -167,6 +167,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                         aantalprojecten.setText(String.valueOf(projecten.size()));
                         textprojecten.setVisibility(View.VISIBLE);
+
+                        getLocationPermission();
                     }
                 },
                 new Response.ErrorListener() {
@@ -200,8 +202,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 }
         );
         VolleyClass.getInstance(getApplicationContext()).addToRequestQueue(getAantalGebruikers,"getaantalGebruikers");
-
-        getLocationPermission();
     }
 
     @Override
@@ -459,11 +459,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         MarkerOptions options2 = new MarkerOptions().position(new LatLng(50.8436386, 4.0288286)).title("Ninof city! ");
         mMap.addMarker(options2.icon(BitmapDescriptorFactory.fromResource(R.drawable.logo_mapmarker)).snippet("test"));
 
-        for (Project p:projecten){
-            Marker mark = mMap.addMarker(new MarkerOptions().position(new LatLng(p.getLatitude(),p.getLongtitude())).title(p.getTitel()).icon(BitmapDescriptorFactory.fromResource(R.drawable.logo_mapmarker)));
+        for (final Project p : projecten) {
+            LatLng coord = new LatLng(p.getLatitude(), p.getLongtitude());
+            MarkerOptions markerOptions = new MarkerOptions().position(coord).title(p.getTitel());
+            Marker mark = mMap.addMarker(markerOptions);
             mark.setTag(new Project(p));
-        }
 
+        }
 
     }
 
