@@ -153,7 +153,7 @@ public class NewProject extends AppCompatActivity {
                     public void onComplete(@NonNull Task task) {
                         if (task.isSuccessful()) {
                             currentLocation = (Location) task.getResult();
-                            Toast.makeText(NewProject.this, "lat: " + currentLocation.getLatitude() + ",long: " + currentLocation.getLongitude(), Toast.LENGTH_SHORT).show();
+                           // Toast.makeText(NewProject.this, "lat: " + currentLocation.getLatitude() + ",long: " + currentLocation.getLongitude(), Toast.LENGTH_SHORT).show();
 
                         } else {
                             Toast.makeText(NewProject.this, "Unable to get location", Toast.LENGTH_SHORT).show();
