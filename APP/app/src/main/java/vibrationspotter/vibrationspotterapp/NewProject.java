@@ -34,14 +34,17 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-public class NewProject extends AppCompatActivity {
+public class NewProject extends AppCompatActivity implements LocationListener {
 
     private FusedLocationProviderClient mfusedLocationProviderclient;
     private boolean mLocationPermissionGranted = true;
+    Location currentLocation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
         setContentView(R.layout.activity_newproject);
         final EditText etProjectTitel = findViewById(R.id.etProjectTitel);
         final EditText etProjectDescription = findViewById(R.id.etProjectDescription);
@@ -66,6 +69,7 @@ public class NewProject extends AppCompatActivity {
 
 
                     int rc = ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION);
+
                     if (rc == PackageManager.PERMISSION_GRANTED) {
                         LocationManager lm = (LocationManager) getSystemService(getApplicationContext().LOCATION_SERVICE);
 
@@ -89,9 +93,10 @@ public class NewProject extends AppCompatActivity {
 
 
                         lm.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
-                        Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-                        longitude = location.getLongitude();
-                        latitude = location.getLatitude();
+                        currentLocation = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+                        //Location location = getDeviceLocation();
+                        longitude = currentLocation.getLongitude();
+                        latitude = currentLocation.getLatitude();
                     } else {
                         requestGPSPermission();
                     }
@@ -141,7 +146,7 @@ public class NewProject extends AppCompatActivity {
         }
     }
 
-    public void getDeviceLocation() {
+    public Location getDeviceLocation() {
         mfusedLocationProviderclient = LocationServices.getFusedLocationProviderClient(this);
         try {
             if (mLocationPermissionGranted) {
@@ -150,7 +155,7 @@ public class NewProject extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task task) {
                         if (task.isSuccessful()) {
-                            Location currentLocation = (Location) task.getResult();
+                            currentLocation = (Location) task.getResult();
                             Toast.makeText(NewProject.this, "lat: " + currentLocation.getLatitude() + ",long: " + currentLocation.getLongitude(), Toast.LENGTH_SHORT).show();
 
                         } else {
@@ -163,6 +168,27 @@ public class NewProject extends AppCompatActivity {
         } catch (SecurityException e) {
 
         }
+
+        return currentLocation;
     }
 
+    @Override
+    public void onLocationChanged(Location location) {
+
+    }
+
+    @Override
+    public void onStatusChanged(String s, int i, Bundle bundle) {
+
+    }
+
+    @Override
+    public void onProviderEnabled(String s) {
+
+    }
+
+    @Override
+    public void onProviderDisabled(String s) {
+
+    }
 }
