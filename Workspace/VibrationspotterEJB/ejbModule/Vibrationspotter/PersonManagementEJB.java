@@ -46,7 +46,7 @@ public class PersonManagementEJB implements PersonManagementEJBLocal {
 	}
 	
 	public int getPersoonsize() {
-		Query q = em.createQuery("SELECT p FROM Persoon");
+		Query q = em.createQuery("SELECT p FROM Persoon p");
 		int size = q.getResultList().size();
 		return size;
 	}

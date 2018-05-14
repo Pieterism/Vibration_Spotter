@@ -53,6 +53,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
 import com.google.gson.reflect.TypeToken;
 
 import org.json.JSONArray;
@@ -90,7 +91,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     /*
      * TODO: Mapfragment initMap()
-     * TODO: Imagebuttons midden: correct aantal gebruikers & projecten inzetten.
      * */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,8 +98,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        getLocationPermission();
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -163,7 +161,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     @Override
                     public void onResponse(JSONArray response) {
                         System.out.println(response.toString());
-                        aantalgebruikers.setText("Test = succes");
+
+                        Type type = new TypeToken<List<Project>>(){}.getType();
+                        projecten = gson.fromJson(response.toString(), type);
+
+                        aantalprojecten.setText(String.valueOf(projecten.size()));
+                        textprojecten.setVisibility(View.VISIBLE);
                     }
                 },
                 new Response.ErrorListener() {
@@ -174,7 +177,31 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 }
         );
         VolleyClass.getInstance(getApplicationContext()).addToRequestQueue(alleprojecten,"alleProjecten");
+        JsonArrayRequest getAantalGebruikers = new JsonArrayRequest(
+                getString(R.string.url) + "Persoon/aantal",
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
 
+                        Gson gson = new Gson();
+                        Type type = new TypeToken<List<Map<String, String>>>(){}.getType();
+
+                        List<Map<String, String>> gegevens = gson.fromJson(response.toString(), type);
+
+                        aantalgebruikers.setText(gegevens.get(0).get("size"));
+                        textgebruikers.setVisibility(View.VISIBLE);
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_LONG).show();
+                    }
+                }
+        );
+        VolleyClass.getInstance(getApplicationContext()).addToRequestQueue(getAantalGebruikers,"getaantalGebruikers");
+
+        getLocationPermission();
     }
 
     @Override
@@ -431,6 +458,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         MarkerOptions options2 = new MarkerOptions().position(new LatLng(50.8436386, 4.0288286)).title("Ninof city! ");
         mMap.addMarker(options2.icon(BitmapDescriptorFactory.fromResource(R.drawable.logo_mapmarker)).snippet("test"));
+
+
+
 
     }
 
