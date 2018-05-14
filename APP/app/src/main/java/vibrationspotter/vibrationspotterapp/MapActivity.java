@@ -141,12 +141,6 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         MarkerInfoWindowAdapter markerInfoWindowAdapter = new MarkerInfoWindowAdapter(getApplicationContext());
         mMap.setInfoWindowAdapter(markerInfoWindowAdapter);
 
-        MarkerOptions options = new MarkerOptions().position(new LatLng(50.8336386, 4.0188286)).title("Ninof city! ");
-        mMap.addMarker(options.icon(BitmapDescriptorFactory.fromResource(R.drawable.logo_mapmarker_red)).snippet("test"));
-
-        MarkerOptions options2 = new MarkerOptions().position(new LatLng(50.8436386, 4.0288286)).title("Ninof city! ");
-        mMap.addMarker(options2.icon(BitmapDescriptorFactory.fromResource(R.drawable.logo_mapmarker)).snippet("test"));
-
         mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
             @Override
             public void onInfoWindowClick(Marker marker) {
