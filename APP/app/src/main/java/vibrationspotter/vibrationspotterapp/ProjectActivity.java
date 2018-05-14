@@ -69,6 +69,8 @@ public class ProjectActivity extends AppCompatActivity {
 
     ImageView qrView;
 
+    JSONArray jArray;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -190,36 +192,38 @@ public class ProjectActivity extends AppCompatActivity {
                 String idProject = "" + project.getIdProject();
                 inloggegevens.put("idProject", idProject);
                 final JSONObject jsonObject = new JSONObject(inloggegevens);
-                JSONArray jArray = new JSONArray();
+                jArray = new JSONArray();
                 jArray.put(jsonObject);
 
                 AlertDialog.Builder alertDialog = new AlertDialog.Builder(ProjectActivity.this);
                 alertDialog.setTitle("Alert");
                 alertDialog.setMessage("Are you sure wou want to delete this project? ");
-                alertDialog.setPositiveButton("OK",null);
+                alertDialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        JsonArrayRequest inloggenRequest = new JsonArrayRequest(Request.Method.POST,
+                                getString(R.string.url) + "Projecten/VerwijderenProjecten",
+                                jArray,
+                                new Response.Listener<JSONArray>() {
+                                    @Override
+                                    public void onResponse(JSONArray response) {
+                                        Log.d("Verwijderen", response.toString());
+                                        startActivity((naar_mainactivity));
+                                    }
+                                },
+
+                                new Response.ErrorListener() {
+                                    @Override
+                                    public void onErrorResponse(VolleyError error) {
+                                        Log.d("Verwijderen", "Error: " + error.toString() + ", " + error.getMessage());
+                                    }
+                                }
+                        );
+                        VolleyClass.getInstance(getApplicationContext()).addToRequestQueue(inloggenRequest, "Verwijderen");
+                    }
+                });
                 alertDialog.setNegativeButton("CANCEL",null);
                 alertDialog.create().show();
-
-
-                JsonArrayRequest inloggenRequest = new JsonArrayRequest(Request.Method.POST,
-                        getString(R.string.url) + "Projecten/VerwijderenProjecten",
-                        jArray,
-                        new Response.Listener<JSONArray>() {
-                            @Override
-                            public void onResponse(JSONArray response) {
-                                Log.d("Verwijderen", response.toString());
-                                startActivity((naar_mainactivity));
-                            }
-                        },
-
-                        new Response.ErrorListener() {
-                            @Override
-                            public void onErrorResponse(VolleyError error) {
-                                Log.d("Verwijderen", "Error: " + error.toString() + ", " + error.getMessage());
-                            }
-                        }
-                );
-                VolleyClass.getInstance(getApplicationContext()).addToRequestQueue(inloggenRequest, "Verwijderen");
             }
         });
         boolean isAuthorised = getIntent().getBooleanExtra("authorised", false);
