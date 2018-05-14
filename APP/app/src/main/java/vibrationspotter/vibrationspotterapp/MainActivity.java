@@ -264,10 +264,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             } else
                 Toast.makeText(getApplicationContext(), "Log in om je projecten te bekijken", Toast.LENGTH_LONG).show();
 
-        } else if (id == R.id.nav_meter) {
-            Intent naar_meter = new Intent(MainActivity.this, Meter.class);
-            startActivity(naar_meter);
-
         } else if (id == R.id.nav_login) {
             Intent naar_login = new Intent(MainActivity.this, Splash.class);
             startActivity((naar_login));
