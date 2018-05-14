@@ -73,7 +73,6 @@ public class NewProject extends AppCompatActivity implements LocationListener {
                     if (rc == PackageManager.PERMISSION_GRANTED) {
                         LocationManager lm = (LocationManager) getSystemService(getApplicationContext().LOCATION_SERVICE);
 
-
                         LocationListener locationListener = new LocationListener() {
 
                             public void onLocationChanged(Location location) {
@@ -92,7 +91,7 @@ public class NewProject extends AppCompatActivity implements LocationListener {
                         };
 
 
-                        lm.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
+                        lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
                         currentLocation = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
                         //Location location = getDeviceLocation();
                         longitude = currentLocation.getLongitude();
@@ -174,6 +173,7 @@ public class NewProject extends AppCompatActivity implements LocationListener {
 
     @Override
     public void onLocationChanged(Location location) {
+        Toast.makeText(getBaseContext(), "location is:" + location, Toast.LENGTH_LONG).show();
 
     }
 
